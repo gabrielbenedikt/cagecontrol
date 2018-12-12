@@ -12,15 +12,6 @@
  */
 
 /*!
- * \ def CURRENT_SAVE_STRUCTURE_VERSION
- *
- * defines the current version of the savefile-structure. Used when reading/writing savefiles to assure
- * the right data is read/written from/into the file. The following versions are implemented:\n
- *
-#define CURRENT_SAVE_STRUCTURE_VERSION 1
-*/
-
-/*!
  * \def DEBUG
  *
  * Enables the execution of various debug-paths used during development.\n
@@ -76,24 +67,5 @@
  */
 #define DEGTORAD PI/180
 #define RADTODEG 180/PI
-
-//Allow measurements with uncalibrated spectrometers
-/*!
- * \def ALLOW_UNCALIBRATED_MEASUREMENT
- * Allow measurement-runs to be carried out although the spectrometer is uncalibrated.\n
- * default: FALSE
- */
-#define ALLOW_UNCALIBRATED_MEASUREMENT FALSE
-
-/*!
- * \def CHAR_READ_MOTOR_MEMORY_POSITION_SPECTROMETER_TYPE
- * Command to access memory position on PCB-Motor controller in which major version of the Spectrometer is stored.
- */
-/*!
- * \def CHAR_READ_MOTOR_MEMORY_POSITION_SPECTROMETER_SUBVERSION
- * Command to access memory position on PCB-Motor controller in which minor version of the Spectrometer is stored.
- */
-#define CHAR_READ_MOTOR_MEMORY_POSITION_SPECTROMETER_TYPE "rd243"
-#define CHAR_READ_MOTOR_MEMORY_POSITION_SPECTROMETER_SUBVERSION "rd245"
 
 #endif // DEFINES_H

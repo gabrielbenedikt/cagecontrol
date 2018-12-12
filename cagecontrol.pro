@@ -8,8 +8,11 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = cagecontrol
+TARGET = bin/cagecontrol
 TEMPLATE = app
+
+# compiler settings
+include($$PWD/compiler.pri)
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -24,6 +27,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+#
+#Use git commit hash as version
+#
+version.target = version.h
+#version.depends = $$PWD/.git nevertruedependency #forces rebuild
+nevertruedependency.CONFIG += recursive
+#QMAKE_EXTRA_TARGETS += nevertruedependency
+
+unix {
+    !macx {
+        version.commands = cd $$PWD ; ./createversion_linux.sh
+        nevertruedependency.commands = echo ""
+    }
+}
+
+win32 {
+    version.commands = cd $$PWD & createversion_win.bat
+    nevertruedependency.commands = echo
+}
+
+macx {
+    #version.commands = $$PWD/
+    #nevertruedependency.commands = echo
+}
+
 SOURCES += \
         main.cpp \
         cagecontrol.cpp
@@ -31,7 +59,9 @@ SOURCES += \
 HEADERS += \
         cagecontrol.h \
     defines.h \
-    debug.h
+    debug.h \
+    version.h \
+    createversion_win.bat
 
 FORMS += \
         cagecontrol.ui
@@ -40,3 +70,7 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    doxygen_cagecontrol \
+    createversion_linux.sh

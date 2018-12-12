@@ -29,7 +29,9 @@ SOURCES += \
         cagecontrol.cpp
 
 HEADERS += \
-        cagecontrol.h
+        cagecontrol.h \
+    defines.h \
+    debug.h
 
 FORMS += \
         cagecontrol.ui

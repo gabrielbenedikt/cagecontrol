@@ -1,0 +1,30 @@
+-E #ifndef VERSION_H
+-E #define VERSION_H
+-E 
+-E /*!
+-E  * ile version.h
+-E  * rief This file contains information about the code version
+-E  * uthor Peter Schiansky
+-E  * ug There are no known bugs.
+-E  *
+-E  * The definitions in this file are used to fill the about-dialog with information about the code:
+-E  * The git commit description, the commit date and the builddate.
+-E  */
+-E 
+-E /*!
+-E  * \def VERSION_GIT
+-E  * rief The git commit description
+-E  */
+-E #define VERSION_GIT ""
+-E /*!
+-E * \def VERSION_GIT_DATE
+-E * rief The date of the git commit
+-E */
+-E #define VERSION_GIT_DATE 201812121130
+-E /*!
+-E  * \def VERSION_BUILD_DATE
+-E  * rief The builddate
+-E  */
+-E #define VERSION_BUILD_DATE 201812121153
+-E 
+-E #endif

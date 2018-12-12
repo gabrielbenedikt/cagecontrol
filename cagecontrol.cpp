@@ -1,5 +1,5 @@
 #include "cagecontrol.h"
-#include "ui_cagecontrol.h"
+#include "motor.h"
 
 /************************************************************************************************
 *                                                                                               *
@@ -12,10 +12,45 @@ cagecontrol::cagecontrol(QWidget *parent) :
     //settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(), QApplication::applicationName());
     settings = new QSettings("cagecontrol.conf", QSettings::IniFormat);
 
-
-    //
     // UI-Setup
     QGridLayout *layout = new QGridLayout;
+    setupUI(layout);
+    setCentralWidget(tabs);
+    centralWidget()->setLayout(layout);
+    setWindowTitle("CageControl");
+
+    LoadConfig();
+    openmotors();
+
+}
+
+void cagecontrol::openmotors()
+{
+    redmotor = new Motor();
+    brownmotor = new Motor();
+    greenmotor = new Motor();
+    bluemotor = new Motor();
+    whitemotor = new Motor();
+    blackmotor = new Motor();
+
+    comports.clear();
+    comports.append(tabs->findChild<QComboBox*>("redcom")->currentText());
+    comports.append(tabs->findChild<QComboBox*>("browncom")->currentText());
+    comports.append(tabs->findChild<QComboBox*>("greencom")->currentText());
+    comports.append(tabs->findChild<QComboBox*>("bluecom")->currentText());
+    comports.append(tabs->findChild<QComboBox*>("whitecom")->currentText());
+    comports.append(tabs->findChild<QComboBox*>("blackcom")->currentText());
+
+    redmotor->open(comports[0]);
+    brownmotor->open(comports[1]);
+    greenmotor->open(comports[2]);
+    bluemotor->open(comports[3]);
+    whitemotor->open(comports[4]);
+    blackmotor->open(comports[5]);
+}
+
+void cagecontrol::setupUI(QGridLayout *layout)
+{
     tabs = new QTabWidget();
     motorstab = new QWidget();
     settingstab = new QWidget();
@@ -53,6 +88,22 @@ cagecontrol::cagecontrol(QWidget *parent) :
     QLabel *settinglabel_black = new QLabel("black");
     QLabel *settinglabel_HWP = new QLabel("HWP");
     QLabel *settinglabel_QWP = new QLabel("QWP");
+    QLabel *settinglabel_COM = new QLabel("Port");
+    QLabel *settinglabel_HWPmnum = new QLabel("HWP motor #");
+
+    QComboBox *settingredcombox = new QComboBox();
+    settingredcombox->setObjectName("redcom");
+    QComboBox *settingbrowncombox = new QComboBox();
+    settingbrowncombox->setObjectName("browncom");
+    QComboBox *settinggreencombox = new QComboBox();
+    settinggreencombox->setObjectName("greencom");
+    QComboBox *settingbluecombox = new QComboBox();
+    settingbluecombox->setObjectName("bluecom");
+    QComboBox *settingwhitecombox = new QComboBox();
+    settingwhitecombox->setObjectName("whitecom");
+    QComboBox *settingblackcombox = new QComboBox();
+    settingblackcombox->setObjectName("blackcom");
+
     QDoubleSpinBox *redHWP0sb = new QDoubleSpinBox();
     redHWP0sb->setObjectName("redHWP0sb");
     QDoubleSpinBox *redQWP0sb = new QDoubleSpinBox();
@@ -78,8 +129,23 @@ cagecontrol::cagecontrol(QWidget *parent) :
     QDoubleSpinBox *blackQWP0sb = new QDoubleSpinBox();
     blackQWP0sb->setObjectName("blackQWP0sb");
 
+    QSpinBox *redHWPnum = new QSpinBox();
+    redHWPnum->setObjectName("redHWPnum");
+    QSpinBox *brownHWPnum = new QSpinBox();
+    brownHWPnum->setObjectName("brownHWPnum");
+    QSpinBox *greenHWPnum = new QSpinBox();
+    greenHWPnum->setObjectName("greenHWPnum");
+    QSpinBox *blueHWPnum = new QSpinBox();
+    blueHWPnum->setObjectName("blueHWPnum");
+    QSpinBox *whiteHWPnum = new QSpinBox();
+    whiteHWPnum->setObjectName("whiteHWPnum");
+    QSpinBox *blackHWPnum = new QSpinBox();
+    blackHWPnum->setObjectName("blackHWPnum");
+
     settingslayout->addWidget(settinglabel_HWP,     1,2,1,1);
     settingslayout->addWidget(settinglabel_QWP,     1,3,1,1);
+    settingslayout->addWidget(settinglabel_COM,     1,4,1,1);
+    settingslayout->addWidget(settinglabel_HWPmnum, 1,5,1,1);
     settingslayout->addWidget(settinglabel_red,     2,1,1,1);
     settingslayout->addWidget(settinglabel_brown,   3,1,1,1);
     settingslayout->addWidget(settinglabel_green,   4,1,1,1);
@@ -98,14 +164,41 @@ cagecontrol::cagecontrol(QWidget *parent) :
     settingslayout->addWidget(blueQWP0sb,           5,3,1,1);
     settingslayout->addWidget(whiteQWP0sb,          6,3,1,1);
     settingslayout->addWidget(blackQWP0sb,          7,3,1,1);
+    settingslayout->addWidget(settingredcombox,     2,4,1,1);
+    settingslayout->addWidget(settingbrowncombox,   3,4,1,1);
+    settingslayout->addWidget(settinggreencombox,   4,4,1,1);
+    settingslayout->addWidget(settingbluecombox,    5,4,1,1);
+    settingslayout->addWidget(settingwhitecombox,   6,4,1,1);
+    settingslayout->addWidget(settingblackcombox,   7,4,1,1);
+    settingslayout->addWidget(redHWPnum,            2,5,1,1);
+    settingslayout->addWidget(brownHWPnum,          3,5,1,1);
+    settingslayout->addWidget(greenHWPnum,          4,5,1,1);
+    settingslayout->addWidget(blueHWPnum,           5,5,1,1);
+    settingslayout->addWidget(whiteHWPnum,          6,5,1,1);
+    settingslayout->addWidget(blackHWPnum,          7,5,1,1);
+
+    settingredcombox->clear();
+    settingbrowncombox->clear();
+    settinggreencombox->clear();
+    settingbluecombox->clear();
+    settingwhitecombox->clear();
+    settingblackcombox->clear();
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+        QStringList list;
+        list << info.portName();
+
+        settingredcombox->addItem(list.first(), list);
+        settingbrowncombox->addItem(list.first(), list);
+        settinggreencombox->addItem(list.first(), list);
+        settingbluecombox->addItem(list.first(), list);
+        settingwhitecombox->addItem(list.first(), list);
+        settingblackcombox->addItem(list.first(), list);
+    }
 
     settingslayout->setAlignment(Qt::AlignTop);
 
     motorstab->setLayout(motorlayout);
     settingstab->setLayout(settingslayout);
-    setCentralWidget(tabs);
-    centralWidget()->setLayout(layout);
-    setWindowTitle("CageControl");
 
     //
     // Signal/Slot Connections
@@ -127,12 +220,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
     connect(blackbox->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::moveblackHV);
     connect(blackbox->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::moveblackPM);
     connect(blackbox->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::moveblackANG);
-
-    LoadConfig();
-
-
 }
-
 
 void cagecontrol::moveredHV()
 {
@@ -261,6 +349,9 @@ void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
 void cagecontrol::LoadConfig()
 {
     double tmpdbl;
+    int tmpidx;
+    int tmpint;
+    QString tmpstr;
     DEBUG_INFO("TODO: Load config");
     tmpdbl = settings->value("WAVEPLATES/HWP/RED",0).toDouble();
     tabs->findChild<QDoubleSpinBox*>("redHWP0sb")->setValue(tmpdbl);
@@ -286,6 +377,56 @@ void cagecontrol::LoadConfig()
     tabs->findChild<QDoubleSpinBox*>("blackHWP0sb")->setValue(tmpdbl);
     tmpdbl = settings->value("WAVEPLATES/QWP/BLACK",0).toDouble();
     tabs->findChild<QDoubleSpinBox*>("blackQWP0sb")->setValue(tmpdbl);
+
+    tmpstr = settings->value("MOTORS/COMRED","").toString();
+    tmpidx=tabs->findChild<QComboBox*>("redcom")->findText(tmpstr);
+    if ((tmpstr=="") or (tmpidx==-1)) {
+        tmpidx=0;
+    }
+    tabs->findChild<QComboBox*>("redcom")->setCurrentIndex(tmpidx);
+    tmpstr = settings->value("MOTORS/COMBROWN","").toString();
+    tmpidx=tabs->findChild<QComboBox*>("browncom")->findText(tmpstr);
+    if ((tmpstr=="") or (tmpidx==-1)) {
+        tmpidx=0;
+    }
+    tabs->findChild<QComboBox*>("browncom")->setCurrentIndex(tmpidx);
+    tmpstr = settings->value("MOTORS/COMGREEN","").toString();
+    tmpidx=tabs->findChild<QComboBox*>("greencom")->findText(tmpstr);
+    if ((tmpstr=="") or (tmpidx==-1)) {
+        tmpidx=0;
+    }
+    tabs->findChild<QComboBox*>("greencom")->setCurrentIndex(tmpidx);
+    tmpstr = settings->value("MOTORS/COMBLUE","").toString();
+    tmpidx=tabs->findChild<QComboBox*>("bluecom")->findText(tmpstr);
+    if ((tmpstr=="") or (tmpidx==-1)) {
+        tmpidx=0;
+    }
+    tabs->findChild<QComboBox*>("bluecom")->setCurrentIndex(tmpidx);
+    tmpstr = settings->value("MOTORS/COMWHITE","").toString();
+    tmpidx=tabs->findChild<QComboBox*>("whitecom")->findText(tmpstr);
+    if ((tmpstr=="") or (tmpidx==-1)) {
+        tmpidx=0;
+    }
+    tabs->findChild<QComboBox*>("whitecom")->setCurrentIndex(tmpidx);
+    tmpstr = settings->value("MOTORS/COMBLACK","").toString();
+    tmpidx=tabs->findChild<QComboBox*>("blackcom")->findText(tmpstr);
+    if ((tmpstr=="") or (tmpidx==-1)) {
+        tmpidx=0;
+    }
+    tabs->findChild<QComboBox*>("blackcom")->setCurrentIndex(tmpidx);
+
+    tmpint = settings->value("MOTORS/HWPNUMRED",0).toInt();
+    tabs->findChild<QSpinBox*>("redHWPnum")->setValue(tmpint);
+    tmpint = settings->value("MOTORS/HWPNUMBROWN",0).toInt();
+    tabs->findChild<QSpinBox*>("brownHWPnum")->setValue(tmpint);
+    tmpint = settings->value("MOTORS/HWPNUMGREEN",0).toInt();
+    tabs->findChild<QSpinBox*>("greenHWPnum")->setValue(tmpint);
+    tmpint = settings->value("MOTORS/HWPNUMBLUE",0).toInt();
+    tabs->findChild<QSpinBox*>("blueHWPnum")->setValue(tmpint);
+    tmpint = settings->value("MOTORS/HWPNUMWHITE",0).toInt();
+    tabs->findChild<QSpinBox*>("whiteHWPnum")->setValue(tmpint);
+    tmpint = settings->value("MOTORS/HWPNUMBLACK",0).toInt();
+    tabs->findChild<QSpinBox*>("blackHWPnum")->setValue(tmpint);
 }
 
 /************************************************************************************************
@@ -308,7 +449,18 @@ void cagecontrol::SaveConfig()
     settings->setValue("WAVEPLATES/QWP/WHITE",tabs->findChild<QDoubleSpinBox*>("whiteQWP0sb")->value());
     settings->setValue("WAVEPLATES/HWP/BLACK",tabs->findChild<QDoubleSpinBox*>("blackHWP0sb")->value());
     settings->setValue("WAVEPLATES/QWP/BLACK",tabs->findChild<QDoubleSpinBox*>("blackQWP0sb")->value());
-
+    settings->setValue("MOTORS/COMRED",tabs->findChild<QComboBox*>("redcom")->currentText());
+    settings->setValue("MOTORS/COMBROWN",tabs->findChild<QComboBox*>("browncom")->currentText());
+    settings->setValue("MOTORS/COMGREEN",tabs->findChild<QComboBox*>("greencom")->currentText());
+    settings->setValue("MOTORS/COMBLUE",tabs->findChild<QComboBox*>("bluecom")->currentText());
+    settings->setValue("MOTORS/COMWHITE",tabs->findChild<QComboBox*>("whitecom")->currentText());
+    settings->setValue("MOTORS/COMBLACK",tabs->findChild<QComboBox*>("blackcom")->currentText());
+    settings->setValue("MOTORS/HWPNUMRED",tabs->findChild<QSpinBox*>("redHWPnum")->value());
+    settings->setValue("MOTORS/HWPNUMBROWN",tabs->findChild<QSpinBox*>("brownHWPnum")->value());
+    settings->setValue("MOTORS/HWPNUMGREEN",tabs->findChild<QSpinBox*>("greenHWPnum")->value());
+    settings->setValue("MOTORS/HWPNUMBLUE",tabs->findChild<QSpinBox*>("blueHWPnum")->value());
+    settings->setValue("MOTORS/HWPNUMWHITE",tabs->findChild<QSpinBox*>("whiteHWPnum")->value());
+    settings->setValue("MOTORS/HWPNUMBLACK",tabs->findChild<QSpinBox*>("blackHWPnum")->value());
     settings->sync();
 }
 

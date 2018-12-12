@@ -10,10 +10,14 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QTabWidget>
+#include <QComboBox>
+#include <QSerialPortInfo>
 
 namespace Ui {
 class cagecontrol;
 }
+
+class Motor;
 
 class cagecontrol : public QMainWindow
 {
@@ -28,6 +32,18 @@ private:
     QTabWidget *tabs;
     QWidget *settingstab;
     QWidget *motorstab;
+    QVector<QString> comports;
+
+    Motor *redmotor;
+    Motor *brownmotor;
+    Motor *greenmotor;
+    Motor *bluemotor;
+    Motor *whitemotor;
+    Motor *blackmotor;
+
+    void setupUI(QGridLayout *layout);
+    void openmotors();
+
     /*!
      * \brief LoadConfig loads config from a file
      *

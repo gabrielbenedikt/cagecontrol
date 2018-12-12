@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -48,23 +48,26 @@ win32 {
 }
 
 macx {
+    #no mac to test.
     #version.commands = $$PWD/
     #nevertruedependency.commands = echo
 }
 
 SOURCES += \
         main.cpp \
-        cagecontrol.cpp
+        cagecontrol.cpp \
+    motor.cpp
 
 HEADERS += \
         cagecontrol.h \
     defines.h \
     debug.h \
     version.h \
-    createversion_win.bat
+    createversion_win.bat \
+    motor.h
 
-FORMS += \
-        cagecontrol.ui
+#FORMS += \
+#        cagecontrol.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

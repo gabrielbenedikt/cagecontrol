@@ -23,6 +23,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
     QWPcust.reserve(motorName.length());
     HWPmnum.reserve(motorName.length());
     QWPmnum.reserve(motorName.length());
+    uiMotorGroupBoxes.reserve(motorName.length());
     setCentralWidget(tabs);
     centralWidget()->setLayout(layout);
     setWindowTitle("CageControl");
@@ -192,22 +193,33 @@ void cagecontrol::setupUI(QGridLayout *layout)
     QGridLayout *motorlayout = new QGridLayout;
     QGridLayout *settingslayout = new QGridLayout;
 
+    /* TODO: this might already work. but cleanup/adaption is needed afterwards
+    for (QString s : motorName) {
+        int i=motorName.indexOf(s);
+        uiMotorGroupBoxes[i] = new QGroupBox();
+        motorGB(uiMotorGroupBoxes[i],s);
+        uiMotorGroupBoxes[i]->setObjectName(s+"box");
+        motorlayout->addWidget(uiMotorGroupBoxes[i]);
+        qDebug()<<s+"box";
+    }
+    */
+
     QGroupBox *redbox = new QGroupBox();
     motorGB(redbox,"red");
     redbox->setObjectName("redbox");
-    QGroupBox *brownbox = new QGroupBox;
+    QGroupBox *brownbox = new QGroupBox();
     motorGB(brownbox,"brown");
     brownbox->setObjectName("brownbox");
-    QGroupBox *greenbox = new QGroupBox;
+    QGroupBox *greenbox = new QGroupBox();
     motorGB(greenbox,"green");
     greenbox->setObjectName("greenbox");
-    QGroupBox *bluebox = new QGroupBox;
+    QGroupBox *bluebox = new QGroupBox();
     motorGB(bluebox,"blue");
     bluebox->setObjectName("bluebox");
-    QGroupBox *whitebox = new QGroupBox;
+    QGroupBox *whitebox = new QGroupBox();
     motorGB(whitebox,"white");
     whitebox->setObjectName("whitebox");
-    QGroupBox *blackbox = new QGroupBox;
+    QGroupBox *blackbox = new QGroupBox();
     motorGB(blackbox,"black");
     blackbox->setObjectName("blackbox");
 

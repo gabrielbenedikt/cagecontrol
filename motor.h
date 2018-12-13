@@ -33,7 +33,11 @@ class Motor : public QObject {
 
 private:
     QTimer hometimer;               //!<Used to iterate through the steps of 'go to the starting position' - but in an inaccurate way. \see command_home()
+    QTimer bothtimer;               //!<Used to iterate through the steps of moving two motors of one controller
+    int movebothstep;
     bool serialconnectionok;
+    uint16_t motor1steps;
+    uint16_t motor2steps;
 public:
     QString publicmotorstatusmessage;   //!<A string containing the current state of the serial connection
 
@@ -49,6 +53,17 @@ public:
      * \return the current PCBMotor optical encoder wheel sendor state
      */
     bool sensordata();
+
+signals:
+    /*!
+     * \brief motorstatusmessage emitted when the status of the serial connection changes, with a string indicating the actual state.
+     * \param message the message
+     */
+    void motorstatusmessage(const QString &message);
+    /*!
+     * \brief emitted when serial connection is closed
+     */
+    void ConnectionClosed();
 
 public slots:
     /*!
@@ -146,6 +161,21 @@ public slots:
      * \param stop Input: True if movents shall be stopped if possible
      */
     void stop(bool stop);
+
+    /*!
+     * \brief command_moveboth moves both motors connected to the controller
+     * \param ang1 angle motor 1 is to be moved to
+     * \param ang2angle motor 2 is to be moved to
+     */
+    void command_moveboth(double ang1, double ang2);
+
+
+private:
+    /*!
+     * \brief command_moveboth moves both motors connected to the controller
+     */
+    void moveboth();
+
 };
 
 QT_END_NAMESPACE

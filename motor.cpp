@@ -31,11 +31,17 @@ Motor::Motor(void)
     serialconnectionok = false;
 
     hometimer.setSingleShot(true);
+    bothtimer.setSingleShot(true);
 
-    connect(serial, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error), this, &Motor::handleError);
-    connect(serial, &QSerialPort::readyRead, this, &Motor::read);
+    //connect(serial, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error), this, &Motor::handleError);
+    //connect(serial, &QSerialPort::readyRead, this, &Motor::read);
 
-    connect(&hometimer, &QTimer::timeout, this, &Motor::command_home);
+    //connect(&hometimer, &QTimer::timeout, this, &Motor::command_home);
+    connect(&bothtimer, &QTimer::timeout, this, &Motor::moveboth);
+
+    movebothstep=0;
+    motor1steps=0;
+    motor1steps=0;
 }//Motor::Motor(void)
 
 /************************************************************************************************
@@ -73,33 +79,135 @@ void Motor::open(QString port)
 }
 void Motor::close()
 {
+    if (serial->isOpen())
+        serial->close();
+    //showStatusMessage(QObject::tr("Disconnected"));
+    serialconnectionok = false;
 
+    //ui->LabelSpectrometer->setVisible(false);
+    //ui->Button_OpenMotor->setVisible(true);
+    emit(ConnectionClosed());
 }
 void Motor::read()
 { }
 void Motor::write(const QByteArray &data)
-{ }
+{
+    serial->write(data);
+}
 void Motor::handleError(QSerialPort::SerialPortError error)
-{ }
+{
+    if (error == QSerialPort::ResourceError) {
+        qDebug()<<"Critical Error"<<serial->errorString();
+        //QMessageBox::critical(this, QObject::tr("Critical Error"), serial->errorString());
+        close();
+    }
+}
 void Motor::showStatusMessage(const QString &message)
-{ }
+{
+    publicmotorstatusmessage = message;
+    emit motorstatusmessage(publicmotorstatusmessage);
+}
 bool Motor::isopen()
-{ }
+{
+    return serialconnectionok;
+}
 void Motor::command_park()
-{ }
+{
+    DEBUG_INFO("Going back to mechanical stop.");
+    write("s2880\r");
+}
 void Motor::command_home()
 { }
 void Motor::command_info()
-{ }
+{
+    write("i\r");
+}
 void Motor::command_help()
-{ }
+{
+    write("h\r");
+}
 void Motor::command_frequency_sweep()
-{ }
+{
+    write("p\r");
+}
 void Motor::command_singlestep(QString dirstring)
-{ }
+{
+    DEBUG_INFO("%s%s, Going 1 step in direction: ", dirstring.toLocal8Bit().data(), "\n");
+    QString commandText;
+
+    commandText = "s";
+
+    if (dirstring=="bw") {
+        commandText.append("-");
+    }
+    commandText.append(QString::number(1));
+    commandText.append(QChar::CarriageReturn);
+    write(commandText.toLocal8Bit());
+}
 void Motor::command_step(uint16_t numsteps, QString dirstring)
-{ }
+{
+    DEBUG_INFO("%d %s %s%s, Going ", numsteps, "steps in direction: ", dirstring.toLocal8Bit().data(), "\n");
+    QString commandText;
+
+    commandText = "s";
+    if (dirstring=="bw")
+        commandText.append("-");
+    commandText.append(QString::number(numsteps));
+    commandText.append(QChar::CarriageReturn);
+    write(commandText.toLocal8Bit());
+}
 void Motor::command_microstep(uint16_t nummsteps, QString dirstring)
-{ }
+{
+    DEBUG_INFO("%d %s %s%s, Going ", nummsteps, "microsteps in direction: ", dirstring.toLocal8Bit().data(), "\n");
+    QString commandText;
+
+    commandText = "u";
+    if (dirstring=="bw")
+        commandText.append("-");
+    commandText.append(QString::number(nummsteps));
+    commandText.append(QChar::CarriageReturn);
+    write(commandText.toLocal8Bit());
+}
 void Motor::stop(bool stop)
 { }
+
+void Motor::command_moveboth(double ang1, double ang2)
+{
+    motor1steps=ang1*2880/360;
+    motor2steps=ang2*2880/360;
+    movebothstep=0;
+    bothtimer.start(1);
+}
+void Motor::moveboth()
+{
+    qDebug()<<"been here. stepnum: "<<movebothstep;
+    if (movebothstep==0) {
+        write("M1\r");
+        ++movebothstep;
+        bothtimer.start(100);
+    } else if (movebothstep==1) {
+        command_park();
+        ++movebothstep;
+        bothtimer.start(4000);
+    } else if (movebothstep==2) {
+        command_step(motor1steps,"bw");
+        ++movebothstep;
+        bothtimer.start(4000);
+    } else if (movebothstep==3) {
+        write("M2\r");
+        ++movebothstep;
+        bothtimer.start(100);
+    } else if (movebothstep==4) {
+        command_park();
+        ++movebothstep;
+        bothtimer.start(4000);
+    } else if (movebothstep==5) {
+        command_step(motor2steps,"bw");
+        movebothstep=0;
+        motor1steps=0;
+        motor2steps=0;
+    } else {
+        DEBUG_ERROR("movebothstep unhandled value %i",movebothstep);
+    }
+}
+

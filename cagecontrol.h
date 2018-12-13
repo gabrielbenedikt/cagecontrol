@@ -27,12 +27,16 @@ public:
     explicit cagecontrol(QWidget *parent = nullptr);
     ~cagecontrol();
 
+private slots:
+    void updatesettings(double d);
+    void updateUI();
+
 private:
-    QSettings *settings;
-    QTabWidget *tabs;
+    QSettings *settings;                                //!<
+    QTabWidget *tabs;                                   //!<
     QWidget *settingstab;
     QWidget *motorstab;
-    QVector<QString> comports;
+    QVector<QString> comports;                          //!<Vector containing available serial ports names ports
 
     Motor *redmotor;
     Motor *brownmotor;
@@ -40,6 +44,19 @@ private:
     Motor *bluemotor;
     Motor *whitemotor;
     Motor *blackmotor;
+
+    /*WIP - cleaner code*/
+    /*Even nicer: put everything in motor class*/
+    QVector<Motor*> motors;//motor
+    QVector<QString> motorName;//motor
+    QVector<QDoubleSpinBox> HWP0sp;//ui
+    QVector<QDoubleSpinBox> QWP0sp;//ui
+    QVector<int> HWPmnum;//motor
+    QVector<int> QWPmnum;//motor
+    QVector<double> HWP0;//motor
+    QVector<double> QWP0;//motor
+    QVector<double> HWPcust;//motor
+    QVector<double> QWPcust;//motor
 
     void setupUI(QGridLayout *layout);
     void openmotors();

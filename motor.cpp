@@ -62,16 +62,10 @@ void Motor::open(QString port)
     serial->setPortName(port);
     if (serial->open(QIODevice::ReadWrite)) {
         showStatusMessage(QObject::tr("Connected to %1").arg(port));
-    /*
-        showStatusMessage(QObject::tr("Connected to %1 : %2, %3, %4, %5, %6")
-                          .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
-                          .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
-        */
         serialconnectionok=true;
     } else {
         DEBUG_ERROR("serial connection could not be established.\n");
         qDebug()<<"Error"<<serial->errorString();
-        //QMessageBox::critical(this, QObject::tr("Error"), serial->errorString());
         serialconnectionok = false;
         showStatusMessage(QObject::tr("Open error"));
     }
@@ -81,11 +75,8 @@ void Motor::close()
 {
     if (serial->isOpen())
         serial->close();
-    //showStatusMessage(QObject::tr("Disconnected"));
     serialconnectionok = false;
 
-    //ui->LabelSpectrometer->setVisible(false);
-    //ui->Button_OpenMotor->setVisible(true);
     emit(ConnectionClosed());
 }
 void Motor::read()
@@ -98,7 +89,6 @@ void Motor::handleError(QSerialPort::SerialPortError error)
 {
     if (error == QSerialPort::ResourceError) {
         qDebug()<<"Critical Error"<<serial->errorString();
-        //QMessageBox::critical(this, QObject::tr("Critical Error"), serial->errorString());
         close();
     }
 }

@@ -138,13 +138,6 @@ void cagecontrol::updatesettings(double d)
 ************************************************************************************************/
 void cagecontrol::openmotors()
 {
-    redmotor = new Motor();
-    brownmotor = new Motor();
-    greenmotor = new Motor();
-    bluemotor = new Motor();
-    whitemotor = new Motor();
-    blackmotor = new Motor();
-
     comports.clear();
     comports.append(tabs->findChild<QComboBox*>("redcom")->currentText());
     comports.append(tabs->findChild<QComboBox*>("browncom")->currentText());
@@ -152,6 +145,18 @@ void cagecontrol::openmotors()
     comports.append(tabs->findChild<QComboBox*>("bluecom")->currentText());
     comports.append(tabs->findChild<QComboBox*>("whitecom")->currentText());
     comports.append(tabs->findChild<QComboBox*>("blackcom")->currentText());
+    for (QString s : motorName) {
+        Motor *motor = new Motor();
+        motors.append(motor);
+        motor->open(comports.at(motors.indexOf(motor)));
+    }
+    /*
+    redmotor = new Motor();
+    brownmotor = new Motor();
+    greenmotor = new Motor();
+    bluemotor = new Motor();
+    whitemotor = new Motor();
+    blackmotor = new Motor();
 
     redmotor->open(comports[0]);
     brownmotor->open(comports[1]);
@@ -159,13 +164,16 @@ void cagecontrol::openmotors()
     bluemotor->open(comports[3]);
     whitemotor->open(comports[4]);
     blackmotor->open(comports[5]);
-
     motors.append(redmotor);
     motors.append(brownmotor);
     motors.append(greenmotor);
     motors.append(bluemotor);
     motors.append(whitemotor);
     motors.append(blackmotor);
+    for (QString s: comports) {
+        //
+    }
+    */
 }
 
 /************************************************************************************************
@@ -478,7 +486,6 @@ void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
 {
     DEBUG_INFO("TODO: move motor %s:\tHWP: %4.1f\tQWP: %4.1f\n",motor.toLatin1().data(), HWPang, QWPang);
     int i = motorName.indexOf(motor);
-    motors.at(i)->write("move me");
     if ((HWPmnum.at(i)==1) and (QWPmnum.at(i)==2)) {
         motors.at(i)->command_moveboth(HWPang,QWPang);
     } else if ((HWPmnum.at(i)==2) and (QWPmnum.at(i)==1)) {
@@ -671,5 +678,8 @@ void cagecontrol::motorGB(QGroupBox *gb, QString id)
 ************************************************************************************************/
 cagecontrol::~cagecontrol()
 {
+    for (Motor* m : motors) {
+        m->close();
+    }
     SaveConfig();
 }

@@ -68,4 +68,56 @@
 #define DEGTORAD PI/180
 #define RADTODEG 180/PI
 
+// comiler quirks
+#if defined(_WIN32)
+// Note:
+//   Visual Studio 6  --> _MSC_VER = 1200
+//   Visual Studio 7  --> _MSC_VER = 1300
+//   Visual Studio 2003 (MSVC++ 7.1)  --> _MSC_VER = 1310
+//   Visual Studio 2005 (MSVC++ 8.0)  --> _MSC_VER = 1400
+//   Visual Studio 2008 (MSVC++ 9.0)  --> _MSC_VER = 1500
+//   Visual Studio 2010 (MSVC++ 10.0) --> _MSC_VER = 1600
+//   Visual Studio 2012 (MSVC++ 11.0) --> _MSC_VER = 1700
+//   Visual Studio 2013 (MSVC++ 12.0) --> _MSC_VER = 1800
+//   Visual Studio 2015 (MSVC++ 14.0) --> _MSC_VER = 1900
+//   Visual Studio 2017v15.0 (MSVC++ 14.1) --> _MSC_VER = 1910
+//   Visual Studio 2017v15.3 (MSVC++ 14.11) --> _MSC_VER = 1911
+//   Visual Studio 2017v15.5 (MSVC++ 14.12) --> _MSC_VER = 1912
+//   Visual Studio 2017v15.6 (MSVC++ 14.13) --> _MSC_VER = 1913
+//   Visual Studio 2017v15.7 (MSVC++ 14.14) --> _MSC_VER = 1914
+//   Visual Studio 2017v15.8 (MSVC++ 14.15) --> _MSC_VER = 1915
+//   Visual Studio 2017v15.9 (MSVC++ 14.16) --> _MSC_VER = 1916
+#if defined (_MSC_VER)  // Microsoft Visual Studio
+#pragma comment(lib, "ws2_32.lib")
+#endif
+#ifndef _STDINT
+#ifndef _STDINT_H
+#if 1
+#if (_MSC_VER < 1900)
+typedef unsigned char    uint8_t;
+typedef unsigned short   uint16_t;
+typedef unsigned long    uint32_t;
+typedef unsigned __int64 uint64_t;
+
+typedef signed char      int8_t;
+typedef signed short     int16_t;
+typedef signed int       int32_t;
+typedef __int64          int64_t;
+#else
+#include <stdint.h>
+#endif
+#else
+      typedef unsigned char    uint8_t;
+      typedef unsigned short   uint16_t;
+      typedef unsigned int     uint32_t;
+
+      typedef __int8      int8_t;
+      typedef __int16     int16_t;
+      typedef __int32     int32_t;
+      typedef __int64     int64_t;
+#endif
+#endif
+#endif
+#endif
+
 #endif // DEFINES_H

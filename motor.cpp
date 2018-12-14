@@ -170,6 +170,7 @@ void Motor::command_moveboth(double ang1, double ang2)
 }
 void Motor::moveboth()
 {
+#if 0
     qDebug()<<"been here. stepnum: "<<movebothstep;
     if (movebothstep==0) {
         write("M1\r");
@@ -199,5 +200,16 @@ void Motor::moveboth()
     } else {
         DEBUG_ERROR("movebothstep unhandled value %i",movebothstep);
     }
+#else
+    //DEBUG_INFO("%d %s %s%s, Going ", numsteps, "steps in direction: ", dirstring.toLocal8Bit().data(), "\n");
+    QString commandText;
+
+    commandText = "M1,s2880,s-";
+    commandText.append(QString::number(motor1steps));
+    commandText.append(",M2,s2880,s-");
+    commandText.append(QString::number(motor2steps));
+    commandText.append(QChar::CarriageReturn);
+    write(commandText.toLocal8Bit());
+#endif
 }
 

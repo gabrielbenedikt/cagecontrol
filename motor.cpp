@@ -83,6 +83,9 @@ void Motor::read()
 { }
 void Motor::write(const QByteArray &data)
 {
+    #if DEBUG
+        qDebug()<<serial->portName()<<":write\t"<<QString::fromLocal8Bit(data);
+    #endif
     serial->write(data);
 }
 void Motor::handleError(QSerialPort::SerialPortError error)

@@ -82,12 +82,20 @@ void cagecontrol::initconnections()
 {
     QList<QDoubleSpinBox*> dsboxes = tabs->findChildren<QDoubleSpinBox*>();
     for(QDoubleSpinBox* box : dsboxes) {
+#if defined (_WIN32) && (_MSC_VER<1900)
+        connect(box,SIGNAL(valueChanged(double)),this,SLOT(updatesettings(double)));
+#else
         connect(box,QOverload<double>::of(&QDoubleSpinBox::valueChanged),this,&cagecontrol::updatesettings);
+#endif
     }
 
     QList<QSpinBox*> sboxes = tabs->findChildren<QSpinBox*>();
     for(QSpinBox* box : sboxes) {
+#if defined (_WIN32) && (_MSC_VER<1900)
+        connect(box,SIGNAL(valueChanged(int)),this,SLOT(updatesettings(double)));
+#else
         connect(box,QOverload<int>::of(&QSpinBox::valueChanged),this,&cagecontrol::updatesettings);
+#endif
     }
 }
 

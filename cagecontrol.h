@@ -57,6 +57,8 @@ private:
     QVector<double> QWP0;//motor
     QVector<double> HWPcust;//motor
     QVector<double> QWPcust;//motor
+    //UI
+    QVector<QGroupBox*> uiMotorGroupBoxes;
 
     void setupUI(QGridLayout *layout);
     void openmotors();

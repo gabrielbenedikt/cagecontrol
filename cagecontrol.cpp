@@ -16,7 +16,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
     // UI-Setup
     QGridLayout *layout = new QGridLayout;
     setupUI(layout);
-    motorName={"red","brown","green","blue","white","black"};
+    motorName<<"red"<<"brown"<<"green"<<"blue"<<"white"<<"black";
     HWP0.reserve(motorName.length());
     QWP0.reserve(motorName.length());
     HWPcust.reserve(motorName.length());

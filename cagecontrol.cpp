@@ -506,9 +506,9 @@ void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
 {
     DEBUG_INFO("TODO: move motor %s:\tHWP: %4.1f\tQWP: %4.1f\n",motor.toLatin1().data(), HWPang, QWPang);
     int i = motorName.indexOf(motor);
-    if ((HWPmnum.at(i)==1) and (QWPmnum.at(i)==2)) {
+    if ((HWPmnum.at(i)==1) && (QWPmnum.at(i)==2)) {
         motors.at(i)->command_moveboth(HWPang,QWPang);
-    } else if ((HWPmnum.at(i)==2) and (QWPmnum.at(i)==1)) {
+    } else if ((HWPmnum.at(i)==2) && (QWPmnum.at(i)==1)) {
         motors.at(i)->command_moveboth(HWPang,QWPang);
     } else {
         DEBUG_ERROR("undefined motor slot: HWP %i QWP %i\n",HWPmnum.at(i),QWPmnum.at(i));
@@ -565,37 +565,37 @@ void cagecontrol::LoadConfig()
 
     tmpstr = settings->value("MOTORS/COMRED","").toString();
     tmpidx=tabs->findChild<QComboBox*>("redcom")->findText(tmpstr);
-    if ((tmpstr=="") or (tmpidx==-1)) {
+    if ((tmpstr=="") || (tmpidx==-1)) {
         tmpidx=0;
     }
     tabs->findChild<QComboBox*>("redcom")->setCurrentIndex(tmpidx);
     tmpstr = settings->value("MOTORS/COMBROWN","").toString();
     tmpidx=tabs->findChild<QComboBox*>("browncom")->findText(tmpstr);
-    if ((tmpstr=="") or (tmpidx==-1)) {
+    if ((tmpstr=="") || (tmpidx==-1)) {
         tmpidx=0;
     }
     tabs->findChild<QComboBox*>("browncom")->setCurrentIndex(tmpidx);
     tmpstr = settings->value("MOTORS/COMGREEN","").toString();
     tmpidx=tabs->findChild<QComboBox*>("greencom")->findText(tmpstr);
-    if ((tmpstr=="") or (tmpidx==-1)) {
+    if ((tmpstr=="") || (tmpidx==-1)) {
         tmpidx=0;
     }
     tabs->findChild<QComboBox*>("greencom")->setCurrentIndex(tmpidx);
     tmpstr = settings->value("MOTORS/COMBLUE","").toString();
     tmpidx=tabs->findChild<QComboBox*>("bluecom")->findText(tmpstr);
-    if ((tmpstr=="") or (tmpidx==-1)) {
+    if ((tmpstr=="") || (tmpidx==-1)) {
         tmpidx=0;
     }
     tabs->findChild<QComboBox*>("bluecom")->setCurrentIndex(tmpidx);
     tmpstr = settings->value("MOTORS/COMWHITE","").toString();
     tmpidx=tabs->findChild<QComboBox*>("whitecom")->findText(tmpstr);
-    if ((tmpstr=="") or (tmpidx==-1)) {
+    if ((tmpstr=="") || (tmpidx==-1)) {
         tmpidx=0;
     }
     tabs->findChild<QComboBox*>("whitecom")->setCurrentIndex(tmpidx);
     tmpstr = settings->value("MOTORS/COMBLACK","").toString();
     tmpidx=tabs->findChild<QComboBox*>("blackcom")->findText(tmpstr);
-    if ((tmpstr=="") or (tmpidx==-1)) {
+    if ((tmpstr=="") || (tmpidx==-1)) {
         tmpidx=0;
     }
     tabs->findChild<QComboBox*>("blackcom")->setCurrentIndex(tmpidx);

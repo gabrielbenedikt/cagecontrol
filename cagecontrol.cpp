@@ -231,12 +231,25 @@ void cagecontrol::setupUI(QGridLayout *layout)
     motorGB(blackbox,"black");
     blackbox->setObjectName("blackbox");
 
-    motorlayout->addWidget(redbox);
-    motorlayout->addWidget(brownbox);
-    motorlayout->addWidget(greenbox);
-    motorlayout->addWidget(bluebox);
-    motorlayout->addWidget(whitebox);
-    motorlayout->addWidget(blackbox);
+    QGridLayout *buttons = new QGridLayout();
+    buttons->setObjectName("buttonbox");
+    QPushButton *allsetbtn = new QPushButton("Set all");
+    allsetbtn->setObjectName("allsetbutton");
+    QPushButton *allhvbtn = new QPushButton("H/V all");
+    allhvbtn->setObjectName("allhbbutton");
+    QPushButton *allpmbtn = new QPushButton("+/- all");
+    allpmbtn->setObjectName("allsetbutton");
+    buttons->addWidget(allsetbtn,1,1,1,1);
+    buttons->addWidget(allhvbtn,1,2,1,1);
+    buttons->addWidget(allpmbtn,1,3,1,1);
+
+    motorlayout->addWidget(redbox,1,1);
+    motorlayout->addWidget(brownbox,2,1);
+    motorlayout->addWidget(greenbox,3,1);
+    motorlayout->addWidget(bluebox,4,1);
+    motorlayout->addWidget(whitebox,5,1);
+    motorlayout->addWidget(blackbox,6,1);
+    motorlayout->addLayout(buttons,7,1);
 
     QLabel *settinglabel_red = new QLabel("red");
     QLabel *settinglabel_brown = new QLabel("brown");
@@ -410,9 +423,36 @@ void cagecontrol::setupUI(QGridLayout *layout)
     connect(blackbox->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::moveblackHV);
     connect(blackbox->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::moveblackPM);
     connect(blackbox->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::moveblackANG);
+    connect(allhvbtn,&QAbstractButton::pressed,this,&cagecontrol::moveallhv);
+    connect(allpmbtn,&QAbstractButton::pressed,this,&cagecontrol::moveallpm);
+    connect(allsetbtn,&QAbstractButton::pressed,this,&cagecontrol::moveallarb);
 
 }
 
+void cagecontrol::moveallhv()
+{
+    for (Motor* m : motors)
+    {
+        int idx = motors.indexOf(m);
+        movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
+    }
+}
+void cagecontrol::moveallpm()
+{
+    for (Motor* m : motors)
+    {
+        int idx = motors.indexOf(m);
+        movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
+    }
+}
+void cagecontrol::moveallarb()
+{
+    for (Motor* m : motors)
+    {
+        int idx = motors.indexOf(m);
+        movemotor(motorName[idx],HWPcust[idx],QWPcust[idx]);
+    }
+}
 void cagecontrol::moveredHV()
 {
     movemotor("red",HWP0[0],QWP0[0]);

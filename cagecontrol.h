@@ -100,6 +100,9 @@ private:
     void moveblackHV();
     void moveblackPM();
     void moveblackANG();
+    void moveallhv();
+    void moveallpm();
+    void moveallarb();
 };
 
 #endif // CAGECONTROL_H

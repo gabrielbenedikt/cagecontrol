@@ -36,10 +36,10 @@
  * usefull information to stdout.\n
  * default: true
  */
-#define DEBUG true
-#define DEBUGERROR true
-#define DEBUGWARNING true
-#define DEBUGINFO true
+#define DEBUG 1
+#define DEBUGERROR 1
+#define DEBUGWARNING 1
+#define DEBUGINFO 1
 
 /*!
  * \def EPS

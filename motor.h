@@ -8,6 +8,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QObject>
 #include <QTimer>
+#include "defines.h"
 
 QT_USE_NAMESPACE
 

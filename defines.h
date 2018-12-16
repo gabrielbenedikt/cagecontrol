@@ -3,6 +3,7 @@
 
 #define DEBUGSPECTROMETERCONFIG FALSE
 
+
 /*!
  * \file defines.h
  * \brief Various compile-time definitions.
@@ -10,6 +11,13 @@
  *
  * Contains definitions of various kind - mathematical, version constants, debug-variables, ...
  */
+
+/*!
+ * \def UNUSED()
+ *
+ * Use UNUSED(var) in function f(...,type var,...) to silence compiler warnings about unused parameter var.
+ */
+#define UNUSED(expr) do { (void)(expr); } while (0)
 
 /*!
  * \def DEBUG

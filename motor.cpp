@@ -207,9 +207,9 @@ void Motor::moveboth()
     //DEBUG_INFO("%d %s %s%s, Going ", numsteps, "steps in direction: ", dirstring.toLocal8Bit().data(), "\n");
     QString commandText;
 
-    commandText = "M1,s2880,s-";
+    commandText = "M1,s-2880,s";
     commandText.append(QString::number(motor1steps));
-    commandText.append(",M2,s2880,s-");
+    commandText.append(",M2,s-2880,s");
     commandText.append(QString::number(motor2steps));
     commandText.append(QChar::CarriageReturn);
     write(commandText.toLocal8Bit());

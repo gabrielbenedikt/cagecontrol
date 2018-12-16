@@ -101,6 +101,8 @@ void cagecontrol::initconnections()
 
 void cagecontrol::updatesettings(double d)
 {
+    UNUSED(d); //just there to create a SLOT with matching parameter for signal &Q(Double)SpinBox::valueChanged
+
     HWP0[0]=settingstab->findChild<QDoubleSpinBox*>("redHWP0sb")->value();
     HWP0[1]=settingstab->findChild<QDoubleSpinBox*>("brownHWP0sb")->value();
     HWP0[2]=settingstab->findChild<QDoubleSpinBox*>("greenHWP0sb")->value();
@@ -549,7 +551,7 @@ void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
     if ((HWPmnum.at(i)==1) && (QWPmnum.at(i)==2)) {
         motors.at(i)->command_moveboth(HWPang,QWPang);
     } else if ((HWPmnum.at(i)==2) && (QWPmnum.at(i)==1)) {
-        motors.at(i)->command_moveboth(HWPang,QWPang);
+        motors.at(i)->command_moveboth(QWPang,HWPang);
     } else {
         DEBUG_ERROR("undefined motor slot: HWP %i QWP %i\n",HWPmnum.at(i),QWPmnum.at(i));
     }
@@ -563,9 +565,7 @@ void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
 ************************************************************************************************/
 void cagecontrol::LoadConfig()
 {
-    double tmpdbl;
     int tmpidx;
-    int tmpint;
     QString tmpstr;
 
     for (int i=0; i<motorName.length(); ++i){

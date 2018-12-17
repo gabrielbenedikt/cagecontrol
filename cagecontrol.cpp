@@ -1,6 +1,6 @@
 #include "cagecontrol.h"
 #include "motor.h"
-#include <QDebug>
+
 
 /************************************************************************************************
 *                                                                                               *
@@ -27,6 +27,8 @@ cagecontrol::cagecontrol(QWidget *parent) :
     setCentralWidget(tabs);
     centralWidget()->setLayout(layout);
     setWindowTitle("CageControl");
+
+    udplistener = new UDPlistener(settings);
 
     LoadConfig();
     initconnections();
@@ -72,6 +74,7 @@ void cagecontrol::updateUI()
     tabs->findChild<QSpinBox*>("blueQWPnum")->setValue(QWPmnum[3]);
     tabs->findChild<QSpinBox*>("whiteQWPnum")->setValue(QWPmnum[4]);
     tabs->findChild<QSpinBox*>("blackQWPnum")->setValue(QWPmnum[5]);
+    tabs->findChild<QSpinBox*>("port")->setValue(udpport);
 }
 /************************************************************************************************
 *                                                                                               *
@@ -97,8 +100,19 @@ void cagecontrol::initconnections()
         connect(box,QOverload<int>::of(&QSpinBox::valueChanged),this,&cagecontrol::updatesettings);
 #endif
     }
+
+    //UDP
+    connect(udplistener, SIGNAL(Move), this, SLOT(slot_movemotors));
+    connect(udplistener, SIGNAL(MoveHV), this, SLOT(slot_moveHV));
+    connect(udplistener, SIGNAL(MovePM), this, SLOT(slot_movePM));
+    connect(udplistener, SIGNAL(MoveLR), this, SLOT(slot_moveLR));
 }
 
+/************************************************************************************************
+*                                                                                               *
+*                            cagecontrol::updatesettings                                        *
+*                                                                                               *
+************************************************************************************************/
 void cagecontrol::updatesettings(double d)
 {
     UNUSED(d); //just there to create a SLOT with matching parameter for signal &Q(Double)SpinBox::valueChanged
@@ -139,6 +153,8 @@ void cagecontrol::updatesettings(double d)
     QWPmnum[3]=settingstab->findChild<QSpinBox*>("blueQWPnum")->value();
     QWPmnum[4]=settingstab->findChild<QSpinBox*>("whiteQWPnum")->value();
     QWPmnum[5]=settingstab->findChild<QSpinBox*>("blackQWPnum")->value();
+
+    udpport=settingstab->findChild<QSpinBox*>("port")->value();
 
 }
 
@@ -241,9 +257,12 @@ void cagecontrol::setupUI(QGridLayout *layout)
     allhvbtn->setObjectName("allhbbutton");
     QPushButton *allpmbtn = new QPushButton("+/- all");
     allpmbtn->setObjectName("allsetbutton");
+    QPushButton *alllrbtn = new QPushButton("L/R all");
+    alllrbtn->setObjectName("alllrbutton");
     buttons->addWidget(allsetbtn,1,1,1,1);
     buttons->addWidget(allhvbtn,1,2,1,1);
     buttons->addWidget(allpmbtn,1,3,1,1);
+    buttons->addWidget(alllrbtn,1,4,1,1);
 
     motorlayout->addWidget(redbox,1,1);
     motorlayout->addWidget(brownbox,2,1);
@@ -340,6 +359,11 @@ void cagecontrol::setupUI(QGridLayout *layout)
     QSpinBox *blackQWPnum = new QSpinBox();
     blackQWPnum->setObjectName("blackQWPnum");
 
+    QLabel *portlabel = new QLabel("UDP port: ");
+    QSpinBox *portsb = new QSpinBox();
+    portsb->setObjectName("port");
+    portsb->setRange(0,65535);
+
     settingslayout->addWidget(settinglabel_HWP,     1,2,1,1);
     settingslayout->addWidget(settinglabel_QWP,     1,3,1,1);
     settingslayout->addWidget(settinglabel_COM,     1,4,1,1);
@@ -381,6 +405,8 @@ void cagecontrol::setupUI(QGridLayout *layout)
     settingslayout->addWidget(blueQWPnum,           5,6,1,1);
     settingslayout->addWidget(whiteQWPnum,          6,6,1,1);
     settingslayout->addWidget(blackQWPnum,          7,6,1,1);
+    settingslayout->addWidget(portlabel,            8,1,1,1);
+    settingslayout->addWidget(portsb,               8,2,1,1);
 
     settingredcombox->clear();
     settingbrowncombox->clear();
@@ -410,24 +436,36 @@ void cagecontrol::setupUI(QGridLayout *layout)
     connect(redbox->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::moveredHV);
     connect(redbox->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::moveredPM);
     connect(redbox->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::moveredANG);
+    connect(redbox->findChild<QPushButton*>("L/R"),&QAbstractButton::pressed,this,&cagecontrol::moveredLR);
     connect(motorstab->findChild<QGroupBox*>("brownbox")->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::movebrownHV);
     connect(motorstab->findChild<QGroupBox*>("brownbox")->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::movebrownPM);
     connect(motorstab->findChild<QGroupBox*>("brownbox")->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::movebrownANG);
+    connect(motorstab->findChild<QGroupBox*>("brownbox")->findChild<QPushButton*>("L/R"),&QAbstractButton::pressed,this,&cagecontrol::movebrownLR);
     connect(greenbox->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::movegreenHV);
     connect(greenbox->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::movegreenPM);
     connect(greenbox->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::movegreenANG);
+    connect(greenbox->findChild<QPushButton*>("L/R"),&QAbstractButton::pressed,this,&cagecontrol::movegreenLR);
     connect(bluebox->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::moveblueHV);
     connect(bluebox->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::movebluePM);
     connect(bluebox->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::moveblueANG);
+    connect(bluebox->findChild<QPushButton*>("L/R"),&QAbstractButton::pressed,this,&cagecontrol::moveblueLR);
     connect(whitebox->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::movewhiteHV);
     connect(whitebox->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::movewhitePM);
     connect(whitebox->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::movewhiteANG);
+    connect(whitebox->findChild<QPushButton*>("L/R"),&QAbstractButton::pressed,this,&cagecontrol::movewhiteLR);
     connect(blackbox->findChild<QPushButton*>("H/V"),&QAbstractButton::pressed,this,&cagecontrol::moveblackHV);
     connect(blackbox->findChild<QPushButton*>("+/-"),&QAbstractButton::pressed,this,&cagecontrol::moveblackPM);
     connect(blackbox->findChild<QPushButton*>("set"),&QAbstractButton::pressed,this,&cagecontrol::moveblackANG);
+    connect(blackbox->findChild<QPushButton*>("L/R"),&QAbstractButton::pressed,this,&cagecontrol::moveblackLR);
     connect(allhvbtn,&QAbstractButton::pressed,this,&cagecontrol::moveallhv);
     connect(allpmbtn,&QAbstractButton::pressed,this,&cagecontrol::moveallpm);
     connect(allsetbtn,&QAbstractButton::pressed,this,&cagecontrol::moveallarb);
+    connect(alllrbtn,&QAbstractButton::pressed,this,&cagecontrol::movealllr);
+#if defined (_WIN32) && (_MSC_VER<1900)
+    connect(portsb,SIGNAL(valueChanged),this,SLOT(updatesettings));
+#else
+    connect(portsb,QOverload<int>::of(&QSpinBox::valueChanged),this,&cagecontrol::updatesettings);
+#endif
 
 }
 
@@ -447,6 +485,14 @@ void cagecontrol::moveallpm()
         movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
     }
 }
+void cagecontrol::movealllr()
+{
+    for (Motor* m : motors)
+    {
+        int idx = motors.indexOf(m);
+        movemotor(motorName[idx], HWP0[idx]+22.5,QWP0[idx]);
+    }
+}
 void cagecontrol::moveallarb()
 {
     for (Motor* m : motors)
@@ -463,6 +509,10 @@ void cagecontrol::moveredPM()
 {
     movemotor("red",HWP0[0]+22.5,QWP0[0]+45);
 }
+void cagecontrol::moveredLR()
+{
+    movemotor("red",HWP0[0]+22.5,QWP0[0]);
+}
 void cagecontrol::moveredANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
@@ -476,6 +526,10 @@ void cagecontrol::movebrownHV()
 void cagecontrol::movebrownPM()
 {
     movemotor("brown",HWP0[1]+22.5,QWP0[1]+45);
+}
+void cagecontrol::movebrownLR()
+{
+    movemotor("brown",HWP0[1]+22.5,QWP0[1]);
 }
 void cagecontrol::movebrownANG()
 {
@@ -491,6 +545,10 @@ void cagecontrol::movegreenPM()
 {
     movemotor("green",HWP0[2]+22.5,QWP0[2]+45);
 }
+void cagecontrol::movegreenLR()
+{
+    movemotor("green",HWP0[2]+22.5,QWP0[2]);
+}
 void cagecontrol::movegreenANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
@@ -504,6 +562,10 @@ void cagecontrol::moveblueHV()
 void cagecontrol::movebluePM()
 {
     movemotor("blue",HWP0[3]+22.5,QWP0[3]+45);
+}
+void cagecontrol::moveblueLR()
+{
+    movemotor("blue",HWP0[3]+22.5,QWP0[3]);
 }
 void cagecontrol::moveblueANG()
 {
@@ -519,6 +581,10 @@ void cagecontrol::movewhitePM()
 {
     movemotor("white",HWP0[4]+22.5,QWP0[4]+45);
 }
+void cagecontrol::movewhiteLR()
+{
+    movemotor("white",HWP0[4]+22.5,QWP0[4]);
+}
 void cagecontrol::movewhiteANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
@@ -532,6 +598,10 @@ void cagecontrol::moveblackHV()
 void cagecontrol::moveblackPM()
 {
     movemotor("black",HWP0[5]+22.5,QWP0[5]+45);
+}
+void cagecontrol::moveblackLR()
+{
+    movemotor("black",HWP0[5]+22.5,QWP0[5]);
 }
 void cagecontrol::moveblackANG()
 {
@@ -566,6 +636,7 @@ void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
 void cagecontrol::LoadConfig()
 {
     int tmpidx;
+    int tmpint;
     QString tmpstr;
 
     for (int i=0; i<motorName.length(); ++i){
@@ -653,6 +724,10 @@ void cagecontrol::LoadConfig()
     tabs->findChild<QSpinBox*>("blueQWPnum")->setValue(QWPmnum[3]);
     tabs->findChild<QSpinBox*>("whiteQWPnum")->setValue(QWPmnum[4]);
     tabs->findChild<QSpinBox*>("blackQWPnum")->setValue(QWPmnum[5]);
+
+    tmpint=settings->value("NETWORK/UDDPPORT",0).toInt();
+    udpport=tmpint;
+    tabs->findChild<QSpinBox*>("port")->setValue(tmpint);
 }
 
 /************************************************************************************************
@@ -683,6 +758,8 @@ void cagecontrol::SaveConfig()
     settings->setValue("MOTORS/COMWHITE",tabs->findChild<QComboBox*>("whitecom")->currentText());
     settings->setValue("MOTORS/COMBLACK",tabs->findChild<QComboBox*>("blackcom")->currentText());
 
+    settings->setValue("NETWORK/UDDPPORT",tabs->findChild<QSpinBox*>("port")->value());
+
     for (int i=0; i<motorName.length(); ++i) {
         settings->setValue("MOTORS/HWP/"+QString::number(i),HWP0[i]);
         settings->setValue("MOTORS/QWP/"+QString::number(i),QWP0[i]);
@@ -707,6 +784,8 @@ void cagecontrol::motorGB(QGroupBox *gb, QString id)
     HVbtn->setObjectName("H/V");
     QPushButton *DAbtn = new QPushButton("+/-");
     DAbtn->setObjectName("+/-");
+    QPushButton *LRbtn = new QPushButton("L/R");
+    LRbtn->setObjectName("L/R");
     QPushButton *Setbtn = new QPushButton("set");
     Setbtn->setObjectName("set");
     QDoubleSpinBox *HWPsb = new QDoubleSpinBox();
@@ -722,8 +801,9 @@ void cagecontrol::motorGB(QGroupBox *gb, QString id)
     layout->addWidget(HWPsb   ,1,2,1,1);
     layout->addWidget(QWPlabel,2,1,1,1);
     layout->addWidget(QWPsb   ,2,2,1,1);
-    layout->addWidget(Setbtn  ,1,3,2,1);
+    layout->addWidget(Setbtn  ,1,3,1,1);
     layout->addWidget(HVbtn   ,1,4,1,1);
+    layout->addWidget(LRbtn   ,2,3,1,1);
     layout->addWidget(DAbtn   ,2,4,1,1);
 
     gb->setTitle(id);
@@ -742,4 +822,83 @@ cagecontrol::~cagecontrol()
         m->close();
     }
     SaveConfig();
+    delete udplistener;
+    delete settings;
+}
+/************************************************************************************************
+*                                                                                               *
+*                                cagecontrol::moveHV                                            *
+*                                                                                               *
+************************************************************************************************/
+void cagecontrol::slot_moveHV(QString color)
+{
+    if (motorName.contains(color.toLower())) {
+        int i = motorName.indexOf(color.toLower());
+        movemotor(color.toLower(),HWP0[i],QWP0[i]);
+    } else if (color.toLower()=="all") {
+        for (Motor* m : motors) {
+            int idx = motors.indexOf(m);
+            movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
+        }
+    } else {
+        DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
+    }
+}
+/************************************************************************************************
+*                                                                                               *
+*                                cagecontrol::movePM                                            *
+*                                                                                               *
+************************************************************************************************/
+void cagecontrol::slot_movePM(QString color)
+{
+    if (motorName.contains(color.toLower())) {
+        int i = motorName.indexOf(color.toLower());
+        movemotor(color.toLower(),HWP0[i]+22.5,QWP0[i]+45);
+    } else if (color.toLower()=="all") {
+        for (Motor* m : motors) {
+            int idx = motors.indexOf(m);
+            movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
+        }
+    } else {
+        DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
+    }
+}
+/************************************************************************************************
+*                                                                                               *
+*                                cagecontrol::moveLR                                            *
+*                                                                                               *
+************************************************************************************************/
+void cagecontrol::slot_moveLR(QString color)
+{
+    // TODO: waveplate settings for circular
+    if (motorName.contains(color.toLower())) {
+        int i = motorName.indexOf(color.toLower());
+        movemotor(color.toLower(),HWP0[i],QWP0[i]);
+    } else if (color.toLower()=="all") {
+        for (Motor* m : motors) {
+            int idx = motors.indexOf(m);
+            movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]);
+        }
+    } else {
+        DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
+    }
+}
+/************************************************************************************************
+*                                                                                               *
+*                              cagecontrol::movemotors                                          *
+*                                                                                               *
+************************************************************************************************/
+void cagecontrol::slot_movemotors(QString color, double HWPang, double QWPang)
+{
+    if (motorName.contains(color.toLower())) {
+        int i = motorName.indexOf(color.toLower());
+        movemotor(color.toLower(),HWPang,QWPang);
+    } else if (color.toLower()=="all") {
+        for (Motor* m : motors) {
+            int idx = motors.indexOf(m);
+            movemotor(motorName[idx],HWPang,QWPang);
+        }
+    } else {
+        DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
+    }
 }

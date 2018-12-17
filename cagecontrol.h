@@ -2,6 +2,8 @@
 #define CAGECONTROL_H
 
 #include "debug.h"
+#include "udplistener.h"
+#include <QDebug>
 #include <QDoubleSpinBox>
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -31,8 +33,31 @@ private slots:
     void updatesettings(double d);
     void updateUI();
 
+public slots:
+    /*!
+     * \brief moveHV
+     * \param color
+     */
+    void slot_moveHV(QString color);
+    /*!
+     * \brief movePM
+     * \param color
+     */
+    void slot_movePM(QString color);
+    /*!
+     * \brief moveLR
+     * \param color
+     */
+    void slot_moveLR(QString color);
+    /*!
+     * \brief movemotors
+     * \param color
+     */
+    void slot_movemotors(QString color, double HWPang, double QWPang);
 private:
+    int udpport;
     QSettings *settings;                                //!<
+    UDPlistener *udplistener;
     QTabWidget *tabs;                                   //!<
     QWidget *settingstab;
     QWidget *motorstab;
@@ -84,24 +109,31 @@ private:
     //Note: there must be a better way to do this...
     void moveredHV();
     void moveredPM();
+    void moveredLR();
     void moveredANG();
     void movebrownHV();
     void movebrownPM();
+    void movebrownLR();
     void movebrownANG();
     void movegreenHV();
     void movegreenPM();
+    void movegreenLR();
     void movegreenANG();
     void moveblueHV();
     void movebluePM();
+    void moveblueLR();
     void moveblueANG();
     void movewhiteHV();
     void movewhitePM();
+    void movewhiteLR();
     void movewhiteANG();
     void moveblackHV();
     void moveblackPM();
+    void moveblackLR();
     void moveblackANG();
     void moveallhv();
     void moveallpm();
+    void movealllr();
     void moveallarb();
 };
 

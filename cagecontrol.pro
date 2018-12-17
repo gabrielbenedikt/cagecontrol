@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -56,7 +56,9 @@ macx {
 SOURCES += \
         main.cpp \
         cagecontrol.cpp \
-    motor.cpp
+    motor.cpp \
+    udplistener.cpp \
+    helper.cpp
 
 HEADERS += \
         cagecontrol.h \
@@ -64,7 +66,9 @@ HEADERS += \
     debug.h \
     version.h \
     createversion_win.bat \
-    motor.h
+    motor.h \
+    udplistener.h \
+    helper.h
 
 #FORMS += \
 #        cagecontrol.ui
@@ -76,4 +80,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     doxygen_cagecontrol \
-    createversion_linux.sh
+    createversion_linux.sh \
+    TODO.txt

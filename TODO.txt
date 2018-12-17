@@ -1,0 +1,12 @@
+-) Read controller feedback message to check that motor did not get stuck
+-) Waveplate angles for circular: 22.5HWP, 0QWP
+-) L/R buttons
+-) Verify that 'go n steps' vs 'to to next edge, n times' does not make a difference
+-) Extend documentation
+-) Clean up GUI code
+---) instead of "redwidget, brownwidget, greenwidget, ......", use QVector<widget>
+-) Add UDP listener/sender to control software using UDP commands (or, use TCP. whatever)
+-) Read bases from file
+---) change every n seconds?
+-) implement arbitrary unitaries using 3 waveplates
+---) two controllers per cage, one shared between 2 cages -> logic needs to be altered (right now, it would attempt to open the serial comm to the shared controller twice - once per cage)

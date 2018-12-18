@@ -1,0 +1,328 @@
+\hypertarget{classMotor}{}\section{Motor Class Reference}
+\label{classMotor}\index{Motor@{Motor}}
+
+
+The \hyperlink{classMotor}{Motor} class operates the P\+C\+B-\/motor.  
+
+
+
+
+{\ttfamily \#include $<$motor.\+h$>$}
+
+
+
+Inheritance diagram for Motor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=133pt]{classMotor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Motor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=133pt]{classMotor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMotor_a6f235ed0f9e1ba51cc6cd1dcd823d850}\label{classMotor_a6f235ed0f9e1ba51cc6cd1dcd823d850}} 
+void \hyperlink{classMotor_a6f235ed0f9e1ba51cc6cd1dcd823d850}{open} (Q\+String port)
+\begin{DoxyCompactList}\small\item\em open establishes a connection over a serial port \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_a6302ab51842ec23bd8b36d56e5ae9416}\label{classMotor_a6302ab51842ec23bd8b36d56e5ae9416}} 
+void \hyperlink{classMotor_a6302ab51842ec23bd8b36d56e5ae9416}{close} ()
+\begin{DoxyCompactList}\small\item\em close closes the serialport connection \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_adc21685543cb0f520fec7291b4a642f0}\label{classMotor_adc21685543cb0f520fec7291b4a642f0}} 
+void \hyperlink{classMotor_adc21685543cb0f520fec7291b4a642f0}{read} ()
+\begin{DoxyCompactList}\small\item\em read reads from the serial port \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_a8305ead4b01433cb8a01eb5440a8b570}{write} (const Q\+Byte\+Array \&data)
+\begin{DoxyCompactList}\small\item\em write writes to the serialport \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_a4c95080f6faf87f02844093e948d485a}{handle\+Error} (Q\+Serial\+Port\+::\+Serial\+Port\+Error error)
+\begin{DoxyCompactList}\small\item\em handle\+Error prints an error message of the serialport connection and closes the connection \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_a3d9df9be923b64306fa28dff13ceaa2e}{show\+Status\+Message} (const Q\+String \&message)
+\begin{DoxyCompactList}\small\item\em show\+Status\+Message fills the label in the G\+UI with text \end{DoxyCompactList}\item 
+bool \hyperlink{classMotor_a6522462ca0730300ca3335090425786b}{isopen} ()
+\begin{DoxyCompactList}\small\item\em isopen returns the state of the serial connection \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_a1b3e37fc95517b98914ce3740232b098}\label{classMotor_a1b3e37fc95517b98914ce3740232b098}} 
+void \hyperlink{classMotor_a1b3e37fc95517b98914ce3740232b098}{command\+\_\+park} ()
+\begin{DoxyCompactList}\small\item\em command\+\_\+park moves the motor to the mechanical stop \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_a75c8443fde45f5dc88e7bfe12db75a88}\label{classMotor_a75c8443fde45f5dc88e7bfe12db75a88}} 
+void \hyperlink{classMotor_a75c8443fde45f5dc88e7bfe12db75a88}{command\+\_\+home} ()
+\begin{DoxyCompactList}\small\item\em command\+\_\+home sends commands to position at the mechanical stop and afterwards go to the offset starting position, but in an inaccurate way \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_abae5d9c4f4e3e9b67a98ca2486edacb9}\label{classMotor_abae5d9c4f4e3e9b67a98ca2486edacb9}} 
+void \hyperlink{classMotor_abae5d9c4f4e3e9b67a98ca2486edacb9}{command\+\_\+info} ()
+\begin{DoxyCompactList}\small\item\em command\+\_\+info sends the command to request the P\+C\+B\+Motor information \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_aca8c344a7251cc4067f4d1cba69f7970}\label{classMotor_aca8c344a7251cc4067f4d1cba69f7970}} 
+void \hyperlink{classMotor_aca8c344a7251cc4067f4d1cba69f7970}{command\+\_\+help} ()
+\begin{DoxyCompactList}\small\item\em command\+\_\+help sends the command to print the P\+C\+B\+Motor help \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_ade0bd3f46caadb9fef19f03629fc4e71}\label{classMotor_ade0bd3f46caadb9fef19f03629fc4e71}} 
+void \hyperlink{classMotor_ade0bd3f46caadb9fef19f03629fc4e71}{command\+\_\+frequency\+\_\+sweep} ()
+\begin{DoxyCompactList}\small\item\em command\+\_\+frequency\+\_\+sweep sends the P\+C\+B\+Motor command for a frequency sweep \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_ae052b079f5bd433c3561eb8b6d772b80}{command\+\_\+singlestep} (Q\+String dirstring)
+\begin{DoxyCompactList}\small\item\em command\+\_\+singlestep moves the motor a single step in a direction specified by dirstring \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_aafbe8e02e29d2a81287747ae09b3d9fa}{command\+\_\+step} (uint16\+\_\+t numsteps, Q\+String dirstring)
+\begin{DoxyCompactList}\small\item\em command\+\_\+step moves the motor numstep steps in a direction specified by dirstring \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_abfbe0b96cfb97107128084ec065e31c2}{command\+\_\+microstep} (uint16\+\_\+t nummsteps, Q\+String dirstring)
+\begin{DoxyCompactList}\small\item\em command\+\_\+microstep aplies nummsteps micropulses to the motor \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_a9ca6508221ea2c42a5220848ab37df30}{stop} (bool stop)
+\begin{DoxyCompactList}\small\item\em stop Tries to stop movenents if possible \end{DoxyCompactList}\item 
+void \hyperlink{classMotor_a3d179f71c181cbeb3cdb44af166e532d}{command\+\_\+moveboth} (double ang1, double ang2)
+\begin{DoxyCompactList}\small\item\em command\+\_\+moveboth moves both motors connected to the controller \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMotor_ad12a639c95a4a33f59118dc8145dc1d4}{motorstatusmessage} (const Q\+String \&message)
+\begin{DoxyCompactList}\small\item\em motorstatusmessage emitted when the status of the serial connection changes, with a string indicating the actual state. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_afcf83aa74380932f2408c150b806b5fb}\label{classMotor_afcf83aa74380932f2408c150b806b5fb}} 
+void \hyperlink{classMotor_afcf83aa74380932f2408c150b806b5fb}{Connection\+Closed} ()
+\begin{DoxyCompactList}\small\item\em emitted when serial connection is closed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMotor_af6fb1d675035fd353cd2cb97dbdbecc9}\label{classMotor_af6fb1d675035fd353cd2cb97dbdbecc9}} 
+\hyperlink{classMotor_af6fb1d675035fd353cd2cb97dbdbecc9}{Motor} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classMotor}{Motor} the contructor initializes variables and establishes the serial connection. \end{DoxyCompactList}\item 
+bool \hyperlink{classMotor_a3e5e0ed8b8095588a09283200aaeb142}{sensordata} ()
+\begin{DoxyCompactList}\small\item\em sensordata returns the current P\+C\+B\+Motor optical encoder wheel sendor state \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMotor_ac64f7613ade081a22859151662b8e866}\label{classMotor_ac64f7613ade081a22859151662b8e866}} 
+Q\+String \hyperlink{classMotor_ac64f7613ade081a22859151662b8e866}{publicmotorstatusmessage}
+\begin{DoxyCompactList}\small\item\em A string containing the current state of the serial connection. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_a830ca5e3e68b7bc0ffb30650d72b8efb}\label{classMotor_a830ca5e3e68b7bc0ffb30650d72b8efb}} 
+Q\+Serial\+Port $\ast$ \hyperlink{classMotor_a830ca5e3e68b7bc0ffb30650d72b8efb}{serial}
+\begin{DoxyCompactList}\small\item\em Qt serial connection interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMotor_a58e08c8118b2e3272c35086ac6289428}\label{classMotor_a58e08c8118b2e3272c35086ac6289428}} 
+void \hyperlink{classMotor_a58e08c8118b2e3272c35086ac6289428}{moveboth} ()
+\begin{DoxyCompactList}\small\item\em command\+\_\+moveboth moves both motors connected to the controller \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Timer \hyperlink{classMotor_adbb59f89d592f1569ba8ad05c5c58a73}{hometimer}
+\begin{DoxyCompactList}\small\item\em Used to iterate through the steps of \textquotesingle{}go to the starting position\textquotesingle{} -\/ but in an inaccurate way. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_a97bf769ce21887450f412554520f4f20}\label{classMotor_a97bf769ce21887450f412554520f4f20}} 
+Q\+Timer \hyperlink{classMotor_a97bf769ce21887450f412554520f4f20}{bothtimer}
+\begin{DoxyCompactList}\small\item\em Used to iterate through the steps of moving two motors of one controller. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMotor_a64cf23f01da50ffdfd3c5ba26ad44f1f}\label{classMotor_a64cf23f01da50ffdfd3c5ba26ad44f1f}} 
+int {\bfseries movebothstep}
+\item 
+\mbox{\Hypertarget{classMotor_a65cf2259e3d3e61ea7e268b99f8089a0}\label{classMotor_a65cf2259e3d3e61ea7e268b99f8089a0}} 
+bool {\bfseries serialconnectionok}
+\item 
+\mbox{\Hypertarget{classMotor_a09aaad8e6e0ea959ac4712677443d8f0}\label{classMotor_a09aaad8e6e0ea959ac4712677443d8f0}} 
+uint16\+\_\+t {\bfseries motor1steps}
+\item 
+\mbox{\Hypertarget{classMotor_af12031af563931e69915308aa0cce190}\label{classMotor_af12031af563931e69915308aa0cce190}} 
+uint16\+\_\+t {\bfseries motor2steps}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classMotor}{Motor} class operates the P\+C\+B-\/motor. 
+
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000004}{Bug}]There are no known bugs.\end{DoxyRefDesc}
+
+
+The P\+C\+B\+Motor is controllable by sending A\+S\+C\+II commands over a serial connection. This class establishes such a connection and controls the movements of the motor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMotor_abfbe0b96cfb97107128084ec065e31c2}\label{classMotor_abfbe0b96cfb97107128084ec065e31c2}} 
+\index{Motor@{Motor}!command\+\_\+microstep@{command\+\_\+microstep}}
+\index{command\+\_\+microstep@{command\+\_\+microstep}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{command\+\_\+microstep}{command\_microstep}}
+{\footnotesize\ttfamily void Motor\+::command\+\_\+microstep (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{nummsteps,  }\item[{Q\+String}]{dirstring }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+command\+\_\+microstep aplies nummsteps micropulses to the motor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nummsteps} & number of micropulses to apply \\
+\hline
+{\em dirstring} & string containing the desired direction\\
+\hline
+\end{DoxyParams}
+dirstring may either be \char`\"{}bw\char`\"{} of \char`\"{}fw\char`\"{} for backward/forward movement. \mbox{\Hypertarget{classMotor_a3d179f71c181cbeb3cdb44af166e532d}\label{classMotor_a3d179f71c181cbeb3cdb44af166e532d}} 
+\index{Motor@{Motor}!command\+\_\+moveboth@{command\+\_\+moveboth}}
+\index{command\+\_\+moveboth@{command\+\_\+moveboth}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{command\+\_\+moveboth}{command\_moveboth}}
+{\footnotesize\ttfamily void Motor\+::command\+\_\+moveboth (\begin{DoxyParamCaption}\item[{double}]{ang1,  }\item[{double}]{ang2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+command\+\_\+moveboth moves both motors connected to the controller 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ang1} & angle motor 1 is to be moved to \\
+\hline
+{\em ang2angle} & motor 2 is to be moved to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMotor_ae052b079f5bd433c3561eb8b6d772b80}\label{classMotor_ae052b079f5bd433c3561eb8b6d772b80}} 
+\index{Motor@{Motor}!command\+\_\+singlestep@{command\+\_\+singlestep}}
+\index{command\+\_\+singlestep@{command\+\_\+singlestep}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{command\+\_\+singlestep}{command\_singlestep}}
+{\footnotesize\ttfamily void Motor\+::command\+\_\+singlestep (\begin{DoxyParamCaption}\item[{Q\+String}]{dirstring }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+command\+\_\+singlestep moves the motor a single step in a direction specified by dirstring 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dirstring} & a string containing the desired movenent direction\\
+\hline
+\end{DoxyParams}
+Dirstring may either be \char`\"{}bw\char`\"{} of \char`\"{}fw\char`\"{} for backward/forward movement. \mbox{\Hypertarget{classMotor_aafbe8e02e29d2a81287747ae09b3d9fa}\label{classMotor_aafbe8e02e29d2a81287747ae09b3d9fa}} 
+\index{Motor@{Motor}!command\+\_\+step@{command\+\_\+step}}
+\index{command\+\_\+step@{command\+\_\+step}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{command\+\_\+step}{command\_step}}
+{\footnotesize\ttfamily void Motor\+::command\+\_\+step (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{numsteps,  }\item[{Q\+String}]{dirstring }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+command\+\_\+step moves the motor numstep steps in a direction specified by dirstring 
+
+
+\begin{DoxyParams}{Parameters}
+{\em numsteps} & number of steps to go \\
+\hline
+{\em dirstring} & direction to go\\
+\hline
+\end{DoxyParams}
+Dirstring may either be \char`\"{}bw\char`\"{} of \char`\"{}fw\char`\"{} for backward/forward movement. \mbox{\Hypertarget{classMotor_a4c95080f6faf87f02844093e948d485a}\label{classMotor_a4c95080f6faf87f02844093e948d485a}} 
+\index{Motor@{Motor}!handle\+Error@{handle\+Error}}
+\index{handle\+Error@{handle\+Error}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{handle\+Error}{handleError}}
+{\footnotesize\ttfamily void Motor\+::handle\+Error (\begin{DoxyParamCaption}\item[{Q\+Serial\+Port\+::\+Serial\+Port\+Error}]{error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+handle\+Error prints an error message of the serialport connection and closes the connection 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMotor_a6522462ca0730300ca3335090425786b}\label{classMotor_a6522462ca0730300ca3335090425786b}} 
+\index{Motor@{Motor}!isopen@{isopen}}
+\index{isopen@{isopen}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{isopen}{isopen}}
+{\footnotesize\ttfamily bool Motor\+::isopen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+isopen returns the state of the serial connection 
+
+\begin{DoxyReturn}{Returns}
+true if serial connection was established successfully, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMotor_ad12a639c95a4a33f59118dc8145dc1d4}\label{classMotor_ad12a639c95a4a33f59118dc8145dc1d4}} 
+\index{Motor@{Motor}!motorstatusmessage@{motorstatusmessage}}
+\index{motorstatusmessage@{motorstatusmessage}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{motorstatusmessage}{motorstatusmessage}}
+{\footnotesize\ttfamily void Motor\+::motorstatusmessage (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+motorstatusmessage emitted when the status of the serial connection changes, with a string indicating the actual state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & the message \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMotor_a3e5e0ed8b8095588a09283200aaeb142}\label{classMotor_a3e5e0ed8b8095588a09283200aaeb142}} 
+\index{Motor@{Motor}!sensordata@{sensordata}}
+\index{sensordata@{sensordata}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{sensordata()}{sensordata()}}
+{\footnotesize\ttfamily bool Motor\+::sensordata (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+sensordata returns the current P\+C\+B\+Motor optical encoder wheel sendor state 
+
+\begin{DoxyReturn}{Returns}
+the current P\+C\+B\+Motor optical encoder wheel sendor state 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMotor_a3d9df9be923b64306fa28dff13ceaa2e}\label{classMotor_a3d9df9be923b64306fa28dff13ceaa2e}} 
+\index{Motor@{Motor}!show\+Status\+Message@{show\+Status\+Message}}
+\index{show\+Status\+Message@{show\+Status\+Message}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{show\+Status\+Message}{showStatusMessage}}
+{\footnotesize\ttfamily void Motor\+::show\+Status\+Message (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+show\+Status\+Message fills the label in the G\+UI with text 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & the text to be shown in the label \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMotor_a9ca6508221ea2c42a5220848ab37df30}\label{classMotor_a9ca6508221ea2c42a5220848ab37df30}} 
+\index{Motor@{Motor}!stop@{stop}}
+\index{stop@{stop}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{stop}{stop}}
+{\footnotesize\ttfamily void Motor\+::stop (\begin{DoxyParamCaption}\item[{bool}]{stop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+stop Tries to stop movenents if possible 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stop} & Input\+: True if movents shall be stopped if possible \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMotor_a8305ead4b01433cb8a01eb5440a8b570}\label{classMotor_a8305ead4b01433cb8a01eb5440a8b570}} 
+\index{Motor@{Motor}!write@{write}}
+\index{write@{write}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{write}{write}}
+{\footnotesize\ttfamily void Motor\+::write (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+write writes to the serialport 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & data to be written to the serial port \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classMotor_adbb59f89d592f1569ba8ad05c5c58a73}\label{classMotor_adbb59f89d592f1569ba8ad05c5c58a73}} 
+\index{Motor@{Motor}!hometimer@{hometimer}}
+\index{hometimer@{hometimer}!Motor@{Motor}}
+\subsubsection{\texorpdfstring{hometimer}{hometimer}}
+{\footnotesize\ttfamily Q\+Timer Motor\+::hometimer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Used to iterate through the steps of \textquotesingle{}go to the starting position\textquotesingle{} -\/ but in an inaccurate way. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classMotor_a75c8443fde45f5dc88e7bfe12db75a88}{command\+\_\+home()} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{motor_8h}{motor.\+h}\item 
+motor.\+cpp\end{DoxyCompactItemize}

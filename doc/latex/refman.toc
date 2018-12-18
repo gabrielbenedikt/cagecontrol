@@ -1,0 +1,57 @@
+\contentsline {chapter}{\numberline {1}Bug List}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Namespace Index}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Namespace List}{3}{section.2.1}
+\contentsline {chapter}{\numberline {3}Hierarchical Index}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Class Hierarchy}{5}{section.3.1}
+\contentsline {chapter}{\numberline {4}Class Index}{7}{chapter.4}
+\contentsline {section}{\numberline {4.1}Class List}{7}{section.4.1}
+\contentsline {chapter}{\numberline {5}File Index}{9}{chapter.5}
+\contentsline {section}{\numberline {5.1}File List}{9}{section.5.1}
+\contentsline {chapter}{\numberline {6}Namespace Documentation}{11}{chapter.6}
+\contentsline {section}{\numberline {6.1}helper Namespace Reference}{11}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Detailed Description}{11}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Function Documentation}{11}{subsection.6.1.2}
+\contentsline {subsubsection}{\numberline {6.1.2.1}error()}{11}{subsubsection.6.1.2.1}
+\contentsline {subsubsection}{\numberline {6.1.2.2}info()}{12}{subsubsection.6.1.2.2}
+\contentsline {subsubsection}{\numberline {6.1.2.3}message()}{12}{subsubsection.6.1.2.3}
+\contentsline {subsubsection}{\numberline {6.1.2.4}warning()}{12}{subsubsection.6.1.2.4}
+\contentsline {chapter}{\numberline {7}Class Documentation}{13}{chapter.7}
+\contentsline {section}{\numberline {7.1}cagecontrol Class Reference}{13}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Member Function Documentation}{15}{subsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.1.1}Load\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Config()}{15}{subsubsection.7.1.1.1}
+\contentsline {subsubsection}{\numberline {7.1.1.2}Save\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Config()}{16}{subsubsection.7.1.1.2}
+\contentsline {section}{\numberline {7.2}Motor Class Reference}{16}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Detailed Description}{18}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Member Function Documentation}{18}{subsection.7.2.2}
+\contentsline {subsubsection}{\numberline {7.2.2.1}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}microstep}{18}{subsubsection.7.2.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2.2}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}moveboth}{19}{subsubsection.7.2.2.2}
+\contentsline {subsubsection}{\numberline {7.2.2.3}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}singlestep}{19}{subsubsection.7.2.2.3}
+\contentsline {subsubsection}{\numberline {7.2.2.4}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}step}{19}{subsubsection.7.2.2.4}
+\contentsline {subsubsection}{\numberline {7.2.2.5}handle\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Error}{20}{subsubsection.7.2.2.5}
+\contentsline {subsubsection}{\numberline {7.2.2.6}isopen}{20}{subsubsection.7.2.2.6}
+\contentsline {subsubsection}{\numberline {7.2.2.7}motorstatusmessage}{20}{subsubsection.7.2.2.7}
+\contentsline {subsubsection}{\numberline {7.2.2.8}sensordata()}{20}{subsubsection.7.2.2.8}
+\contentsline {subsubsection}{\numberline {7.2.2.9}show\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Status\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Message}{21}{subsubsection.7.2.2.9}
+\contentsline {subsubsection}{\numberline {7.2.2.10}stop}{21}{subsubsection.7.2.2.10}
+\contentsline {subsubsection}{\numberline {7.2.2.11}write}{21}{subsubsection.7.2.2.11}
+\contentsline {subsection}{\numberline {7.2.3}Member Data Documentation}{21}{subsection.7.2.3}
+\contentsline {subsubsection}{\numberline {7.2.3.1}hometimer}{22}{subsubsection.7.2.3.1}
+\contentsline {chapter}{\numberline {8}File Documentation}{23}{chapter.8}
+\contentsline {section}{\numberline {8.1}debug.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{23}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}Detailed Description}{24}{subsection.8.1.1}
+\contentsline {section}{\numberline {8.2}defines.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{24}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}Detailed Description}{24}{subsection.8.2.1}
+\contentsline {subsection}{\numberline {8.2.2}Macro Definition Documentation}{25}{subsection.8.2.2}
+\contentsline {subsubsection}{\numberline {8.2.2.1}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}B\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}UG}{25}{subsubsection.8.2.2.1}
+\contentsline {subsubsection}{\numberline {8.2.2.2}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}B\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}OR}{25}{subsubsection.8.2.2.2}
+\contentsline {subsubsection}{\numberline {8.2.2.3}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}B\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}I\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}N\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}FO}{25}{subsubsection.8.2.2.3}
+\contentsline {subsubsection}{\numberline {8.2.2.4}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}B\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}W\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}N\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}I\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}NG}{25}{subsubsection.8.2.2.4}
+\contentsline {subsubsection}{\numberline {8.2.2.5}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}T\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}AD}{25}{subsubsection.8.2.2.5}
+\contentsline {subsubsection}{\numberline {8.2.2.6}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}PS}{25}{subsubsection.8.2.2.6}
+\contentsline {subsubsection}{\numberline {8.2.2.7}PI}{26}{subsubsection.8.2.2.7}
+\contentsline {subsubsection}{\numberline {8.2.2.8}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}T\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}EG}{26}{subsubsection.8.2.2.8}
+\contentsline {section}{\numberline {8.3}helper.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{26}{section.8.3}
+\contentsline {section}{\numberline {8.4}motor.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{27}{section.8.4}
+\contentsline {section}{\numberline {8.5}version.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{27}{section.8.5}
+\contentsline {subsection}{\numberline {8.5.1}Detailed Description}{27}{subsection.8.5.1}
+\contentsline {chapter}{Index}{29}{section*.27}

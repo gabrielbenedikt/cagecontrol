@@ -1,0 +1,123 @@
+\begin{theindex}
+
+  \item {cagecontrol}, \hyperpage{13}
+    \subitem {Load\+Config}, \hyperpage{15}
+    \subitem {Save\+Config}, \hyperpage{15}
+  \item {command\+\_\+microstep}
+    \subitem {Motor}, \hyperpage{18}
+  \item {command\+\_\+moveboth}
+    \subitem {Motor}, \hyperpage{19}
+  \item {command\+\_\+singlestep}
+    \subitem {Motor}, \hyperpage{19}
+  \item {command\+\_\+step}
+    \subitem {Motor}, \hyperpage{19}
+
+  \indexspace
+
+  \item {D\+E\+B\+U\+G\+E\+R\+R\+OR}
+    \subitem {defines.\+h}, \hyperpage{25}
+  \item {D\+E\+B\+U\+G\+I\+N\+FO}
+    \subitem {defines.\+h}, \hyperpage{25}
+  \item {D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}
+    \subitem {defines.\+h}, \hyperpage{25}
+  \item {D\+E\+B\+UG}
+    \subitem {defines.\+h}, \hyperpage{25}
+  \item {D\+E\+G\+T\+O\+R\+AD}
+    \subitem {defines.\+h}, \hyperpage{25}
+  \item {debug.\+h}, \hyperpage{23}
+  \item {defines.\+h}, \hyperpage{24}
+    \subitem {D\+E\+B\+U\+G\+E\+R\+R\+OR}, \hyperpage{25}
+    \subitem {D\+E\+B\+U\+G\+I\+N\+FO}, \hyperpage{25}
+    \subitem {D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}, \hyperpage{25}
+    \subitem {D\+E\+B\+UG}, \hyperpage{25}
+    \subitem {D\+E\+G\+T\+O\+R\+AD}, \hyperpage{25}
+    \subitem {E\+PS}, \hyperpage{25}
+    \subitem {PI}, \hyperpage{25}
+    \subitem {R\+A\+D\+T\+O\+D\+EG}, \hyperpage{26}
+
+  \indexspace
+
+  \item {E\+PS}
+    \subitem {defines.\+h}, \hyperpage{25}
+  \item {error}
+    \subitem {helper}, \hyperpage{11}
+
+  \indexspace
+
+  \item {handle\+Error}
+    \subitem {Motor}, \hyperpage{20}
+  \item {helper}, \hyperpage{11}
+    \subitem {error}, \hyperpage{11}
+    \subitem {info}, \hyperpage{12}
+    \subitem {message}, \hyperpage{12}
+    \subitem {warning}, \hyperpage{12}
+  \item {helper.\+h}, \hyperpage{26}
+  \item {hometimer}
+    \subitem {Motor}, \hyperpage{21}
+
+  \indexspace
+
+  \item {info}
+    \subitem {helper}, \hyperpage{12}
+  \item {isopen}
+    \subitem {Motor}, \hyperpage{20}
+
+  \indexspace
+
+  \item {Load\+Config}
+    \subitem {cagecontrol}, \hyperpage{15}
+
+  \indexspace
+
+  \item {message}
+    \subitem {helper}, \hyperpage{12}
+  \item {Motor}, \hyperpage{16}
+    \subitem {command\+\_\+microstep}, \hyperpage{18}
+    \subitem {command\+\_\+moveboth}, \hyperpage{19}
+    \subitem {command\+\_\+singlestep}, \hyperpage{19}
+    \subitem {command\+\_\+step}, \hyperpage{19}
+    \subitem {handle\+Error}, \hyperpage{20}
+    \subitem {hometimer}, \hyperpage{21}
+    \subitem {isopen}, \hyperpage{20}
+    \subitem {motorstatusmessage}, \hyperpage{20}
+    \subitem {sensordata}, \hyperpage{20}
+    \subitem {show\+Status\+Message}, \hyperpage{21}
+    \subitem {stop}, \hyperpage{21}
+    \subitem {write}, \hyperpage{21}
+  \item {motor.\+h}, \hyperpage{27}
+  \item {motorstatusmessage}
+    \subitem {Motor}, \hyperpage{20}
+
+  \indexspace
+
+  \item {PI}
+    \subitem {defines.\+h}, \hyperpage{25}
+
+  \indexspace
+
+  \item {R\+A\+D\+T\+O\+D\+EG}
+    \subitem {defines.\+h}, \hyperpage{26}
+
+  \indexspace
+
+  \item {Save\+Config}
+    \subitem {cagecontrol}, \hyperpage{15}
+  \item {sensordata}
+    \subitem {Motor}, \hyperpage{20}
+  \item {show\+Status\+Message}
+    \subitem {Motor}, \hyperpage{21}
+  \item {stop}
+    \subitem {Motor}, \hyperpage{21}
+
+  \indexspace
+
+  \item {version.\+h}, \hyperpage{27}
+
+  \indexspace
+
+  \item {warning}
+    \subitem {helper}, \hyperpage{12}
+  \item {write}
+    \subitem {Motor}, \hyperpage{21}
+
+\end{theindex}

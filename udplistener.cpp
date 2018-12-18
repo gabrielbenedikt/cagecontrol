@@ -61,9 +61,11 @@ void UDPlistener::processPendingDatagrams()
 
     in >> message;
 
-    DEBUG_INFO("Received control message: %s\n", message.toLatin1().data());
+    //DEBUG_INFO("Received control message: %s\n", message.toLatin1().data());
+    //processCommands(message);
 
-    processCommands(message);
+    DEBUG_INFO("Received control message: %s\n", datagram.toStdString().c_str());
+    processCommands(datagram);
 }
 
 /************************************************************************************************

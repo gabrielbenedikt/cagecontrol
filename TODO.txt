@@ -1,3 +1,6 @@
+-) Set arbitrary angle: start from 'H'=0 position (use that aas offset)
+--) check, that mechanical stop is not hit (rotate by 180° at some point)
+-) when predefined basis is set, update spinboxes to show actual angles
 -) Read controller feedback message to check that motor did not get stuck
 -) Verify that 'go n steps' vs 'to to next edge, n times' does not make a difference
 -) Extend documentation

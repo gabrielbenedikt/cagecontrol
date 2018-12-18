@@ -74,6 +74,7 @@ private:
 
     /*WIP - cleaner code*/
     /*Even nicer: put everything in motor class*/
+    QVector<bool> invert;               //!< True: invert predefined bases (H/V -> V/H, P/M->M/P, L/R->R/L)
     QVector<Motor*> motors;//motor
     QVector<QString> motorName;//motor
     QVector<QDoubleSpinBox> HWP0sp;//ui

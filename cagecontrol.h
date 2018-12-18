@@ -69,6 +69,7 @@ public slots:
     void slot_movemotors(QString color, double HWPang, double QWPang);
 private:
     int udpport;                                        //!< Hold the UDP port to listen to for commandds
+    bool pauseupdating;                                 //!< Keep updateUI and updatesettings from interfering with each other
     QSettings *settings;                                //!< A QSettings object, used to store settings in a config file
     UDPlistener *udplistener;                           //!< Listens to a UDP port, aquiires & checks commands send to it
     QTabWidget *tabs;                                   //!< GUI tab widget

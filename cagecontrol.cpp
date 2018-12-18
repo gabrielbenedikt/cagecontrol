@@ -15,6 +15,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
     settings = new QSettings("cagecontrol.conf", QSettings::IniFormat);
 
     // UI-Setup
+    pauseupdating=false;
     QWidget *mainwidget = new QWidget();
     QGridLayout *mainlayout = new QGridLayout;
     setupUI(mainlayout);
@@ -143,52 +144,53 @@ void cagecontrol::updatesettingsint(int i)
 void cagecontrol::updatesettings(double d)
 {
     UNUSED(d); //just there to create a SLOT with matching parameter for signal &Q(Double)SpinBox::valueChanged
+    if (!pauseupdating) {
+        HWP0[0]=settingstab->findChild<QDoubleSpinBox*>("redHWP0sb")->value();
+        HWP0[1]=settingstab->findChild<QDoubleSpinBox*>("brownHWP0sb")->value();
+        HWP0[2]=settingstab->findChild<QDoubleSpinBox*>("greenHWP0sb")->value();
+        HWP0[3]=settingstab->findChild<QDoubleSpinBox*>("blueHWP0sb")->value();
+        HWP0[4]=settingstab->findChild<QDoubleSpinBox*>("whiteHWP0sb")->value();
+        HWP0[5]=settingstab->findChild<QDoubleSpinBox*>("blackHWP0sb")->value();
+        QWP0[0]=settingstab->findChild<QDoubleSpinBox*>("redQWP0sb")->value();
+        QWP0[1]=settingstab->findChild<QDoubleSpinBox*>("brownQWP0sb")->value();
+        QWP0[2]=settingstab->findChild<QDoubleSpinBox*>("greenQWP0sb")->value();
+        QWP0[3]=settingstab->findChild<QDoubleSpinBox*>("blueQWP0sb")->value();
+        QWP0[4]=settingstab->findChild<QDoubleSpinBox*>("whiteQWP0sb")->value();
+        QWP0[5]=settingstab->findChild<QDoubleSpinBox*>("blackQWP0sb")->value();
+        HWPcust[0]=motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
+        HWPcust[1]=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
+        HWPcust[2]=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
+        HWPcust[3]=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
+        HWPcust[4]=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
+        HWPcust[5]=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
+        QWPcust[0]=motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
+        QWPcust[1]=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
+        QWPcust[2]=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
+        QWPcust[3]=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
+        QWPcust[4]=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
+        QWPcust[5]=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
+        HWPmnum[0]=settingstab->findChild<QSpinBox*>("redHWPnum")->value();
+        HWPmnum[1]=settingstab->findChild<QSpinBox*>("brownHWPnum")->value();
+        HWPmnum[2]=settingstab->findChild<QSpinBox*>("greenHWPnum")->value();
+        HWPmnum[3]=settingstab->findChild<QSpinBox*>("blueHWPnum")->value();
+        HWPmnum[4]=settingstab->findChild<QSpinBox*>("whiteHWPnum")->value();
+        HWPmnum[5]=settingstab->findChild<QSpinBox*>("blackHWPnum")->value();
+        QWPmnum[0]=settingstab->findChild<QSpinBox*>("redQWPnum")->value();
+        QWPmnum[1]=settingstab->findChild<QSpinBox*>("brownQWPnum")->value();
+        QWPmnum[2]=settingstab->findChild<QSpinBox*>("greenQWPnum")->value();
+        QWPmnum[3]=settingstab->findChild<QSpinBox*>("blueQWPnum")->value();
+        QWPmnum[4]=settingstab->findChild<QSpinBox*>("whiteQWPnum")->value();
+        QWPmnum[5]=settingstab->findChild<QSpinBox*>("blackQWPnum")->value();
 
-    HWP0[0]=settingstab->findChild<QDoubleSpinBox*>("redHWP0sb")->value();
-    HWP0[1]=settingstab->findChild<QDoubleSpinBox*>("brownHWP0sb")->value();
-    HWP0[2]=settingstab->findChild<QDoubleSpinBox*>("greenHWP0sb")->value();
-    HWP0[3]=settingstab->findChild<QDoubleSpinBox*>("blueHWP0sb")->value();
-    HWP0[4]=settingstab->findChild<QDoubleSpinBox*>("whiteHWP0sb")->value();
-    HWP0[5]=settingstab->findChild<QDoubleSpinBox*>("blackHWP0sb")->value();
-    QWP0[0]=settingstab->findChild<QDoubleSpinBox*>("redQWP0sb")->value();
-    QWP0[1]=settingstab->findChild<QDoubleSpinBox*>("brownQWP0sb")->value();
-    QWP0[2]=settingstab->findChild<QDoubleSpinBox*>("greenQWP0sb")->value();
-    QWP0[3]=settingstab->findChild<QDoubleSpinBox*>("blueQWP0sb")->value();
-    QWP0[4]=settingstab->findChild<QDoubleSpinBox*>("whiteQWP0sb")->value();
-    QWP0[5]=settingstab->findChild<QDoubleSpinBox*>("blackQWP0sb")->value();
-    HWPcust[0]=motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
-    HWPcust[1]=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
-    HWPcust[2]=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
-    HWPcust[3]=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
-    HWPcust[4]=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
-    HWPcust[5]=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
-    QWPcust[0]=motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    QWPcust[1]=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    QWPcust[2]=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    QWPcust[3]=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    QWPcust[4]=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    QWPcust[5]=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    HWPmnum[0]=settingstab->findChild<QSpinBox*>("redHWPnum")->value();
-    HWPmnum[1]=settingstab->findChild<QSpinBox*>("brownHWPnum")->value();
-    HWPmnum[2]=settingstab->findChild<QSpinBox*>("greenHWPnum")->value();
-    HWPmnum[3]=settingstab->findChild<QSpinBox*>("blueHWPnum")->value();
-    HWPmnum[4]=settingstab->findChild<QSpinBox*>("whiteHWPnum")->value();
-    HWPmnum[5]=settingstab->findChild<QSpinBox*>("blackHWPnum")->value();
-    QWPmnum[0]=settingstab->findChild<QSpinBox*>("redQWPnum")->value();
-    QWPmnum[1]=settingstab->findChild<QSpinBox*>("brownQWPnum")->value();
-    QWPmnum[2]=settingstab->findChild<QSpinBox*>("greenQWPnum")->value();
-    QWPmnum[3]=settingstab->findChild<QSpinBox*>("blueQWPnum")->value();
-    QWPmnum[4]=settingstab->findChild<QSpinBox*>("whiteQWPnum")->value();
-    QWPmnum[5]=settingstab->findChild<QSpinBox*>("blackQWPnum")->value();
+        invert[0]=motorstab->findChild<QGroupBox*>("redbox")->findChild<QCheckBox*>("invertcb")->isChecked();
+        invert[1]=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QCheckBox*>("invertcb")->isChecked();
+        invert[2]=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QCheckBox*>("invertcb")->isChecked();
+        invert[3]=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QCheckBox*>("invertcb")->isChecked();
+        invert[4]=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QCheckBox*>("invertcb")->isChecked();
+        invert[5]=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QCheckBox*>("invertcb")->isChecked();
 
-    invert[0]=motorstab->findChild<QGroupBox*>("redbox")->findChild<QCheckBox*>("invertcb")->isChecked();
-    invert[1]=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QCheckBox*>("invertcb")->isChecked();
-    invert[2]=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QCheckBox*>("invertcb")->isChecked();
-    invert[3]=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QCheckBox*>("invertcb")->isChecked();
-    invert[4]=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QCheckBox*>("invertcb")->isChecked();
-    invert[5]=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QCheckBox*>("invertcb")->isChecked();
-
-    udpport=settingstab->findChild<QSpinBox*>("port")->value();
+        udpport=settingstab->findChild<QSpinBox*>("port")->value();
+    }
 
 }
 
@@ -519,7 +521,10 @@ void cagecontrol::moveallhv()
             qwprot=0;
         }
         movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+        HWPcust[idx]=HWP0[idx]+hwprot;
+        QWPcust[idx]=QWP0[idx]+qwprot;
     }
+    updateUI();
 }
 void cagecontrol::moveallpm()
 {
@@ -536,7 +541,10 @@ void cagecontrol::moveallpm()
             qwprot=45;
         }
         movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+        HWPcust[idx]=HWP0[idx]+hwprot;
+        QWPcust[idx]=QWP0[idx]+qwprot;
     }
+    updateUI();
 }
 void cagecontrol::movealllr()
 {
@@ -553,7 +561,10 @@ void cagecontrol::movealllr()
             qwprot=0;
         }
         movemotor(motorName[idx], HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+        HWPcust[idx]=HWP0[idx]+hwprot;
+        QWPcust[idx]=QWP0[idx]+qwprot;
     }
+    updateUI();
 }
 void cagecontrol::moveallarb()
 {
@@ -575,6 +586,10 @@ void cagecontrol::moveredHV()
         qwprot=0;
     }
     movemotor("red",HWP0[0]+hwprot,QWP0[0]+qwprot);
+    HWPcust[0]=HWP0[0]+hwprot;
+    updateUI();
+    QWPcust[0]=QWP0[0]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveredPM()
 {
@@ -588,6 +603,10 @@ void cagecontrol::moveredPM()
         qwprot=45;
     }
     movemotor("red",HWP0[0]+hwprot,QWP0[0]+qwprot);
+    HWPcust[0]=HWP0[0]+hwprot;
+    updateUI();
+    QWPcust[0]=QWP0[0]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveredLR()
 {
@@ -601,6 +620,10 @@ void cagecontrol::moveredLR()
         qwprot=0;
     }
     movemotor("red",HWP0[0]+hwprot,QWP0[0]+qwprot);
+    HWPcust[0]=HWP0[0]+hwprot;
+    updateUI();
+    QWPcust[0]=QWP0[0]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveredANG()
 {
@@ -620,6 +643,10 @@ void cagecontrol::movebrownHV()
         qwprot=0;
     }
     movemotor("brown",HWP0[1]+hwprot,QWP0[1]+qwprot);
+    HWPcust[1]=HWP0[1]+hwprot;
+    updateUI();
+    QWPcust[1]=QWP0[1]+qwprot;
+    updateUI();
 }
 void cagecontrol::movebrownPM()
 {
@@ -633,6 +660,9 @@ void cagecontrol::movebrownPM()
         qwprot=45;
     }
     movemotor("brown",HWP0[1]+hwprot,QWP0[1]+qwprot);
+    HWPcust[1]=HWP0[1]+hwprot;
+    updateUI();
+    QWPcust[1]=QWP0[1]+qwprot;
 }
 void cagecontrol::movebrownLR()
 {
@@ -646,6 +676,9 @@ void cagecontrol::movebrownLR()
         qwprot=0;
     }
     movemotor("brown",HWP0[1]+hwprot,QWP0[1]+qwprot);
+    HWPcust[1]=HWP0[1]+hwprot;
+    updateUI();
+    QWPcust[1]=QWP0[1]+qwprot;
 }
 void cagecontrol::movebrownANG()
 {
@@ -665,6 +698,10 @@ void cagecontrol::movegreenHV()
         qwprot=0;
     }
     movemotor("green",HWP0[2]+hwprot,QWP0[2]+qwprot);
+    HWPcust[2]=HWP0[2]+hwprot;
+    updateUI();
+    QWPcust[2]=QWP0[2]+qwprot;
+    updateUI();
 }
 void cagecontrol::movegreenPM()
 {
@@ -678,6 +715,10 @@ void cagecontrol::movegreenPM()
         qwprot=45;
     }
     movemotor("green",HWP0[2]+hwprot,QWP0[2]+qwprot);
+    HWPcust[2]=HWP0[2]+hwprot;
+    updateUI();
+    QWPcust[2]=QWP0[2]+qwprot;
+    updateUI();
 }
 void cagecontrol::movegreenLR()
 {
@@ -691,6 +732,10 @@ void cagecontrol::movegreenLR()
         qwprot=0;
     }
     movemotor("green",HWP0[2]+hwprot,QWP0[2]+qwprot);
+    HWPcust[2]=HWP0[2]+hwprot;
+    updateUI();
+    QWPcust[2]=QWP0[2]+qwprot;
+    updateUI();
 }
 void cagecontrol::movegreenANG()
 {
@@ -710,6 +755,10 @@ void cagecontrol::moveblueHV()
         qwprot=0;
     }
     movemotor("blue",HWP0[3]+hwprot,QWP0[3]+qwprot);
+    HWPcust[3]=HWP0[3]+hwprot;
+    updateUI();
+    QWPcust[3]=QWP0[3]+qwprot;
+    updateUI();
 }
 void cagecontrol::movebluePM()
 {
@@ -723,6 +772,10 @@ void cagecontrol::movebluePM()
         qwprot=45;
     }
     movemotor("blue",HWP0[3]+hwprot,QWP0[3]+qwprot);
+    HWPcust[3]=HWP0[3]+hwprot;
+    updateUI();
+    QWPcust[3]=QWP0[3]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveblueLR()
 {
@@ -736,6 +789,10 @@ void cagecontrol::moveblueLR()
         qwprot=0;
     }
     movemotor("blue",HWP0[3]+hwprot,QWP0[3]+qwprot);
+    HWPcust[3]=HWP0[3]+hwprot;
+    updateUI();
+    QWPcust[3]=QWP0[3]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveblueANG()
 {
@@ -755,6 +812,10 @@ void cagecontrol::movewhiteHV()
         qwprot=0;
     }
     movemotor("white",HWP0[4]+hwprot,QWP0[4]+qwprot);
+    HWPcust[4]=HWP0[4]+hwprot;
+    updateUI();
+    QWPcust[4]=QWP0[4]+qwprot;
+    updateUI();
 }
 void cagecontrol::movewhitePM()
 {
@@ -768,6 +829,10 @@ void cagecontrol::movewhitePM()
         qwprot=45;
     }
     movemotor("white",HWP0[4]+hwprot,QWP0[4]+qwprot);
+    HWPcust[4]=HWP0[4]+hwprot;
+    updateUI();
+    QWPcust[4]=QWP0[4]+qwprot;
+    updateUI();
 }
 void cagecontrol::movewhiteLR()
 {
@@ -781,6 +846,10 @@ void cagecontrol::movewhiteLR()
         qwprot=0;
     }
     movemotor("white",HWP0[4]+hwprot,QWP0[4]+qwprot);
+    HWPcust[4]=HWP0[4]+hwprot;
+    updateUI();
+    QWPcust[4]=QWP0[4]+qwprot;
+    updateUI();
 }
 void cagecontrol::movewhiteANG()
 {
@@ -800,6 +869,10 @@ void cagecontrol::moveblackHV()
         qwprot=0;
     }
     movemotor("black",HWP0[5]+hwprot,QWP0[5]+qwprot);
+    HWPcust[5]=HWP0[5]+hwprot;
+    updateUI();
+    QWPcust[5]=QWP0[5]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveblackPM()
 {
@@ -813,6 +886,10 @@ void cagecontrol::moveblackPM()
         qwprot=45;
     }
     movemotor("black",HWP0[5]+hwprot,QWP0[5]+qwprot);
+    HWPcust[5]=HWP0[5]+hwprot;
+    updateUI();
+    QWPcust[5]=QWP0[5]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveblackLR()
 {
@@ -826,6 +903,10 @@ void cagecontrol::moveblackLR()
         qwprot=0;
     }
     movemotor("black",HWP0[5]+hwprot,QWP0[5]+qwprot);
+    HWPcust[5]=HWP0[5]+hwprot;
+    updateUI();
+    QWPcust[5]=QWP0[5]+qwprot;
+    updateUI();
 }
 void cagecontrol::moveblackANG()
 {
@@ -1080,6 +1161,10 @@ void cagecontrol::slot_moveHV(QString color)
             qwprot = 0;
         }
         movemotor(color.toLower(),HWP0[i]+hwprot,QWP0[i]+qwprot);
+        HWPcust[i]=HWP0[i]+hwprot;
+        updateUI();
+        QWPcust[i]=QWP0[i]+hwprot;
+        updateUI();
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
@@ -1091,6 +1176,10 @@ void cagecontrol::slot_moveHV(QString color)
                 qwprot = 0;
             }
             movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+hwprot;
+        updateUI();
         }
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
@@ -1116,6 +1205,10 @@ void cagecontrol::slot_movePM(QString color)
             qwprot = 45;
         }
         movemotor(color.toLower(),HWP0[i]+hwprot,QWP0[i]+qwprot);
+        HWPcust[i]=HWP0[i]+hwprot;
+        updateUI();
+        QWPcust[i]=QWP0[i]+hwprot;
+        updateUI();
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
@@ -1127,6 +1220,10 @@ void cagecontrol::slot_movePM(QString color)
                 qwprot = 45;
             }
             movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+hwprot;
+            updateUI();
         }
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
@@ -1153,6 +1250,10 @@ void cagecontrol::slot_moveLR(QString color)
             qwprot = 0;
         }
         movemotor(color.toLower(),HWP0[i]+hwprot,QWP0[i]+qwprot);
+        HWPcust[i]=HWP0[i]+hwprot;
+        updateUI();
+        QWPcust[i]=QWP0[i]+hwprot;
+        updateUI();
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
@@ -1164,6 +1265,10 @@ void cagecontrol::slot_moveLR(QString color)
                 qwprot = 0;
             }
             movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+hwprot;
+            updateUI();
         }
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());

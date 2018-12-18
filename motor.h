@@ -35,7 +35,7 @@ class Motor : public QObject {
 private:
     QTimer hometimer;               //!<Used to iterate through the steps of 'go to the starting position' - but in an inaccurate way. \see command_home()
     QTimer bothtimer;               //!<Used to iterate through the steps of moving two motors of one controller
-    //int movebothstep;               //!<Controls logic flow when two motors are to be moved consecutively
+    int movebothstep;               //!<Controls logic flow when two motors are to be moved consecutively
     bool serialconnectionok;        //!<False if opening the serial connection failed
     uint16_t motor1steps;           //!<number of stept the 1st motor is to be moved
     uint16_t motor2steps;           //!<number of stept the 2nd motor is to be moved

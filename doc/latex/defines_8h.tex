@@ -10,7 +10,7 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=224pt]{defines_8h__dep__incl}
+\includegraphics[width=238pt]{defines_8h__dep__incl}
 \end{center}
 \end{figure}
 \subsection*{Macros}
@@ -19,13 +19,15 @@ This graph shows which files directly or indirectly include this file\+:
 \mbox{\Hypertarget{defines_8h_a78b073f863b42046c2f5c213502bf66c}\label{defines_8h_a78b073f863b42046c2f5c213502bf66c}} 
 \#define {\bfseries D\+E\+B\+U\+G\+S\+P\+E\+C\+T\+R\+O\+M\+E\+T\+E\+R\+C\+O\+N\+F\+IG}~F\+A\+L\+SE
 \item 
-\#define \hyperlink{defines_8h_ad72dbcf6d0153db1b8d8a58001feed83}{D\+E\+B\+UG}~true
+\#define \hyperlink{defines_8h_aea1d71af1a30c261dbd16745c82e94ba}{U\+N\+U\+S\+ED}(expr)~do \{ (void)(expr); \} while (0)
 \item 
-\#define \hyperlink{defines_8h_ac2aa26b507687122d58648153582d82e}{D\+E\+B\+U\+G\+E\+R\+R\+OR}~true
+\#define \hyperlink{defines_8h_ad72dbcf6d0153db1b8d8a58001feed83}{D\+E\+B\+UG}~1
 \item 
-\#define \hyperlink{defines_8h_a4d33f6a22fa2272e18c3ffc0a1d30f59}{D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}~true
+\#define \hyperlink{defines_8h_ac2aa26b507687122d58648153582d82e}{D\+E\+B\+U\+G\+E\+R\+R\+OR}~1
 \item 
-\#define \hyperlink{defines_8h_acc3775aea93cde2af0ced3225b4a0313}{D\+E\+B\+U\+G\+I\+N\+FO}~true
+\#define \hyperlink{defines_8h_a4d33f6a22fa2272e18c3ffc0a1d30f59}{D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}~1
+\item 
+\#define \hyperlink{defines_8h_acc3775aea93cde2af0ced3225b4a0313}{D\+E\+B\+U\+G\+I\+N\+FO}~1
 \item 
 \#define \hyperlink{defines_8h_a6ebf6899d6c1c8b7b9d09be872c05aae}{E\+PS}~0.\+0000001
 \item 
@@ -51,28 +53,28 @@ Contains definitions of various kind -\/ mathematical, version constants, debug-
 \index{defines.\+h@{defines.\+h}!D\+E\+B\+UG@{D\+E\+B\+UG}}
 \index{D\+E\+B\+UG@{D\+E\+B\+UG}!defines.\+h@{defines.\+h}}
 \subsubsection{\texorpdfstring{D\+E\+B\+UG}{DEBUG}}
-{\footnotesize\ttfamily \#define D\+E\+B\+UG~true}
+{\footnotesize\ttfamily \#define D\+E\+B\+UG~1}
 
 Enables the execution of various debug-\/paths used during development.~\newline
 default\+: F\+A\+L\+SE. \mbox{\Hypertarget{defines_8h_ac2aa26b507687122d58648153582d82e}\label{defines_8h_ac2aa26b507687122d58648153582d82e}} 
 \index{defines.\+h@{defines.\+h}!D\+E\+B\+U\+G\+E\+R\+R\+OR@{D\+E\+B\+U\+G\+E\+R\+R\+OR}}
 \index{D\+E\+B\+U\+G\+E\+R\+R\+OR@{D\+E\+B\+U\+G\+E\+R\+R\+OR}!defines.\+h@{defines.\+h}}
 \subsubsection{\texorpdfstring{D\+E\+B\+U\+G\+E\+R\+R\+OR}{DEBUGERROR}}
-{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+E\+R\+R\+OR~true}
+{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+E\+R\+R\+OR~1}
 
 If set to T\+R\+UE, enables the execution of the D\+E\+B\+U\+G\+\_\+\+E\+R\+R\+O\+R() makro which is used to write error messages (critical) to stdout.~\newline
 default\+: true \mbox{\Hypertarget{defines_8h_acc3775aea93cde2af0ced3225b4a0313}\label{defines_8h_acc3775aea93cde2af0ced3225b4a0313}} 
 \index{defines.\+h@{defines.\+h}!D\+E\+B\+U\+G\+I\+N\+FO@{D\+E\+B\+U\+G\+I\+N\+FO}}
 \index{D\+E\+B\+U\+G\+I\+N\+FO@{D\+E\+B\+U\+G\+I\+N\+FO}!defines.\+h@{defines.\+h}}
 \subsubsection{\texorpdfstring{D\+E\+B\+U\+G\+I\+N\+FO}{DEBUGINFO}}
-{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+I\+N\+FO~true}
+{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+I\+N\+FO~1}
 
 If set to T\+R\+UE, enables the execution of the D\+E\+B\+U\+G\+\_\+\+I\+N\+F\+O() makro which is used to write usefull information to stdout.~\newline
 default\+: true \mbox{\Hypertarget{defines_8h_a4d33f6a22fa2272e18c3ffc0a1d30f59}\label{defines_8h_a4d33f6a22fa2272e18c3ffc0a1d30f59}} 
 \index{defines.\+h@{defines.\+h}!D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG@{D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}}
 \index{D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG@{D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}!defines.\+h@{defines.\+h}}
 \subsubsection{\texorpdfstring{D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}{DEBUGWARNING}}
-{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG~true}
+{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG~1}
 
 If set to T\+R\+UE, enables the execution of the D\+E\+B\+U\+G\+\_\+\+W\+A\+R\+N\+I\+N\+G() makro which is used to write warnings about unexpected behaviour to stdout.~\newline
 default\+: true \mbox{\Hypertarget{defines_8h_abbfb1b8e88373781c6238d647110f5d2}\label{defines_8h_abbfb1b8e88373781c6238d647110f5d2}} 
@@ -101,4 +103,10 @@ default\+: 3.\+14159265358979323846 \mbox{\Hypertarget{defines_8h_a9fcbc53371e9a
 \subsubsection{\texorpdfstring{R\+A\+D\+T\+O\+D\+EG}{RADTODEG}}
 {\footnotesize\ttfamily \#define R\+A\+D\+T\+O\+D\+EG~180/\hyperlink{defines_8h_a598a3330b3c21701223ee0ca14316eca}{PI}}
 
-Conversion factor from radians to degree. 180/\+PI 
+Conversion factor from radians to degree. 180/\+PI \mbox{\Hypertarget{defines_8h_aea1d71af1a30c261dbd16745c82e94ba}\label{defines_8h_aea1d71af1a30c261dbd16745c82e94ba}} 
+\index{defines.\+h@{defines.\+h}!U\+N\+U\+S\+ED@{U\+N\+U\+S\+ED}}
+\index{U\+N\+U\+S\+ED@{U\+N\+U\+S\+ED}!defines.\+h@{defines.\+h}}
+\subsubsection{\texorpdfstring{U\+N\+U\+S\+ED}{UNUSED}}
+{\footnotesize\ttfamily \#define U\+N\+U\+S\+ED(\begin{DoxyParamCaption}\item[{}]{expr }\end{DoxyParamCaption})~do \{ (void)(expr); \} while (0)}
+
+Use \hyperlink{defines_8h_aea1d71af1a30c261dbd16745c82e94ba}{U\+N\+U\+S\+E\+D(var)} in function f(...,type var,...) to silence compiler warnings about unused parameter var. 

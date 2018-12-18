@@ -1,0 +1,204 @@
+\hypertarget{classUDPlistener}{}\section{U\+D\+Plistener Class Reference}
+\label{classUDPlistener}\index{U\+D\+Plistener@{U\+D\+Plistener}}
+
+
+The \hyperlink{classUDPlistener}{U\+D\+Plistener} class is used to control dinspect with U\+DP packages.  
+
+
+
+
+{\ttfamily \#include $<$udplistener.\+h$>$}
+
+
+
+Inheritance diagram for U\+D\+Plistener\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=150pt]{classUDPlistener__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for U\+D\+Plistener\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=150pt]{classUDPlistener__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classUDPlistener_a4b7a056403f9b80485c92b82c340109a}{bind} ()
+\begin{DoxyCompactList}\small\item\em bind Binds to a new U\+DP port \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}{Move} (Q\+String controller, double H\+W\+Pang, double Q\+W\+Pang)
+\begin{DoxyCompactList}\small\item\em Move moves the waveplates in a cage to certain angles. \end{DoxyCompactList}\item 
+void \hyperlink{classUDPlistener_a3d16ae857b48ba56257008a008b4e6ee}{Move\+HV} (Q\+String controller)
+\begin{DoxyCompactList}\small\item\em Move\+HV moves cage to H/V basis. \end{DoxyCompactList}\item 
+void \hyperlink{classUDPlistener_a3e3521c57796737bb229eeadb2f2fdfe}{Move\+PM} (Q\+String controller)
+\begin{DoxyCompactList}\small\item\em Move\+PM moves cage to P/M basis. \end{DoxyCompactList}\item 
+void \hyperlink{classUDPlistener_aefb57eacf9148d294952db636eefa9ac}{Move\+LR} (Q\+String controller)
+\begin{DoxyCompactList}\small\item\em Move\+LR moves cage to R/L basis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classUDPlistener_a789cb6a7b7347a2df5cdc85a457bde4a}{U\+D\+Plistener} (Q\+Settings $\ast$\hyperlink{classUDPlistener_a14614017bcc3fc38e0caad8d4a9781a6}{settings}, Q\+Object $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classUDPlistener}{U\+D\+Plistener} listen for commands on a U\+DP port and execute them. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUDPlistener_ac971ee184440cfc88ff260db8ca3a2ca}\label{classUDPlistener_ac971ee184440cfc88ff260db8ca3a2ca}} 
+void \hyperlink{classUDPlistener_ac971ee184440cfc88ff260db8ca3a2ca}{process\+Pending\+Datagrams} ()
+\begin{DoxyCompactList}\small\item\em process\+Pending\+Datagrams reads data from the U\+DP socket \end{DoxyCompactList}\item 
+void \hyperlink{classUDPlistener_a86e1147a1adf1a32ae49d43529cd53f1}{process\+Commands} (Q\+String msg)
+\begin{DoxyCompactList}\small\item\em process\+Commands extracts commands out of received data and executes them \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUDPlistener_a14614017bcc3fc38e0caad8d4a9781a6}\label{classUDPlistener_a14614017bcc3fc38e0caad8d4a9781a6}} 
+Q\+Settings $\ast$ \hyperlink{classUDPlistener_a14614017bcc3fc38e0caad8d4a9781a6}{settings}
+\begin{DoxyCompactList}\small\item\em configuration \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUDPlistener_a4e391608821969dc58f1cf509d0206fd}\label{classUDPlistener_a4e391608821969dc58f1cf509d0206fd}} 
+Q\+Udp\+Socket \hyperlink{classUDPlistener_a4e391608821969dc58f1cf509d0206fd}{socket}
+\begin{DoxyCompactList}\small\item\em the U\+DP socket \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUDPlistener_ab1fb04f4812b70f607727e27cedf26b1}\label{classUDPlistener_ab1fb04f4812b70f607727e27cedf26b1}} 
+uint \hyperlink{classUDPlistener_ab1fb04f4812b70f607727e27cedf26b1}{port}
+\begin{DoxyCompactList}\small\item\em port the listener listens to \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUDPlistener_ad032b16f2451215e0f4bd7b6998fc11d}\label{classUDPlistener_ad032b16f2451215e0f4bd7b6998fc11d}} 
+bool \hyperlink{classUDPlistener_ad032b16f2451215e0f4bd7b6998fc11d}{alreadybound}
+\begin{DoxyCompactList}\small\item\em true if the listener is already listening to a port \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classUDPlistener}{U\+D\+Plistener} class is used to control dinspect with U\+DP packages. 
+
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000005}{Bug}]There are no known bugs\end{DoxyRefDesc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classUDPlistener_a789cb6a7b7347a2df5cdc85a457bde4a}\label{classUDPlistener_a789cb6a7b7347a2df5cdc85a457bde4a}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!U\+D\+Plistener@{U\+D\+Plistener}}
+\index{U\+D\+Plistener@{U\+D\+Plistener}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{U\+D\+Plistener()}{UDPlistener()}}
+{\footnotesize\ttfamily U\+D\+Plistener\+::\+U\+D\+Plistener (\begin{DoxyParamCaption}\item[{Q\+Settings $\ast$}]{settings,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\hyperlink{classUDPlistener}{U\+D\+Plistener} listen for commands on a U\+DP port and execute them. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & a pointer to a qsettings instance, used to get the port to bind to and known commands\\
+\hline
+\end{DoxyParams}
+\hyperlink{classUDPlistener}{U\+D\+Plistener} opens a U\+DP socket and binds to a port specified in qsettings. Incoming packages are analysed to check if they contain known commands. If they do, these commands are executed.
+
+The commands can be changed in the dinspect settings dialog, but the standard ones are\+:
+\begin{DoxyItemize}
+\item Move(\+Q\+String, Q\+String)
+\item \hyperlink{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}{Move(\+Q\+String, double, double)} 
+\end{DoxyItemize}
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classUDPlistener_a4b7a056403f9b80485c92b82c340109a}\label{classUDPlistener_a4b7a056403f9b80485c92b82c340109a}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!bind@{bind}}
+\index{bind@{bind}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{bind}{bind}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::bind (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+bind Binds to a new U\+DP port 
+
+This function checks whether the U\+DP socket is already bound to a a specific port. If so, it closes this connection and binds to the new port. If not, it binds to the port right away. \mbox{\Hypertarget{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}\label{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!Move@{Move}}
+\index{Move@{Move}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{Move}{Move}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::\+Move (\begin{DoxyParamCaption}\item[{Q\+String}]{controller,  }\item[{double}]{H\+W\+Pang,  }\item[{double}]{Q\+W\+Pang }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Move moves the waveplates in a cage to certain angles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em controller} & either colorcode of cage or \textquotesingle{}all\textquotesingle{} \\
+\hline
+{\em H\+W\+Pang} & angle of the H\+WP in degree \\
+\hline
+{\em Q\+W\+Pang} & angle of the Q\+WP in degree \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUDPlistener_a3d16ae857b48ba56257008a008b4e6ee}\label{classUDPlistener_a3d16ae857b48ba56257008a008b4e6ee}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!Move\+HV@{Move\+HV}}
+\index{Move\+HV@{Move\+HV}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{Move\+HV}{MoveHV}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::\+Move\+HV (\begin{DoxyParamCaption}\item[{Q\+String}]{controller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Move\+HV moves cage to H/V basis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em controller} & either colorcode of stage, or \textquotesingle{}all\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUDPlistener_aefb57eacf9148d294952db636eefa9ac}\label{classUDPlistener_aefb57eacf9148d294952db636eefa9ac}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!Move\+LR@{Move\+LR}}
+\index{Move\+LR@{Move\+LR}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{Move\+LR}{MoveLR}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::\+Move\+LR (\begin{DoxyParamCaption}\item[{Q\+String}]{controller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Move\+LR moves cage to R/L basis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em controller} & either colorcode of stage, or \textquotesingle{}all\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUDPlistener_a3e3521c57796737bb229eeadb2f2fdfe}\label{classUDPlistener_a3e3521c57796737bb229eeadb2f2fdfe}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!Move\+PM@{Move\+PM}}
+\index{Move\+PM@{Move\+PM}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{Move\+PM}{MovePM}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::\+Move\+PM (\begin{DoxyParamCaption}\item[{Q\+String}]{controller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Move\+PM moves cage to P/M basis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em controller} & either colorcode of stage, or \textquotesingle{}all\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUDPlistener_a86e1147a1adf1a32ae49d43529cd53f1}\label{classUDPlistener_a86e1147a1adf1a32ae49d43529cd53f1}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!process\+Commands@{process\+Commands}}
+\index{process\+Commands@{process\+Commands}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{process\+Commands}{processCommands}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::process\+Commands (\begin{DoxyParamCaption}\item[{Q\+String}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+process\+Commands extracts commands out of received data and executes them 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & input\+: the received message \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{udplistener_8h}{udplistener.\+h}\item 
+udplistener.\+cpp\end{DoxyCompactItemize}

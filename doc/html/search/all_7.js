@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['message',['message',['../namespacehelper.xhtml#ab2cc8239d9bf2ae383474c0343205346',1,'helper']]],
-  ['motor',['Motor',['../classMotor.xhtml',1,'Motor'],['../classMotor.xhtml#af6fb1d675035fd353cd2cb97dbdbecc9',1,'Motor::Motor()']]],
-  ['motor_2eh',['motor.h',['../motor_8h.xhtml',1,'']]],
-  ['motorstatusmessage',['motorstatusmessage',['../classMotor.xhtml#ad12a639c95a4a33f59118dc8145dc1d4',1,'Motor']]],
-  ['moveboth',['moveboth',['../classMotor.xhtml#a58e08c8118b2e3272c35086ac6289428',1,'Motor']]]
+  ['info',['info',['../namespacehelper.xhtml#a88e86d2fd14fc8354c1529beaa157f25',1,'helper']]],
+  ['initconnections',['initconnections',['../classcagecontrol.xhtml#a56c01018dbd0d16a360106c438539c9e',1,'cagecontrol']]],
+  ['invert',['invert',['../classcagecontrol.xhtml#a3a78cb0c0f45a8bb3e6b093ef7412124',1,'cagecontrol']]],
+  ['isopen',['isopen',['../classMotor.xhtml#a6522462ca0730300ca3335090425786b',1,'Motor']]]
 ];

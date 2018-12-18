@@ -1,123 +1,183 @@
 \begin{theindex}
 
+  \item {bind}
+    \subitem {U\+D\+Plistener}, \hyperpage{31}
+
+  \indexspace
+
   \item {cagecontrol}, \hyperpage{13}
-    \subitem {Load\+Config}, \hyperpage{15}
-    \subitem {Save\+Config}, \hyperpage{15}
+    \subitem {initconnections}, \hyperpage{17}
+    \subitem {Load\+Config}, \hyperpage{17}
+    \subitem {motor\+GB}, \hyperpage{17}
+    \subitem {movemotor}, \hyperpage{19}
+    \subitem {Save\+Config}, \hyperpage{19}
+    \subitem {slot\+\_\+move\+HV}, \hyperpage{19}
+    \subitem {slot\+\_\+move\+LR}, \hyperpage{19}
+    \subitem {slot\+\_\+move\+PM}, \hyperpage{20}
+    \subitem {slot\+\_\+movemotors}, \hyperpage{20}
+    \subitem {updatesettings}, \hyperpage{20}
+    \subitem {updatesettingsint}, \hyperpage{21}
+    \subitem {updatestatus}, \hyperpage{21}
   \item {command\+\_\+microstep}
-    \subitem {Motor}, \hyperpage{18}
+    \subitem {Motor}, \hyperpage{24}
   \item {command\+\_\+moveboth}
-    \subitem {Motor}, \hyperpage{19}
+    \subitem {Motor}, \hyperpage{24}
   \item {command\+\_\+singlestep}
-    \subitem {Motor}, \hyperpage{19}
+    \subitem {Motor}, \hyperpage{26}
   \item {command\+\_\+step}
-    \subitem {Motor}, \hyperpage{19}
+    \subitem {Motor}, \hyperpage{26}
 
   \indexspace
 
   \item {D\+E\+B\+U\+G\+E\+R\+R\+OR}
-    \subitem {defines.\+h}, \hyperpage{25}
+    \subitem {defines.\+h}, \hyperpage{36}
   \item {D\+E\+B\+U\+G\+I\+N\+FO}
-    \subitem {defines.\+h}, \hyperpage{25}
+    \subitem {defines.\+h}, \hyperpage{36}
   \item {D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}
-    \subitem {defines.\+h}, \hyperpage{25}
+    \subitem {defines.\+h}, \hyperpage{36}
   \item {D\+E\+B\+UG}
-    \subitem {defines.\+h}, \hyperpage{25}
+    \subitem {defines.\+h}, \hyperpage{36}
   \item {D\+E\+G\+T\+O\+R\+AD}
-    \subitem {defines.\+h}, \hyperpage{25}
-  \item {debug.\+h}, \hyperpage{23}
-  \item {defines.\+h}, \hyperpage{24}
-    \subitem {D\+E\+B\+U\+G\+E\+R\+R\+OR}, \hyperpage{25}
-    \subitem {D\+E\+B\+U\+G\+I\+N\+FO}, \hyperpage{25}
-    \subitem {D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}, \hyperpage{25}
-    \subitem {D\+E\+B\+UG}, \hyperpage{25}
-    \subitem {D\+E\+G\+T\+O\+R\+AD}, \hyperpage{25}
-    \subitem {E\+PS}, \hyperpage{25}
-    \subitem {PI}, \hyperpage{25}
-    \subitem {R\+A\+D\+T\+O\+D\+EG}, \hyperpage{26}
+    \subitem {defines.\+h}, \hyperpage{36}
+  \item {debug.\+h}, \hyperpage{33}
+  \item {defines.\+h}, \hyperpage{34}
+    \subitem {D\+E\+B\+U\+G\+E\+R\+R\+OR}, \hyperpage{36}
+    \subitem {D\+E\+B\+U\+G\+I\+N\+FO}, \hyperpage{36}
+    \subitem {D\+E\+B\+U\+G\+W\+A\+R\+N\+I\+NG}, \hyperpage{36}
+    \subitem {D\+E\+B\+UG}, \hyperpage{36}
+    \subitem {D\+E\+G\+T\+O\+R\+AD}, \hyperpage{36}
+    \subitem {E\+PS}, \hyperpage{36}
+    \subitem {PI}, \hyperpage{36}
+    \subitem {R\+A\+D\+T\+O\+D\+EG}, \hyperpage{37}
+    \subitem {U\+N\+U\+S\+ED}, \hyperpage{37}
 
   \indexspace
 
   \item {E\+PS}
-    \subitem {defines.\+h}, \hyperpage{25}
+    \subitem {defines.\+h}, \hyperpage{36}
   \item {error}
     \subitem {helper}, \hyperpage{11}
 
   \indexspace
 
   \item {handle\+Error}
-    \subitem {Motor}, \hyperpage{20}
+    \subitem {Motor}, \hyperpage{26}
   \item {helper}, \hyperpage{11}
     \subitem {error}, \hyperpage{11}
     \subitem {info}, \hyperpage{12}
     \subitem {message}, \hyperpage{12}
     \subitem {warning}, \hyperpage{12}
-  \item {helper.\+h}, \hyperpage{26}
+  \item {helper.\+h}, \hyperpage{37}
   \item {hometimer}
-    \subitem {Motor}, \hyperpage{21}
+    \subitem {Motor}, \hyperpage{28}
 
   \indexspace
 
   \item {info}
     \subitem {helper}, \hyperpage{12}
+  \item {initconnections}
+    \subitem {cagecontrol}, \hyperpage{17}
   \item {isopen}
-    \subitem {Motor}, \hyperpage{20}
+    \subitem {Motor}, \hyperpage{26}
 
   \indexspace
 
   \item {Load\+Config}
-    \subitem {cagecontrol}, \hyperpage{15}
+    \subitem {cagecontrol}, \hyperpage{17}
 
   \indexspace
 
   \item {message}
     \subitem {helper}, \hyperpage{12}
-  \item {Motor}, \hyperpage{16}
-    \subitem {command\+\_\+microstep}, \hyperpage{18}
-    \subitem {command\+\_\+moveboth}, \hyperpage{19}
-    \subitem {command\+\_\+singlestep}, \hyperpage{19}
-    \subitem {command\+\_\+step}, \hyperpage{19}
-    \subitem {handle\+Error}, \hyperpage{20}
-    \subitem {hometimer}, \hyperpage{21}
-    \subitem {isopen}, \hyperpage{20}
-    \subitem {motorstatusmessage}, \hyperpage{20}
-    \subitem {sensordata}, \hyperpage{20}
-    \subitem {show\+Status\+Message}, \hyperpage{21}
-    \subitem {stop}, \hyperpage{21}
-    \subitem {write}, \hyperpage{21}
-  \item {motor.\+h}, \hyperpage{27}
+  \item {Motor}, \hyperpage{21}
+    \subitem {command\+\_\+microstep}, \hyperpage{24}
+    \subitem {command\+\_\+moveboth}, \hyperpage{24}
+    \subitem {command\+\_\+singlestep}, \hyperpage{26}
+    \subitem {command\+\_\+step}, \hyperpage{26}
+    \subitem {handle\+Error}, \hyperpage{26}
+    \subitem {hometimer}, \hyperpage{28}
+    \subitem {isopen}, \hyperpage{26}
+    \subitem {motorstatusmessage}, \hyperpage{27}
+    \subitem {sensordata}, \hyperpage{27}
+    \subitem {show\+Status\+Message}, \hyperpage{27}
+    \subitem {stop}, \hyperpage{28}
+    \subitem {write}, \hyperpage{28}
+  \item {motor.\+h}, \hyperpage{38}
+  \item {motor\+GB}
+    \subitem {cagecontrol}, \hyperpage{17}
   \item {motorstatusmessage}
-    \subitem {Motor}, \hyperpage{20}
+    \subitem {Motor}, \hyperpage{27}
+  \item {Move}
+    \subitem {U\+D\+Plistener}, \hyperpage{31}
+  \item {Move\+HV}
+    \subitem {U\+D\+Plistener}, \hyperpage{31}
+  \item {Move\+LR}
+    \subitem {U\+D\+Plistener}, \hyperpage{32}
+  \item {Move\+PM}
+    \subitem {U\+D\+Plistener}, \hyperpage{32}
+  \item {movemotor}
+    \subitem {cagecontrol}, \hyperpage{19}
 
   \indexspace
 
   \item {PI}
-    \subitem {defines.\+h}, \hyperpage{25}
+    \subitem {defines.\+h}, \hyperpage{36}
+  \item {process\+Commands}
+    \subitem {U\+D\+Plistener}, \hyperpage{32}
 
   \indexspace
 
   \item {R\+A\+D\+T\+O\+D\+EG}
-    \subitem {defines.\+h}, \hyperpage{26}
+    \subitem {defines.\+h}, \hyperpage{37}
 
   \indexspace
 
   \item {Save\+Config}
-    \subitem {cagecontrol}, \hyperpage{15}
+    \subitem {cagecontrol}, \hyperpage{19}
   \item {sensordata}
-    \subitem {Motor}, \hyperpage{20}
+    \subitem {Motor}, \hyperpage{27}
   \item {show\+Status\+Message}
-    \subitem {Motor}, \hyperpage{21}
+    \subitem {Motor}, \hyperpage{27}
+  \item {slot\+\_\+move\+HV}
+    \subitem {cagecontrol}, \hyperpage{19}
+  \item {slot\+\_\+move\+LR}
+    \subitem {cagecontrol}, \hyperpage{19}
+  \item {slot\+\_\+move\+PM}
+    \subitem {cagecontrol}, \hyperpage{20}
+  \item {slot\+\_\+movemotors}
+    \subitem {cagecontrol}, \hyperpage{20}
   \item {stop}
-    \subitem {Motor}, \hyperpage{21}
+    \subitem {Motor}, \hyperpage{28}
 
   \indexspace
 
-  \item {version.\+h}, \hyperpage{27}
+  \item {U\+D\+Plistener}, \hyperpage{29}
+    \subitem {bind}, \hyperpage{31}
+    \subitem {Move}, \hyperpage{31}
+    \subitem {Move\+HV}, \hyperpage{31}
+    \subitem {Move\+LR}, \hyperpage{32}
+    \subitem {Move\+PM}, \hyperpage{32}
+    \subitem {process\+Commands}, \hyperpage{32}
+    \subitem {U\+D\+Plistener}, \hyperpage{30}
+  \item {U\+N\+U\+S\+ED}
+    \subitem {defines.\+h}, \hyperpage{37}
+  \item {udplistener.\+h}, \hyperpage{39}
+  \item {updatesettings}
+    \subitem {cagecontrol}, \hyperpage{20}
+  \item {updatesettingsint}
+    \subitem {cagecontrol}, \hyperpage{21}
+  \item {updatestatus}
+    \subitem {cagecontrol}, \hyperpage{21}
+
+  \indexspace
+
+  \item {version.\+h}, \hyperpage{40}
 
   \indexspace
 
   \item {warning}
     \subitem {helper}, \hyperpage{12}
   \item {write}
-    \subitem {Motor}, \hyperpage{21}
+    \subitem {Motor}, \hyperpage{28}
 
 \end{theindex}

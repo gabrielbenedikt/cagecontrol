@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.11.21)  13 DEC 2018 17:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.16)  18 DEC 2018 18:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **refman
 (./refman.tex
-LaTeX2e <2018-04-01> patch level 5
+LaTeX2e <2018-12-01>
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
-Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+Document Class: book 2018/09/03 v1.4i Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/bk10.clo
-File: bk10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+File: bk10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 )
 \c@part=\count80
 \c@chapter=\count81
@@ -52,22 +52,22 @@ Package: doxygen
 Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2018/04/30 v2.4h Tabular extension package (FMi)
+Package: array 2018/11/13 v2.4j Tabular extension package (FMi)
 \col@sep=\dimen105
-\ar@mcellbox=\box26
+\ar@mcellbox=\box27
 \extrarowheight=\dimen106
 \NC@list=\toks14
 \extratabsurround=\skip46
 \backup@length=\skip47
-\ar@cellbox=\box27
+\ar@cellbox=\box28
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count92
 \float@exts=\toks15
-\float@box=\box28
+\float@box=\box29
 \@float@everytoks=\toks16
-\@floatcapt=\box29
+\@floatcapt=\box30
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
@@ -90,7 +90,7 @@ Package xcolor Info: Driver file: pdftex.def on input line 225.
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 )
 (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
-Package: colortbl 2018/05/02 v1.0c Color table columns (DPC)
+Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
 \everycr=\toks19
 \minrowclearance=\skip48
 )
@@ -113,10 +113,10 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTpost=\skip52
 \LTchunksize=\count94
 \LTcapwidth=\dimen107
-\LT@head=\box30
-\LT@firsthead=\box31
-\LT@foot=\box32
-\LT@lastfoot=\box33
+\LT@head=\box31
+\LT@firsthead=\box32
+\LT@foot=\box33
+\LT@lastfoot=\box34
 \LT@cols=\count95
 \LT@rows=\count96
 \c@LT@tables=\count97
@@ -128,7 +128,7 @@ Package: tabu 2011/02/26 v2.8 - flexible LaTeX tabulars (FC)
 
 (/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box34
+\@vwid@box=\box35
 \sift@deathcycles=\count99
 \@vwid@loff=\dimen108
 \@vwid@roff=\dimen109
@@ -150,10 +150,10 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabustrutrule=\dimen118
 \tabu@thebody=\toks21
 \tabu@footnotes=\toks22
-\tabu@box=\box35
-\tabu@arstrutbox=\box36
-\tabu@hleads=\box37
-\tabu@vleads=\box38
+\tabu@box=\box36
+\tabu@arstrutbox=\box37
+\tabu@hleads=\box38
+\tabu@vleads=\box39
 \tabu@cellskip=\skip53
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
@@ -173,7 +173,7 @@ Package: multirow 2018/08/03 v2.3 Span multiple rows of a table
 \multirow@dima=\skip55
 \bigstrutjot=\dimen124
 )
-\xrefbox=\box39
+\xrefbox=\box40
 \xreflength=\skip56
 )
 (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
@@ -217,7 +217,7 @@ Package graphics Info: Driver file: pdftex.def on input line 99.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
-\collectedbox=\box40
+\collectedbox=\box41
 )
 \tc@llx=\dimen127
 \tc@lly=\dimen128
@@ -242,7 +242,7 @@ Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
 \c@checkoddpage=\count109
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2018/04/06 v1.3b Input encoding file
+Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks26
 \inpenc@posthook=\toks27
 )
@@ -250,9 +250,9 @@ Package: inputenc 2018/04/06 v1.3b Input encoding file
 Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
-Package: multicol 2018/04/20 v1.8s multicolumn formatting (FMi)
+Package: multicol 2018/11/09 v1.8u multicolumn formatting (FMi)
 \c@tracingmulticols=\count110
-\mult@box=\box41
+\mult@box=\box42
 \multicol@leftmargin=\dimen139
 \c@unbalance=\count111
 \c@collectmore=\count112
@@ -265,14 +265,13 @@ Package: multicol 2018/04/20 v1.8s multicolumn formatting (FMi)
 \postmulticols=\dimen143
 \multicolsep=\skip57
 \multicolbaselineskip=\skip58
-\partial@page=\box42
-\last@line=\box43
+\partial@page=\box43
+\last@line=\box44
 \maxbalancingoverflow=\dimen144
-\mult@rightbox=\box44
-\mult@grightbox=\box45
-\mult@gfirstbox=\box46
-\mult@firstbox=\box47
-\@tempa=\box48
+\mult@rightbox=\box45
+\mult@grightbox=\box46
+\mult@gfirstbox=\box47
+\mult@firstbox=\box48
 \@tempa=\box49
 \@tempa=\box50
 \@tempa=\box51
@@ -289,17 +288,18 @@ Package: multicol 2018/04/20 v1.8s multicolumn formatting (FMi)
 \@tempa=\box62
 \@tempa=\box63
 \@tempa=\box64
+\@tempa=\box65
 \c@columnbadness=\count116
 \c@finalcolumnbadness=\count117
 \last@try=\dimen145
 \multicolovershoot=\dimen146
 \multicolundershoot=\dimen147
-\mult@nat@firstbox=\box65
-\colbreak@box=\box66
+\mult@nat@firstbox=\box66
+\colbreak@box=\box67
 \mc@col@check@num=\count118
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
-Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
+Package: textcomp 2018/08/11 v2.0j Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
 (textcomp)               4 = 5 + \texteuro
@@ -319,7 +319,7 @@ Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu
-File: ts1enc.dfu 2018/04/05 v1.2c UTF-8 support for inputenc
+File: ts1enc.dfu 2018/10/05 v1.2f UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00A4 (decimal 164)
@@ -462,10 +462,10 @@ LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 (Font)                  U/wasy/m/n --> U/wasy/b/n on input line 90.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
-File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
@@ -581,7 +581,7 @@ Package tocloft Info: The document has chapter divisions on input line 51.
 
 Writing index file refman.idx
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2018/09/30 v6.88a Hypertext links for LaTeX
+Package: hyperref 2018/11/30 v6.88e Hypertext links for LaTeX
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
@@ -633,7 +633,7 @@ Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 \Hy@pagecounter=\count126
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2018/09/30 v6.88a Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2018/11/30 v6.88e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -642,13 +642,13 @@ Now handling font encoding PD1 ...
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4535.
-Package hyperref Info: Link nesting OFF on input line 4540.
-Package hyperref Info: Hyper index ON on input line 4543.
-Package hyperref Info: Plain pages OFF on input line 4550.
-Package hyperref Info: Backreferencing ON on input line 4553.
+Package hyperref Info: Hyper figures OFF on input line 4519.
+Package hyperref Info: Link nesting OFF on input line 4524.
+Package hyperref Info: Hyper index ON on input line 4527.
+Package hyperref Info: Plain pages OFF on input line 4534.
+Package hyperref Info: Backreferencing ON on input line 4537.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4788.
+Package hyperref Info: Bookmarks ON on input line 4772.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/backref.sty
 Package: backref 2016/05/21 v1.39 Bibliographical back referencing
@@ -664,20 +664,20 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5141.
+LaTeX Info: Redefining \url on input line 5125.
 \XeTeXLinkMargin=\dimen157
 \Fld@menulength=\count129
 \Field@Width=\dimen158
 \Fld@charsize=\dimen159
-Package hyperref Info: Hyper figures OFF on input line 6396.
-Package hyperref Info: Link nesting OFF on input line 6401.
-Package hyperref Info: Hyper index ON on input line 6404.
-Package hyperref Info: backreferencing ON on input line 6409.
-Package hyperref Info: Link coloring OFF on input line 6416.
-Package hyperref Info: Link coloring with OCG OFF on input line 6421.
-Package hyperref Info: PDF/A mode OFF on input line 6426.
-LaTeX Info: Redefining \ref on input line 6466.
-LaTeX Info: Redefining \pageref on input line 6470.
+Package hyperref Info: Hyper figures OFF on input line 6380.
+Package hyperref Info: Link nesting OFF on input line 6385.
+Package hyperref Info: Hyper index ON on input line 6388.
+Package hyperref Info: backreferencing ON on input line 6393.
+Package hyperref Info: Link coloring OFF on input line 6400.
+Package hyperref Info: Link coloring with OCG OFF on input line 6405.
+Package hyperref Info: PDF/A mode OFF on input line 6410.
+LaTeX Info: Redefining \ref on input line 6450.
+LaTeX Info: Redefining \pageref on input line 6454.
 \Hy@abspage=\count130
 \c@Item=\count131
 \c@Hfootnote=\count132
@@ -685,7 +685,7 @@ LaTeX Info: Redefining \pageref on input line 6470.
 Package hyperref Info: Driver: hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2018/09/30 v6.88a Hyperref driver for pdfTeX
+File: hpdftex.def 2018/11/30 v6.88e Hyperref driver for pdfTeX
 \Fld@listcount=\count133
 \c@bookmark@seq@number=\count134
 \Hy@SectionHShift=\skip104
@@ -694,7 +694,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 105.
 Package hyperref Info: Option `unicode' set `true' on input line 105.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2018/09/30 v6.88a Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2018/11/30 v6.88e Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
@@ -758,7 +758,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count137
 \scratchdimen=\dimen167
-\scratchbox=\box67
+\scratchbox=\box68
 \nofMPsegments=\count138
 \nofMParguments=\count139
 \everyMPshowfont=\toks30
@@ -818,7 +818,7 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box68
+\AtBeginShipoutBox=\box69
 Package backref Info: ** backref set up for natbib ** on input line 117.
 Package hyperref Info: Link coloring ON on input line 117.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
@@ -885,15 +885,18 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 1.
  [1
 
-])
+]
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 61.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 6.29996pt on input line 61.
+ [2])
 \tf@toc=\write5
 \openout5 = `refman.toc'.
 
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 136.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 6.29996pt on input line 136.
- [2]
+ [3] [4
+
+]
 Package hyperref Info: Option `pageanchor' set `true' on input line 138.
 
 Chapter 1.
@@ -906,7 +909,6 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 18.66588pt on input line 141.
 (./bug.tex) [1
-
 
 ] [2
 
@@ -977,18 +979,18 @@ LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
  [11]) [12]
 Chapter 7.
 (./classcagecontrol.tex
-<classcagecontrol__inherit__graph.pdf, id=417, 160.6pt x 156.585pt>
+<classcagecontrol__inherit__graph.pdf, id=549, 160.6pt x 156.585pt>
 File: classcagecontrol__inherit__graph.pdf Graphic file (type pdf)
 <use classcagecontrol__inherit__graph.pdf>
 Package pdftex.def Info: classcagecontrol__inherit__graph.pdf  used on input li
-ne 10.
+ne 9.
 (pdftex.def)             Requested size: 160.0pt x 156.004pt.
-<classcagecontrol__coll__graph.pdf, id=418, 235.88126pt x 280.04625pt>
+<classcagecontrol__coll__graph.pdf, id=550, 325.215pt x 280.04625pt>
 File: classcagecontrol__coll__graph.pdf Graphic file (type pdf)
 <use classcagecontrol__coll__graph.pdf>
 Package pdftex.def Info: classcagecontrol__coll__graph.pdf  used on input line 
-20.
-(pdftex.def)             Requested size: 235.0pt x 279.00288pt.
+19.
+(pdftex.def)             Requested size: 324.0pt x 279.01999pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -996,130 +998,191 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  <./classcagecontrol__inherit__graph.pdf>] [14 <./classcagecontrol__coll__graph
 .pdf>]
+[15] [16]
+LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 210.
+LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 210.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 6.29996pt on input line 186.
+(Font)              scaled to size 6.29996pt on input line 251.
+ [17] [18]
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 279.
+ [19] [20]
+Underfull \hbox (badness 10000) detected at line 389
+[][][]
+ []
 
-[15]) (./classMotor.tex
-<classMotor__inherit__graph.pdf, id=515, 133.49875pt x 156.585pt>
+) (./classMotor.tex
+<classMotor__inherit__graph.pdf, id=767, 133.49875pt x 156.585pt>
 File: classMotor__inherit__graph.pdf Graphic file (type pdf)
 <use classMotor__inherit__graph.pdf>
-Package pdftex.def Info: classMotor__inherit__graph.pdf  used on input line 19.
+Package pdftex.def Info: classMotor__inherit__graph.pdf  used on input line 18.
 
 (pdftex.def)             Requested size: 133.0pt x 156.01595pt.
-<classMotor__coll__graph.pdf, id=516, 133.49875pt x 156.585pt>
+ [21]
+<classMotor__coll__graph.pdf, id=775, 133.49875pt x 156.585pt>
 File: classMotor__coll__graph.pdf Graphic file (type pdf)
 <use classMotor__coll__graph.pdf>
-Package pdftex.def Info: classMotor__coll__graph.pdf  used on input line 29.
+Package pdftex.def Info: classMotor__coll__graph.pdf  used on input line 27.
 (pdftex.def)             Requested size: 133.0pt x 156.01595pt.
- [16 <./classMotor__inherit__graph.pdf> <./classMotor__coll__graph.pdf
+ [22 <./classMotor__inherit__graph.pdf> <./classMotor__coll__graph.pdf
 
 pdfTeX warning: pdflatex (file ./classMotor__coll__graph.pdf): PDF inclusion: m
 ultiple pdfs with page group included in a single page
->] [17]
-LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 112.
-LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 112.
- [18]
+>] [23] [24] [25] [26]
+Underfull \hbox (badness 10000) detected at line 226
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 254
+[][][]
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19]
-Underfull \hbox (badness 10000) detected at line 231
+ [27]
+Underfull \hbox (badness 10000) detected at line 315
 [][][]
  []
 
-[20]
-Underfull \hbox (badness 10000) detected at line 259
-[][][]
- []
+) (./classUDPlistener.tex
+<classUDPlistener__inherit__graph.pdf, id=892, 150.5625pt x 156.585pt>
+File: classUDPlistener__inherit__graph.pdf Graphic file (type pdf)
+<use classUDPlistener__inherit__graph.pdf>
+Package pdftex.def Info: classUDPlistener__inherit__graph.pdf  used on input li
+ne 19.
+(pdftex.def)             Requested size: 150.0pt x 156.01357pt.
+ [28]
+<classUDPlistener__coll__graph.pdf, id=900, 150.5625pt x 156.585pt>
+File: classUDPlistener__coll__graph.pdf Graphic file (type pdf)
+<use classUDPlistener__coll__graph.pdf>
+Package pdftex.def Info: classUDPlistener__coll__graph.pdf  used on input line 
+29.
+(pdftex.def)             Requested size: 150.0pt x 156.01357pt.
+ [29 <./classUDPlistener__inherit__graph.pdf> <./classUDPlistener__coll__graph.
+pdf
 
-[21]
-Underfull \hbox (badness 10000) detected at line 320
-[][][]
- []
+pdfTeX warning: pdflatex (file ./classUDPlistener__coll__graph.pdf): PDF inclus
+ion: multiple pdfs with page group included in a single page
+>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) [22]
+ [30]
+[31]) [32]
 Chapter 8.
 (./debug_8h.tex
-<debug_8h__incl.pdf, id=636, 200.75pt x 156.585pt>
+<debug_8h__incl.pdf, id=974, 200.75pt x 156.585pt>
 File: debug_8h__incl.pdf Graphic file (type pdf)
 <use debug_8h__incl.pdf>
-Package pdftex.def Info: debug_8h__incl.pdf  used on input line 15.
+Package pdftex.def Info: debug_8h__incl.pdf  used on input line 14.
 (pdftex.def)             Requested size: 200.0pt x 156.01117pt.
-<debug_8h__dep__incl.pdf, id=637, 224.84pt x 156.585pt>
+<debug_8h__dep__incl.pdf, id=975, 186.6975pt x 269.005pt>
 File: debug_8h__dep__incl.pdf Graphic file (type pdf)
 <use debug_8h__dep__incl.pdf>
-Package pdftex.def Info: debug_8h__dep__incl.pdf  used on input line 23.
-(pdftex.def)             Requested size: 224.0pt x 156.0064pt.
- [23
+Package pdftex.def Info: debug_8h__dep__incl.pdf  used on input line 22.
+(pdftex.def)             Requested size: 186.0pt x 268.01099pt.
 
- <./debug_8h__incl.pdf> <./debug_8h__dep__incl.pdf
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-pdfTeX warning: pdflatex (file ./debug_8h__dep__incl.pdf): PDF inclusion: multi
-ple pdfs with page group included in a single page
->]) (./defines_8h.tex
-<defines_8h__dep__incl.pdf, id=657, 224.84pt x 212.795pt>
+ [33
+
+ <./debug_8h__incl.pdf>]) (./defines_8h.tex
+<defines_8h__dep__incl.pdf, id=988, 238.8925pt x 325.215pt>
 File: defines_8h__dep__incl.pdf Graphic file (type pdf)
 <use defines_8h__dep__incl.pdf>
 Package pdftex.def Info: defines_8h__dep__incl.pdf  used on input line 13.
-(pdftex.def)             Requested size: 224.0pt x 212.00868pt.
- [24 <./defines_8h__dep__incl.pdf>]) (./helper_8h.tex
-[25]
-<helper_8h__incl.pdf, id=696, 283.0575pt x 212.795pt>
+(pdftex.def)             Requested size: 238.0pt x 323.99841pt.
+
+Underfull \vbox (badness 1158) has occurred while \output is active []
+
+ [34 <./debug_8h__dep__incl.pdf>] [35 <./defines_8h__dep__incl.pdf>] [36]) (./h
+elper_8h.tex
+<helper_8h__incl.pdf, id=1042, 283.0575pt x 212.795pt>
 File: helper_8h__incl.pdf Graphic file (type pdf)
 <use helper_8h__incl.pdf>
-Package pdftex.def Info: helper_8h__incl.pdf  used on input line 11.
+Package pdftex.def Info: helper_8h__incl.pdf  used on input line 10.
 (pdftex.def)             Requested size: 282.0pt x 212.01843pt.
-) (./motor_8h.tex
-<motor_8h__incl.pdf, id=702, 520.94624pt x 156.585pt>
+<helper_8h__dep__incl.pdf, id=1043, 155.58125pt x 212.795pt>
+File: helper_8h__dep__incl.pdf Graphic file (type pdf)
+<use helper_8h__dep__incl.pdf>
+Package pdftex.def Info: helper_8h__dep__incl.pdf  used on input line 18.
+(pdftex.def)             Requested size: 155.0pt x 212.0022pt.
+[37 <./helper_8h__incl.pdf>]) (./motor_8h.tex
+<motor_8h__incl.pdf, id=1061, 595.22375pt x 156.585pt>
 File: motor_8h__incl.pdf Graphic file (type pdf)
 <use motor_8h__incl.pdf>
-Package pdftex.def Info: motor_8h__incl.pdf  used on input line 13.
-(pdftex.def)             Requested size: 350.0pt x 105.20288pt.
- [26 <./helper_8h__incl.pdf>]) (./version_8h.tex
+Package pdftex.def Info: motor_8h__incl.pdf  used on input line 14.
+(pdftex.def)             Requested size: 350.0pt x 92.07373pt.
+ [38 <./helper_8h__dep__incl.pdf> <./motor_8h__incl.pdf
+
+pdfTeX warning: pdflatex (file ./motor_8h__incl.pdf): PDF inclusion: multiple p
+dfs with page group included in a single page
+>]) (./udplistener_8h.tex
+<udplistener_8h__incl.pdf, id=1083, 557.08125pt x 269.005pt>
+File: udplistener_8h__incl.pdf Graphic file (type pdf)
+<use udplistener_8h__incl.pdf>
+Package pdftex.def Info: udplistener_8h__incl.pdf  used on input line 13.
+(pdftex.def)             Requested size: 350.0pt x 169.01021pt.
+<udplistener_8h__dep__incl.pdf, id=1084, 155.58125pt x 156.585pt>
+File: udplistener_8h__dep__incl.pdf Graphic file (type pdf)
+<use udplistener_8h__dep__incl.pdf>
+Package pdftex.def Info: udplistener_8h__dep__incl.pdf  used on input line 21.
+(pdftex.def)             Requested size: 155.0pt x 156.00162pt.
+) (./version_8h.tex [39 <./udplistener_8h__incl.pdf> <./udplistener_8h__dep__in
+cl.pdf
+
+pdfTeX warning: pdflatex (file ./udplistener_8h__dep__incl.pdf): PDF inclusion:
+ multiple pdfs with page group included in a single page
+>]
 Underfull \hbox (badness 10000) detected at line 25
 [][][]
  []
 
-) [27 <./motor_8h__incl.pdf>] [28
+) [40] (./refman.ind [41
 
-] (./refman.ind [29
 
+
+] [42
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 174.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 174.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 176.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 176.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 174.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 174.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 176.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 176.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 8A50E8A993338B633DE8FB0F260A974D;9841.
+(rerunfilecheck)             Checksum: FF3154D727625CF777FEC277E9F94ABF;14105.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 174.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 176.
  ) 
 Here is how much of TeX's memory you used:
- 15209 strings out of 493375
- 224574 string characters out of 6147218
- 318323 words of memory out of 5000000
- 18557 multiletter control sequences out of 15000+600000
- 62170 words of font info for 70 fonts, out of 8000000 for 9000
+ 15455 strings out of 493352
+ 230986 string characters out of 6146898
+ 322149 words of memory out of 5000000
+ 18704 multiletter control sequences out of 15000+600000
+ 67832 words of font info for 92 fonts, out of 8000000 for 9000
  645 hyphenation exceptions out of 8191
- 53i,15n,92p,1270b,627s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,16n,92p,1294b,627s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-urw/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
-/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (33 pages, 178653 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/uc
+rro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (48 pages, 232376 bytes).
 PDF statistics:
- 889 PDF objects out of 1000 (max. 8388607)
- 814 compressed objects within 9 object streams
- 235 named destinations out of 1000 (max. 500000)
- 502 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1333 PDF objects out of 1440 (max. 8388607)
+ 1226 compressed objects within 13 object streams
+ 334 named destinations out of 1000 (max. 500000)
+ 711 words of extra memory for PDF output out of 10000 (max. 10000000)
 

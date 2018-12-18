@@ -2,8 +2,7 @@
 \label{classcagecontrol}\index{cagecontrol@{cagecontrol}}
 
 
-Inheritance diagram for cagecontrol\+:
-\nopagebreak
+Inheritance diagram for cagecontrol\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -17,9 +16,20 @@ Collaboration diagram for cagecontrol\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=235pt]{classcagecontrol__coll__graph}
+\includegraphics[width=324pt]{classcagecontrol__coll__graph}
 \end{center}
 \end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}{slot\+\_\+move\+HV} (Q\+String color)
+\begin{DoxyCompactList}\small\item\em move\+HV \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_a3207f15cba9458e32fb5c2cf366c4b44}{slot\+\_\+move\+PM} (Q\+String color)
+\begin{DoxyCompactList}\small\item\em move\+PM \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_a138905383fdc09a0b5077a185eaf6682}{slot\+\_\+move\+LR} (Q\+String color)
+\begin{DoxyCompactList}\small\item\em move\+LR \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_a2d971435af3267351272b2c2d5f2f709}{slot\+\_\+movemotors} (Q\+String color, double H\+W\+Pang, double Q\+W\+Pang)
+\begin{DoxyCompactList}\small\item\em movemotors \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,158 +39,213 @@ Collaboration diagram for cagecontrol\+:
 \subsection*{Private Slots}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classcagecontrol_a244c02598b4b73db82b5852561634084}\label{classcagecontrol_a244c02598b4b73db82b5852561634084}} 
-void {\bfseries updatesettings} (double d)
-\item 
+void \hyperlink{classcagecontrol_a244c02598b4b73db82b5852561634084}{updatesettings} (double d)
+\begin{DoxyCompactList}\small\item\em updatesettings fills variables with data from G\+UI \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_a2cfb7b65a7b8838d5f2acaa384a7cfcc}{updatesettingsint} (int i)
+\begin{DoxyCompactList}\small\item\em updatesettingsint wrapper, just calls \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ab6993b1b41f55c164298c1b3e067ab34}\label{classcagecontrol_ab6993b1b41f55c164298c1b3e067ab34}} 
-void {\bfseries update\+UI} ()
-\end{DoxyCompactItemize}
+void \hyperlink{classcagecontrol_ab6993b1b41f55c164298c1b3e067ab34}{update\+UI} ()
+\begin{DoxyCompactList}\small\item\em update\+UI updates UI with supposedly new numbers (loaded from conf file, e.\+g.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classcagecontrol_a79a089c4e7196a7c158aa62f4883ba18}\label{classcagecontrol_a79a089c4e7196a7c158aa62f4883ba18}} 
-void {\bfseries setup\+UI} (Q\+Grid\+Layout $\ast$layout)
-\item 
+void \hyperlink{classcagecontrol_a79a089c4e7196a7c158aa62f4883ba18}{setup\+UI} (Q\+Grid\+Layout $\ast$layout)
+\begin{DoxyCompactList}\small\item\em Puts together the G\+UI. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ae961f42ea421a8d512964f158b0201e8}\label{classcagecontrol_ae961f42ea421a8d512964f158b0201e8}} 
-void {\bfseries openmotors} ()
-\item 
+void \hyperlink{classcagecontrol_ae961f42ea421a8d512964f158b0201e8}{openmotors} ()
+\begin{DoxyCompactList}\small\item\em Opens serial connections to the P\+CB motor controlllers. \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_aab3dedc2c4b814569988c93bd30546c7}{updatestatus} (Q\+String msg)
+\begin{DoxyCompactList}\small\item\em updatestatus writes message to statusbar and to a logfile \end{DoxyCompactList}\item 
 void \hyperlink{classcagecontrol_a0e6648cef5e6d08d638aa2472824cb6b}{Load\+Config} ()
 \begin{DoxyCompactList}\small\item\em Load\+Config loads config from a file. \end{DoxyCompactList}\item 
 void \hyperlink{classcagecontrol_a217d948983c0d1c153d29c728b06d764}{Save\+Config} ()
 \begin{DoxyCompactList}\small\item\em Save\+Config stores config to a file. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcagecontrol_a2fd60ea2aa138472e3714dbd25cadc55}\label{classcagecontrol_a2fd60ea2aa138472e3714dbd25cadc55}} 
-void {\bfseries motor\+GB} (Q\+Group\+Box $\ast$gb, Q\+String id)
-\item 
-\mbox{\Hypertarget{classcagecontrol_a56c01018dbd0d16a360106c438539c9e}\label{classcagecontrol_a56c01018dbd0d16a360106c438539c9e}} 
-void {\bfseries initconnections} ()
-\item 
-\mbox{\Hypertarget{classcagecontrol_a4e2c79dc05f66b2b15ae01eaa8d39fca}\label{classcagecontrol_a4e2c79dc05f66b2b15ae01eaa8d39fca}} 
-void {\bfseries movemotor} (Q\+String motor, double H\+W\+Pang, double Q\+W\+Pang)
-\item 
+void \hyperlink{classcagecontrol_a2fd60ea2aa138472e3714dbd25cadc55}{motor\+GB} (Q\+Group\+Box $\ast$gb, Q\+String id)
+\begin{DoxyCompactList}\small\item\em motor\+GB fills an empty Q\+Group\+Box with motor controls \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_a56c01018dbd0d16a360106c438539c9e}{initconnections} ()
+\begin{DoxyCompactList}\small\item\em initconnections connects Qt Signals to slots \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_a4e2c79dc05f66b2b15ae01eaa8d39fca}{movemotor} (Q\+String motor, double H\+W\+Pang, double Q\+W\+Pang)
+\begin{DoxyCompactList}\small\item\em movemotor moves both motors of a cage to certain angles \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_acb242e48298555a31dcff17bff83b885}\label{classcagecontrol_acb242e48298555a31dcff17bff83b885}} 
-void {\bfseries movered\+HV} ()
-\item 
+void \hyperlink{classcagecontrol_acb242e48298555a31dcff17bff83b885}{movered\+HV} ()
+\begin{DoxyCompactList}\small\item\em movered\+HV moves red cage to HV basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ac0a1c61636bd51739426e43efd488620}\label{classcagecontrol_ac0a1c61636bd51739426e43efd488620}} 
-void {\bfseries movered\+PM} ()
-\item 
+void \hyperlink{classcagecontrol_ac0a1c61636bd51739426e43efd488620}{movered\+PM} ()
+\begin{DoxyCompactList}\small\item\em movered\+PM moves red cage to PM basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_a231f0b4dd0ab808172edc9655c5cd508}\label{classcagecontrol_a231f0b4dd0ab808172edc9655c5cd508}} 
+void \hyperlink{classcagecontrol_a231f0b4dd0ab808172edc9655c5cd508}{movered\+LR} ()
+\begin{DoxyCompactList}\small\item\em movered\+LR moves red cage to RL basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a2fc1b98fb22ede9c62c72dec1a228727}\label{classcagecontrol_a2fc1b98fb22ede9c62c72dec1a228727}} 
-void {\bfseries movered\+A\+NG} ()
-\item 
+void \hyperlink{classcagecontrol_a2fc1b98fb22ede9c62c72dec1a228727}{movered\+A\+NG} ()
+\begin{DoxyCompactList}\small\item\em movered\+A\+NG moves red cage to the angles set in the G\+UI \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a88d660f6b66569caf3b78ad9538b0826}\label{classcagecontrol_a88d660f6b66569caf3b78ad9538b0826}} 
-void {\bfseries movebrown\+HV} ()
-\item 
+void \hyperlink{classcagecontrol_a88d660f6b66569caf3b78ad9538b0826}{movebrown\+HV} ()
+\begin{DoxyCompactList}\small\item\em movebrown\+HV moves brown cage to HV basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a929fc957acccf06e36c11af32b49168b}\label{classcagecontrol_a929fc957acccf06e36c11af32b49168b}} 
-void {\bfseries movebrown\+PM} ()
-\item 
+void \hyperlink{classcagecontrol_a929fc957acccf06e36c11af32b49168b}{movebrown\+PM} ()
+\begin{DoxyCompactList}\small\item\em movebrown\+PM moves brown cage to PM basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_aa146d98da4d107f29b086c4136d05f58}\label{classcagecontrol_aa146d98da4d107f29b086c4136d05f58}} 
+void \hyperlink{classcagecontrol_aa146d98da4d107f29b086c4136d05f58}{movebrown\+LR} ()
+\begin{DoxyCompactList}\small\item\em movebrown\+LR moves brown cage to RL basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a8fe48c38d5ed672375ba50aa52c4671e}\label{classcagecontrol_a8fe48c38d5ed672375ba50aa52c4671e}} 
-void {\bfseries movebrown\+A\+NG} ()
-\item 
+void \hyperlink{classcagecontrol_a8fe48c38d5ed672375ba50aa52c4671e}{movebrown\+A\+NG} ()
+\begin{DoxyCompactList}\small\item\em movebrown\+A\+NG moves brown cage to the angles set in the G\+UI \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_af4185b8a7157c810beb1533dba201e2d}\label{classcagecontrol_af4185b8a7157c810beb1533dba201e2d}} 
-void {\bfseries movegreen\+HV} ()
-\item 
+void \hyperlink{classcagecontrol_af4185b8a7157c810beb1533dba201e2d}{movegreen\+HV} ()
+\begin{DoxyCompactList}\small\item\em movegreen\+HV moves green cage to HV basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_aea81bb0a641e220fd5f6f01baba0b222}\label{classcagecontrol_aea81bb0a641e220fd5f6f01baba0b222}} 
-void {\bfseries movegreen\+PM} ()
-\item 
+void \hyperlink{classcagecontrol_aea81bb0a641e220fd5f6f01baba0b222}{movegreen\+PM} ()
+\begin{DoxyCompactList}\small\item\em movegreen\+PM moves green cage to PM basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_aa00c694cc43ef792b86e3cff4907a41d}\label{classcagecontrol_aa00c694cc43ef792b86e3cff4907a41d}} 
+void \hyperlink{classcagecontrol_aa00c694cc43ef792b86e3cff4907a41d}{movegreen\+LR} ()
+\begin{DoxyCompactList}\small\item\em movegreen\+LR moves green cage to RL basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a0643d9578dcd3e704093232711e22132}\label{classcagecontrol_a0643d9578dcd3e704093232711e22132}} 
-void {\bfseries movegreen\+A\+NG} ()
-\item 
+void \hyperlink{classcagecontrol_a0643d9578dcd3e704093232711e22132}{movegreen\+A\+NG} ()
+\begin{DoxyCompactList}\small\item\em movegreen\+A\+NG moves green cage to the angles set in the G\+UI \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a195d4aad32491eef569c51f2ba50bb76}\label{classcagecontrol_a195d4aad32491eef569c51f2ba50bb76}} 
-void {\bfseries moveblue\+HV} ()
-\item 
+void \hyperlink{classcagecontrol_a195d4aad32491eef569c51f2ba50bb76}{moveblue\+HV} ()
+\begin{DoxyCompactList}\small\item\em moveblue\+HV moves blue cage to HV basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a0930283133bafaff0990c183ac7b99a7}\label{classcagecontrol_a0930283133bafaff0990c183ac7b99a7}} 
-void {\bfseries moveblue\+PM} ()
-\item 
+void \hyperlink{classcagecontrol_a0930283133bafaff0990c183ac7b99a7}{moveblue\+PM} ()
+\begin{DoxyCompactList}\small\item\em moveblue\+PM moves blue cage to PM basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_ad51fd091c85c84f4f3fa1e41f14c8840}\label{classcagecontrol_ad51fd091c85c84f4f3fa1e41f14c8840}} 
+void \hyperlink{classcagecontrol_ad51fd091c85c84f4f3fa1e41f14c8840}{moveblue\+LR} ()
+\begin{DoxyCompactList}\small\item\em moveblue\+LR moves blue cage to RL basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ac6396cf94a2350fdf9c477e755a8c786}\label{classcagecontrol_ac6396cf94a2350fdf9c477e755a8c786}} 
-void {\bfseries moveblue\+A\+NG} ()
-\item 
+void \hyperlink{classcagecontrol_ac6396cf94a2350fdf9c477e755a8c786}{moveblue\+A\+NG} ()
+\begin{DoxyCompactList}\small\item\em moveblue\+A\+NG moves white cage to the angles set in the G\+UI \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a4ab679ff1453b8992b632185e753faf7}\label{classcagecontrol_a4ab679ff1453b8992b632185e753faf7}} 
-void {\bfseries movewhite\+HV} ()
-\item 
+void \hyperlink{classcagecontrol_a4ab679ff1453b8992b632185e753faf7}{movewhite\+HV} ()
+\begin{DoxyCompactList}\small\item\em movewhite\+HV moves white cage to HV basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ac77a1ff1b29de6c0abff88d767ae4474}\label{classcagecontrol_ac77a1ff1b29de6c0abff88d767ae4474}} 
-void {\bfseries movewhite\+PM} ()
-\item 
+void \hyperlink{classcagecontrol_ac77a1ff1b29de6c0abff88d767ae4474}{movewhite\+PM} ()
+\begin{DoxyCompactList}\small\item\em movewhite\+PM moves white cage to PM basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_a9c9eb314a6f9ab6679d29e2a9c86fe0a}\label{classcagecontrol_a9c9eb314a6f9ab6679d29e2a9c86fe0a}} 
+void \hyperlink{classcagecontrol_a9c9eb314a6f9ab6679d29e2a9c86fe0a}{movewhite\+LR} ()
+\begin{DoxyCompactList}\small\item\em movewhite\+LR moves white cage to RL basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ae28a686ab880f2164b50872acf5a4c35}\label{classcagecontrol_ae28a686ab880f2164b50872acf5a4c35}} 
-void {\bfseries movewhite\+A\+NG} ()
-\item 
+void \hyperlink{classcagecontrol_ae28a686ab880f2164b50872acf5a4c35}{movewhite\+A\+NG} ()
+\begin{DoxyCompactList}\small\item\em movewhite\+A\+NG moves black cage to the angles set in the G\+UI \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a432cbc27c9981b81c218163f26972daa}\label{classcagecontrol_a432cbc27c9981b81c218163f26972daa}} 
-void {\bfseries moveblack\+HV} ()
-\item 
+void \hyperlink{classcagecontrol_a432cbc27c9981b81c218163f26972daa}{moveblack\+HV} ()
+\begin{DoxyCompactList}\small\item\em moveblack\+HV moves black cage to HV basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a42a9180358270c4b5a2e3bf8fe8dd016}\label{classcagecontrol_a42a9180358270c4b5a2e3bf8fe8dd016}} 
-void {\bfseries moveblack\+PM} ()
-\item 
+void \hyperlink{classcagecontrol_a42a9180358270c4b5a2e3bf8fe8dd016}{moveblack\+PM} ()
+\begin{DoxyCompactList}\small\item\em moveblack\+PM moves black cage to PM basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_a776a75fb1b9b680a0e99f5332446d616}\label{classcagecontrol_a776a75fb1b9b680a0e99f5332446d616}} 
+void \hyperlink{classcagecontrol_a776a75fb1b9b680a0e99f5332446d616}{moveblack\+LR} ()
+\begin{DoxyCompactList}\small\item\em moveblack\+LR moves black cage to RL basis \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ae1ded3bab80cf942c1662b371b4aa9ce}\label{classcagecontrol_ae1ded3bab80cf942c1662b371b4aa9ce}} 
-void {\bfseries moveblack\+A\+NG} ()
-\end{DoxyCompactItemize}
+void \hyperlink{classcagecontrol_ae1ded3bab80cf942c1662b371b4aa9ce}{moveblack\+A\+NG} ()
+\begin{DoxyCompactList}\small\item\em moveblack\+A\+NG \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_a79f7b716a9b1a49ade6dd35879af6947}\label{classcagecontrol_a79f7b716a9b1a49ade6dd35879af6947}} 
+void \hyperlink{classcagecontrol_a79f7b716a9b1a49ade6dd35879af6947}{moveallhv} ()
+\begin{DoxyCompactList}\small\item\em moveallhv \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_aa3f9b4e3937ffc7eca65edac02d5d4db}\label{classcagecontrol_aa3f9b4e3937ffc7eca65edac02d5d4db}} 
+void \hyperlink{classcagecontrol_aa3f9b4e3937ffc7eca65edac02d5d4db}{moveallpm} ()
+\begin{DoxyCompactList}\small\item\em moveallpm \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_af50e9b09c4c2b5d6a7dd6a5fe5fe7d4d}\label{classcagecontrol_af50e9b09c4c2b5d6a7dd6a5fe5fe7d4d}} 
+void \hyperlink{classcagecontrol_af50e9b09c4c2b5d6a7dd6a5fe5fe7d4d}{movealllr} ()
+\begin{DoxyCompactList}\small\item\em movealllr \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_aea25e1e2eabc1accdc10536f34e0472d}\label{classcagecontrol_aea25e1e2eabc1accdc10536f34e0472d}} 
+void \hyperlink{classcagecontrol_aea25e1e2eabc1accdc10536f34e0472d}{moveallarb} ()
+\begin{DoxyCompactList}\small\item\em moveallarb \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{classcagecontrol_ae73f9b22e1cc81ef92d900b8c63b4663}\label{classcagecontrol_ae73f9b22e1cc81ef92d900b8c63b4663}} 
+int \hyperlink{classcagecontrol_ae73f9b22e1cc81ef92d900b8c63b4663}{udpport}
+\begin{DoxyCompactList}\small\item\em Hold the U\+DP port to listen to for commandds. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_aaa56b3d1bbf35785c21c5465eef48185}\label{classcagecontrol_aaa56b3d1bbf35785c21c5465eef48185}} 
-Q\+Settings $\ast$ {\bfseries settings}
-\item 
+Q\+Settings $\ast$ \hyperlink{classcagecontrol_aaa56b3d1bbf35785c21c5465eef48185}{settings}
+\begin{DoxyCompactList}\small\item\em A Q\+Settings object, used to store settings in a config file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_a6c281db6d7f0de7964c49bac0d5823b7}\label{classcagecontrol_a6c281db6d7f0de7964c49bac0d5823b7}} 
+\hyperlink{classUDPlistener}{U\+D\+Plistener} $\ast$ \hyperlink{classcagecontrol_a6c281db6d7f0de7964c49bac0d5823b7}{udplistener}
+\begin{DoxyCompactList}\small\item\em Listens to a U\+DP port, aquiires \& checks commands send to it. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_abc80d835c69ca52a62f18c341c2bd009}\label{classcagecontrol_abc80d835c69ca52a62f18c341c2bd009}} 
-Q\+Tab\+Widget $\ast$ {\bfseries tabs}
-\item 
+Q\+Tab\+Widget $\ast$ \hyperlink{classcagecontrol_abc80d835c69ca52a62f18c341c2bd009}{tabs}
+\begin{DoxyCompactList}\small\item\em G\+UI tab widget. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a5350ebcf40a0c709af82276e6ce2284d}\label{classcagecontrol_a5350ebcf40a0c709af82276e6ce2284d}} 
-Q\+Widget $\ast$ {\bfseries settingstab}
-\item 
+Q\+Widget $\ast$ \hyperlink{classcagecontrol_a5350ebcf40a0c709af82276e6ce2284d}{settingstab}
+\begin{DoxyCompactList}\small\item\em G\+UI tab containing settings. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a9c0bb2384100cced3b96363cca8e5428}\label{classcagecontrol_a9c0bb2384100cced3b96363cca8e5428}} 
-Q\+Widget $\ast$ {\bfseries motorstab}
-\item 
+Q\+Widget $\ast$ \hyperlink{classcagecontrol_a9c0bb2384100cced3b96363cca8e5428}{motorstab}
+\begin{DoxyCompactList}\small\item\em G\+UI tab containing motor controls. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_a18d5a48b8893f88b9b660c9c08e92f9b}\label{classcagecontrol_a18d5a48b8893f88b9b660c9c08e92f9b}} 
+Q\+Status\+Bar $\ast$ \hyperlink{classcagecontrol_a18d5a48b8893f88b9b660c9c08e92f9b}{status}
+\begin{DoxyCompactList}\small\item\em Status bar. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a1fa2f1480f616b4f7142f9e7a471cef3}\label{classcagecontrol_a1fa2f1480f616b4f7142f9e7a471cef3}} 
 Q\+Vector$<$ Q\+String $>$ \hyperlink{classcagecontrol_a1fa2f1480f616b4f7142f9e7a471cef3}{comports}
 \begin{DoxyCompactList}\small\item\em Vector containing available serial ports names ports. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_aba1bc33f1f9a17cfa548f1390d4a9358}\label{classcagecontrol_aba1bc33f1f9a17cfa548f1390d4a9358}} 
-\hyperlink{classMotor}{Motor} $\ast$ {\bfseries redmotor}
-\item 
+\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_aba1bc33f1f9a17cfa548f1390d4a9358}{redmotor}
+\begin{DoxyCompactList}\small\item\em Serial connections to the red cage. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a5a58ab2407ea37d47b00dfa31fbd837e}\label{classcagecontrol_a5a58ab2407ea37d47b00dfa31fbd837e}} 
-\hyperlink{classMotor}{Motor} $\ast$ {\bfseries brownmotor}
-\item 
+\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a5a58ab2407ea37d47b00dfa31fbd837e}{brownmotor}
+\begin{DoxyCompactList}\small\item\em Serial connections to the brown cage. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a15f7d52bdae84ce7d23274254bed283a}\label{classcagecontrol_a15f7d52bdae84ce7d23274254bed283a}} 
-\hyperlink{classMotor}{Motor} $\ast$ {\bfseries greenmotor}
-\item 
+\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a15f7d52bdae84ce7d23274254bed283a}{greenmotor}
+\begin{DoxyCompactList}\small\item\em Serial connections to the green cage. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a0b188226c1976ff8b89f4a043320c0d7}\label{classcagecontrol_a0b188226c1976ff8b89f4a043320c0d7}} 
-\hyperlink{classMotor}{Motor} $\ast$ {\bfseries bluemotor}
-\item 
+\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a0b188226c1976ff8b89f4a043320c0d7}{bluemotor}
+\begin{DoxyCompactList}\small\item\em Serial connections to the blue cage. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_ac345b05074401d11ce84f6e56a24538b}\label{classcagecontrol_ac345b05074401d11ce84f6e56a24538b}} 
-\hyperlink{classMotor}{Motor} $\ast$ {\bfseries whitemotor}
-\item 
+\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_ac345b05074401d11ce84f6e56a24538b}{whitemotor}
+\begin{DoxyCompactList}\small\item\em Serial connections to the white cage. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a4e5d64b7fc46495e7f1c8824ccb2b8d8}\label{classcagecontrol_a4e5d64b7fc46495e7f1c8824ccb2b8d8}} 
-\hyperlink{classMotor}{Motor} $\ast$ {\bfseries blackmotor}
-\item 
+\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a4e5d64b7fc46495e7f1c8824ccb2b8d8}{blackmotor}
+\begin{DoxyCompactList}\small\item\em Serial connections to the black cage. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_a3a78cb0c0f45a8bb3e6b093ef7412124}\label{classcagecontrol_a3a78cb0c0f45a8bb3e6b093ef7412124}} 
+Q\+Vector$<$ bool $>$ \hyperlink{classcagecontrol_a3a78cb0c0f45a8bb3e6b093ef7412124}{invert}
+\begin{DoxyCompactList}\small\item\em True\+: invert predefined bases (H/V -\/$>$ V/H, P/\+M-\/$>$M/P, L/\+R-\/$>$R/L) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a8c4968b6ced27c21dafbc9c804e96ba0}\label{classcagecontrol_a8c4968b6ced27c21dafbc9c804e96ba0}} 
-Q\+Vector$<$ \hyperlink{classMotor}{Motor} $\ast$ $>$ {\bfseries motors}
-\item 
+Q\+Vector$<$ \hyperlink{classMotor}{Motor} $\ast$ $>$ \hyperlink{classcagecontrol_a8c4968b6ced27c21dafbc9c804e96ba0}{motors}
+\begin{DoxyCompactList}\small\item\em List of serial connections to the cages. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a8e87cb65e7cd3b01bb35709ee62e5226}\label{classcagecontrol_a8e87cb65e7cd3b01bb35709ee62e5226}} 
-Q\+Vector$<$ Q\+String $>$ {\bfseries motor\+Name}
-\item 
+Q\+Vector$<$ Q\+String $>$ \hyperlink{classcagecontrol_a8e87cb65e7cd3b01bb35709ee62e5226}{motor\+Name}
+\begin{DoxyCompactList}\small\item\em List of colorcodes of the cages. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a5af27745d1d9e0b9411d8445f5648e74}\label{classcagecontrol_a5af27745d1d9e0b9411d8445f5648e74}} 
-Q\+Vector$<$ Q\+Double\+Spin\+Box $>$ {\bfseries H\+W\+P0sp}
-\item 
+Q\+Vector$<$ Q\+Double\+Spin\+Box $>$ \hyperlink{classcagecontrol_a5af27745d1d9e0b9411d8445f5648e74}{H\+W\+P0sp}
+\begin{DoxyCompactList}\small\item\em List of Q\+Spin\+Boxes to set the \textquotesingle{}0\textquotesingle{} of the H\+W\+Ps. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a026cbda0584d3b18cab5c30fec167ce2}\label{classcagecontrol_a026cbda0584d3b18cab5c30fec167ce2}} 
-Q\+Vector$<$ Q\+Double\+Spin\+Box $>$ {\bfseries Q\+W\+P0sp}
-\item 
+Q\+Vector$<$ Q\+Double\+Spin\+Box $>$ \hyperlink{classcagecontrol_a026cbda0584d3b18cab5c30fec167ce2}{Q\+W\+P0sp}
+\begin{DoxyCompactList}\small\item\em List of Q\+Spin\+Boxes to set the \textquotesingle{}0\textquotesingle{} of the Q\+W\+Ps. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a2ed383394220bea867589a6e7939156f}\label{classcagecontrol_a2ed383394220bea867589a6e7939156f}} 
-Q\+Vector$<$ int $>$ {\bfseries H\+W\+Pmnum}
-\item 
+Q\+Vector$<$ int $>$ \hyperlink{classcagecontrol_a2ed383394220bea867589a6e7939156f}{H\+W\+Pmnum}
+\begin{DoxyCompactList}\small\item\em Motornumber of controller the H\+WP is connected to. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a0ecfc817dfe853a073e6b11b3ac9c53c}\label{classcagecontrol_a0ecfc817dfe853a073e6b11b3ac9c53c}} 
-Q\+Vector$<$ int $>$ {\bfseries Q\+W\+Pmnum}
-\item 
+Q\+Vector$<$ int $>$ \hyperlink{classcagecontrol_a0ecfc817dfe853a073e6b11b3ac9c53c}{Q\+W\+Pmnum}
+\begin{DoxyCompactList}\small\item\em Motornumber of controller the Q\+WP is connected to. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a89582491b0b4f2421abe2e7cad735505}\label{classcagecontrol_a89582491b0b4f2421abe2e7cad735505}} 
-Q\+Vector$<$ double $>$ {\bfseries H\+W\+P0}
-\item 
+Q\+Vector$<$ double $>$ \hyperlink{classcagecontrol_a89582491b0b4f2421abe2e7cad735505}{H\+W\+P0}
+\begin{DoxyCompactList}\small\item\em \textquotesingle{}0\textquotesingle{} of H\+W\+Ps \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a6f1fca7829c5e2c25e6a15969aa9a622}\label{classcagecontrol_a6f1fca7829c5e2c25e6a15969aa9a622}} 
-Q\+Vector$<$ double $>$ {\bfseries Q\+W\+P0}
-\item 
+Q\+Vector$<$ double $>$ \hyperlink{classcagecontrol_a6f1fca7829c5e2c25e6a15969aa9a622}{Q\+W\+P0}
+\begin{DoxyCompactList}\small\item\em \textquotesingle{}0\textquotesingle{} of Q\+W\+Ps \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a1502c9ebc5e04d61af76492d563f9e0e}\label{classcagecontrol_a1502c9ebc5e04d61af76492d563f9e0e}} 
-Q\+Vector$<$ double $>$ {\bfseries H\+W\+Pcust}
-\item 
+Q\+Vector$<$ double $>$ \hyperlink{classcagecontrol_a1502c9ebc5e04d61af76492d563f9e0e}{H\+W\+Pcust}
+\begin{DoxyCompactList}\small\item\em custum set angle to rotate H\+WP to \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a43e35156274c70bda842d25680a9159d}\label{classcagecontrol_a43e35156274c70bda842d25680a9159d}} 
-Q\+Vector$<$ double $>$ {\bfseries Q\+W\+Pcust}
-\end{DoxyCompactItemize}
+Q\+Vector$<$ double $>$ \hyperlink{classcagecontrol_a43e35156274c70bda842d25680a9159d}{Q\+W\+Pcust}
+\begin{DoxyCompactList}\small\item\em custom set angle to rotate Q\+WP to \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_aced71e7c8e0053e6d4291bcee17c9af7}\label{classcagecontrol_aced71e7c8e0053e6d4291bcee17c9af7}} 
+Q\+Vector$<$ Q\+Group\+Box $\ast$ $>$ \hyperlink{classcagecontrol_aced71e7c8e0053e6d4291bcee17c9af7}{ui\+Motor\+Group\+Boxes}
+\begin{DoxyCompactList}\small\item\em List of Groupboxes containing cage controls. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classcagecontrol_a0e6648cef5e6d08d638aa2472824cb6b}\label{classcagecontrol_a0e6648cef5e6d08d638aa2472824cb6b}} 
+\mbox{\Hypertarget{classcagecontrol_a56c01018dbd0d16a360106c438539c9e}\label{classcagecontrol_a56c01018dbd0d16a360106c438539c9e}} 
+\index{cagecontrol@{cagecontrol}!initconnections@{initconnections}}
+\index{initconnections@{initconnections}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{initconnections()}{initconnections()}}
+{\footnotesize\ttfamily void cagecontrol\+::initconnections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+initconnections connects Qt Signals to slots 
+
+Defines what happens when a button is clicked, a number is changet, et cetera \mbox{\Hypertarget{classcagecontrol_a0e6648cef5e6d08d638aa2472824cb6b}\label{classcagecontrol_a0e6648cef5e6d08d638aa2472824cb6b}} 
 \index{cagecontrol@{cagecontrol}!Load\+Config@{Load\+Config}}
 \index{Load\+Config@{Load\+Config}!cagecontrol@{cagecontrol}}
 \subsubsection{\texorpdfstring{Load\+Config()}{LoadConfig()}}
@@ -190,7 +255,43 @@ Q\+Vector$<$ double $>$ {\bfseries Q\+W\+Pcust}
 
 Load\+Config loads config from a file. 
 
-The dialog is set up with values already stored in the Q\+Settings object. If a specific quantity does not exist there, it is set to a standard value. \mbox{\Hypertarget{classcagecontrol_a217d948983c0d1c153d29c728b06d764}\label{classcagecontrol_a217d948983c0d1c153d29c728b06d764}} 
+The dialog is set up with values already stored in the Q\+Settings object. If a specific quantity does not exist there, it is set to a standard value. \mbox{\Hypertarget{classcagecontrol_a2fd60ea2aa138472e3714dbd25cadc55}\label{classcagecontrol_a2fd60ea2aa138472e3714dbd25cadc55}} 
+\index{cagecontrol@{cagecontrol}!motor\+GB@{motor\+GB}}
+\index{motor\+GB@{motor\+GB}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{motor\+G\+B()}{motorGB()}}
+{\footnotesize\ttfamily void cagecontrol\+::motor\+GB (\begin{DoxyParamCaption}\item[{Q\+Group\+Box $\ast$}]{gb,  }\item[{Q\+String}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+motor\+GB fills an empty Q\+Group\+Box with motor controls 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gb} & empty Q\+Group\+Box \\
+\hline
+{\em id} & colorcode of the cage \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_a4e2c79dc05f66b2b15ae01eaa8d39fca}\label{classcagecontrol_a4e2c79dc05f66b2b15ae01eaa8d39fca}} 
+\index{cagecontrol@{cagecontrol}!movemotor@{movemotor}}
+\index{movemotor@{movemotor}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{movemotor()}{movemotor()}}
+{\footnotesize\ttfamily void cagecontrol\+::movemotor (\begin{DoxyParamCaption}\item[{Q\+String}]{motor,  }\item[{double}]{H\+W\+Pang,  }\item[{double}]{Q\+W\+Pang }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+movemotor moves both motors of a cage to certain angles 
+
+
+\begin{DoxyParams}{Parameters}
+{\em motor} & colorcode of the cage \\
+\hline
+{\em H\+W\+Pang} & angle of the H\+WP in degrees \\
+\hline
+{\em Q\+W\+Pang} & angle of the Q\+WP in degrees \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_a217d948983c0d1c153d29c728b06d764}\label{classcagecontrol_a217d948983c0d1c153d29c728b06d764}} 
 \index{cagecontrol@{cagecontrol}!Save\+Config@{Save\+Config}}
 \index{Save\+Config@{Save\+Config}!cagecontrol@{cagecontrol}}
 \subsubsection{\texorpdfstring{Save\+Config()}{SaveConfig()}}
@@ -200,7 +301,115 @@ The dialog is set up with values already stored in the Q\+Settings object. If a 
 
 Save\+Config stores config to a file. 
 
-The Q\+Settings object is updated with the values received from the dialog and saved immediately. 
+The Q\+Settings object is updated with the values received from the dialog and saved immediately. \mbox{\Hypertarget{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}\label{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}} 
+\index{cagecontrol@{cagecontrol}!slot\+\_\+move\+HV@{slot\+\_\+move\+HV}}
+\index{slot\+\_\+move\+HV@{slot\+\_\+move\+HV}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{slot\+\_\+move\+HV}{slot\_moveHV}}
+{\footnotesize\ttfamily void cagecontrol\+::slot\+\_\+move\+HV (\begin{DoxyParamCaption}\item[{Q\+String}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+move\+HV 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & colorcode of the cage, or \textquotesingle{}all\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_a138905383fdc09a0b5077a185eaf6682}\label{classcagecontrol_a138905383fdc09a0b5077a185eaf6682}} 
+\index{cagecontrol@{cagecontrol}!slot\+\_\+move\+LR@{slot\+\_\+move\+LR}}
+\index{slot\+\_\+move\+LR@{slot\+\_\+move\+LR}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{slot\+\_\+move\+LR}{slot\_moveLR}}
+{\footnotesize\ttfamily void cagecontrol\+::slot\+\_\+move\+LR (\begin{DoxyParamCaption}\item[{Q\+String}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+move\+LR 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & colorcode of the cage, or \textquotesingle{}all\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_a2d971435af3267351272b2c2d5f2f709}\label{classcagecontrol_a2d971435af3267351272b2c2d5f2f709}} 
+\index{cagecontrol@{cagecontrol}!slot\+\_\+movemotors@{slot\+\_\+movemotors}}
+\index{slot\+\_\+movemotors@{slot\+\_\+movemotors}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{slot\+\_\+movemotors}{slot\_movemotors}}
+{\footnotesize\ttfamily void cagecontrol\+::slot\+\_\+movemotors (\begin{DoxyParamCaption}\item[{Q\+String}]{color,  }\item[{double}]{H\+W\+Pang,  }\item[{double}]{Q\+W\+Pang }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+movemotors 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & colorcode of the cage, or \textquotesingle{}all\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_a3207f15cba9458e32fb5c2cf366c4b44}\label{classcagecontrol_a3207f15cba9458e32fb5c2cf366c4b44}} 
+\index{cagecontrol@{cagecontrol}!slot\+\_\+move\+PM@{slot\+\_\+move\+PM}}
+\index{slot\+\_\+move\+PM@{slot\+\_\+move\+PM}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{slot\+\_\+move\+PM}{slot\_movePM}}
+{\footnotesize\ttfamily void cagecontrol\+::slot\+\_\+move\+PM (\begin{DoxyParamCaption}\item[{Q\+String}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+move\+PM 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & colorcode of the cage, or \textquotesingle{}all\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_a244c02598b4b73db82b5852561634084}\label{classcagecontrol_a244c02598b4b73db82b5852561634084}} 
+\index{cagecontrol@{cagecontrol}!updatesettings@{updatesettings}}
+\index{updatesettings@{updatesettings}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{updatesettings}{updatesettings}}
+{\footnotesize\ttfamily void cagecontrol\+::updatesettings (\begin{DoxyParamCaption}\item[{double}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+updatesettings fills variables with data from G\+UI 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & unused \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_a2cfb7b65a7b8838d5f2acaa384a7cfcc}\label{classcagecontrol_a2cfb7b65a7b8838d5f2acaa384a7cfcc}} 
+\index{cagecontrol@{cagecontrol}!updatesettingsint@{updatesettingsint}}
+\index{updatesettingsint@{updatesettingsint}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{updatesettingsint}{updatesettingsint}}
+{\footnotesize\ttfamily void cagecontrol\+::updatesettingsint (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+updatesettingsint wrapper, just calls 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classcagecontrol_a244c02598b4b73db82b5852561634084}{updatesettings(double d)} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & unused \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_aab3dedc2c4b814569988c93bd30546c7}\label{classcagecontrol_aab3dedc2c4b814569988c93bd30546c7}} 
+\index{cagecontrol@{cagecontrol}!updatestatus@{updatestatus}}
+\index{updatestatus@{updatestatus}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{updatestatus()}{updatestatus()}}
+{\footnotesize\ttfamily void cagecontrol\+::updatestatus (\begin{DoxyParamCaption}\item[{Q\+String}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+updatestatus writes message to statusbar and to a logfile 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message to write \\
+\hline
+\end{DoxyParams}
+
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

@@ -26,8 +26,8 @@ public:
      * these commands are executed.
      *
      * The commands can be changed in the dinspect settings dialog, but the standard ones are:
-     *      - SetAngle(Qstring,double,double)
-     *      - Move(Qstring)
+     *      - Move(QString, QString)
+     *      - Move(QString, double, double)
      */
     explicit UDPlistener(QSettings *settings, QObject *parent = 0);
 
@@ -40,28 +40,28 @@ private:
 
 signals:
     /*!
-     * \brief Move
-     * \param controller
-     * \param HWPang
-     * \param QWPang
+     * \brief Move moves the waveplates in a cage to certain angles
+     * \param controller either colorcode of cage or 'all'
+     * \param HWPang angle of the HWP in degree
+     * \param QWPang angle of the QWP in degree
      */
     void Move(QString controller, double HWPang, double QWPang);
 
     /*!
-     * \brief MoveHV
-     * \param controller
+     * \brief MoveHV moves cage to H/V basis
+     * \param controller either colorcode of stage, or 'all'
      */
     void MoveHV(QString controller);
 
     /*!
-     * \brief MovePM
-     * \param controller
+     * \brief MovePM moves cage to P/M basis
+     * \param controller either colorcode of stage, or 'all'
      */
     void MovePM(QString controller);
 
     /*!
-     * \brief MoveLR
-     * \param controller
+     * \brief MoveLR moves cage to R/L basis
+     * \param controller either colorcode of stage, or 'all'
      */
     void MoveLR(QString controller);
 

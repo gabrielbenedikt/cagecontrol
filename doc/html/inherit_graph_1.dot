@@ -6,4 +6,6 @@ digraph "Graphical Class Hierarchy"
   Node0 [label="QObject",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node0 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node0 [label="Motor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMotor.xhtml",tooltip="The Motor class operates the PCB-motor. "];
+  Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="UDPlistener",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classUDPlistener.xhtml",tooltip="The UDPlistener class is used to control dinspect with UDP packages. "];
 }

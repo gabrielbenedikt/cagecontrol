@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['radtodeg',['RADTODEG',['../defines_8h.xhtml#a9fcbc53371e9a60b983c6b338537aa40',1,'defines.h']]],
-  ['read',['read',['../classMotor.xhtml#adc21685543cb0f520fec7291b4a642f0',1,'Motor']]]
+  ['open',['open',['../classMotor.xhtml#a6f235ed0f9e1ba51cc6cd1dcd823d850',1,'Motor']]],
+  ['openmotors',['openmotors',['../classcagecontrol.xhtml#ae961f42ea421a8d512964f158b0201e8',1,'cagecontrol']]]
 ];

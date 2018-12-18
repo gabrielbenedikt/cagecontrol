@@ -1,16 +1,9 @@
 var searchData=
 [
-  ['cagecontrol',['cagecontrol',['../classcagecontrol.xhtml',1,'']]],
-  ['close',['close',['../classMotor.xhtml#a6302ab51842ec23bd8b36d56e5ae9416',1,'Motor']]],
-  ['command_5ffrequency_5fsweep',['command_frequency_sweep',['../classMotor.xhtml#ade0bd3f46caadb9fef19f03629fc4e71',1,'Motor']]],
-  ['command_5fhelp',['command_help',['../classMotor.xhtml#aca8c344a7251cc4067f4d1cba69f7970',1,'Motor']]],
-  ['command_5fhome',['command_home',['../classMotor.xhtml#a75c8443fde45f5dc88e7bfe12db75a88',1,'Motor']]],
-  ['command_5finfo',['command_info',['../classMotor.xhtml#abae5d9c4f4e3e9b67a98ca2486edacb9',1,'Motor']]],
-  ['command_5fmicrostep',['command_microstep',['../classMotor.xhtml#abfbe0b96cfb97107128084ec065e31c2',1,'Motor']]],
-  ['command_5fmoveboth',['command_moveboth',['../classMotor.xhtml#a3d179f71c181cbeb3cdb44af166e532d',1,'Motor']]],
-  ['command_5fpark',['command_park',['../classMotor.xhtml#a1b3e37fc95517b98914ce3740232b098',1,'Motor']]],
-  ['command_5fsinglestep',['command_singlestep',['../classMotor.xhtml#ae052b079f5bd433c3561eb8b6d772b80',1,'Motor']]],
-  ['command_5fstep',['command_step',['../classMotor.xhtml#aafbe8e02e29d2a81287747ae09b3d9fa',1,'Motor']]],
-  ['comports',['comports',['../classcagecontrol.xhtml#a1fa2f1480f616b4f7142f9e7a471cef3',1,'cagecontrol']]],
-  ['connectionclosed',['ConnectionClosed',['../classMotor.xhtml#afcf83aa74380932f2408c150b806b5fb',1,'Motor']]]
+  ['bind',['bind',['../classUDPlistener.xhtml#a4b7a056403f9b80485c92b82c340109a',1,'UDPlistener']]],
+  ['blackmotor',['blackmotor',['../classcagecontrol.xhtml#a4e5d64b7fc46495e7f1c8824ccb2b8d8',1,'cagecontrol']]],
+  ['bluemotor',['bluemotor',['../classcagecontrol.xhtml#a0b188226c1976ff8b89f4a043320c0d7',1,'cagecontrol']]],
+  ['bothtimer',['bothtimer',['../classMotor.xhtml#a97bf769ce21887450f412554520f4f20',1,'Motor']]],
+  ['brownmotor',['brownmotor',['../classcagecontrol.xhtml#a5a58ab2407ea37d47b00dfa31fbd837e',1,'cagecontrol']]],
+  ['bug_20list',['Bug List',['../bug.xhtml',1,'']]]
 ];

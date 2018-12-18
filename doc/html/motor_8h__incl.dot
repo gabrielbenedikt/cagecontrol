@@ -13,4 +13,6 @@ digraph "motor.h"
   Node4 [label="QObject",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node0 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 [label="QTimer",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node0 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="defines.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$defines_8h.xhtml",tooltip="Various compile-time definitions. "];
 }

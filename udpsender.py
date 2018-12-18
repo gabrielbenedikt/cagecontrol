@@ -5,8 +5,8 @@ import socket
 # IP
 # IP of client
 #IP = "127.0.0.1"
-#IP = "131.130.45.30"
-UDP_IP = "131.130.45.13"
+IP = "131.130.45.30"
+#IP = "131.130.45.13"
 ###########
 # PORT
 # port client listens to

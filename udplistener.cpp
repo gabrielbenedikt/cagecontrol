@@ -162,7 +162,7 @@ void UDPlistener::processCommands(QString msg)
     }
 */
     // Move motors?
-    refmsg="Move";
+    refmsg="move";
     if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
         msg.chop(1);//remove ')'
         msg.remove(0,refmsg.length()+1);//remove command body + '('

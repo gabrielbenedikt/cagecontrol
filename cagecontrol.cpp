@@ -1,6 +1,6 @@
 #include "cagecontrol.h"
 #include "motor.h"
-
+#include <QStatusBar>
 
 /************************************************************************************************
 *                                                                                               *
@@ -14,8 +14,9 @@ cagecontrol::cagecontrol(QWidget *parent) :
     settings = new QSettings("cagecontrol.conf", QSettings::IniFormat);
 
     // UI-Setup
-    QGridLayout *layout = new QGridLayout;
-    setupUI(layout);
+    QWidget *mainwidget = new QWidget();
+    QGridLayout *mainlayout = new QGridLayout;
+    setupUI(mainlayout);
     motorName<<"red"<<"brown"<<"green"<<"blue"<<"white"<<"black";
     HWP0.reserve(motorName.length());
     QWP0.reserve(motorName.length());
@@ -24,8 +25,11 @@ cagecontrol::cagecontrol(QWidget *parent) :
     HWPmnum.reserve(motorName.length());
     QWPmnum.reserve(motorName.length());
     uiMotorGroupBoxes.reserve(motorName.length());
-    setCentralWidget(tabs);
-    centralWidget()->setLayout(layout);
+    mainlayout->addWidget(tabs);
+    mainlayout->addWidget(status);
+    mainwidget->setLayout(mainlayout);
+    setCentralWidget(mainwidget);
+    centralWidget()->setLayout(mainlayout);
     setWindowTitle("CageControl");
 
     udplistener = new UDPlistener(settings);
@@ -102,10 +106,10 @@ void cagecontrol::initconnections()
     }
 
     //UDP
-    connect(udplistener, SIGNAL(Move), this, SLOT(slot_movemotors));
-    connect(udplistener, SIGNAL(MoveHV), this, SLOT(slot_moveHV));
-    connect(udplistener, SIGNAL(MovePM), this, SLOT(slot_movePM));
-    connect(udplistener, SIGNAL(MoveLR), this, SLOT(slot_moveLR));
+    connect(udplistener, &UDPlistener::Move, this, &cagecontrol::slot_movemotors);
+    connect(udplistener, &UDPlistener::MoveHV, this, &cagecontrol::slot_moveHV);
+    connect(udplistener, &UDPlistener::MovePM, this, &cagecontrol::slot_movePM);
+    connect(udplistener, &UDPlistener::MoveLR, this, &cagecontrol::slot_moveLR);
 }
 
 /************************************************************************************************
@@ -210,6 +214,7 @@ void cagecontrol::openmotors()
 ************************************************************************************************/
 void cagecontrol::setupUI(QGridLayout *layout)
 {
+    status = new QStatusBar();
     tabs = new QTabWidget();
     motorstab = new QWidget();
     settingstab = new QWidget();
@@ -616,7 +621,6 @@ void cagecontrol::moveblackANG()
 ************************************************************************************************/
 void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
 {
-    DEBUG_INFO("TODO: move motor %s:\tHWP: %4.1f\tQWP: %4.1f\n",motor.toLatin1().data(), HWPang, QWPang);
     int i = motorName.indexOf(motor);
     if ((HWPmnum.at(i)==1) && (QWPmnum.at(i)==2)) {
         motors.at(i)->command_moveboth(HWPang,QWPang);
@@ -832,6 +836,7 @@ cagecontrol::~cagecontrol()
 ************************************************************************************************/
 void cagecontrol::slot_moveHV(QString color)
 {
+    updatestatus("From UDP: move " + color + "to H/V");
     if (motorName.contains(color.toLower())) {
         int i = motorName.indexOf(color.toLower());
         movemotor(color.toLower(),HWP0[i],QWP0[i]);
@@ -851,6 +856,7 @@ void cagecontrol::slot_moveHV(QString color)
 ************************************************************************************************/
 void cagecontrol::slot_movePM(QString color)
 {
+    updatestatus("From UDP: move " + color + "to P/M");
     if (motorName.contains(color.toLower())) {
         int i = motorName.indexOf(color.toLower());
         movemotor(color.toLower(),HWP0[i]+22.5,QWP0[i]+45);
@@ -870,6 +876,7 @@ void cagecontrol::slot_movePM(QString color)
 ************************************************************************************************/
 void cagecontrol::slot_moveLR(QString color)
 {
+    updatestatus("From UDP: move " + color + "to L/R");
     // TODO: waveplate settings for circular
     if (motorName.contains(color.toLower())) {
         int i = motorName.indexOf(color.toLower());
@@ -890,6 +897,7 @@ void cagecontrol::slot_moveLR(QString color)
 ************************************************************************************************/
 void cagecontrol::slot_movemotors(QString color, double HWPang, double QWPang)
 {
+    updatestatus("From UDP: move " + color + " to HWP " + QString::number(HWPang) + " QWP " + QString::number(QWPang));
     if (motorName.contains(color.toLower())) {
         int i = motorName.indexOf(color.toLower());
         movemotor(color.toLower(),HWPang,QWPang);
@@ -901,4 +909,10 @@ void cagecontrol::slot_movemotors(QString color, double HWPang, double QWPang)
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
     }
+}
+
+void cagecontrol::updatestatus(QString msg)
+{
+    status->showMessage(msg);
+    //TODO: write to logfile
 }

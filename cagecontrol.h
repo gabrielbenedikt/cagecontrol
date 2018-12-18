@@ -20,6 +20,7 @@ class cagecontrol;
 }
 
 class Motor;
+class UDPlistener;
 
 class cagecontrol : public QMainWindow
 {
@@ -55,12 +56,13 @@ public slots:
      */
     void slot_movemotors(QString color, double HWPang, double QWPang);
 private:
-    int udpport;
-    QSettings *settings;                                //!<
-    UDPlistener *udplistener;
-    QTabWidget *tabs;                                   //!<
+    int udpport;                                        //!< Hold the UDP port to listen to for commandds
+    QSettings *settings;                                //!< A QSettings object, used to store settings in a config file
+    UDPlistener *udplistener;                           //!< Listens to a UDP port, aquiires & checks commands send to it
+    QTabWidget *tabs;
     QWidget *settingstab;
     QWidget *motorstab;
+    QStatusBar *status;                                 //!< Status bar
     QVector<QString> comports;                          //!<Vector containing available serial ports names ports
 
     Motor *redmotor;
@@ -87,6 +89,12 @@ private:
 
     void setupUI(QGridLayout *layout);
     void openmotors();
+
+    /*!
+     * \brief updatestatus writes message to statusbar and to a logfile
+     * \param msg Message to write
+     */
+    void updatestatus(QString msg);
 
     /*!
      * \brief LoadConfig loads config from a file

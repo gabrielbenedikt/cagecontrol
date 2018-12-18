@@ -106,7 +106,7 @@ void UDPlistener::processCommands(QString msg)
             }
         } else if (params.length()==2) {
             motorcolor=params[0].toLower();
-            basis.toLower()=params[1];
+            basis=params[1].toLower();
             if (basis=="hv") {
                 emit(MoveHV(motorcolor));
             } else if (basis=="pm") {

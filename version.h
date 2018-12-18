@@ -2,7 +2,7 @@
 #define VERSION_H
 
 /*!
- * \file version.h
+ * \file version.h
  * \brief This file contains information about the code version
  * \author Peter Schiansky
  * \bug There are no known bugs.
@@ -15,16 +15,16 @@
  * \def VERSION_GIT
  * \brief The git commit description
  */
-#define VERSION_GIT ""
+#define VERSION_GIT "v0.1-9-g0c78d25"
 /*!
 * \def VERSION_GIT_DATE
 * \brief The date of the git commit
 */
-#define VERSION_GIT_DATE 201812121130
+#define VERSION_GIT_DATE 201812181743
 /*!
  * \def VERSION_BUILD_DATE
  * \brief The builddate
  */
-#define VERSION_BUILD_DATE 201812121153
+#define VERSION_BUILD_DATE 201812181755
 
 #endif

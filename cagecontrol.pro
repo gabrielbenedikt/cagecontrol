@@ -31,9 +31,9 @@ CONFIG += c++11
 #Use git commit hash as version
 #
 version.target = version.h
-#version.depends = $$PWD/.git nevertruedependency #forces rebuild
+version.depends = $$PWD/.git nevertruedependency #forces rebuild
 nevertruedependency.CONFIG += recursive
-#QMAKE_EXTRA_TARGETS += nevertruedependency
+QMAKE_EXTRA_TARGETS += nevertruedependency
 
 unix {
     !macx {
@@ -65,7 +65,6 @@ HEADERS += \
     defines.h \
     debug.h \
     version.h \
-    createversion_win.bat \
     motor.h \
     udplistener.h \
     helper.h
@@ -81,6 +80,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     doxygen_cagecontrol \
     createversion_linux.sh \
+    createversion_win.bat \
     TODO.txt
 
 isEmpty(TARGET_EXT) {

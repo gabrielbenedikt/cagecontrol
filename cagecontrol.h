@@ -32,6 +32,7 @@ public:
 
 private slots:
     void updatesettings(double d);
+    void updatesettingsint(int i);
     void updateUI();
 
 public slots:

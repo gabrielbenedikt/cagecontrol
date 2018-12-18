@@ -108,18 +108,18 @@ void cagecontrol::initconnections()
     QList<QSpinBox*> sboxes = tabs->findChildren<QSpinBox*>();
     for(QSpinBox* box : sboxes) {
 #if defined (_WIN32) && (_MSC_VER<1900)
-        connect(box,SIGNAL(valueChanged(int)),this,SLOT(updatesettings(double)));
+        connect(box,SIGNAL(valueChanged(int)),this,SLOT(updatesettingsint(int)));
 #else
-        connect(box,QOverload<int>::of(&QSpinBox::valueChanged),this,&cagecontrol::updatesettings);
+        connect(box,QOverload<int>::of(&QSpinBox::valueChanged),this,&cagecontrol::updatesettingsint);
 #endif
     }
 
     QList<QCheckBox*> cboxes = tabs->findChildren<QCheckBox*>();
     for(QCheckBox* box : cboxes) {
 #if defined (_WIN32) && (_MSC_VER<1900)
-        connect(box,SIGNAL(stateChanged(int)),this,SLOT(updatesettings(double)));
+        connect(box,SIGNAL(stateChanged(int)),this,SLOT(updatesettingsint(int)));
 #else
-        connect(box,&QCheckBox::stateChanged,this,&cagecontrol::updatesettings);
+        connect(box,&QCheckBox::stateChanged,this,&cagecontrol::updatesettingsint);
 #endif
     }
 
@@ -135,6 +135,11 @@ void cagecontrol::initconnections()
 *                            cagecontrol::updatesettings                                        *
 *                                                                                               *
 ************************************************************************************************/
+void cagecontrol::updatesettingsint(int i)
+{
+    UNUSED(i);
+    updatesettings(3.1415);
+}
 void cagecontrol::updatesettings(double d)
 {
     UNUSED(d); //just there to create a SLOT with matching parameter for signal &Q(Double)SpinBox::valueChanged

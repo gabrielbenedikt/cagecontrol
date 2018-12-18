@@ -836,7 +836,7 @@ cagecontrol::~cagecontrol()
 ************************************************************************************************/
 void cagecontrol::slot_moveHV(QString color)
 {
-    updatestatus("From UDP: move " + color + "to H/V");
+    updatestatus("From UDP: move " + color + " to H/V");
     if (motorName.contains(color.toLower())) {
         int i = motorName.indexOf(color.toLower());
         movemotor(color.toLower(),HWP0[i],QWP0[i]);
@@ -856,7 +856,7 @@ void cagecontrol::slot_moveHV(QString color)
 ************************************************************************************************/
 void cagecontrol::slot_movePM(QString color)
 {
-    updatestatus("From UDP: move " + color + "to P/M");
+    updatestatus("From UDP: move " + color + " to P/M");
     if (motorName.contains(color.toLower())) {
         int i = motorName.indexOf(color.toLower());
         movemotor(color.toLower(),HWP0[i]+22.5,QWP0[i]+45);
@@ -876,7 +876,7 @@ void cagecontrol::slot_movePM(QString color)
 ************************************************************************************************/
 void cagecontrol::slot_moveLR(QString color)
 {
-    updatestatus("From UDP: move " + color + "to L/R");
+    updatestatus("From UDP: move " + color + " to L/R");
     // TODO: waveplate settings for circular
     if (motorName.contains(color.toLower())) {
         int i = motorName.indexOf(color.toLower());

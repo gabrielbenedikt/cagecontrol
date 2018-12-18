@@ -82,85 +82,8 @@ void UDPlistener::processCommands(QString msg)
     QString basis="";
     bool ok;
 
-    /*
-    //Start mesaurement?
-    if (settings->contains("NET/ReceiveUDPctrlmsgStart")) {
-        refmsg = settings->value("NET/ReceiveUDPctrlmsgStart").toString();
-        result = QString::compare(refmsg, msg); //result==0 iff refmsg==msg
-        if (result==0) {
-            emit(startMeasurement());
-        }
-    }
-    //Stop mesaurement?
-    if (settings->contains("NET/ReceiveUDPctrlmsgStop")) {
-        refmsg = settings->value("NET/ReceiveUDPctrlmsgStop").toString();
-        result = QString::compare(refmsg, msg); //result==0 iff refmsg==msg
-        if (result==0) {
-            emit(stopMeasurement());
-        }
-    }
+    msg=msg.toLower();
 
-    //Set detector to TTM?
-    if (settings->contains("NET/ReceiveUDPctrlmsgSetDetTTM")) {
-        refmsg = settings->value("NET/ReceiveUDPctrlmsgSetDetTTM").toString();
-        result = QString::compare(refmsg, msg); //result==0 iff refmsg==msg
-        if (result==0) {
-
-            emit(setDetector("TTM8000"));
-        }
-    }
-    //Set detector to PM100D?
-    if (settings->contains("NET/ReceiveUDPctrlmsgSetDetPM100D")) {
-        refmsg = settings->value("NET/ReceiveUDPctrlmsgSetDetPM100D").toString();
-        result = QString::compare(refmsg, msg); //result==0 iff refmsg==msg
-        if (result==0) {
-            emit(setDetector("PM100D"));
-        }
-    }
-
-    //Change scanrange?
-    if (settings->contains("NET/ReceiveUDPctrlmsgSetScanrange")) {
-        refmsg = settings->value("NET/ReceiveUDPctrlmsgSetScanrange").toString();
-
-        //Check if msg contains refmsg
-        //msg should be something like setscanrange(1234, 2345)
-        //refmsg in this case is setscanrange
-        if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
-            msg.chop(1);//remove the ')'
-            msg.remove(0,refmsg.length()+1);//remove the command body + '('
-            QStringList range = msg.split(',', QString::SkipEmptyParts); //split in two
-            if (range.length()==2) {
-                double low=range[0].toDouble();
-                double high=range[1].toDouble();
-                emit(setScanrange(low, high));
-            } else {
-                DEBUG_WARNING("Changing the scanrange needs exactly two parameters.\n");
-            }
-
-        }
-    }
-
-    //Change TTM channel?
-    if (settings->contains("NET/ReceiveUDPctrlmsgSetTTMChannel")) {
-        refmsg = settings->value("NET/ReceiveUDPctrlmsgSetTTMChannel").toString();
-        if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
-            msg.chop(1);//remove the ')'
-            msg.remove(0,refmsg.length()+1);//remove the command body + '('
-            int channel = msg.toUInt();
-            emit(setTTMChannel(channel));
-        }
-    }
-    //Change TTM coincidence channel?
-    if (settings->contains("NET/ReceiveUDPctrlmsgSetTTMCoincidenceChannel")) {
-        refmsg = settings->value("NET/ReceiveUDPctrlmsgSetTTMCoincidenceChannel").toString();
-        if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
-            msg.chop(1);//remove the ')'
-            msg.remove(0,refmsg.length()+1);//remove the command body + '('
-            int channel = msg.toUInt();
-            emit(setTTMCoincidenceChannel(channel));
-        }
-    }
-*/
     // Move motors?
     refmsg="move";
     if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
@@ -183,12 +106,12 @@ void UDPlistener::processCommands(QString msg)
             }
         } else if (params.length()==2) {
             motorcolor=params[0].toLower();
-            basis=params[1];
-            if (basis=="HV") {
+            basis.toLower()=params[1];
+            if (basis=="hv") {
                 emit(MoveHV(motorcolor));
-            } else if (basis=="PM") {
+            } else if (basis=="pm") {
                 emit(MovePM(motorcolor));
-            } else if (basis=="LR") {
+            } else if (basis=="lr") {
                 emit(MoveLR(motorcolor));
             } else {
                 DEBUG_ERROR("Expected basis strings to be 'HV', 'PM', 'LR'. Got: %s\n", basis.toLocal8Bit().data());

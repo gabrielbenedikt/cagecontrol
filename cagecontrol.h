@@ -7,10 +7,14 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDebug>
+#include <QDir>
 #include <QDoubleSpinBox>
+#include <QFile>
+#include <QFileDialog>
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QSettings>
@@ -86,6 +90,12 @@ public slots:
      */
     void slot_movemotors(QString color, double HWPang, double QWPang);
 private:
+    QString basesfname;                                 //!< path and filename of file containing bases
+    QTimer basestimer;                                  //!< Runs out every \see basestime seconds to change bases
+    QDir basesdir;                                      //!< Directory of basesfile
+    QFile basesf;                                       //!< Bases file
+    int currentbasisidx;                                   //!< index of current basis
+    int basestime;                                      //!< When reading bases from file: Number of seconds after which a basischange occurs
     int udpport;                                        //!< Hold the UDP port to listen to for commandds
     bool pauseupdating;                                 //!< Keep updateUI and updatesettings from interfering with each other
     bool useoffset;                                     //!< If true, the angles in the settings-tab will be used as '0'. \see slot_changeoffsetusage
@@ -96,6 +106,7 @@ private:
     QWidget *motorstab;                                 //!< GUI tab containing motor controls
     QStatusBar *status;                                 //!< Status bar
     QVector<QString> comports;                          //!< Vector containing available serial ports names ports
+    QVector<QStringList> bases;                         //!< vector holding all bases for automatic basis change
 
     /*WIP - cleaner code*/
     /*Even nicer: put everything in motor class*/
@@ -116,6 +127,20 @@ private:
     void setupUI(QGridLayout *layout);                  //!< Puts together the GUI
     void openmotors();                                  //!< Opens serial connections to the PCB motor controlllers
 
+
+    /*!
+     * \brief changebases changes bases periodically
+     */
+    void changebases();
+    /*!
+     * \brief setbasesfile reads filename from dialog
+     */
+    void setbasesfile();
+    /*!
+     * \brief readbasesfile reads file containing bases
+     * \return 0 on success
+     */
+    int readbasesfile();
     /*!
      * \brief updatestatus writes message to statusbar and to a logfile
      * \param msg Message to write

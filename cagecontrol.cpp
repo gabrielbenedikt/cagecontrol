@@ -24,6 +24,9 @@ cagecontrol::cagecontrol(QWidget *parent) :
     QWPmnum.reserve(motorName.length());
     invert.reserve(motorName.length());
     useoffset=true;
+    currentbasisidx=-1;
+    basestime=0;
+    basestimer.setSingleShot(true);
     uiMotorGroupBoxes.reserve(motorName.length());
     mainlayout->addWidget(tabs);
     mainlayout->addWidget(status);
@@ -80,6 +83,11 @@ void cagecontrol::initconnections()
     connect(motorstab->findChild<QPushButton*>("allpmbutton"),&QAbstractButton::pressed,this,&cagecontrol::moveallpm);
     connect(motorstab->findChild<QPushButton*>("alllrbutton"),&QAbstractButton::pressed,this,&cagecontrol::movealllr);
     connect(motorstab->findChild<QPushButton*>("allsetbutton"),&QAbstractButton::pressed,this,&cagecontrol::moveallarb);
+
+    connect(tabs->findChild<QPushButton*>("filebtn"),&QAbstractButton::pressed,this,&cagecontrol::setbasesfile);
+    connect(tabs->findChild<QPushButton*>("startbasesbtn"),&QAbstractButton::pressed,this,&cagecontrol::changebases);
+
+
 #if defined (_WIN32) && (_MSC_VER<1900)
     connect(settingstab->findChild<QSpinBox*>("port"),SIGNAL(valueChanged),this,SLOT(updatesettings));
 #else
@@ -121,6 +129,10 @@ void cagecontrol::initconnections()
     connect(udplistener, &UDPlistener::MoveLR, this, &cagecontrol::slot_moveLR);
     connect(udplistener, &UDPlistener::changeoffsetusage, this, &cagecontrol::slot_changeoffsetusage);
     connect(udplistener, &UDPlistener::changeWPangles,this,&cagecontrol::slot_changeWPangles);
+
+    connect(&basestimer, &QTimer::timeout,this,&cagecontrol::changebases);
+
+
 }
 
 /************************************************************************************************
@@ -185,6 +197,9 @@ void cagecontrol::updatesettings(double d)
         udpport=settingstab->findChild<QSpinBox*>("port")->value();
 
         useoffset = settingstab->findChild<QCheckBox*>("offsetcb")->isChecked();
+
+        basesfname = tabs->findChild<QLineEdit*>("filele")->text();
+        basestime = tabs->findChild<QSpinBox*>("baseschangesb")->value();
     }
 
 }
@@ -300,6 +315,13 @@ void cagecontrol::LoadConfig()
     udpport=tmpint;
     tabs->findChild<QSpinBox*>("port")->setValue(tmpint);
 
+    basesfname = settings->value("GUI/BASESFNAME").toString();
+    tabs->findChild<QLineEdit*>("filele")->setText(basesfname);
+    tmpint = settings->value("GUI/BASESTIME").toInt();
+    basestime=tmpint;
+    tabs->findChild<QSpinBox*>("baseschangesb")->setValue(basestime);
+
+
 }
 
 /************************************************************************************************
@@ -343,6 +365,8 @@ void cagecontrol::SaveConfig()
     }
 
     settings->setValue("GUI/OFFSET",useoffset);
+    settings->setValue("GUI/BASESTIME",basestime);
+    settings->setValue("GUI/BASESFNAME",basesfname);
 
     settings->sync();
 }
@@ -1359,13 +1383,34 @@ void cagecontrol::setupUI(QGridLayout *layout)
     buttons->addWidget(allpmbtn,1,3,1,1);
     buttons->addWidget(alllrbtn,1,4,1,1);
 
-    motorlayout->addWidget(redbox,1,1);
-    motorlayout->addWidget(brownbox,2,1);
-    motorlayout->addWidget(greenbox,3,1);
-    motorlayout->addWidget(bluebox,4,1);
-    motorlayout->addWidget(whitebox,5,1);
-    motorlayout->addWidget(blackbox,6,1);
-    motorlayout->addLayout(buttons,7,1);
+    QLabel *filelabel = new QLabel("Load bases from");
+    QLabel *baseschangelabel = new QLabel("change every");
+    QPushButton *filebtn = new QPushButton("File");
+    QPushButton *startbasesbtn = new QPushButton("start");
+    startbasesbtn->setObjectName("startbasesbtn");
+    QSpinBox *baseschangesb = new QSpinBox();
+    QLineEdit *filele = new QLineEdit();
+    filele->setObjectName("filele");
+    baseschangesb->setObjectName("baseschangesb");
+    baseschangesb->setSuffix(" s");
+    filebtn->setObjectName("filebtn");
+    QGridLayout *baseschangegrid = new QGridLayout();
+    baseschangegrid->addWidget(filelabel,       1,1,1,1);
+    baseschangegrid->addWidget(filebtn,         1,2,1,1);
+    baseschangegrid->addWidget(filele,          2,1,1,2);
+    baseschangegrid->addWidget(baseschangelabel,1,3,1,1);
+    baseschangegrid->addWidget(baseschangesb,   1,4,1,1);
+    baseschangegrid->addWidget(startbasesbtn,   2,4,1,1);
+
+
+    motorlayout->addWidget(redbox,          1,1);
+    motorlayout->addWidget(brownbox,        2,1);
+    motorlayout->addWidget(greenbox,        3,1);
+    motorlayout->addWidget(bluebox,         4,1);
+    motorlayout->addWidget(whitebox,        5,1);
+    motorlayout->addWidget(blackbox,        6,1);
+    motorlayout->addLayout(buttons,         7,1);
+    motorlayout->addLayout(baseschangegrid, 8,1);
 
     QLabel *settinglabel_red = new QLabel("red");
     QLabel *settinglabel_brown = new QLabel("brown");
@@ -1532,106 +1577,201 @@ void cagecontrol::setupUI(QGridLayout *layout)
 
     }
 
-    /************************************************************************************************
+/************************************************************************************************
 *                                                                                               *
 *                                cagecontrol::updateUI                                          *
 *                                                                                               *
 ************************************************************************************************/
-    void cagecontrol::updateUI()
-    {
-        tabs->findChild<QDoubleSpinBox*>("redHWP0sb")->setValue(HWP0[0]);
-        tabs->findChild<QDoubleSpinBox*>("redQWP0sb")->setValue(QWP0[0]);
-        tabs->findChild<QDoubleSpinBox*>("brownHWP0sb")->setValue(HWP0[1]);
-        tabs->findChild<QDoubleSpinBox*>("brownQWP0sb")->setValue(QWP0[1]);
-        tabs->findChild<QDoubleSpinBox*>("greenHWP0sb")->setValue(HWP0[2]);
-        tabs->findChild<QDoubleSpinBox*>("greenQWP0sb")->setValue(QWP0[2]);
-        tabs->findChild<QDoubleSpinBox*>("blueHWP0sb")->setValue(HWP0[3]);
-        tabs->findChild<QDoubleSpinBox*>("blueQWP0sb")->setValue(QWP0[3]);
-        tabs->findChild<QDoubleSpinBox*>("whiteHWP0sb")->setValue(HWP0[4]);
-        tabs->findChild<QDoubleSpinBox*>("whiteQWP0sb")->setValue(QWP0[4]);
-        tabs->findChild<QDoubleSpinBox*>("blackHWP0sb")->setValue(HWP0[5]);
-        tabs->findChild<QDoubleSpinBox*>("blackQWP0sb")->setValue(QWP0[5]);
-        motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[0]);
-        motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[1]);
-        motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[2]);
-        motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[3]);
-        motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[4]);
-        motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[5]);
-        motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[0]);
-        motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[1]);
-        motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[2]);
-        motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[3]);
-        motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[4]);
-        motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[5]);
-        tabs->findChild<QSpinBox*>("redHWPnum")->setValue(HWPmnum[0]);
-        tabs->findChild<QSpinBox*>("brownHWPnum")->setValue(HWPmnum[1]);
-        tabs->findChild<QSpinBox*>("greenHWPnum")->setValue(HWPmnum[2]);
-        tabs->findChild<QSpinBox*>("blueHWPnum")->setValue(HWPmnum[3]);
-        tabs->findChild<QSpinBox*>("whiteHWPnum")->setValue(HWPmnum[4]);
-        tabs->findChild<QSpinBox*>("blackHWPnum")->setValue(HWPmnum[5]);
-        tabs->findChild<QSpinBox*>("redQWPnum")->setValue(QWPmnum[0]);
-        tabs->findChild<QSpinBox*>("brownQWPnum")->setValue(QWPmnum[1]);
-        tabs->findChild<QSpinBox*>("greenQWPnum")->setValue(QWPmnum[2]);
-        tabs->findChild<QSpinBox*>("blueQWPnum")->setValue(QWPmnum[3]);
-        tabs->findChild<QSpinBox*>("whiteQWPnum")->setValue(QWPmnum[4]);
-        tabs->findChild<QSpinBox*>("blackQWPnum")->setValue(QWPmnum[5]);
+void cagecontrol::updateUI()
+{
+    tabs->findChild<QDoubleSpinBox*>("redHWP0sb")->setValue(HWP0[0]);
+    tabs->findChild<QDoubleSpinBox*>("redQWP0sb")->setValue(QWP0[0]);
+    tabs->findChild<QDoubleSpinBox*>("brownHWP0sb")->setValue(HWP0[1]);
+    tabs->findChild<QDoubleSpinBox*>("brownQWP0sb")->setValue(QWP0[1]);
+    tabs->findChild<QDoubleSpinBox*>("greenHWP0sb")->setValue(HWP0[2]);
+    tabs->findChild<QDoubleSpinBox*>("greenQWP0sb")->setValue(QWP0[2]);
+    tabs->findChild<QDoubleSpinBox*>("blueHWP0sb")->setValue(HWP0[3]);
+    tabs->findChild<QDoubleSpinBox*>("blueQWP0sb")->setValue(QWP0[3]);
+    tabs->findChild<QDoubleSpinBox*>("whiteHWP0sb")->setValue(HWP0[4]);
+    tabs->findChild<QDoubleSpinBox*>("whiteQWP0sb")->setValue(QWP0[4]);
+    tabs->findChild<QDoubleSpinBox*>("blackHWP0sb")->setValue(HWP0[5]);
+    tabs->findChild<QDoubleSpinBox*>("blackQWP0sb")->setValue(QWP0[5]);
+    motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[0]);
+    motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[1]);
+    motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[2]);
+    motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[3]);
+    motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[4]);
+    motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[5]);
+    motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[0]);
+    motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[1]);
+    motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[2]);
+    motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[3]);
+    motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[4]);
+    motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[5]);
+    tabs->findChild<QSpinBox*>("redHWPnum")->setValue(HWPmnum[0]);
+    tabs->findChild<QSpinBox*>("brownHWPnum")->setValue(HWPmnum[1]);
+    tabs->findChild<QSpinBox*>("greenHWPnum")->setValue(HWPmnum[2]);
+    tabs->findChild<QSpinBox*>("blueHWPnum")->setValue(HWPmnum[3]);
+    tabs->findChild<QSpinBox*>("whiteHWPnum")->setValue(HWPmnum[4]);
+    tabs->findChild<QSpinBox*>("blackHWPnum")->setValue(HWPmnum[5]);
+    tabs->findChild<QSpinBox*>("redQWPnum")->setValue(QWPmnum[0]);
+    tabs->findChild<QSpinBox*>("brownQWPnum")->setValue(QWPmnum[1]);
+    tabs->findChild<QSpinBox*>("greenQWPnum")->setValue(QWPmnum[2]);
+    tabs->findChild<QSpinBox*>("blueQWPnum")->setValue(QWPmnum[3]);
+    tabs->findChild<QSpinBox*>("whiteQWPnum")->setValue(QWPmnum[4]);
+    tabs->findChild<QSpinBox*>("blackQWPnum")->setValue(QWPmnum[5]);
 
-        motorstab->findChild<QGroupBox*>("redbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[0]);
-        motorstab->findChild<QGroupBox*>("brownbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[1]);
-        motorstab->findChild<QGroupBox*>("greenbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[2]);
-        motorstab->findChild<QGroupBox*>("bluebox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[3]);
-        motorstab->findChild<QGroupBox*>("whitebox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[4]);
-        motorstab->findChild<QGroupBox*>("blackbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[5]);
-        tabs->findChild<QSpinBox*>("port")->setValue(udpport);
-        tabs->findChild<QCheckBox*>("offsetcb")->setChecked(useoffset);
-    }
+    motorstab->findChild<QGroupBox*>("redbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[0]);
+    motorstab->findChild<QGroupBox*>("brownbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[1]);
+    motorstab->findChild<QGroupBox*>("greenbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[2]);
+    motorstab->findChild<QGroupBox*>("bluebox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[3]);
+    motorstab->findChild<QGroupBox*>("whitebox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[4]);
+    motorstab->findChild<QGroupBox*>("blackbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[5]);
+    tabs->findChild<QSpinBox*>("port")->setValue(udpport);
+    tabs->findChild<QCheckBox*>("offsetcb")->setChecked(useoffset);
 
-    /************************************************************************************************
+    tabs->findChild<QLineEdit*>("filele")->setText(basesfname);
+    tabs->findChild<QSpinBox*>("baseschangesb")->setValue(basestime);
+
+}
+
+/************************************************************************************************
 *                                                                                               *
 *                                cagecontrol::motorGB                                           *
 *                                                                                               *
 ************************************************************************************************/
-    void cagecontrol::motorGB(QGroupBox *gb, QString id)
-    {
-        QGridLayout *layout = new QGridLayout();
-        QPushButton *HVbtn = new QPushButton("H/V");
-        HVbtn->setObjectName("H/V");
-        QPushButton *DAbtn = new QPushButton("+/-");
-        DAbtn->setObjectName("+/-");
-        QPushButton *LRbtn = new QPushButton("R/L");
-        LRbtn->setObjectName("L/R");
-        QPushButton *Setbtn = new QPushButton("set");
-        Setbtn->setObjectName("set");
-        QDoubleSpinBox *HWPsb = new QDoubleSpinBox();
-        HWPsb->setObjectName("HWPsb");
-        HWPsb->setRange(0,360);
-        QDoubleSpinBox *QWPsb = new QDoubleSpinBox();
-        QWPsb->setObjectName("QWPsb");
-        QWPsb->setRange(0,360);
-        QLabel *HWPlabel = new QLabel("HWP");
-        QLabel *QWPlabel = new QLabel("QWP");
-        QCheckBox *invcb = new QCheckBox("invert");
-        invcb->setObjectName("invertcb");
-        invcb->setToolTip("Rotates predefined bases: HV->VH, PM->MP, RL->LR");
+void cagecontrol::motorGB(QGroupBox *gb, QString id)
+{
+    QGridLayout *layout = new QGridLayout();
+    QPushButton *HVbtn = new QPushButton("H/V");
+    HVbtn->setObjectName("H/V");
+    QPushButton *DAbtn = new QPushButton("+/-");
+    DAbtn->setObjectName("+/-");
+    QPushButton *LRbtn = new QPushButton("R/L");
+    LRbtn->setObjectName("L/R");
+    QPushButton *Setbtn = new QPushButton("set");
+    Setbtn->setObjectName("set");
+    QDoubleSpinBox *HWPsb = new QDoubleSpinBox();
+    HWPsb->setObjectName("HWPsb");
+    HWPsb->setRange(0,360);
+    QDoubleSpinBox *QWPsb = new QDoubleSpinBox();
+    QWPsb->setObjectName("QWPsb");
+    QWPsb->setRange(0,360);
+    QLabel *HWPlabel = new QLabel("HWP");
+    QLabel *QWPlabel = new QLabel("QWP");
+    QCheckBox *invcb = new QCheckBox("invert");
+    invcb->setObjectName("invertcb");
+    invcb->setToolTip("Rotates predefined bases: HV->VH, PM->MP, RL->LR");
 
 
-        layout->addWidget(HWPlabel  ,1,1,1,1);
-        layout->addWidget(HWPsb     ,1,2,1,1);
-        layout->addWidget(QWPlabel  ,2,1,1,1);
-        layout->addWidget(QWPsb     ,2,2,1,1);
-        layout->addWidget(Setbtn    ,1,3,1,1);
-        layout->addWidget(HVbtn     ,1,4,1,1);
-        layout->addWidget(LRbtn     ,2,3,1,1);
-        layout->addWidget(DAbtn     ,2,4,1,1);
-        layout->addWidget(invcb     ,1,5,1,1);
+    layout->addWidget(HWPlabel  ,1,1,1,1);
+    layout->addWidget(HWPsb     ,1,2,1,1);
+    layout->addWidget(QWPlabel  ,2,1,1,1);
+    layout->addWidget(QWPsb     ,2,2,1,1);
+    layout->addWidget(Setbtn    ,1,3,1,1);
+    layout->addWidget(HVbtn     ,1,4,1,1);
+    layout->addWidget(LRbtn     ,2,3,1,1);
+    layout->addWidget(DAbtn     ,2,4,1,1);
+    layout->addWidget(invcb     ,1,5,1,1);
 
-        gb->setTitle(id);
+    gb->setTitle(id);
 
-        gb->setLayout(layout);
+    gb->setLayout(layout);
+}
+
+void cagecontrol::updatestatus(QString msg)
+{
+    status->showMessage(msg);
+    DEBUG_INFO("%s\n",msg.toLocal8Bit().data())
+    //TODO: write to logfile
+}
+
+void cagecontrol::setbasesfile()
+{
+    QFileDialog *bfd = new QFileDialog();
+    bfd->setAcceptMode(QFileDialog::AcceptOpen);
+    bfd->setFileMode(QFileDialog::ExistingFile);
+    bfd->setDirectory(QDir::current());
+    if(bfd->exec()) {
+        basesfname = bfd->selectedFiles()[0];
+        tabs->findChild<QLineEdit*>("filele")->setText(basesfname);
     }
 
-    void cagecontrol::updatestatus(QString msg)
-    {
-        status->showMessage(msg);
-        //TODO: write to logfile
+}
+int cagecontrol::readbasesfile()
+{
+    basesf.setFileName(basesfname);
+    if (!basesf.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        DEBUG_ERROR("Error opening file");
+        return 1;
+    } else {
+        bases.clear();
+        while (!basesf.atEnd()) {
+            QString line = basesf.readLine();
+            line.remove("\n");
+            line=line.simplified().toLower();
+            QString tmpline = line;
+            if (!tmpline.remove('x').remove('y').remove('z').simplified().isEmpty()) {
+                DEBUG_ERROR("Line contains unknown basis: %s\n",line.toLocal8Bit().data());
+                return 1;
+            }
+            QStringList bline = line.split(' ');
+            if (bline.length()==motorName.length()) {
+                bases.append(bline);
+                qDebug()<<bases;
+            } else {
+                DEBUG_ERROR("wrong number of bases in file: %i. Expected %i.\n",bline.length(),motorName.length());
+            }
+        }
+        return 0;
+    }
+}
+
+void cagecontrol::changebases()
+{
+    if (currentbasisidx<=-1) {
+        updatesettings(3.141592654);//to get fname from QLineEdit in GUI
+        if (!readbasesfile()) {
+            currentbasisidx=0;
+            //Change basis here
+            QStringList currentbasis = bases[currentbasisidx];
+            updatestatus("current basis: " + currentbasis.join(' '));
+            for (QString s : motorName) {
+                int idx = motorName.indexOf(s);
+                if (currentbasis[idx].toLower()=='x') { //PM
+                    movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
+                } else if (currentbasis[idx].toLower()=='y') { //RL
+                    movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]);
+                } else if (currentbasis[idx].toLower()=='z') { //HV
+                    movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
+                } else {
+                    DEBUG_ERROR("unknown basis: %s\n",currentbasis[idx].toLower().toLocal8Bit().data());
+                }
+            }
+            basestimer.start(basestime);
+        } else {
+            DEBUG_ERROR("Error reading file\n");
+        }
+    } else if (currentbasisidx>=bases.length()){
+        currentbasisidx=-1;
+        updatestatus("all bases from file set.\n");
+    } else {
+        QStringList currentbasis = bases[currentbasisidx];
+        updatestatus("current basis: " + currentbasis.join(' '));
+        for (QString s : motorName) {
+            int idx = motorName.indexOf(s);
+            if (currentbasis[idx].toLower()=='x') { //PM
+                movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
+            } else if (currentbasis[idx].toLower()=='y') { //RL
+                movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]);
+            } else if (currentbasis[idx].toLower()=='z') { //HV
+                movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
+            } else {
+                DEBUG_ERROR("unknown basis: %s\n",currentbasis[idx].toLower().toLocal8Bit().data());
+            }
+        }
+        ++currentbasisidx;
+        basestimer.start(basestime*1000);
+    }
+
 }

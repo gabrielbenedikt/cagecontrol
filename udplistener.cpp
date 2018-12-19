@@ -132,4 +132,17 @@ void UDPlistener::processCommands(QString msg)
         emit changeoffsetusage(useoffset);
     }
 
+    //Change offset angles?
+    refmsg="setwpangles";
+    if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
+        msg.chop(1);
+        msg.remove(0,refmsg.length()+1);
+        QList<QString> strlist = msg.split(',');
+        QVector<double> dbllist;
+        for (int i=0; i<strlist.length(); ++i) {
+            dbllist.append(strlist[i].toDouble());
+        }
+        emit(changeWPangles(dbllist));
+    }
+
 }

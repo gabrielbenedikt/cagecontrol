@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['redmotor',['redmotor',['../classcagecontrol.xhtml#aba1bc33f1f9a17cfa548f1390d4a9358',1,'cagecontrol']]]
+  ['tabs',['tabs',['../classcagecontrol.xhtml#abc80d835c69ca52a62f18c341c2bd009',1,'cagecontrol']]]
 ];

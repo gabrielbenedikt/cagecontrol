@@ -2,7 +2,10 @@
 #define CAGECONTROL_H
 
 #include "debug.h"
+#include "motor.h"
 #include "udplistener.h"
+#include <QCheckBox>
+#include <QComboBox>
 #include <QDebug>
 #include <QDoubleSpinBox>
 #include <QGroupBox>
@@ -11,8 +14,8 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QSettings>
+#include <QStatusBar>
 #include <QTabWidget>
-#include <QComboBox>
 #include <QSerialPortInfo>
 
 namespace Ui {
@@ -47,6 +50,11 @@ private slots:
     void updateUI();
 
 public slots:
+    /*!
+     * \brief slot_changeWPangles sets offsetangles for all waveplates
+     * \param angles vector containing all angles. Ordering: HWP0,HWP1,...,HWPn,QWP0,QWP1,...,QWPn
+     */
+    void slot_changeWPangles(QVector<double> angles);
     /*!
      * \brief slot_changeoffsetusage changes the usage of the waveplate offset
      * \param useoffset true if waveplate offset is to be used
@@ -88,13 +96,6 @@ private:
     QWidget *motorstab;                                 //!< GUI tab containing motor controls
     QStatusBar *status;                                 //!< Status bar
     QVector<QString> comports;                          //!< Vector containing available serial ports names ports
-
-    Motor *redmotor;                                    //!< Serial connections to the red cage
-    Motor *brownmotor;                                  //!< Serial connections to the brown cage
-    Motor *greenmotor;                                  //!< Serial connections to the green cage
-    Motor *bluemotor;                                   //!< Serial connections to the blue cage
-    Motor *whitemotor;                                  //!< Serial connections to the white cage
-    Motor *blackmotor;                                  //!< Serial connections to the black cage
 
     /*WIP - cleaner code*/
     /*Even nicer: put everything in motor class*/

@@ -56,6 +56,8 @@
               <section title="openmotors" ref="classcagecontrol.xhtml#ae961f42ea421a8d512964f158b0201e8" />
               <section title="SaveConfig" ref="classcagecontrol.xhtml#a217d948983c0d1c153d29c728b06d764" />
               <section title="setupUI" ref="classcagecontrol.xhtml#a79a089c4e7196a7c158aa62f4883ba18" />
+              <section title="slot_changeoffsetusage" ref="classcagecontrol.xhtml#a2e106a12191172da2780a3d7fe137041" />
+              <section title="slot_changeWPangles" ref="classcagecontrol.xhtml#a27d63224f95901dbbe8560cd88c90bca" />
               <section title="slot_moveHV" ref="classcagecontrol.xhtml#af9a2772a38394159c54d7e5d7f2a86fb" />
               <section title="slot_moveLR" ref="classcagecontrol.xhtml#a138905383fdc09a0b5077a185eaf6682" />
               <section title="slot_movemotors" ref="classcagecontrol.xhtml#a2d971435af3267351272b2c2d5f2f709" />
@@ -64,11 +66,7 @@
               <section title="updatesettingsint" ref="classcagecontrol.xhtml#a2cfb7b65a7b8838d5f2acaa384a7cfcc" />
               <section title="updatestatus" ref="classcagecontrol.xhtml#aab3dedc2c4b814569988c93bd30546c7" />
               <section title="updateUI" ref="classcagecontrol.xhtml#ab6993b1b41f55c164298c1b3e067ab34" />
-              <section title="blackmotor" ref="classcagecontrol.xhtml#a4e5d64b7fc46495e7f1c8824ccb2b8d8" />
-              <section title="bluemotor" ref="classcagecontrol.xhtml#a0b188226c1976ff8b89f4a043320c0d7" />
-              <section title="brownmotor" ref="classcagecontrol.xhtml#a5a58ab2407ea37d47b00dfa31fbd837e" />
               <section title="comports" ref="classcagecontrol.xhtml#a1fa2f1480f616b4f7142f9e7a471cef3" />
-              <section title="greenmotor" ref="classcagecontrol.xhtml#a15f7d52bdae84ce7d23274254bed283a" />
               <section title="HWP0" ref="classcagecontrol.xhtml#a89582491b0b4f2421abe2e7cad735505" />
               <section title="HWP0sp" ref="classcagecontrol.xhtml#a5af27745d1d9e0b9411d8445f5648e74" />
               <section title="HWPcust" ref="classcagecontrol.xhtml#a1502c9ebc5e04d61af76492d563f9e0e" />
@@ -77,11 +75,11 @@
               <section title="motorName" ref="classcagecontrol.xhtml#a8e87cb65e7cd3b01bb35709ee62e5226" />
               <section title="motors" ref="classcagecontrol.xhtml#a8c4968b6ced27c21dafbc9c804e96ba0" />
               <section title="motorstab" ref="classcagecontrol.xhtml#a9c0bb2384100cced3b96363cca8e5428" />
+              <section title="pauseupdating" ref="classcagecontrol.xhtml#aadbcbafcce2b4e49b83560d308086f87" />
               <section title="QWP0" ref="classcagecontrol.xhtml#a6f1fca7829c5e2c25e6a15969aa9a622" />
               <section title="QWP0sp" ref="classcagecontrol.xhtml#a026cbda0584d3b18cab5c30fec167ce2" />
               <section title="QWPcust" ref="classcagecontrol.xhtml#a43e35156274c70bda842d25680a9159d" />
               <section title="QWPmnum" ref="classcagecontrol.xhtml#a0ecfc817dfe853a073e6b11b3ac9c53c" />
-              <section title="redmotor" ref="classcagecontrol.xhtml#aba1bc33f1f9a17cfa548f1390d4a9358" />
               <section title="settings" ref="classcagecontrol.xhtml#aaa56b3d1bbf35785c21c5465eef48185" />
               <section title="settingstab" ref="classcagecontrol.xhtml#a5350ebcf40a0c709af82276e6ce2284d" />
               <section title="status" ref="classcagecontrol.xhtml#a18d5a48b8893f88b9b660c9c08e92f9b" />
@@ -89,7 +87,7 @@
               <section title="udplistener" ref="classcagecontrol.xhtml#a6c281db6d7f0de7964c49bac0d5823b7" />
               <section title="udpport" ref="classcagecontrol.xhtml#ae73f9b22e1cc81ef92d900b8c63b4663" />
               <section title="uiMotorGroupBoxes" ref="classcagecontrol.xhtml#aced71e7c8e0053e6d4291bcee17c9af7" />
-              <section title="whitemotor" ref="classcagecontrol.xhtml#ac345b05074401d11ce84f6e56a24538b" />
+              <section title="useoffset" ref="classcagecontrol.xhtml#aaae4d96e61ebe50baf65014003208ac0" />
             </section>
             <section title="Motor" ref="classMotor.xhtml">
               <section title="Motor" ref="classMotor.xhtml#af6fb1d675035fd353cd2cb97dbdbecc9" />
@@ -119,6 +117,7 @@
               <section title="hometimer" ref="classMotor.xhtml#adbb59f89d592f1569ba8ad05c5c58a73" />
               <section title="motor1steps" ref="classMotor.xhtml#a09aaad8e6e0ea959ac4712677443d8f0" />
               <section title="motor2steps" ref="classMotor.xhtml#af12031af563931e69915308aa0cce190" />
+              <section title="movebothstep" ref="classMotor.xhtml#a64cf23f01da50ffdfd3c5ba26ad44f1f" />
               <section title="publicmotorstatusmessage" ref="classMotor.xhtml#ac64f7613ade081a22859151662b8e866" />
               <section title="serial" ref="classMotor.xhtml#a830ca5e3e68b7bc0ffb30650d72b8efb" />
               <section title="serialconnectionok" ref="classMotor.xhtml#a65cf2259e3d3e61ea7e268b99f8089a0" />
@@ -126,6 +125,8 @@
             <section title="UDPlistener" ref="classUDPlistener.xhtml">
               <section title="UDPlistener" ref="classUDPlistener.xhtml#a789cb6a7b7347a2df5cdc85a457bde4a" />
               <section title="bind" ref="classUDPlistener.xhtml#a4b7a056403f9b80485c92b82c340109a" />
+              <section title="changeoffsetusage" ref="classUDPlistener.xhtml#abc9c9ae6f1371e6b55d9631ba00743c3" />
+              <section title="changeWPangles" ref="classUDPlistener.xhtml#a6b7ee954a2af1aa98c6963f6ae266bc3" />
               <section title="Move" ref="classUDPlistener.xhtml#a03cb7a923fb064f41395f8db9409e511" />
               <section title="MoveHV" ref="classUDPlistener.xhtml#a3d16ae857b48ba56257008a008b4e6ee" />
               <section title="MoveLR" ref="classUDPlistener.xhtml#aefb57eacf9148d294952db636eefa9ac" />
@@ -205,6 +206,7 @@
                 <section title="hometimer" ref="classMotor.xhtml#adbb59f89d592f1569ba8ad05c5c58a73" />
                 <section title="motor1steps" ref="classMotor.xhtml#a09aaad8e6e0ea959ac4712677443d8f0" />
                 <section title="motor2steps" ref="classMotor.xhtml#af12031af563931e69915308aa0cce190" />
+                <section title="movebothstep" ref="classMotor.xhtml#a64cf23f01da50ffdfd3c5ba26ad44f1f" />
                 <section title="publicmotorstatusmessage" ref="classMotor.xhtml#ac64f7613ade081a22859151662b8e866" />
                 <section title="serial" ref="classMotor.xhtml#a830ca5e3e68b7bc0ffb30650d72b8efb" />
                 <section title="serialconnectionok" ref="classMotor.xhtml#a65cf2259e3d3e61ea7e268b99f8089a0" />
@@ -214,6 +216,8 @@
               <section title="UDPlistener" ref="classUDPlistener.xhtml">
                 <section title="UDPlistener" ref="classUDPlistener.xhtml#a789cb6a7b7347a2df5cdc85a457bde4a" />
                 <section title="bind" ref="classUDPlistener.xhtml#a4b7a056403f9b80485c92b82c340109a" />
+                <section title="changeoffsetusage" ref="classUDPlistener.xhtml#abc9c9ae6f1371e6b55d9631ba00743c3" />
+                <section title="changeWPangles" ref="classUDPlistener.xhtml#a6b7ee954a2af1aa98c6963f6ae266bc3" />
                 <section title="Move" ref="classUDPlistener.xhtml#a03cb7a923fb064f41395f8db9409e511" />
                 <section title="MoveHV" ref="classUDPlistener.xhtml#a3d16ae857b48ba56257008a008b4e6ee" />
                 <section title="MoveLR" ref="classUDPlistener.xhtml#aefb57eacf9148d294952db636eefa9ac" />
@@ -259,6 +263,8 @@
       <keyword name="VERSION_BUILD_DATE" id="version.h::VERSION_BUILD_DATE" ref="version_8h.xhtml#af2ce4617e68d068424e42195d4d7d830" />
       <keyword name="Bug List" id="Bug List" ref="bug.xhtml" />
       <keyword name="cagecontrol" id="cagecontrol" ref="classcagecontrol.xhtml" />
+      <keyword name="slot_changeWPangles" id="cagecontrol::slot_changeWPangles" ref="classcagecontrol.xhtml#a27d63224f95901dbbe8560cd88c90bca" />
+      <keyword name="slot_changeoffsetusage" id="cagecontrol::slot_changeoffsetusage" ref="classcagecontrol.xhtml#a2e106a12191172da2780a3d7fe137041" />
       <keyword name="slot_moveHV" id="cagecontrol::slot_moveHV" ref="classcagecontrol.xhtml#af9a2772a38394159c54d7e5d7f2a86fb" />
       <keyword name="slot_movePM" id="cagecontrol::slot_movePM" ref="classcagecontrol.xhtml#a3207f15cba9458e32fb5c2cf366c4b44" />
       <keyword name="slot_moveLR" id="cagecontrol::slot_moveLR" ref="classcagecontrol.xhtml#a138905383fdc09a0b5077a185eaf6682" />
@@ -304,6 +310,8 @@
       <keyword name="movealllr" id="cagecontrol::movealllr" ref="classcagecontrol.xhtml#af50e9b09c4c2b5d6a7dd6a5fe5fe7d4d" />
       <keyword name="moveallarb" id="cagecontrol::moveallarb" ref="classcagecontrol.xhtml#aea25e1e2eabc1accdc10536f34e0472d" />
       <keyword name="udpport" id="cagecontrol::udpport" ref="classcagecontrol.xhtml#ae73f9b22e1cc81ef92d900b8c63b4663" />
+      <keyword name="pauseupdating" id="cagecontrol::pauseupdating" ref="classcagecontrol.xhtml#aadbcbafcce2b4e49b83560d308086f87" />
+      <keyword name="useoffset" id="cagecontrol::useoffset" ref="classcagecontrol.xhtml#aaae4d96e61ebe50baf65014003208ac0" />
       <keyword name="settings" id="cagecontrol::settings" ref="classcagecontrol.xhtml#aaa56b3d1bbf35785c21c5465eef48185" />
       <keyword name="udplistener" id="cagecontrol::udplistener" ref="classcagecontrol.xhtml#a6c281db6d7f0de7964c49bac0d5823b7" />
       <keyword name="tabs" id="cagecontrol::tabs" ref="classcagecontrol.xhtml#abc80d835c69ca52a62f18c341c2bd009" />
@@ -311,12 +319,6 @@
       <keyword name="motorstab" id="cagecontrol::motorstab" ref="classcagecontrol.xhtml#a9c0bb2384100cced3b96363cca8e5428" />
       <keyword name="status" id="cagecontrol::status" ref="classcagecontrol.xhtml#a18d5a48b8893f88b9b660c9c08e92f9b" />
       <keyword name="comports" id="cagecontrol::comports" ref="classcagecontrol.xhtml#a1fa2f1480f616b4f7142f9e7a471cef3" />
-      <keyword name="redmotor" id="cagecontrol::redmotor" ref="classcagecontrol.xhtml#aba1bc33f1f9a17cfa548f1390d4a9358" />
-      <keyword name="brownmotor" id="cagecontrol::brownmotor" ref="classcagecontrol.xhtml#a5a58ab2407ea37d47b00dfa31fbd837e" />
-      <keyword name="greenmotor" id="cagecontrol::greenmotor" ref="classcagecontrol.xhtml#a15f7d52bdae84ce7d23274254bed283a" />
-      <keyword name="bluemotor" id="cagecontrol::bluemotor" ref="classcagecontrol.xhtml#a0b188226c1976ff8b89f4a043320c0d7" />
-      <keyword name="whitemotor" id="cagecontrol::whitemotor" ref="classcagecontrol.xhtml#ac345b05074401d11ce84f6e56a24538b" />
-      <keyword name="blackmotor" id="cagecontrol::blackmotor" ref="classcagecontrol.xhtml#a4e5d64b7fc46495e7f1c8824ccb2b8d8" />
       <keyword name="invert" id="cagecontrol::invert" ref="classcagecontrol.xhtml#a3a78cb0c0f45a8bb3e6b093ef7412124" />
       <keyword name="motors" id="cagecontrol::motors" ref="classcagecontrol.xhtml#a8c4968b6ced27c21dafbc9c804e96ba0" />
       <keyword name="motorName" id="cagecontrol::motorName" ref="classcagecontrol.xhtml#a8e87cb65e7cd3b01bb35709ee62e5226" />
@@ -356,11 +358,14 @@
       <keyword name="moveboth" id="Motor::moveboth" ref="classMotor.xhtml#a58e08c8118b2e3272c35086ac6289428" />
       <keyword name="hometimer" id="Motor::hometimer" ref="classMotor.xhtml#adbb59f89d592f1569ba8ad05c5c58a73" />
       <keyword name="bothtimer" id="Motor::bothtimer" ref="classMotor.xhtml#a97bf769ce21887450f412554520f4f20" />
+      <keyword name="movebothstep" id="Motor::movebothstep" ref="classMotor.xhtml#a64cf23f01da50ffdfd3c5ba26ad44f1f" />
       <keyword name="serialconnectionok" id="Motor::serialconnectionok" ref="classMotor.xhtml#a65cf2259e3d3e61ea7e268b99f8089a0" />
       <keyword name="motor1steps" id="Motor::motor1steps" ref="classMotor.xhtml#a09aaad8e6e0ea959ac4712677443d8f0" />
       <keyword name="motor2steps" id="Motor::motor2steps" ref="classMotor.xhtml#af12031af563931e69915308aa0cce190" />
       <keyword name="UDPlistener" id="UDPlistener" ref="classUDPlistener.xhtml" />
       <keyword name="bind" id="UDPlistener::bind" ref="classUDPlistener.xhtml#a4b7a056403f9b80485c92b82c340109a" />
+      <keyword name="changeWPangles" id="UDPlistener::changeWPangles" ref="classUDPlistener.xhtml#a6b7ee954a2af1aa98c6963f6ae266bc3" />
+      <keyword name="changeoffsetusage" id="UDPlistener::changeoffsetusage" ref="classUDPlistener.xhtml#abc9c9ae6f1371e6b55d9631ba00743c3" />
       <keyword name="Move" id="UDPlistener::Move" ref="classUDPlistener.xhtml#a03cb7a923fb064f41395f8db9409e511" />
       <keyword name="MoveHV" id="UDPlistener::MoveHV" ref="classUDPlistener.xhtml#a3d16ae857b48ba56257008a008b4e6ee" />
       <keyword name="MovePM" id="UDPlistener::MovePM" ref="classUDPlistener.xhtml#a3e3521c57796737bb229eeadb2f2fdfe" />
@@ -426,6 +431,8 @@
       <file>motor_8h.xhtml</file>
       <file>motor_8h__incl.png</file>
       <file>motor_8h__incl.png</file>
+      <file>motor_8h__dep__incl.png</file>
+      <file>motor_8h__dep__incl.png</file>
       <file>udplistener_8h.xhtml</file>
       <file>udplistener_8h__incl.png</file>
       <file>udplistener_8h__incl.png</file>
@@ -486,7 +493,6 @@
       <file>functions.xhtml</file>
       <file>functions.xhtml</file>
       <file>functions.xhtml</file>
-      <file>functions.xhtml</file>
       <file>functions_func.xhtml</file>
       <file>functions_func.xhtml</file>
       <file>functions_func.xhtml</file>
@@ -499,9 +505,6 @@
       <file>functions_func.xhtml</file>
       <file>functions_func.xhtml</file>
       <file>functions_func.xhtml</file>
-      <file>functions_vars.xhtml</file>
-      <file>functions_vars.xhtml</file>
-      <file>functions_vars.xhtml</file>
       <file>functions_vars.xhtml</file>
       <file>functions_vars.xhtml</file>
       <file>functions_vars.xhtml</file>

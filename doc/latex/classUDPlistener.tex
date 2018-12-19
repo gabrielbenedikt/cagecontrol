@@ -11,8 +11,7 @@ The \hyperlink{classUDPlistener}{U\+D\+Plistener} class is used to control dinsp
 
 
 
-Inheritance diagram for U\+D\+Plistener\+:
-\nopagebreak
+Inheritance diagram for U\+D\+Plistener\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,8 +20,7 @@ Inheritance diagram for U\+D\+Plistener\+:
 \end{figure}
 
 
-Collaboration diagram for U\+D\+Plistener\+:
-\nopagebreak
+Collaboration diagram for U\+D\+Plistener\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -37,14 +35,18 @@ void \hyperlink{classUDPlistener_a4b7a056403f9b80485c92b82c340109a}{bind} ()
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{classUDPlistener_a6b7ee954a2af1aa98c6963f6ae266bc3}{change\+W\+Pangles} (Q\+Vector$<$ double $>$ angles)
+\begin{DoxyCompactList}\small\item\em change\+W\+Pangles emitted when received message contains command to set waveplate characterization angles (\textquotesingle{}H\textquotesingle{}) \end{DoxyCompactList}\item 
+void \hyperlink{classUDPlistener_abc9c9ae6f1371e6b55d9631ba00743c3}{changeoffsetusage} (bool useoffset)
+\begin{DoxyCompactList}\small\item\em changeoffsetusage emitted when massage to change usage of offset is received \end{DoxyCompactList}\item 
 void \hyperlink{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}{Move} (Q\+String controller, double H\+W\+Pang, double Q\+W\+Pang)
-\begin{DoxyCompactList}\small\item\em Move moves the waveplates in a cage to certain angles. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Move emitted when massage to move the waveplates in a cage to certain angles is received. \end{DoxyCompactList}\item 
 void \hyperlink{classUDPlistener_a3d16ae857b48ba56257008a008b4e6ee}{Move\+HV} (Q\+String controller)
-\begin{DoxyCompactList}\small\item\em Move\+HV moves cage to H/V basis. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Move\+HV emitted when massage to move cage to H/V basis is received. \end{DoxyCompactList}\item 
 void \hyperlink{classUDPlistener_a3e3521c57796737bb229eeadb2f2fdfe}{Move\+PM} (Q\+String controller)
-\begin{DoxyCompactList}\small\item\em Move\+PM moves cage to P/M basis. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Move\+PM emitted when massage to move cage to P/M basis is received. \end{DoxyCompactList}\item 
 void \hyperlink{classUDPlistener_aefb57eacf9148d294952db636eefa9ac}{Move\+LR} (Q\+String controller)
-\begin{DoxyCompactList}\small\item\em Move\+LR moves cage to R/L basis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Move\+LR emitted when massage to move cage to R/L basis is received. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -117,7 +119,37 @@ The commands can be changed in the dinspect settings dialog, but the standard on
 
 bind Binds to a new U\+DP port 
 
-This function checks whether the U\+DP socket is already bound to a a specific port. If so, it closes this connection and binds to the new port. If not, it binds to the port right away. \mbox{\Hypertarget{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}\label{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}} 
+This function checks whether the U\+DP socket is already bound to a a specific port. If so, it closes this connection and binds to the new port. If not, it binds to the port right away. \mbox{\Hypertarget{classUDPlistener_abc9c9ae6f1371e6b55d9631ba00743c3}\label{classUDPlistener_abc9c9ae6f1371e6b55d9631ba00743c3}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!changeoffsetusage@{changeoffsetusage}}
+\index{changeoffsetusage@{changeoffsetusage}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{changeoffsetusage}{changeoffsetusage}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::changeoffsetusage (\begin{DoxyParamCaption}\item[{bool}]{useoffset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+changeoffsetusage emitted when massage to change usage of offset is received 
+
+
+\begin{DoxyParams}{Parameters}
+{\em useoffset} & true if waveplate offset is to be used \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUDPlistener_a6b7ee954a2af1aa98c6963f6ae266bc3}\label{classUDPlistener_a6b7ee954a2af1aa98c6963f6ae266bc3}} 
+\index{U\+D\+Plistener@{U\+D\+Plistener}!change\+W\+Pangles@{change\+W\+Pangles}}
+\index{change\+W\+Pangles@{change\+W\+Pangles}!U\+D\+Plistener@{U\+D\+Plistener}}
+\subsubsection{\texorpdfstring{change\+W\+Pangles}{changeWPangles}}
+{\footnotesize\ttfamily void U\+D\+Plistener\+::change\+W\+Pangles (\begin{DoxyParamCaption}\item[{Q\+Vector$<$ double $>$}]{angles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+change\+W\+Pangles emitted when received message contains command to set waveplate characterization angles (\textquotesingle{}H\textquotesingle{}) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angles} & vector containing all angles. Ordering\+: H\+W\+P0,H\+W\+P1,...,H\+W\+Pn,Q\+W\+P0,Q\+W\+P1,...,Q\+W\+Pn \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}\label{classUDPlistener_a03cb7a923fb064f41395f8db9409e511}} 
 \index{U\+D\+Plistener@{U\+D\+Plistener}!Move@{Move}}
 \index{Move@{Move}!U\+D\+Plistener@{U\+D\+Plistener}}
 \subsubsection{\texorpdfstring{Move}{Move}}
@@ -125,7 +157,7 @@ This function checks whether the U\+DP socket is already bound to a a specific p
 
 
 
-Move moves the waveplates in a cage to certain angles. 
+Move emitted when massage to move the waveplates in a cage to certain angles is received. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -144,7 +176,7 @@ Move moves the waveplates in a cage to certain angles.
 
 
 
-Move\+HV moves cage to H/V basis. 
+Move\+HV emitted when massage to move cage to H/V basis is received. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -159,7 +191,7 @@ Move\+HV moves cage to H/V basis.
 
 
 
-Move\+LR moves cage to R/L basis. 
+Move\+LR emitted when massage to move cage to R/L basis is received. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -174,7 +206,7 @@ Move\+LR moves cage to R/L basis.
 
 
 
-Move\+PM moves cage to P/M basis. 
+Move\+PM emitted when massage to move cage to P/M basis is received. 
 
 
 \begin{DoxyParams}{Parameters}

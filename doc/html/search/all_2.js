@@ -1,6 +1,8 @@
 var searchData=
 [
   ['cagecontrol',['cagecontrol',['../classcagecontrol.xhtml',1,'']]],
+  ['changeoffsetusage',['changeoffsetusage',['../classUDPlistener.xhtml#abc9c9ae6f1371e6b55d9631ba00743c3',1,'UDPlistener']]],
+  ['changewpangles',['changeWPangles',['../classUDPlistener.xhtml#a6b7ee954a2af1aa98c6963f6ae266bc3',1,'UDPlistener']]],
   ['close',['close',['../classMotor.xhtml#a6302ab51842ec23bd8b36d56e5ae9416',1,'Motor']]],
   ['command_5ffrequency_5fsweep',['command_frequency_sweep',['../classMotor.xhtml#ade0bd3f46caadb9fef19f03629fc4e71',1,'Motor']]],
   ['command_5fhelp',['command_help',['../classMotor.xhtml#aca8c344a7251cc4067f4d1cba69f7970',1,'Motor']]],

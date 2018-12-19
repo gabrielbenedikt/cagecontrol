@@ -58,7 +58,9 @@ SOURCES += \
         cagecontrol.cpp \
     motor.cpp \
     udplistener.cpp \
-    helper.cpp
+    helper.cpp \
+    cagecontrol_ui.cpp \
+    cagecontrol_motors.cpp
 
 HEADERS += \
         cagecontrol.h \

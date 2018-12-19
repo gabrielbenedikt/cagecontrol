@@ -16,12 +16,16 @@ Collaboration diagram for cagecontrol\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=324pt]{classcagecontrol__coll__graph}
+\includegraphics[width=248pt]{classcagecontrol__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{classcagecontrol_a27d63224f95901dbbe8560cd88c90bca}{slot\+\_\+change\+W\+Pangles} (Q\+Vector$<$ double $>$ angles)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+change\+W\+Pangles sets offsetangles for all waveplates \end{DoxyCompactList}\item 
+void \hyperlink{classcagecontrol_a2e106a12191172da2780a3d7fe137041}{slot\+\_\+changeoffsetusage} (bool uo\+\_\+in)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+changeoffsetusage changes the usage of the waveplate offset \end{DoxyCompactList}\item 
 void \hyperlink{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}{slot\+\_\+move\+HV} (Q\+String color)
 \begin{DoxyCompactList}\small\item\em move\+HV \end{DoxyCompactList}\item 
 void \hyperlink{classcagecontrol_a3207f15cba9458e32fb5c2cf366c4b44}{slot\+\_\+move\+PM} (Q\+String color)
@@ -157,6 +161,11 @@ void \hyperlink{classcagecontrol_aea25e1e2eabc1accdc10536f34e0472d}{moveallarb} 
 \mbox{\Hypertarget{classcagecontrol_ae73f9b22e1cc81ef92d900b8c63b4663}\label{classcagecontrol_ae73f9b22e1cc81ef92d900b8c63b4663}} 
 int \hyperlink{classcagecontrol_ae73f9b22e1cc81ef92d900b8c63b4663}{udpport}
 \begin{DoxyCompactList}\small\item\em Hold the U\+DP port to listen to for commandds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcagecontrol_aadbcbafcce2b4e49b83560d308086f87}\label{classcagecontrol_aadbcbafcce2b4e49b83560d308086f87}} 
+bool \hyperlink{classcagecontrol_aadbcbafcce2b4e49b83560d308086f87}{pauseupdating}
+\begin{DoxyCompactList}\small\item\em Keep update\+UI and updatesettings from interfering with each other. \end{DoxyCompactList}\item 
+bool \hyperlink{classcagecontrol_aaae4d96e61ebe50baf65014003208ac0}{useoffset}
+\begin{DoxyCompactList}\small\item\em If true, the angles in the settings-\/tab will be used as \textquotesingle{}0\textquotesingle{}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_aaa56b3d1bbf35785c21c5465eef48185}\label{classcagecontrol_aaa56b3d1bbf35785c21c5465eef48185}} 
 Q\+Settings $\ast$ \hyperlink{classcagecontrol_aaa56b3d1bbf35785c21c5465eef48185}{settings}
 \begin{DoxyCompactList}\small\item\em A Q\+Settings object, used to store settings in a config file. \end{DoxyCompactList}\item 
@@ -178,24 +187,6 @@ Q\+Status\+Bar $\ast$ \hyperlink{classcagecontrol_a18d5a48b8893f88b9b660c9c08e92
 \mbox{\Hypertarget{classcagecontrol_a1fa2f1480f616b4f7142f9e7a471cef3}\label{classcagecontrol_a1fa2f1480f616b4f7142f9e7a471cef3}} 
 Q\+Vector$<$ Q\+String $>$ \hyperlink{classcagecontrol_a1fa2f1480f616b4f7142f9e7a471cef3}{comports}
 \begin{DoxyCompactList}\small\item\em Vector containing available serial ports names ports. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcagecontrol_aba1bc33f1f9a17cfa548f1390d4a9358}\label{classcagecontrol_aba1bc33f1f9a17cfa548f1390d4a9358}} 
-\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_aba1bc33f1f9a17cfa548f1390d4a9358}{redmotor}
-\begin{DoxyCompactList}\small\item\em Serial connections to the red cage. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcagecontrol_a5a58ab2407ea37d47b00dfa31fbd837e}\label{classcagecontrol_a5a58ab2407ea37d47b00dfa31fbd837e}} 
-\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a5a58ab2407ea37d47b00dfa31fbd837e}{brownmotor}
-\begin{DoxyCompactList}\small\item\em Serial connections to the brown cage. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcagecontrol_a15f7d52bdae84ce7d23274254bed283a}\label{classcagecontrol_a15f7d52bdae84ce7d23274254bed283a}} 
-\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a15f7d52bdae84ce7d23274254bed283a}{greenmotor}
-\begin{DoxyCompactList}\small\item\em Serial connections to the green cage. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcagecontrol_a0b188226c1976ff8b89f4a043320c0d7}\label{classcagecontrol_a0b188226c1976ff8b89f4a043320c0d7}} 
-\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a0b188226c1976ff8b89f4a043320c0d7}{bluemotor}
-\begin{DoxyCompactList}\small\item\em Serial connections to the blue cage. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcagecontrol_ac345b05074401d11ce84f6e56a24538b}\label{classcagecontrol_ac345b05074401d11ce84f6e56a24538b}} 
-\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_ac345b05074401d11ce84f6e56a24538b}{whitemotor}
-\begin{DoxyCompactList}\small\item\em Serial connections to the white cage. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcagecontrol_a4e5d64b7fc46495e7f1c8824ccb2b8d8}\label{classcagecontrol_a4e5d64b7fc46495e7f1c8824ccb2b8d8}} 
-\hyperlink{classMotor}{Motor} $\ast$ \hyperlink{classcagecontrol_a4e5d64b7fc46495e7f1c8824ccb2b8d8}{blackmotor}
-\begin{DoxyCompactList}\small\item\em Serial connections to the black cage. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcagecontrol_a3a78cb0c0f45a8bb3e6b093ef7412124}\label{classcagecontrol_a3a78cb0c0f45a8bb3e6b093ef7412124}} 
 Q\+Vector$<$ bool $>$ \hyperlink{classcagecontrol_a3a78cb0c0f45a8bb3e6b093ef7412124}{invert}
 \begin{DoxyCompactList}\small\item\em True\+: invert predefined bases (H/V -\/$>$ V/H, P/\+M-\/$>$M/P, L/\+R-\/$>$R/L) \end{DoxyCompactList}\item 
@@ -301,7 +292,40 @@ movemotor moves both motors of a cage to certain angles
 
 Save\+Config stores config to a file. 
 
-The Q\+Settings object is updated with the values received from the dialog and saved immediately. \mbox{\Hypertarget{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}\label{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}} 
+The Q\+Settings object is updated with the values received from the dialog and saved immediately. \mbox{\Hypertarget{classcagecontrol_a2e106a12191172da2780a3d7fe137041}\label{classcagecontrol_a2e106a12191172da2780a3d7fe137041}} 
+\index{cagecontrol@{cagecontrol}!slot\+\_\+changeoffsetusage@{slot\+\_\+changeoffsetusage}}
+\index{slot\+\_\+changeoffsetusage@{slot\+\_\+changeoffsetusage}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{slot\+\_\+changeoffsetusage}{slot\_changeoffsetusage}}
+{\footnotesize\ttfamily void cagecontrol\+::slot\+\_\+changeoffsetusage (\begin{DoxyParamCaption}\item[{bool}]{uo\+\_\+in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+changeoffsetusage changes the usage of the waveplate offset 
+
+
+\begin{DoxyParams}{Parameters}
+{\em useoffset} & true if waveplate offset is to be used\\
+\hline
+\end{DoxyParams}
+The term \textquotesingle{}offset\textquotesingle{} refers to the waveplate angles specified in the \begin{DoxySeeAlso}{See also}
+\hyperlink{classcagecontrol_a5350ebcf40a0c709af82276e6ce2284d}{settingstab}. E.\+g.\+: \textquotesingle{}H\textquotesingle{} of H\+WP specified in he \hyperlink{classcagecontrol_a5350ebcf40a0c709af82276e6ce2284d}{settingstab} is 50° and one wants to rotate the waveplate to H+10°. If (\hyperlink{classcagecontrol_aaae4d96e61ebe50baf65014003208ac0}{useoffset}==true), one needs to rotate the motor to 10°. If (\hyperlink{classcagecontrol_aaae4d96e61ebe50baf65014003208ac0}{useoffset}==false), one needs to rotate the motor to 60°. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcagecontrol_a27d63224f95901dbbe8560cd88c90bca}\label{classcagecontrol_a27d63224f95901dbbe8560cd88c90bca}} 
+\index{cagecontrol@{cagecontrol}!slot\+\_\+change\+W\+Pangles@{slot\+\_\+change\+W\+Pangles}}
+\index{slot\+\_\+change\+W\+Pangles@{slot\+\_\+change\+W\+Pangles}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{slot\+\_\+change\+W\+Pangles}{slot\_changeWPangles}}
+{\footnotesize\ttfamily void cagecontrol\+::slot\+\_\+change\+W\+Pangles (\begin{DoxyParamCaption}\item[{Q\+Vector$<$ double $>$}]{angles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+change\+W\+Pangles sets offsetangles for all waveplates 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angles} & vector containing all angles. Ordering\+: H\+W\+P0,H\+W\+P1,...,H\+W\+Pn,Q\+W\+P0,Q\+W\+P1,...,Q\+W\+Pn \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}\label{classcagecontrol_af9a2772a38394159c54d7e5d7f2a86fb}} 
 \index{cagecontrol@{cagecontrol}!slot\+\_\+move\+HV@{slot\+\_\+move\+HV}}
 \index{slot\+\_\+move\+HV@{slot\+\_\+move\+HV}!cagecontrol@{cagecontrol}}
 \subsubsection{\texorpdfstring{slot\+\_\+move\+HV}{slot\_moveHV}}
@@ -411,7 +435,25 @@ updatestatus writes message to statusbar and to a logfile
 \end{DoxyParams}
 
 
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcagecontrol_aaae4d96e61ebe50baf65014003208ac0}\label{classcagecontrol_aaae4d96e61ebe50baf65014003208ac0}} 
+\index{cagecontrol@{cagecontrol}!useoffset@{useoffset}}
+\index{useoffset@{useoffset}!cagecontrol@{cagecontrol}}
+\subsubsection{\texorpdfstring{useoffset}{useoffset}}
+{\footnotesize\ttfamily bool cagecontrol\+::useoffset\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+If true, the angles in the settings-\/tab will be used as \textquotesingle{}0\textquotesingle{}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classcagecontrol_a2e106a12191172da2780a3d7fe137041}{slot\+\_\+changeoffsetusage} 
+\end{DoxySeeAlso}
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 cagecontrol.\+h\item 
-cagecontrol.\+cpp\end{DoxyCompactItemize}
+cagecontrol.\+cpp\item 
+cagecontrol\+\_\+motors.\+cpp\item 
+cagecontrol\+\_\+ui.\+cpp\end{DoxyCompactItemize}

@@ -25,9 +25,10 @@ public:
      * Incoming packages are analysed to check if they contain known commands. If they do,
      * these commands are executed.
      *
-     * The commands can be changed in the dinspect settings dialog, but the standard ones are:
-     *      - Move(QString, QString)
-     *      - Move(QString, double, double)
+     *      - move(QString, QString)
+     *      - move(QString, double, double)
+     *      - useoffset(int)
+     *      - setwpangles(many doubles)
      */
     explicit UDPlistener(QSettings *settings, QObject *parent = 0);
 
@@ -39,6 +40,11 @@ private:
     bool alreadybound;      //!<true if the listener is already listening to a port
 
 signals:
+    /*!
+     * \brief changeWPangles emitted when received message contains command to set waveplate characterization angles ('H')
+     * \param angles vector containing all angles. Ordering: HWP0,HWP1,...,HWPn,QWP0,QWP1,...,QWPn
+     */
+    void changeWPangles(QVector<double> angles);
     /*!
      * \brief changeoffsetusage emitted when massage to change usage of offset is received
      * \param useoffset true if waveplate offset is to be used

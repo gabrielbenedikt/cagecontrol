@@ -17,46 +17,52 @@
 \contentsline {subsubsection}{\numberline {6.1.2.4}warning()}{12}{subsubsection.6.1.2.4}% 
 \contentsline {chapter}{\numberline {7}Class Documentation}{13}{chapter.7}% 
 \contentsline {section}{\numberline {7.1}cagecontrol Class Reference}{13}{section.7.1}% 
-\contentsline {subsection}{\numberline {7.1.1}Member Function Documentation}{17}{subsection.7.1.1}% 
+\contentsline {subsection}{\numberline {7.1.1}Member Function Documentation}{16}{subsection.7.1.1}% 
 \contentsline {subsubsection}{\numberline {7.1.1.1}initconnections()}{17}{subsubsection.7.1.1.1}% 
 \contentsline {subsubsection}{\numberline {7.1.1.2}Load\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Config()}{17}{subsubsection.7.1.1.2}% 
-\contentsline {subsubsection}{\numberline {7.1.1.3}motor\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}B()}{18}{subsubsection.7.1.1.3}% 
-\contentsline {subsubsection}{\numberline {7.1.1.4}movemotor()}{19}{subsubsection.7.1.1.4}% 
-\contentsline {subsubsection}{\numberline {7.1.1.5}Save\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Config()}{19}{subsubsection.7.1.1.5}% 
-\contentsline {subsubsection}{\numberline {7.1.1.6}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}HV}{19}{subsubsection.7.1.1.6}% 
-\contentsline {subsubsection}{\numberline {7.1.1.7}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}LR}{20}{subsubsection.7.1.1.7}% 
-\contentsline {subsubsection}{\numberline {7.1.1.8}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}movemotors}{20}{subsubsection.7.1.1.8}% 
-\contentsline {subsubsection}{\numberline {7.1.1.9}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}PM}{20}{subsubsection.7.1.1.9}% 
-\contentsline {subsubsection}{\numberline {7.1.1.10}updatesettings}{20}{subsubsection.7.1.1.10}% 
-\contentsline {subsubsection}{\numberline {7.1.1.11}updatesettingsint}{21}{subsubsection.7.1.1.11}% 
-\contentsline {subsubsection}{\numberline {7.1.1.12}updatestatus()}{21}{subsubsection.7.1.1.12}% 
+\contentsline {subsubsection}{\numberline {7.1.1.3}motor\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}B()}{17}{subsubsection.7.1.1.3}% 
+\contentsline {subsubsection}{\numberline {7.1.1.4}movemotor()}{17}{subsubsection.7.1.1.4}% 
+\contentsline {subsubsection}{\numberline {7.1.1.5}Save\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Config()}{18}{subsubsection.7.1.1.5}% 
+\contentsline {subsubsection}{\numberline {7.1.1.6}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}changeoffsetusage}{18}{subsubsection.7.1.1.6}% 
+\contentsline {subsubsection}{\numberline {7.1.1.7}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}change\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}W\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Pangles}{18}{subsubsection.7.1.1.7}% 
+\contentsline {subsubsection}{\numberline {7.1.1.8}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}HV}{18}{subsubsection.7.1.1.8}% 
+\contentsline {subsubsection}{\numberline {7.1.1.9}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}LR}{19}{subsubsection.7.1.1.9}% 
+\contentsline {subsubsection}{\numberline {7.1.1.10}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}movemotors}{19}{subsubsection.7.1.1.10}% 
+\contentsline {subsubsection}{\numberline {7.1.1.11}slot\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}PM}{19}{subsubsection.7.1.1.11}% 
+\contentsline {subsubsection}{\numberline {7.1.1.12}updatesettings}{20}{subsubsection.7.1.1.12}% 
+\contentsline {subsubsection}{\numberline {7.1.1.13}updatesettingsint}{20}{subsubsection.7.1.1.13}% 
+\contentsline {subsubsection}{\numberline {7.1.1.14}updatestatus()}{20}{subsubsection.7.1.1.14}% 
+\contentsline {subsection}{\numberline {7.1.2}Member Data Documentation}{20}{subsection.7.1.2}% 
+\contentsline {subsubsection}{\numberline {7.1.2.1}useoffset}{21}{subsubsection.7.1.2.1}% 
 \contentsline {section}{\numberline {7.2}Motor Class Reference}{21}{section.7.2}% 
-\contentsline {subsection}{\numberline {7.2.1}Detailed Description}{24}{subsection.7.2.1}% 
-\contentsline {subsection}{\numberline {7.2.2}Member Function Documentation}{24}{subsection.7.2.2}% 
-\contentsline {subsubsection}{\numberline {7.2.2.1}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}microstep}{24}{subsubsection.7.2.2.1}% 
+\contentsline {subsection}{\numberline {7.2.1}Detailed Description}{23}{subsection.7.2.1}% 
+\contentsline {subsection}{\numberline {7.2.2}Member Function Documentation}{23}{subsection.7.2.2}% 
+\contentsline {subsubsection}{\numberline {7.2.2.1}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}microstep}{23}{subsubsection.7.2.2.1}% 
 \contentsline {subsubsection}{\numberline {7.2.2.2}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}moveboth}{24}{subsubsection.7.2.2.2}% 
-\contentsline {subsubsection}{\numberline {7.2.2.3}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}singlestep}{26}{subsubsection.7.2.2.3}% 
-\contentsline {subsubsection}{\numberline {7.2.2.4}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}step}{26}{subsubsection.7.2.2.4}% 
-\contentsline {subsubsection}{\numberline {7.2.2.5}handle\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Error}{26}{subsubsection.7.2.2.5}% 
-\contentsline {subsubsection}{\numberline {7.2.2.6}isopen}{27}{subsubsection.7.2.2.6}% 
-\contentsline {subsubsection}{\numberline {7.2.2.7}motorstatusmessage}{27}{subsubsection.7.2.2.7}% 
-\contentsline {subsubsection}{\numberline {7.2.2.8}sensordata()}{27}{subsubsection.7.2.2.8}% 
-\contentsline {subsubsection}{\numberline {7.2.2.9}show\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Status\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Message}{27}{subsubsection.7.2.2.9}% 
-\contentsline {subsubsection}{\numberline {7.2.2.10}stop}{28}{subsubsection.7.2.2.10}% 
-\contentsline {subsubsection}{\numberline {7.2.2.11}write}{28}{subsubsection.7.2.2.11}% 
-\contentsline {subsection}{\numberline {7.2.3}Member Data Documentation}{28}{subsection.7.2.3}% 
-\contentsline {subsubsection}{\numberline {7.2.3.1}hometimer}{28}{subsubsection.7.2.3.1}% 
-\contentsline {section}{\numberline {7.3}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Plistener Class Reference}{29}{section.7.3}% 
-\contentsline {subsection}{\numberline {7.3.1}Detailed Description}{30}{subsection.7.3.1}% 
-\contentsline {subsection}{\numberline {7.3.2}Constructor \& Destructor Documentation}{30}{subsection.7.3.2}% 
-\contentsline {subsubsection}{\numberline {7.3.2.1}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Plistener()}{30}{subsubsection.7.3.2.1}% 
-\contentsline {subsection}{\numberline {7.3.3}Member Function Documentation}{31}{subsection.7.3.3}% 
-\contentsline {subsubsection}{\numberline {7.3.3.1}bind}{31}{subsubsection.7.3.3.1}% 
-\contentsline {subsubsection}{\numberline {7.3.3.2}Move}{31}{subsubsection.7.3.3.2}% 
-\contentsline {subsubsection}{\numberline {7.3.3.3}Move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}HV}{31}{subsubsection.7.3.3.3}% 
-\contentsline {subsubsection}{\numberline {7.3.3.4}Move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}LR}{32}{subsubsection.7.3.3.4}% 
-\contentsline {subsubsection}{\numberline {7.3.3.5}Move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}PM}{32}{subsubsection.7.3.3.5}% 
-\contentsline {subsubsection}{\numberline {7.3.3.6}process\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Commands}{32}{subsubsection.7.3.3.6}% 
+\contentsline {subsubsection}{\numberline {7.2.2.3}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}singlestep}{24}{subsubsection.7.2.2.3}% 
+\contentsline {subsubsection}{\numberline {7.2.2.4}command\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}step}{24}{subsubsection.7.2.2.4}% 
+\contentsline {subsubsection}{\numberline {7.2.2.5}handle\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Error}{25}{subsubsection.7.2.2.5}% 
+\contentsline {subsubsection}{\numberline {7.2.2.6}isopen}{25}{subsubsection.7.2.2.6}% 
+\contentsline {subsubsection}{\numberline {7.2.2.7}motorstatusmessage}{25}{subsubsection.7.2.2.7}% 
+\contentsline {subsubsection}{\numberline {7.2.2.8}sensordata()}{25}{subsubsection.7.2.2.8}% 
+\contentsline {subsubsection}{\numberline {7.2.2.9}show\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Status\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Message}{26}{subsubsection.7.2.2.9}% 
+\contentsline {subsubsection}{\numberline {7.2.2.10}stop}{26}{subsubsection.7.2.2.10}% 
+\contentsline {subsubsection}{\numberline {7.2.2.11}write}{26}{subsubsection.7.2.2.11}% 
+\contentsline {subsection}{\numberline {7.2.3}Member Data Documentation}{26}{subsection.7.2.3}% 
+\contentsline {subsubsection}{\numberline {7.2.3.1}hometimer}{27}{subsubsection.7.2.3.1}% 
+\contentsline {section}{\numberline {7.3}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Plistener Class Reference}{27}{section.7.3}% 
+\contentsline {subsection}{\numberline {7.3.1}Detailed Description}{28}{subsection.7.3.1}% 
+\contentsline {subsection}{\numberline {7.3.2}Constructor \& Destructor Documentation}{29}{subsection.7.3.2}% 
+\contentsline {subsubsection}{\numberline {7.3.2.1}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Plistener()}{29}{subsubsection.7.3.2.1}% 
+\contentsline {subsection}{\numberline {7.3.3}Member Function Documentation}{29}{subsection.7.3.3}% 
+\contentsline {subsubsection}{\numberline {7.3.3.1}bind}{29}{subsubsection.7.3.3.1}% 
+\contentsline {subsubsection}{\numberline {7.3.3.2}changeoffsetusage}{29}{subsubsection.7.3.3.2}% 
+\contentsline {subsubsection}{\numberline {7.3.3.3}change\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}W\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Pangles}{30}{subsubsection.7.3.3.3}% 
+\contentsline {subsubsection}{\numberline {7.3.3.4}Move}{30}{subsubsection.7.3.3.4}% 
+\contentsline {subsubsection}{\numberline {7.3.3.5}Move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}HV}{30}{subsubsection.7.3.3.5}% 
+\contentsline {subsubsection}{\numberline {7.3.3.6}Move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}LR}{30}{subsubsection.7.3.3.6}% 
+\contentsline {subsubsection}{\numberline {7.3.3.7}Move\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}PM}{31}{subsubsection.7.3.3.7}% 
+\contentsline {subsubsection}{\numberline {7.3.3.8}process\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Commands}{31}{subsubsection.7.3.3.8}% 
 \contentsline {chapter}{\numberline {8}File Documentation}{33}{chapter.8}% 
 \contentsline {section}{\numberline {8.1}debug.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{33}{section.8.1}% 
 \contentsline {subsection}{\numberline {8.1.1}Detailed Description}{34}{subsection.8.1.1}% 
@@ -76,5 +82,5 @@
 \contentsline {section}{\numberline {8.4}motor.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{38}{section.8.4}% 
 \contentsline {section}{\numberline {8.5}udplistener.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{39}{section.8.5}% 
 \contentsline {section}{\numberline {8.6}version.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{40}{section.8.6}% 
-\contentsline {subsection}{\numberline {8.6.1}Detailed Description}{40}{subsection.8.6.1}% 
-\contentsline {chapter}{Index}{41}{section*.39}% 
+\contentsline {subsection}{\numberline {8.6.1}Detailed Description}{41}{subsection.8.6.1}% 
+\contentsline {chapter}{Index}{43}{section*.40}% 

@@ -80,13 +80,18 @@ Collaboration diagram for cagecontrol:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcagecontrol__coll__graph.png" border="0" usemap="#cagecontrol_coll__map" alt="Collaboration graph"/></div>
 <map name="cagecontrol_coll__map" id="cagecontrol_coll__map">
-<area shape="rect" id="node3" href="classMotor.xhtml" title="The Motor class operates the PCB&#45;motor. " alt="" coords="137,81,191,108"/>
-<area shape="rect" id="node5" href="classUDPlistener.xhtml" title="The UDPlistener class is used to control dinspect with UDP packages. " alt="" coords="216,81,309,108"/>
+<area shape="rect" id="node3" href="classUDPlistener.xhtml" title="The UDPlistener class is used to control dinspect with UDP packages. " alt="" coords="136,81,229,108"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.xhtml">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
+<tr class="memitem:a27d63224f95901dbbe8560cd88c90bca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a27d63224f95901dbbe8560cd88c90bca">slot_changeWPangles</a> (QVector&lt; double &gt; angles)</td></tr>
+<tr class="memdesc:a27d63224f95901dbbe8560cd88c90bca"><td class="mdescLeft">&#160;</td><td class="mdescRight">slot_changeWPangles sets offsetangles for all waveplates  <a href="#a27d63224f95901dbbe8560cd88c90bca">More...</a><br /></td></tr>
+<tr class="separator:a27d63224f95901dbbe8560cd88c90bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e106a12191172da2780a3d7fe137041"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a2e106a12191172da2780a3d7fe137041">slot_changeoffsetusage</a> (bool uo_in)</td></tr>
+<tr class="memdesc:a2e106a12191172da2780a3d7fe137041"><td class="mdescLeft">&#160;</td><td class="mdescRight">slot_changeoffsetusage changes the usage of the waveplate offset  <a href="#a2e106a12191172da2780a3d7fe137041">More...</a><br /></td></tr>
+<tr class="separator:a2e106a12191172da2780a3d7fe137041"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a2772a38394159c54d7e5d7f2a86fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#af9a2772a38394159c54d7e5d7f2a86fb">slot_moveHV</a> (QString color)</td></tr>
 <tr class="memdesc:af9a2772a38394159c54d7e5d7f2a86fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">moveHV  <a href="#af9a2772a38394159c54d7e5d7f2a86fb">More...</a><br /></td></tr>
 <tr class="separator:af9a2772a38394159c54d7e5d7f2a86fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,6 +271,13 @@ Private Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#ae73f9b22e1cc81ef92d900b8c63b4663">udpport</a></td></tr>
 <tr class="memdesc:ae73f9b22e1cc81ef92d900b8c63b4663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hold the UDP port to listen to for commandds. <br /></td></tr>
 <tr class="separator:ae73f9b22e1cc81ef92d900b8c63b4663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadbcbafcce2b4e49b83560d308086f87"><td class="memItemLeft" align="right" valign="top"><a id="aadbcbafcce2b4e49b83560d308086f87"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#aadbcbafcce2b4e49b83560d308086f87">pauseupdating</a></td></tr>
+<tr class="memdesc:aadbcbafcce2b4e49b83560d308086f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep updateUI and updatesettings from interfering with each other. <br /></td></tr>
+<tr class="separator:aadbcbafcce2b4e49b83560d308086f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae4d96e61ebe50baf65014003208ac0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#aaae4d96e61ebe50baf65014003208ac0">useoffset</a></td></tr>
+<tr class="memdesc:aaae4d96e61ebe50baf65014003208ac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the angles in the settings-tab will be used as '0'.  <a href="#aaae4d96e61ebe50baf65014003208ac0">More...</a><br /></td></tr>
+<tr class="separator:aaae4d96e61ebe50baf65014003208ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa56b3d1bbf35785c21c5465eef48185"><td class="memItemLeft" align="right" valign="top"><a id="aaa56b3d1bbf35785c21c5465eef48185"></a>
 QSettings *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#aaa56b3d1bbf35785c21c5465eef48185">settings</a></td></tr>
 <tr class="memdesc:aaa56b3d1bbf35785c21c5465eef48185"><td class="mdescLeft">&#160;</td><td class="mdescRight">A QSettings object, used to store settings in a config file. <br /></td></tr>
@@ -294,30 +306,6 @@ QStatusBar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 QVector&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a1fa2f1480f616b4f7142f9e7a471cef3">comports</a></td></tr>
 <tr class="memdesc:a1fa2f1480f616b4f7142f9e7a471cef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector containing available serial ports names ports. <br /></td></tr>
 <tr class="separator:a1fa2f1480f616b4f7142f9e7a471cef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba1bc33f1f9a17cfa548f1390d4a9358"><td class="memItemLeft" align="right" valign="top"><a id="aba1bc33f1f9a17cfa548f1390d4a9358"></a>
-<a class="el" href="classMotor.xhtml">Motor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#aba1bc33f1f9a17cfa548f1390d4a9358">redmotor</a></td></tr>
-<tr class="memdesc:aba1bc33f1f9a17cfa548f1390d4a9358"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial connections to the red cage. <br /></td></tr>
-<tr class="separator:aba1bc33f1f9a17cfa548f1390d4a9358"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a58ab2407ea37d47b00dfa31fbd837e"><td class="memItemLeft" align="right" valign="top"><a id="a5a58ab2407ea37d47b00dfa31fbd837e"></a>
-<a class="el" href="classMotor.xhtml">Motor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a5a58ab2407ea37d47b00dfa31fbd837e">brownmotor</a></td></tr>
-<tr class="memdesc:a5a58ab2407ea37d47b00dfa31fbd837e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial connections to the brown cage. <br /></td></tr>
-<tr class="separator:a5a58ab2407ea37d47b00dfa31fbd837e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15f7d52bdae84ce7d23274254bed283a"><td class="memItemLeft" align="right" valign="top"><a id="a15f7d52bdae84ce7d23274254bed283a"></a>
-<a class="el" href="classMotor.xhtml">Motor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a15f7d52bdae84ce7d23274254bed283a">greenmotor</a></td></tr>
-<tr class="memdesc:a15f7d52bdae84ce7d23274254bed283a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial connections to the green cage. <br /></td></tr>
-<tr class="separator:a15f7d52bdae84ce7d23274254bed283a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b188226c1976ff8b89f4a043320c0d7"><td class="memItemLeft" align="right" valign="top"><a id="a0b188226c1976ff8b89f4a043320c0d7"></a>
-<a class="el" href="classMotor.xhtml">Motor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a0b188226c1976ff8b89f4a043320c0d7">bluemotor</a></td></tr>
-<tr class="memdesc:a0b188226c1976ff8b89f4a043320c0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial connections to the blue cage. <br /></td></tr>
-<tr class="separator:a0b188226c1976ff8b89f4a043320c0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac345b05074401d11ce84f6e56a24538b"><td class="memItemLeft" align="right" valign="top"><a id="ac345b05074401d11ce84f6e56a24538b"></a>
-<a class="el" href="classMotor.xhtml">Motor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#ac345b05074401d11ce84f6e56a24538b">whitemotor</a></td></tr>
-<tr class="memdesc:ac345b05074401d11ce84f6e56a24538b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial connections to the white cage. <br /></td></tr>
-<tr class="separator:ac345b05074401d11ce84f6e56a24538b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e5d64b7fc46495e7f1c8824ccb2b8d8"><td class="memItemLeft" align="right" valign="top"><a id="a4e5d64b7fc46495e7f1c8824ccb2b8d8"></a>
-<a class="el" href="classMotor.xhtml">Motor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a4e5d64b7fc46495e7f1c8824ccb2b8d8">blackmotor</a></td></tr>
-<tr class="memdesc:a4e5d64b7fc46495e7f1c8824ccb2b8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial connections to the black cage. <br /></td></tr>
-<tr class="separator:a4e5d64b7fc46495e7f1c8824ccb2b8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a78cb0c0f45a8bb3e6b093ef7412124"><td class="memItemLeft" align="right" valign="top"><a id="a3a78cb0c0f45a8bb3e6b093ef7412124"></a>
 QVector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcagecontrol.xhtml#a3a78cb0c0f45a8bb3e6b093ef7412124">invert</a></td></tr>
 <tr class="memdesc:a3a78cb0c0f45a8bb3e6b093ef7412124"><td class="mdescLeft">&#160;</td><td class="mdescRight">True: invert predefined bases (H/V -&gt; V/H, P/M-&gt;M/P, L/R-&gt;R/L) <br /></td></tr>
@@ -546,6 +534,75 @@ QVector&lt; QGroupBox * &gt;&#160;</td><td class="memItemRight" valign="bottom">
 
 <p>SaveConfig stores config to a file. </p>
 <p>The QSettings object is updated with the values received from the dialog and saved immediately. </p>
+
+</div>
+</div>
+<a id="a2e106a12191172da2780a3d7fe137041"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e106a12191172da2780a3d7fe137041">&#9670;&nbsp;</a></span>slot_changeoffsetusage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cagecontrol::slot_changeoffsetusage </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>uo_in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>slot_changeoffsetusage changes the usage of the waveplate offset </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">useoffset</td><td>true if waveplate offset is to be used</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The term 'offset' refers to the waveplate angles specified in the </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classcagecontrol.xhtml#a5350ebcf40a0c709af82276e6ce2284d" title="GUI tab containing settings. ">settingstab</a>. E.g.: 'H' of HWP specified in he <a class="el" href="classcagecontrol.xhtml#a5350ebcf40a0c709af82276e6ce2284d" title="GUI tab containing settings. ">settingstab</a> is 50° and one wants to rotate the waveplate to H+10°. If (<a class="el" href="classcagecontrol.xhtml#aaae4d96e61ebe50baf65014003208ac0" title="If true, the angles in the settings-tab will be used as &#39;0&#39;. ">useoffset</a>==true), one needs to rotate the motor to 10°. If (<a class="el" href="classcagecontrol.xhtml#aaae4d96e61ebe50baf65014003208ac0" title="If true, the angles in the settings-tab will be used as &#39;0&#39;. ">useoffset</a>==false), one needs to rotate the motor to 60°. </dd></dl>
+
+</div>
+</div>
+<a id="a27d63224f95901dbbe8560cd88c90bca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27d63224f95901dbbe8560cd88c90bca">&#9670;&nbsp;</a></span>slot_changeWPangles</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cagecontrol::slot_changeWPangles </td>
+          <td>(</td>
+          <td class="paramtype">QVector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>angles</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>slot_changeWPangles sets offsetangles for all waveplates </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">angles</td><td>vector containing all angles. Ordering: HWP0,HWP1,...,HWPn,QWP0,QWP1,...,QWPn </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -804,9 +861,37 @@ QVector&lt; QGroupBox * &gt;&#160;</td><td class="memItemRight" valign="bottom">
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aaae4d96e61ebe50baf65014003208ac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaae4d96e61ebe50baf65014003208ac0">&#9670;&nbsp;</a></span>useoffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cagecontrol::useoffset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If true, the angles in the settings-tab will be used as '0'. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcagecontrol.xhtml#a2e106a12191172da2780a3d7fe137041" title="slot_changeoffsetusage changes the usage of the waveplate offset ">slot_changeoffsetusage</a> </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="cagecontrol_8h_source.xhtml">cagecontrol.h</a></li>
 <li>cagecontrol.cpp</li>
+<li>cagecontrol_motors.cpp</li>
+<li>cagecontrol_ui.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

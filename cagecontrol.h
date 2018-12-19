@@ -48,6 +48,16 @@ private slots:
 
 public slots:
     /*!
+     * \brief slot_changeoffsetusage changes the usage of the waveplate offset
+     * \param useoffset true if waveplate offset is to be used
+     *
+     * The term 'offset' refers to the waveplate angles specified in the \see settingstab.
+     * E.g.: 'H' of HWP specified in he settingstab is 50° and one wants to rotate the waveplate to H+10°.
+     * If (useoffset==true), one needs to rotate the motor to 10°.
+     * If (useoffset==false), one needs to rotate the motor to 60°.
+     */
+    void slot_changeoffsetusage(bool uo_in);
+    /*!
      * \brief moveHV
      * \param color colorcode of the cage, or 'all'
      */
@@ -70,6 +80,7 @@ public slots:
 private:
     int udpport;                                        //!< Hold the UDP port to listen to for commandds
     bool pauseupdating;                                 //!< Keep updateUI and updatesettings from interfering with each other
+    bool useoffset;                                     //!< If true, the angles in the settings-tab will be used as '0'. \see slot_changeoffsetusage
     QSettings *settings;                                //!< A QSettings object, used to store settings in a config file
     UDPlistener *udplistener;                           //!< Listens to a UDP port, aquiires & checks commands send to it
     QTabWidget *tabs;                                   //!< GUI tab widget

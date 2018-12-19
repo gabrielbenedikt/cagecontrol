@@ -11,7 +11,6 @@
 cagecontrol::cagecontrol(QWidget *parent) :
     QMainWindow(parent)//,ui(new Ui::cagecontrol)
 {
-    //settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(), QApplication::applicationName());
     settings = new QSettings("cagecontrol.conf", QSettings::IniFormat);
 
     // UI-Setup
@@ -27,6 +26,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
     HWPmnum.reserve(motorName.length());
     QWPmnum.reserve(motorName.length());
     invert.reserve(motorName.length());
+    useoffset=true;
     uiMotorGroupBoxes.reserve(motorName.length());
     mainlayout->addWidget(tabs);
     mainlayout->addWidget(status);
@@ -36,6 +36,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
     setWindowTitle("CageControl");
 
     udplistener = new UDPlistener(settings);
+
 
     LoadConfig();
     initconnections();
@@ -89,6 +90,7 @@ void cagecontrol::updateUI()
     motorstab->findChild<QGroupBox*>("whitebox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[4]);
     motorstab->findChild<QGroupBox*>("blackbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[5]);
     tabs->findChild<QSpinBox*>("port")->setValue(udpport);
+    tabs->findChild<QCheckBox*>("offsetcb")->setChecked(useoffset);
 }
 /************************************************************************************************
 *                                                                                               *
@@ -129,6 +131,7 @@ void cagecontrol::initconnections()
     connect(udplistener, &UDPlistener::MoveHV, this, &cagecontrol::slot_moveHV);
     connect(udplistener, &UDPlistener::MovePM, this, &cagecontrol::slot_movePM);
     connect(udplistener, &UDPlistener::MoveLR, this, &cagecontrol::slot_moveLR);
+    connect(udplistener, &UDPlistener::changeoffsetusage, this, &cagecontrol::slot_changeoffsetusage);
 }
 
 /************************************************************************************************
@@ -141,6 +144,7 @@ void cagecontrol::updatesettingsint(int i)
     UNUSED(i);
     updatesettings(3.1415);
 }
+
 void cagecontrol::updatesettings(double d)
 {
     UNUSED(d); //just there to create a SLOT with matching parameter for signal &Q(Double)SpinBox::valueChanged
@@ -190,6 +194,8 @@ void cagecontrol::updatesettings(double d)
         invert[5]=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QCheckBox*>("invertcb")->isChecked();
 
         udpport=settingstab->findChild<QSpinBox*>("port")->value();
+
+        useoffset = settingstab->findChild<QCheckBox*>("offsetcb")->isChecked();
     }
 
 }
@@ -358,18 +364,18 @@ void cagecontrol::setupUI(QGridLayout *layout)
     blackHWP0sb->setObjectName("blackHWP0sb");
     QDoubleSpinBox *blackQWP0sb = new QDoubleSpinBox();
     blackQWP0sb->setObjectName("blackQWP0sb");
-    redHWP0sb->setRange(0,360);
-    redQWP0sb->setRange(0,360);
-    brownHWP0sb->setRange(0,360);
-    brownQWP0sb->setRange(0,360);
-    greenHWP0sb->setRange(0,360);
-    greenQWP0sb->setRange(0,360);
-    blueHWP0sb->setRange(0,360);
-    blueQWP0sb->setRange(0,360);
-    whiteHWP0sb->setRange(0,360);
-    whiteQWP0sb->setRange(0,360);
-    blackHWP0sb->setRange(0,360);
-    blackQWP0sb->setRange(0,360);
+    redHWP0sb->setRange(0,330);
+    redQWP0sb->setRange(0,330);
+    brownHWP0sb->setRange(0,330);
+    brownQWP0sb->setRange(0,330);
+    greenHWP0sb->setRange(0,330);
+    greenQWP0sb->setRange(0,330);
+    blueHWP0sb->setRange(0,330);
+    blueQWP0sb->setRange(0,330);
+    whiteHWP0sb->setRange(0,330);
+    whiteQWP0sb->setRange(0,330);
+    blackHWP0sb->setRange(0,330);
+    blackQWP0sb->setRange(0,330);
 
     QSpinBox *redHWPnum = new QSpinBox();
     redHWPnum->setObjectName("redHWPnum");
@@ -400,6 +406,9 @@ void cagecontrol::setupUI(QGridLayout *layout)
     QSpinBox *portsb = new QSpinBox();
     portsb->setObjectName("port");
     portsb->setRange(0,65535);
+
+    QCheckBox *offsetcb = new QCheckBox("use these angles as offset");
+    offsetcb->setObjectName("offsetcb");
 
     settingslayout->addWidget(settinglabel_HWP,     1,2,1,1);
     settingslayout->addWidget(settinglabel_QWP,     1,3,1,1);
@@ -442,8 +451,9 @@ void cagecontrol::setupUI(QGridLayout *layout)
     settingslayout->addWidget(blueQWPnum,           5,6,1,1);
     settingslayout->addWidget(whiteQWPnum,          6,6,1,1);
     settingslayout->addWidget(blackQWPnum,          7,6,1,1);
-    settingslayout->addWidget(portlabel,            8,1,1,1);
-    settingslayout->addWidget(portsb,               8,2,1,1);
+    settingslayout->addWidget(portlabel,            9,1,1,1);
+    settingslayout->addWidget(portsb,               9,2,1,1);
+    settingslayout->addWidget(offsetcb,             8,1,1,3);
 
     settingredcombox->clear();
     settingbrowncombox->clear();
@@ -521,10 +531,18 @@ void cagecontrol::moveallhv()
             qwprot=0;
         }
         movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
-        HWPcust[idx]=HWP0[idx]+hwprot;
-        QWPcust[idx]=QWP0[idx]+qwprot;
+        if (useoffset) {
+            HWPcust[idx]=hwprot;
+            updateUI();
+            QWPcust[idx]=qwprot;
+            updateUI();
+        } else {
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+qwprot;
+            updateUI();
+        }
     }
-    updateUI();
 }
 void cagecontrol::moveallpm()
 {
@@ -541,10 +559,18 @@ void cagecontrol::moveallpm()
             qwprot=45;
         }
         movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
-        HWPcust[idx]=HWP0[idx]+hwprot;
-        QWPcust[idx]=QWP0[idx]+qwprot;
+        if (useoffset) {
+            HWPcust[idx]=hwprot;
+            updateUI();
+            QWPcust[idx]=qwprot;
+            updateUI();
+        } else {
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+qwprot;
+            updateUI();
+        }
     }
-    updateUI();
 }
 void cagecontrol::movealllr()
 {
@@ -561,21 +587,38 @@ void cagecontrol::movealllr()
             qwprot=0;
         }
         movemotor(motorName[idx], HWP0[idx]+hwprot,QWP0[idx]+qwprot);
-        HWPcust[idx]=HWP0[idx]+hwprot;
-        QWPcust[idx]=QWP0[idx]+qwprot;
+        if (useoffset) {
+            HWPcust[idx]=hwprot;
+            updateUI();
+            QWPcust[idx]=qwprot;
+            updateUI();
+        } else {
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+qwprot;
+            updateUI();
+        }
     }
-    updateUI();
 }
 void cagecontrol::moveallarb()
 {
     for (Motor* m : motors)
     {
         int idx = motors.indexOf(m);
-        movemotor(motorName[idx],HWPcust[idx],QWPcust[idx]);
+        if (useoffset) {
+            double hrot=HWPcust[idx]+HWP0[idx];
+            double qrot=QWPcust[idx]+QWP0[idx];
+            while (hrot > 330) {hrot=hrot-180;}
+            while (qrot > 330) {qrot=qrot-180;}
+            movemotor(motorName[idx],hrot,qrot);
+        } else {
+            movemotor(motorName[idx],HWPcust[idx],QWPcust[idx]);
+        }
     }
 }
 void cagecontrol::moveredHV()
 {
+    std::vector<double> angles = {0,0};
     double hwprot;
     double qwprot;
     if (invert[0]) {
@@ -586,10 +629,17 @@ void cagecontrol::moveredHV()
         qwprot=0;
     }
     movemotor("red",HWP0[0]+hwprot,QWP0[0]+qwprot);
-    HWPcust[0]=HWP0[0]+hwprot;
-    updateUI();
-    QWPcust[0]=QWP0[0]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[0]=hwprot;
+        updateUI();
+        QWPcust[0]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[0]=HWP0[0]+hwprot;
+        updateUI();
+        QWPcust[0]=QWP0[0]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveredPM()
 {
@@ -603,10 +653,17 @@ void cagecontrol::moveredPM()
         qwprot=45;
     }
     movemotor("red",HWP0[0]+hwprot,QWP0[0]+qwprot);
-    HWPcust[0]=HWP0[0]+hwprot;
-    updateUI();
-    QWPcust[0]=QWP0[0]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[0]=hwprot;
+        updateUI();
+        QWPcust[0]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[0]=HWP0[0]+hwprot;
+        updateUI();
+        QWPcust[0]=QWP0[0]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveredLR()
 {
@@ -620,16 +677,31 @@ void cagecontrol::moveredLR()
         qwprot=0;
     }
     movemotor("red",HWP0[0]+hwprot,QWP0[0]+qwprot);
-    HWPcust[0]=HWP0[0]+hwprot;
-    updateUI();
-    QWPcust[0]=QWP0[0]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[0]=hwprot;
+        updateUI();
+        QWPcust[0]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[0]=HWP0[0]+hwprot;
+        updateUI();
+        QWPcust[0]=QWP0[0]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveredANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
     double QWPang=motorstab->findChild<QGroupBox*>("redbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    movemotor("red",HWPang,QWPang);
+    if (useoffset) {
+        double hrot=HWPang+HWP0[0];
+        double qrot=QWPang+QWP0[0];
+        while (hrot > 330) {hrot=hrot-180;}
+        while (qrot > 330) {qrot=qrot-180;}
+        movemotor("red",hrot,qrot);
+    } else {
+        movemotor("red",HWPang,QWPang);
+    }
 }
 void cagecontrol::movebrownHV()
 {
@@ -643,10 +715,17 @@ void cagecontrol::movebrownHV()
         qwprot=0;
     }
     movemotor("brown",HWP0[1]+hwprot,QWP0[1]+qwprot);
-    HWPcust[1]=HWP0[1]+hwprot;
-    updateUI();
-    QWPcust[1]=QWP0[1]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[1]=hwprot;
+        updateUI();
+        QWPcust[1]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[1]=HWP0[1]+hwprot;
+        updateUI();
+        QWPcust[1]=QWP0[1]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movebrownPM()
 {
@@ -660,9 +739,17 @@ void cagecontrol::movebrownPM()
         qwprot=45;
     }
     movemotor("brown",HWP0[1]+hwprot,QWP0[1]+qwprot);
-    HWPcust[1]=HWP0[1]+hwprot;
-    updateUI();
-    QWPcust[1]=QWP0[1]+qwprot;
+    if (useoffset) {
+        HWPcust[1]=hwprot;
+        updateUI();
+        QWPcust[1]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[1]=HWP0[1]+hwprot;
+        updateUI();
+        QWPcust[1]=QWP0[1]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movebrownLR()
 {
@@ -676,15 +763,31 @@ void cagecontrol::movebrownLR()
         qwprot=0;
     }
     movemotor("brown",HWP0[1]+hwprot,QWP0[1]+qwprot);
-    HWPcust[1]=HWP0[1]+hwprot;
-    updateUI();
-    QWPcust[1]=QWP0[1]+qwprot;
+    if (useoffset) {
+        HWPcust[1]=hwprot;
+        updateUI();
+        QWPcust[1]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[1]=HWP0[1]+hwprot;
+        updateUI();
+        QWPcust[1]=QWP0[1]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movebrownANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
     double QWPang=motorstab->findChild<QGroupBox*>("brownbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    movemotor("brown",HWPang,QWPang);
+    if (useoffset) {
+        double hrot=HWPang+HWP0[1];
+        double qrot=QWPang+QWP0[1];
+        while (hrot > 330) {hrot=hrot-180;}
+        while (qrot > 330) {qrot=qrot-180;}
+        movemotor("brown",hrot,qrot);
+    } else {
+        movemotor("brown",HWPang,QWPang);
+    }
 }
 void cagecontrol::movegreenHV()
 {
@@ -698,10 +801,17 @@ void cagecontrol::movegreenHV()
         qwprot=0;
     }
     movemotor("green",HWP0[2]+hwprot,QWP0[2]+qwprot);
-    HWPcust[2]=HWP0[2]+hwprot;
-    updateUI();
-    QWPcust[2]=QWP0[2]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[2]=hwprot;
+        updateUI();
+        QWPcust[2]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[2]=HWP0[2]+hwprot;
+        updateUI();
+        QWPcust[2]=QWP0[2]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movegreenPM()
 {
@@ -715,10 +825,17 @@ void cagecontrol::movegreenPM()
         qwprot=45;
     }
     movemotor("green",HWP0[2]+hwprot,QWP0[2]+qwprot);
-    HWPcust[2]=HWP0[2]+hwprot;
-    updateUI();
-    QWPcust[2]=QWP0[2]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[2]=hwprot;
+        updateUI();
+        QWPcust[2]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[2]=HWP0[2]+hwprot;
+        updateUI();
+        QWPcust[2]=QWP0[2]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movegreenLR()
 {
@@ -732,16 +849,31 @@ void cagecontrol::movegreenLR()
         qwprot=0;
     }
     movemotor("green",HWP0[2]+hwprot,QWP0[2]+qwprot);
-    HWPcust[2]=HWP0[2]+hwprot;
-    updateUI();
-    QWPcust[2]=QWP0[2]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[2]=hwprot;
+        updateUI();
+        QWPcust[2]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[2]=HWP0[2]+hwprot;
+        updateUI();
+        QWPcust[2]=QWP0[2]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movegreenANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
     double QWPang=motorstab->findChild<QGroupBox*>("greenbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    movemotor("green",HWPang,QWPang);
+    if (useoffset) {
+        double hrot=HWPang+HWP0[2];
+        double qrot=QWPang+QWP0[2];
+        while (hrot > 330) {hrot=hrot-180;}
+        while (qrot > 330) {qrot=qrot-180;}
+        movemotor("green",hrot,qrot);
+    } else {
+        movemotor("green",HWPang,QWPang);
+    }
 }
 void cagecontrol::moveblueHV()
 {
@@ -755,10 +887,17 @@ void cagecontrol::moveblueHV()
         qwprot=0;
     }
     movemotor("blue",HWP0[3]+hwprot,QWP0[3]+qwprot);
-    HWPcust[3]=HWP0[3]+hwprot;
-    updateUI();
-    QWPcust[3]=QWP0[3]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[3]=hwprot;
+        updateUI();
+        QWPcust[3]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[3]=HWP0[3]+hwprot;
+        updateUI();
+        QWPcust[3]=QWP0[3]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movebluePM()
 {
@@ -772,10 +911,17 @@ void cagecontrol::movebluePM()
         qwprot=45;
     }
     movemotor("blue",HWP0[3]+hwprot,QWP0[3]+qwprot);
-    HWPcust[3]=HWP0[3]+hwprot;
-    updateUI();
-    QWPcust[3]=QWP0[3]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[3]=hwprot;
+        updateUI();
+        QWPcust[3]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[3]=HWP0[3]+hwprot;
+        updateUI();
+        QWPcust[3]=QWP0[3]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveblueLR()
 {
@@ -789,16 +935,31 @@ void cagecontrol::moveblueLR()
         qwprot=0;
     }
     movemotor("blue",HWP0[3]+hwprot,QWP0[3]+qwprot);
-    HWPcust[3]=HWP0[3]+hwprot;
-    updateUI();
-    QWPcust[3]=QWP0[3]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[3]=hwprot;
+        updateUI();
+        QWPcust[3]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[3]=HWP0[3]+hwprot;
+        updateUI();
+        QWPcust[3]=QWP0[3]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveblueANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
     double QWPang=motorstab->findChild<QGroupBox*>("bluebox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    movemotor("blue",HWPang,QWPang);
+    if (useoffset) {
+        double hrot=HWPang+HWP0[3];
+        double qrot=QWPang+QWP0[3];
+        while (hrot > 330) {hrot=hrot-180;}
+        while (qrot > 330) {qrot=qrot-180;}
+        movemotor("blue",hrot,qrot);
+    } else {
+        movemotor("blue",HWPang,QWPang);
+    }
 }
 void cagecontrol::movewhiteHV()
 {
@@ -812,10 +973,17 @@ void cagecontrol::movewhiteHV()
         qwprot=0;
     }
     movemotor("white",HWP0[4]+hwprot,QWP0[4]+qwprot);
-    HWPcust[4]=HWP0[4]+hwprot;
-    updateUI();
-    QWPcust[4]=QWP0[4]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[4]=hwprot;
+        updateUI();
+        QWPcust[4]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[4]=HWP0[4]+hwprot;
+        updateUI();
+        QWPcust[4]=QWP0[4]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movewhitePM()
 {
@@ -829,10 +997,17 @@ void cagecontrol::movewhitePM()
         qwprot=45;
     }
     movemotor("white",HWP0[4]+hwprot,QWP0[4]+qwprot);
-    HWPcust[4]=HWP0[4]+hwprot;
-    updateUI();
-    QWPcust[4]=QWP0[4]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[4]=hwprot;
+        updateUI();
+        QWPcust[4]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[4]=HWP0[4]+hwprot;
+        updateUI();
+        QWPcust[4]=QWP0[4]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movewhiteLR()
 {
@@ -846,16 +1021,31 @@ void cagecontrol::movewhiteLR()
         qwprot=0;
     }
     movemotor("white",HWP0[4]+hwprot,QWP0[4]+qwprot);
-    HWPcust[4]=HWP0[4]+hwprot;
-    updateUI();
-    QWPcust[4]=QWP0[4]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[4]=hwprot;
+        updateUI();
+        QWPcust[4]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[4]=HWP0[4]+hwprot;
+        updateUI();
+        QWPcust[4]=QWP0[4]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::movewhiteANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
     double QWPang=motorstab->findChild<QGroupBox*>("whitebox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    movemotor("white",HWPang,QWPang);
+    if (useoffset) {
+        double hrot=HWPang+HWP0[4];
+        double qrot=QWPang+QWP0[4];
+        while (hrot > 330) {hrot=hrot-180;}
+        while (qrot > 330) {qrot=qrot-180;}
+        movemotor("white",hrot,qrot);
+    } else {
+        movemotor("white",HWPang,QWPang);
+    }
 }
 void cagecontrol::moveblackHV()
 {
@@ -869,10 +1059,17 @@ void cagecontrol::moveblackHV()
         qwprot=0;
     }
     movemotor("black",HWP0[5]+hwprot,QWP0[5]+qwprot);
-    HWPcust[5]=HWP0[5]+hwprot;
-    updateUI();
-    QWPcust[5]=QWP0[5]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[5]=hwprot;
+        updateUI();
+        QWPcust[5]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[5]=HWP0[5]+hwprot;
+        updateUI();
+        QWPcust[5]=QWP0[5]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveblackPM()
 {
@@ -886,10 +1083,17 @@ void cagecontrol::moveblackPM()
         qwprot=45;
     }
     movemotor("black",HWP0[5]+hwprot,QWP0[5]+qwprot);
-    HWPcust[5]=HWP0[5]+hwprot;
-    updateUI();
-    QWPcust[5]=QWP0[5]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[5]=hwprot;
+        updateUI();
+        QWPcust[5]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[5]=HWP0[5]+hwprot;
+        updateUI();
+        QWPcust[5]=QWP0[5]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveblackLR()
 {
@@ -903,16 +1107,31 @@ void cagecontrol::moveblackLR()
         qwprot=0;
     }
     movemotor("black",HWP0[5]+hwprot,QWP0[5]+qwprot);
-    HWPcust[5]=HWP0[5]+hwprot;
-    updateUI();
-    QWPcust[5]=QWP0[5]+qwprot;
-    updateUI();
+    if (useoffset) {
+        HWPcust[5]=hwprot;
+        updateUI();
+        QWPcust[5]=qwprot;
+        updateUI();
+    } else {
+        HWPcust[5]=HWP0[5]+hwprot;
+        updateUI();
+        QWPcust[5]=QWP0[5]+qwprot;
+        updateUI();
+    }
 }
 void cagecontrol::moveblackANG()
 {
     double HWPang=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("HWPsb")->value();
     double QWPang=motorstab->findChild<QGroupBox*>("blackbox")->findChild<QDoubleSpinBox*>("QWPsb")->value();
-    movemotor("black",HWPang,QWPang);
+    if (useoffset) {
+        double hrot=HWPang+HWP0[5];
+        double qrot=QWPang+QWP0[5];
+        while (hrot > 330) {hrot=hrot-180;}
+        while (qrot > 330) {qrot=qrot-180;}
+        movemotor("black",hrot,qrot);
+    } else {
+        movemotor("black",HWPang,QWPang);
+    }
 }
 /************************************************************************************************
 *                                                                                               *
@@ -958,6 +1177,9 @@ void cagecontrol::LoadConfig()
     motorstab->findChild<QGroupBox*>("bluebox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[3]);
     motorstab->findChild<QGroupBox*>("whitebox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[4]);
     motorstab->findChild<QGroupBox*>("blackbox")->findChild<QCheckBox*>("invertcb")->setChecked(invert[5]);
+
+    useoffset=settings->value("GUI/OFFSET").toBool();
+    tabs->findChild<QCheckBox*>("offsetcb")->setChecked(useoffset);
 
     tabs->findChild<QDoubleSpinBox*>("redHWP0sb")->setValue(HWP0[0]);
     tabs->findChild<QDoubleSpinBox*>("redQWP0sb")->setValue(QWP0[0]);
@@ -1039,6 +1261,7 @@ void cagecontrol::LoadConfig()
     tmpint=settings->value("NETWORK/UDDPPORT",0).toInt();
     udpport=tmpint;
     tabs->findChild<QSpinBox*>("port")->setValue(tmpint);
+
 }
 
 /************************************************************************************************
@@ -1080,6 +1303,8 @@ void cagecontrol::SaveConfig()
         settings->setValue("MOTORS/QWPNUM/"+QString::number(i),QWPmnum[i]);
         settings->setValue("GUI/INVERT/"+QString::number(i),invert[i]);
     }
+
+    settings->setValue("GUI/OFFSET",useoffset);
 
     settings->sync();
 }
@@ -1152,19 +1377,26 @@ void cagecontrol::slot_moveHV(QString color)
     double qwprot=0;
     updatestatus("From UDP: move " + color + " to H/V");
     if (motorName.contains(color.toLower())) {
-        int i = motorName.indexOf(color.toLower());
-        if (invert[i]) {
+        int idx = motorName.indexOf(color.toLower());
+        if (invert[idx]) {
             hwprot = 45;
             qwprot = 0;
         } else {
             hwprot = 0;
             qwprot = 0;
         }
-        movemotor(color.toLower(),HWP0[i]+hwprot,QWP0[i]+qwprot);
-        HWPcust[i]=HWP0[i]+hwprot;
-        updateUI();
-        QWPcust[i]=QWP0[i]+hwprot;
-        updateUI();
+        movemotor(color.toLower(),HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+        if (useoffset) {
+            HWPcust[idx]=hwprot;
+            updateUI();
+            QWPcust[idx]=qwprot;
+            updateUI();
+        } else {
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+qwprot;
+            updateUI();
+            }
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
@@ -1176,10 +1408,17 @@ void cagecontrol::slot_moveHV(QString color)
                 qwprot = 0;
             }
             movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
-            HWPcust[idx]=HWP0[idx]+hwprot;
-            updateUI();
-            QWPcust[idx]=QWP0[idx]+hwprot;
-        updateUI();
+            if (useoffset) {
+                HWPcust[idx]=hwprot;
+                updateUI();
+                QWPcust[idx]=qwprot;
+                updateUI();
+            } else {
+                HWPcust[idx]=HWP0[idx]+hwprot;
+                updateUI();
+                QWPcust[idx]=QWP0[idx]+qwprot;
+                updateUI();
+            }
         }
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
@@ -1196,19 +1435,26 @@ void cagecontrol::slot_movePM(QString color)
     double qwprot=0;
     updatestatus("From UDP: move " + color + " to P/M");
     if (motorName.contains(color.toLower())) {
-        int i = motorName.indexOf(color.toLower());
-        if (invert[i]) {
+        int idx = motorName.indexOf(color.toLower());
+        if (invert[idx]) {
             hwprot = 67.5;
             qwprot = 45;
         } else {
             hwprot = 22.5;
             qwprot = 45;
         }
-        movemotor(color.toLower(),HWP0[i]+hwprot,QWP0[i]+qwprot);
-        HWPcust[i]=HWP0[i]+hwprot;
-        updateUI();
-        QWPcust[i]=QWP0[i]+hwprot;
-        updateUI();
+        movemotor(color.toLower(),HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+        if (useoffset) {
+            HWPcust[idx]=hwprot;
+            updateUI();
+            QWPcust[idx]=qwprot;
+            updateUI();
+        } else {
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+qwprot;
+            updateUI();
+            }
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
@@ -1220,10 +1466,17 @@ void cagecontrol::slot_movePM(QString color)
                 qwprot = 45;
             }
             movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
-            HWPcust[idx]=HWP0[idx]+hwprot;
-            updateUI();
-            QWPcust[idx]=QWP0[idx]+hwprot;
-            updateUI();
+            if (useoffset) {
+                HWPcust[idx]=hwprot;
+                updateUI();
+                QWPcust[idx]=qwprot;
+                updateUI();
+            } else {
+                HWPcust[idx]=HWP0[idx]+hwprot;
+                updateUI();
+                QWPcust[idx]=QWP0[idx]+qwprot;
+                updateUI();
+            }
         }
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
@@ -1241,19 +1494,26 @@ void cagecontrol::slot_moveLR(QString color)
     updatestatus("From UDP: move " + color + " to R/L");
     // TODO: waveplate settings for circular
     if (motorName.contains(color.toLower())) {
-        int i = motorName.indexOf(color.toLower());
-        if (invert[i]) {
+        int idx = motorName.indexOf(color.toLower());
+        if (invert[idx]) {
             hwprot = 67.5;
             qwprot = 0;
         } else {
             hwprot = 22.5;
             qwprot = 0;
         }
-        movemotor(color.toLower(),HWP0[i]+hwprot,QWP0[i]+qwprot);
-        HWPcust[i]=HWP0[i]+hwprot;
-        updateUI();
-        QWPcust[i]=QWP0[i]+hwprot;
-        updateUI();
+        movemotor(color.toLower(),HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+        if (useoffset) {
+            HWPcust[idx]=hwprot;
+            updateUI();
+            QWPcust[idx]=qwprot;
+            updateUI();
+        } else {
+            HWPcust[idx]=HWP0[idx]+hwprot;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+qwprot;
+            updateUI();
+            }
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
@@ -1265,10 +1525,17 @@ void cagecontrol::slot_moveLR(QString color)
                 qwprot = 0;
             }
             movemotor(motorName[idx],HWP0[idx]+hwprot,QWP0[idx]+qwprot);
-            HWPcust[idx]=HWP0[idx]+hwprot;
-            updateUI();
-            QWPcust[idx]=QWP0[idx]+hwprot;
-            updateUI();
+            if (useoffset) {
+                HWPcust[idx]=hwprot;
+                updateUI();
+                QWPcust[idx]=qwprot;
+                updateUI();
+            } else {
+                HWPcust[idx]=HWP0[idx]+hwprot;
+                updateUI();
+                QWPcust[idx]=QWP0[idx]+qwprot;
+                updateUI();
+            }
         }
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
@@ -1283,12 +1550,34 @@ void cagecontrol::slot_movemotors(QString color, double HWPang, double QWPang)
 {
     updatestatus("From UDP: move " + color + " to HWP " + QString::number(HWPang) + " QWP " + QString::number(QWPang));
     if (motorName.contains(color.toLower())) {
-        int i = motorName.indexOf(color.toLower());
+        int idx = motorName.indexOf(color.toLower());
         movemotor(color.toLower(),HWPang,QWPang);
+        if (useoffset) {
+            HWPcust[idx]=HWPang;
+            updateUI();
+            QWPcust[idx]=QWPang;
+            updateUI();
+        } else {
+            HWPcust[idx]=HWP0[idx]+HWPang;
+            updateUI();
+            QWPcust[idx]=QWP0[idx]+QWPang;
+            updateUI();
+            }
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
             movemotor(motorName[idx],HWPang,QWPang);
+            if (useoffset) {
+                HWPcust[idx]=HWPang;
+                updateUI();
+                QWPcust[idx]=QWPang;
+                updateUI();
+            } else {
+                HWPcust[idx]=HWP0[idx]+HWPang;
+                updateUI();
+                QWPcust[idx]=QWP0[idx]+QWPang;
+                updateUI();
+            }
         }
     } else {
         DEBUG_ERROR("Cage color unknown. Got: %s\n", color.toLocal8Bit().data());
@@ -1299,4 +1588,10 @@ void cagecontrol::updatestatus(QString msg)
 {
     status->showMessage(msg);
     //TODO: write to logfile
+}
+
+void cagecontrol::slot_changeoffsetusage(bool uo_in)
+{
+    useoffset=uo_in;
+    updatestatus("UDP: useoffset "+QString::number(uo_in));
 }

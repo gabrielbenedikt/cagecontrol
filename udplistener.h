@@ -40,7 +40,12 @@ private:
 
 signals:
     /*!
-     * \brief Move moves the waveplates in a cage to certain angles
+     * \brief changeoffsetusage emitted when massage to change usage of offset is received
+     * \param useoffset true if waveplate offset is to be used
+     */
+    void changeoffsetusage(bool useoffset);
+    /*!
+     * \brief Move emitted when massage to move the waveplates in a cage to certain angles is received
      * \param controller either colorcode of cage or 'all'
      * \param HWPang angle of the HWP in degree
      * \param QWPang angle of the QWP in degree
@@ -48,19 +53,19 @@ signals:
     void Move(QString controller, double HWPang, double QWPang);
 
     /*!
-     * \brief MoveHV moves cage to H/V basis
+     * \brief MoveHV emitted when massage to move cage to H/V basis is received
      * \param controller either colorcode of stage, or 'all'
      */
     void MoveHV(QString controller);
 
     /*!
-     * \brief MovePM moves cage to P/M basis
+     * \brief MovePM emitted when massage to move cage to P/M basis is received
      * \param controller either colorcode of stage, or 'all'
      */
     void MovePM(QString controller);
 
     /*!
-     * \brief MoveLR moves cage to R/L basis
+     * \brief MoveLR emitted when massage to move cage to R/L basis is received
      * \param controller either colorcode of stage, or 'all'
      */
     void MoveLR(QString controller);

@@ -122,5 +122,14 @@ void UDPlistener::processCommands(QString msg)
             DEBUG_ERROR("Move motors: expected 2 or 3 parameters, got %d. msg: %s\n", params.length(), msg.toLocal8Bit().data());
         }
     }
-}
 
+    //Useoffset?
+    refmsg="useoffset";
+    if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
+        msg.chop(1);
+        msg.remove(0,refmsg.length()+1);
+        bool useoffset=msg.toInt();
+        emit changeoffsetusage(useoffset);
+    }
+
+}

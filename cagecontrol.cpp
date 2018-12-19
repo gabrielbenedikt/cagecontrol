@@ -300,7 +300,7 @@ void cagecontrol::setupUI(QGridLayout *layout)
     allhvbtn->setObjectName("allhbbutton");
     QPushButton *allpmbtn = new QPushButton("+/- all");
     allpmbtn->setObjectName("allsetbutton");
-    QPushButton *alllrbtn = new QPushButton("L/R all");
+    QPushButton *alllrbtn = new QPushButton("R/L all");
     alllrbtn->setObjectName("alllrbutton");
     buttons->addWidget(allsetbtn,1,1,1,1);
     buttons->addWidget(allhvbtn,1,2,1,1);
@@ -1335,6 +1335,7 @@ void cagecontrol::motorGB(QGroupBox *gb, QString id)
     QLabel *QWPlabel = new QLabel("QWP");
     QCheckBox *invcb = new QCheckBox("invert");
     invcb->setObjectName("invertcb");
+    invcb->setToolTip("Rotates predefined bases: HV->VH, PM->MP, RL->LR");
 
 
     layout->addWidget(HWPlabel  ,1,1,1,1);

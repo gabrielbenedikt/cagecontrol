@@ -1682,7 +1682,7 @@ void cagecontrol::motorGB(QGroupBox *gb, QString id)
 void cagecontrol::updatestatus(QString msg)
 {
     status->showMessage(msg);
-    DEBUG_INFO("%s\n",msg.toLocal8Bit().data())
+    DEBUG_INFO("%s\n",msg.toLocal8Bit().data());
     //TODO: write to logfile
 }
 
@@ -1738,11 +1738,11 @@ void cagecontrol::changebases()
             updatestatus("current basis: " + currentbasis.join(' '));
             for (QString s : motorName) {
                 int idx = motorName.indexOf(s);
-                if (currentbasis[idx].toLower()=='x') { //PM
+                if (currentbasis[idx].toLower()=="x") { //PM
                     movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
-                } else if (currentbasis[idx].toLower()=='y') { //RL
+                } else if (currentbasis[idx].toLower()=="y") { //RL
                     movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]);
-                } else if (currentbasis[idx].toLower()=='z') { //HV
+                } else if (currentbasis[idx].toLower()=="z") { //HV
                     movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
                 } else {
                     DEBUG_ERROR("unknown basis: %s\n",currentbasis[idx].toLower().toLocal8Bit().data());
@@ -1760,11 +1760,11 @@ void cagecontrol::changebases()
         updatestatus("current basis: " + currentbasis.join(' '));
         for (QString s : motorName) {
             int idx = motorName.indexOf(s);
-            if (currentbasis[idx].toLower()=='x') { //PM
+            if (currentbasis[idx].toLower()=="x") { //PM
                 movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
-            } else if (currentbasis[idx].toLower()=='y') { //RL
+            } else if (currentbasis[idx].toLower()=="y") { //RL
                 movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]);
-            } else if (currentbasis[idx].toLower()=='z') { //HV
+            } else if (currentbasis[idx].toLower()=="z") { //HV
                 movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
             } else {
                 DEBUG_ERROR("unknown basis: %s\n",currentbasis[idx].toLower().toLocal8Bit().data());

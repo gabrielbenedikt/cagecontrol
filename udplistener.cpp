@@ -1,9 +1,7 @@
 #include "udplistener.h"
 
 /************************************************************************************************
-*                                                                                               *
 *                                UDPlistener::UDPlistener                                       *
-*                                                                                               *
 ************************************************************************************************/
 UDPlistener::UDPlistener(QSettings *insettings, QObject *parent) : QObject(parent)
 {
@@ -14,9 +12,7 @@ UDPlistener::UDPlistener(QSettings *insettings, QObject *parent) : QObject(paren
 }
 
 /************************************************************************************************
-*                                                                                               *
 *                                   UDPlistener::bind                                           *
-*                                                                                               *
 ************************************************************************************************/
 void UDPlistener::bind()
 {
@@ -44,9 +40,7 @@ void UDPlistener::bind()
 }
 
 /************************************************************************************************
-*                                                                                               *
 *                          UDPlistener::processPendingDatagrams                                 *
-*                                                                                               *
 ************************************************************************************************/
 void UDPlistener::processPendingDatagrams()
 {
@@ -61,17 +55,12 @@ void UDPlistener::processPendingDatagrams()
 
     in >> message;
 
-    //DEBUG_INFO("Received control message: %s\n", message.toLatin1().data());
-    //processCommands(message);
-
     DEBUG_INFO("Received control message: %s\n", datagram.toStdString().c_str());
     processCommands(datagram);
 }
 
 /************************************************************************************************
-*                                                                                               *
 *                              UDPlistener::processCommands                                     *
-*                                                                                               *
 ************************************************************************************************/
 void UDPlistener::processCommands(QString msg)
 {
@@ -85,6 +74,7 @@ void UDPlistener::processCommands(QString msg)
     bool ok;
 
     msg=msg.toLower();
+    emit showmsg("UDP: "+msg);
 
     // Move motors?
     refmsg="move";
@@ -114,7 +104,7 @@ void UDPlistener::processCommands(QString msg)
             } else if (basis=="pm") {
                 emit(MovePM(motorcolor));
             } else if (basis=="lr") {
-                emit(MoveLR(motorcolor));
+                emit(MoveRL(motorcolor));
             } else {
                 DEBUG_ERROR("Expected basis strings to be 'HV', 'PM', 'LR'. Got: %s\n", basis.toLocal8Bit().data());
             }

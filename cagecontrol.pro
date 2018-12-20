@@ -58,7 +58,8 @@ SOURCES += \
         cagecontrol.cpp \
     motor.cpp \
     udplistener.cpp \
-    helper.cpp
+    helper.cpp \
+    cqpushbutton.cpp
 
 HEADERS += \
         cagecontrol.h \
@@ -67,7 +68,8 @@ HEADERS += \
     version.h \
     motor.h \
     udplistener.h \
-    helper.h
+    helper.h \
+    cqpushbutton.h
 
 #FORMS += \
 #        cagecontrol.ui

@@ -74,7 +74,13 @@ signals:
      * \brief MoveLR emitted when massage to move cage to R/L basis is received
      * \param controller either colorcode of stage, or 'all'
      */
-    void MoveLR(QString controller);
+    void MoveRL(QString controller);
+
+    /*!
+     * \brief showmsg submits QString to show in status bar
+     * \param msg message
+     */
+    void showmsg(QString msg);
 
 
 private slots:

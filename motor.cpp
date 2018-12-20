@@ -15,9 +15,7 @@
 QT_USE_NAMESPACE
 
 /************************************************************************************************
-*                                                                                               *
 *                                 Motor::Motor                                                  *
-*                                                                                               *
 ************************************************************************************************/
 Motor::Motor(void)
 {
@@ -33,10 +31,6 @@ Motor::Motor(void)
     hometimer.setSingleShot(true);
     bothtimer.setSingleShot(true);
 
-    //connect(serial, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error), this, &Motor::handleError);
-    //connect(serial, &QSerialPort::readyRead, this, &Motor::read);
-
-    //connect(&hometimer, &QTimer::timeout, this, &Motor::command_home);
     connect(&bothtimer, &QTimer::timeout, this, &Motor::moveboth);
 
     movebothstep=0;
@@ -45,9 +39,7 @@ Motor::Motor(void)
 }//Motor::Motor(void)
 
 /************************************************************************************************
-*                                                                                               *
 *                                 Motor::~Motor                                                 *
-*                                                                                               *
 ************************************************************************************************/
 Motor::~Motor()
 {
@@ -55,6 +47,9 @@ Motor::~Motor()
     delete serial;
 }//Motor::~Motor()
 
+/************************************************************************************************
+*                                    Motor::open                                                *
+************************************************************************************************/
 void Motor::open(QString port)
 {
     DEBUG_INFO("called\n");
@@ -71,6 +66,10 @@ void Motor::open(QString port)
     }
     DEBUG_INFO("reached End\n");
 }
+
+/************************************************************************************************
+*                                    Motor::close                                               *
+************************************************************************************************/
 void Motor::close()
 {
     if (serial->isOpen())
@@ -79,8 +78,16 @@ void Motor::close()
 
     emit(ConnectionClosed());
 }
+
+/************************************************************************************************
+*                                    Motor::read                                                *
+************************************************************************************************/
 void Motor::read()
 { }
+
+/************************************************************************************************
+*                                    Motor::write                                               *
+************************************************************************************************/
 void Motor::write(const QByteArray &data)
 {
     #if DEBUG
@@ -88,6 +95,9 @@ void Motor::write(const QByteArray &data)
     #endif
     serial->write(data);
 }
+/************************************************************************************************
+*                                    Motor::open                                                *
+************************************************************************************************/
 void Motor::handleError(QSerialPort::SerialPortError error)
 {
     if (error == QSerialPort::ResourceError) {
@@ -95,34 +105,66 @@ void Motor::handleError(QSerialPort::SerialPortError error)
         close();
     }
 }
+
+/************************************************************************************************
+*                               Motor::showStatusMessage                                        *
+************************************************************************************************/
 void Motor::showStatusMessage(const QString &message)
 {
     publicmotorstatusmessage = message;
     emit motorstatusmessage(publicmotorstatusmessage);
 }
+
+/************************************************************************************************
+*                                    Motor::isopen                                              *
+************************************************************************************************/
 bool Motor::isopen()
 {
     return serialconnectionok;
 }
+
+/************************************************************************************************
+*                                Motor::command_park                                            *
+************************************************************************************************/
 void Motor::command_park()
 {
     DEBUG_INFO("Going back to mechanical stop.");
     write("s2880\r");
 }
+
+/************************************************************************************************
+*                                Motor::command_home                                            *
+************************************************************************************************/
 void Motor::command_home()
 { }
+
+/************************************************************************************************
+*                                Motor::command_info                                            *
+************************************************************************************************/
 void Motor::command_info()
 {
     write("i\r");
 }
+
+/************************************************************************************************
+*                                Motor::command_help                                            *
+************************************************************************************************/
 void Motor::command_help()
 {
     write("h\r");
 }
+
+/************************************************************************************************
+*                            Motor::command_frequency_sweep                                     *
+************************************************************************************************/
 void Motor::command_frequency_sweep()
 {
     write("p\r");
 }
+
+/************************************************************************************************
+*                             Motor::command_singlestep                                         *
+************************************************************************************************/
 void Motor::command_singlestep(QString dirstring)
 {
     DEBUG_INFO("%s%s, Going 1 step in direction: ", dirstring.toLocal8Bit().data(), "\n");
@@ -137,6 +179,10 @@ void Motor::command_singlestep(QString dirstring)
     commandText.append(QChar::CarriageReturn);
     write(commandText.toLocal8Bit());
 }
+
+/************************************************************************************************
+*                                  Motor::command_step                                          *
+************************************************************************************************/
 void Motor::command_step(uint16_t numsteps, QString dirstring)
 {
     DEBUG_INFO("%d %s %s%s, Going ", numsteps, "steps in direction: ", dirstring.toLocal8Bit().data(), "\n");
@@ -149,6 +195,10 @@ void Motor::command_step(uint16_t numsteps, QString dirstring)
     commandText.append(QChar::CarriageReturn);
     write(commandText.toLocal8Bit());
 }
+
+/************************************************************************************************
+*                             Motor::command_microstep                                          *
+************************************************************************************************/
 void Motor::command_microstep(uint16_t nummsteps, QString dirstring)
 {
     DEBUG_INFO("%d %s %s%s, Going ", nummsteps, "microsteps in direction: ", dirstring.toLocal8Bit().data(), "\n");
@@ -161,9 +211,16 @@ void Motor::command_microstep(uint16_t nummsteps, QString dirstring)
     commandText.append(QChar::CarriageReturn);
     write(commandText.toLocal8Bit());
 }
+
+/************************************************************************************************
+*                                    Motor::stop                                                *
+************************************************************************************************/
 void Motor::stop(bool stop)
 { }
 
+/************************************************************************************************
+*                              Motor::command_moveboth                                          *
+************************************************************************************************/
 void Motor::command_moveboth(double ang1, double ang2)
 {
     motor1steps=ang1*2880/360;
@@ -171,6 +228,10 @@ void Motor::command_moveboth(double ang1, double ang2)
     movebothstep=0;
     bothtimer.start(1);
 }
+
+/************************************************************************************************
+*                                  Motor::moveboth                                              *
+************************************************************************************************/
 void Motor::moveboth()
 {
 #if 0

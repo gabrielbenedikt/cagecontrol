@@ -1,6 +1,7 @@
 #ifndef CAGECONTROL_H
 #define CAGECONTROL_H
 
+#include "cqpushbutton.h"
 #include "debug.h"
 #include "motor.h"
 #include "udplistener.h"
@@ -69,26 +70,34 @@ public slots:
      * If (useoffset==false), one needs to rotate the motor to 60°.
      */
     void slot_changeoffsetusage(bool uo_in);
+
     /*!
-     * \brief moveHV
-     * \param color colorcode of the cage, or 'all'
-     */
-    void slot_moveHV(QString color);
-    /*!
-     * \brief movePM
-     * \param color colorcode of the cage, or 'all'
-     */
-    void slot_movePM(QString color);
-    /*!
-     * \brief moveLR
-     * \param color colorcode of the cage, or 'all'
-     */
-    void slot_moveLR(QString color);
-    /*!
-     * \brief movemotors
+     * \brief slot_movemotors
      * \param color colorcode of the cage, or 'all'
      */
     void slot_movemotors(QString color, double HWPang, double QWPang);
+
+    /*!
+     * \brief moveHV moves cage with colorcode id to H/V basis
+     * \param id colorcode of cage, or "all"
+     */
+    void moveHV(QString id);
+    /*!
+     * \brief movePM moves cage with colorcode id to P/M basis
+     * \param id colorcode of cage, or "all"
+     */
+    void movePM(QString id);
+    /*!
+     * \brief moveRL moves cage with colorcode id to R/L basis
+     * \param id colorcode of cage, or "all"
+     */
+    void moveRL(QString id);
+
+    /*!
+     * \brief moveANG moves cage with colorcode id to angles set in GUI
+     * \param id colorcode of cage, or "all"
+     */
+    void moveANG(QString id);
 private:
     QString basesfname;                                 //!< path and filename of file containing bases
     QTimer basestimer;                                  //!< Runs out every \see basestime seconds to change bases
@@ -183,119 +192,6 @@ private:
      */
     void movemotor(QString motor, double HWPang, double QWPang);
 
-    //Note: there must be a better way to do this...
-    /*!
-     * \brief moveredHV moves red cage to HV basis
-     */
-    void moveredHV();
-    /*!
-     * \brief moveredPM moves red cage to PM basis
-     */
-    void moveredPM();
-    /*!
-     * \brief moveredLR moves red cage to RL basis
-     */
-    void moveredLR();
-    /*!
-     * \brief moveredANG  moves red cage to the angles set in the GUI
-     */
-    void moveredANG();
-    /*!
-     * \brief movebrownHV moves brown cage to HV basis
-     */
-    void movebrownHV();
-    /*!
-     * \brief movebrownPM moves brown cage to PM basis
-     */
-    void movebrownPM();
-    /*!
-     * \brief movebrownLR moves brown cage to RL basis
-     */
-    void movebrownLR();
-    /*!
-     * \brief movebrownANG moves brown cage to the angles set in the GUI
-     */
-    void movebrownANG();
-    /*!
-     * \brief movegreenHV moves green cage to HV basis
-     */
-    void movegreenHV();
-    /*!
-     * \brief movegreenPM moves green cage to PM basis
-     */
-    void movegreenPM();
-    /*!
-     * \brief movegreenLR moves green cage to RL basis
-     */
-    void movegreenLR();
-    /*!
-     * \brief movegreenANG moves green cage to the angles set in the GUI
-     */
-    void movegreenANG();
-    /*!
-     * \brief moveblueHV moves blue cage to HV basis
-     */
-    void moveblueHV();
-    /*!
-     * \brief movebluePM moves blue cage to PM basis
-     */
-    void movebluePM();
-    /*!
-     * \brief moveblueLR moves blue cage to RL basis
-     */
-    void moveblueLR();
-    /*!
-     * \brief moveblueANG moves white cage to the angles set in the GUI
-     */
-    void moveblueANG();
-    /*!
-     * \brief movewhiteHV moves white cage to HV basis
-     */
-    void movewhiteHV();
-    /*!
-     * \brief movewhitePM moves white cage to PM basis
-     */
-    void movewhitePM();
-    /*!
-     * \brief movewhiteLR moves white cage to RL basis
-     */
-    void movewhiteLR();
-    /*!
-     * \brief movewhiteANG moves black cage to the angles set in the GUI
-     */
-    void movewhiteANG();
-    /*!
-     * \brief moveblackHV moves black cage to HV basis
-     */
-    void moveblackHV();
-    /*!
-     * \brief moveblackPM moves black cage to PM basis
-     */
-    void moveblackPM();
-    /*!
-     * \brief moveblackLR moves black cage to RL basis
-     */
-    void moveblackLR();
-    /*!
-     * \brief moveblackANG
-     */
-    void moveblackANG();
-    /*!
-     * \brief moveallhv
-     */
-    void moveallhv();
-    /*!
-     * \brief moveallpm
-     */
-    void moveallpm();
-    /*!
-     * \brief movealllr
-     */
-    void movealllr();
-    /*!
-     * \brief moveallarb
-     */
-    void moveallarb();
 };
 
 #endif // CAGECONTROL_H

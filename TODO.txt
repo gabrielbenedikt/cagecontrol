@@ -1,3 +1,4 @@
+-) window to set predefined bases that consecutively change on single click
 -) Read controller feedback message to check that motor did not get stuck
 -) Verify that 'go n steps' vs 'to to next edge, n times' does not make a difference
 -) Extend documentation

@@ -332,7 +332,7 @@ void cagecontrol::moveHV(QString id)
     for (QString s : motorName) {
         int idx = motorName.indexOf(s);
         if ((id=="all") || (id==s)) {
-            if (invert[0]) {
+            if (invert[idx]) {
                 hwprot=45;
                 qwprot=0;
             } else {
@@ -367,7 +367,7 @@ void cagecontrol::movePM(QString id)
     for (QString s : motorName) {
         int idx = motorName.indexOf(s);
         if ((id=="all") || (id==s)) {
-            if (invert[0]) {
+            if (invert[idx]) {
                 hwprot=67.5;
                 qwprot=45;
             } else {
@@ -402,7 +402,7 @@ void cagecontrol::moveRL(QString id)
     for (QString s : motorName) {
         int idx = motorName.indexOf(s);
         if ((id=="all") || (id==s)) {
-            if (invert[0]) {
+            if (invert[idx]) {
                 hwprot=67.5;
                 qwprot=0;
             } else {

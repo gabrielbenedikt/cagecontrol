@@ -78,6 +78,13 @@ public slots:
     void slot_movemotors(QString color, double HWPang, double QWPang);
 
     /*!
+     * \brief useinvertedbases
+     * \param id colorcode of cage, or 'all'
+     * \param inv true if consecutive bases changes shall be inverted (using e.g. V/H instead of H/V)
+     */
+    void useinvertedbases(QString id, bool inv);
+
+    /*!
      * \brief moveHV moves cage with colorcode id to H/V basis
      * \param id colorcode of cage, or "all"
      */

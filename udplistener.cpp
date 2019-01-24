@@ -135,4 +135,24 @@ void UDPlistener::processCommands(QString msg)
         emit(changeWPangles(dbllist));
     }
 
+    // toggle invert?
+    refmsg="useinvertedbases";
+    if (msg.startsWith(refmsg+'(') && msg.endsWith(')')) {
+        msg.chop(1);//remove ')'
+        msg.remove(0,refmsg.length()+1);//remove command body + '('
+        params = msg.split(',');
+        // we expect 2 parameters
+        if (params.length()==2) {
+            motorcolor=params[0].toLower();
+            bool inv=params[1].toUInt(&ok);
+            if (ok) {
+                emit(invert(motorcolor,inv));
+                    //emit(Move(motorcolor,HWPang,QWPang));
+            } else {
+                DEBUG_ERROR("Conversion to double failed: %s\n", params[1].toLocal8Bit().data());
+            }
+        } else {
+            DEBUG_ERROR("Move motors: expected 2 or 3 parameters, got %d. msg: %s\n", params.length(), msg.toLocal8Bit().data());
+        }
+    }
 }

@@ -101,6 +101,7 @@ void cagecontrol::initconnections()
     connect(udplistener, &UDPlistener::MoveHV, this, &cagecontrol::moveHV);
     connect(udplistener, &UDPlistener::MovePM, this, &cagecontrol::movePM);
     connect(udplistener, &UDPlistener::MoveRL, this, &cagecontrol::moveRL);
+    connect(udplistener, &UDPlistener::invert, this, &cagecontrol::useinvertedbases);
     connect(udplistener, &UDPlistener::changeoffsetusage, this, &cagecontrol::slot_changeoffsetusage);
     connect(udplistener, &UDPlistener::changeWPangles,this,&cagecontrol::slot_changeWPangles);
     connect(udplistener, &UDPlistener::showmsg,this,&cagecontrol::updatestatus);
@@ -762,4 +763,22 @@ void cagecontrol::changebases()
         ++currentbasisidx;
         basestimer.start(basestime*1000);
     }
+}
+
+void cagecontrol::useinvertedbases(QString id, bool inv)
+{
+    pauseupdating=true;
+    if (id.toLower()=="all") {
+        for (int i=0; i<invert.length(); ++i) {
+            invert[i]=inv;
+        }
+        updateUI();
+    } else if (motorName.contains(id.toLower())) {
+        int idx = motorName.indexOf(id);
+        invert[idx]=inv;
+        updateUI();
+    } else {
+        DEBUG_ERROR("no matching colorcode of cage found in vector motorName: %s", id.toLocal8Bit().data());
+    }
+    pauseupdating=false;
 }

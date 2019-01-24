@@ -77,6 +77,13 @@ signals:
     void MoveRL(QString controller);
 
     /*!
+     * \brief invert emitted when next bases change shall be inverted (V/H instead of H/V)
+     * \param motorcolor either colorcode of stage, or 'all'
+     * \param invert use inverted bases if true; don't do so if false
+     */
+    void invert(QString motorcolor, bool inv);
+
+    /*!
      * \brief showmsg submits QString to show in status bar
      * \param msg message
      */

@@ -502,7 +502,7 @@ void cagecontrol::setupUI(QGridLayout *layout)
     CQPushButton *allpmbtn = new CQPushButton("+/- all","all");
     allpmbtn->setObjectName("allpmbutton");
     CQPushButton *allrlbtn = new CQPushButton("R/L all","all");
-    allrlbtn->setObjectName("allbutton");
+    allrlbtn->setObjectName("allrlbutton");
     buttons->addWidget(allsetbtn,1,1,1,1);
     buttons->addWidget(allhvbtn,1,2,1,1);
     buttons->addWidget(allpmbtn,1,3,1,1);

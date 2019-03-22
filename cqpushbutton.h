@@ -19,11 +19,14 @@ public slots:
     QString getid();            //!< Returns QString id which is sent when signal pressed_id is emitted. \see setid \see pressed_id \see id
     void triggerOutput();       //!< Function to capture Qt's standard &QAbstracButton::pressed(void) signal and emits pressed_id(QString) instead.
 
+private slots:
+    void mousePressEvent(QMouseEvent *e);
 signals:
     /*!
      * \brief pressed_id signal emitted when button is pressed. Carries QString id. \see setid \see getid \see id
      */
     void pressed_id(QString);
+    void rightClicked();
 };
 
 #endif // CQPUSHBUTTON_H

@@ -1,4 +1,6 @@
 #include "cqpushbutton.h"
+#include "QDebug"
+#include "QMouseEvent"
 
 /************************************************************************************************
 *                             CQPushButton::CQPushButton                                        *
@@ -32,4 +34,16 @@ QString CQPushButton::getid()
 void CQPushButton::triggerOutput()
 {
     emit pressed_id(id);
+}
+
+/************************************************************************************************
+*                            CQPushButton::mousePressEvent                                      *
+************************************************************************************************/
+void CQPushButton::mousePressEvent(QMouseEvent *e)
+{
+    if(e->button()==Qt::RightButton) {
+        emit this->clicked();
+    } else {
+        emit this->clicked();
+    }
 }

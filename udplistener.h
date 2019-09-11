@@ -54,9 +54,10 @@ signals:
      * \brief Move emitted when massage to move the waveplates in a cage to certain angles is received
      * \param controller either colorcode of cage or 'all'
      * \param HWPang angle of the HWP in degree
-     * \param QWPang angle of the QWP in degree
+     * \param QWPang angle of the 1st QWP in degree
+     * \param QWP2ang angle of the 2nd QWP in degree
      */
-    void Move(QString controller, double HWPang, double QWPang);
+    void Move(QString controller, double HWPang, double QWPang, double QWP2ang);
 
     /*!
      * \brief MoveHV emitted when massage to move cage to H/V basis is received

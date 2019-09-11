@@ -30,10 +30,13 @@ Motor::Motor(void)
 
     hometimer.setSingleShot(true);
     bothtimer.setSingleShot(true);
+    threetimer.setSingleShot(true);
 
     connect(&bothtimer, &QTimer::timeout, this, &Motor::moveboth);
+    connect(&threetimer, &QTimer::timeout, this, &Motor::movethree);
 
     movebothstep=0;
+    movethreestep=0;
     motor1steps=0;
     motor1steps=0;
 }//Motor::Motor(void)
@@ -230,6 +233,18 @@ void Motor::command_moveboth(double ang1, double ang2)
 }
 
 /************************************************************************************************
+*                              Motor::command_movethree                                         *
+************************************************************************************************/
+void Motor::command_movethree(int idx1, int idx2, int idx3, double ang1, double ang2, double ang3)
+{
+    motor1steps=ang1*2880/360;
+    motor2steps=ang2*2880/360;
+    motor3steps=ang3*2880/360;
+    movethreestep=0;
+    threetimer.start(1);
+}
+
+/************************************************************************************************
 *                                  Motor::moveboth                                              *
 ************************************************************************************************/
 void Motor::moveboth()
@@ -275,5 +290,23 @@ void Motor::moveboth()
     commandText.append(QChar::CarriageReturn);
     write(commandText.toLocal8Bit());
 #endif
+}
+
+/************************************************************************************************
+*                                  Motor::movethree                                             *
+************************************************************************************************/
+void Motor::movethree()
+{
+    //DEBUG_INFO("%d %s %s%s, Going ", numsteps, "steps in direction: ", dirstring.toLocal8Bit().data(), "\n");
+    QString commandText;
+
+    commandText = "M"+QString::number(motor1idx)+",s-2880,s";
+    commandText.append(QString::number(motor1steps));
+    commandText.append(",M"+QString::number(motor2idx)+",s-2880,s");
+    commandText.append(QString::number(motor2steps));
+    commandText.append(",M"+QString::number(motor3idx)+",s-2880,s");
+    commandText.append(QString::number(motor3steps));
+    commandText.append(QChar::CarriageReturn);
+    write(commandText.toLocal8Bit());
 }
 

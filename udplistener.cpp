@@ -64,7 +64,7 @@ void UDPlistener::processPendingDatagrams()
 ************************************************************************************************/
 void UDPlistener::processCommands(QString msg)
 {
-    int result = 0;
+    //nt result = 0;
     QString refmsg = "";
     QStringList params; params << "" << "";
     double HWPang=0;
@@ -89,7 +89,7 @@ void UDPlistener::processCommands(QString msg)
             if (ok) {
                 QWPang=params[2].toDouble(&ok);
                 if (ok) {
-                    emit(Move(motorcolor,HWPang,QWPang));
+                    emit(Move(motorcolor,HWPang,QWPang,0));
                 } else {
                     DEBUG_ERROR("Conversion to double failed: %s\n", params[2].toLocal8Bit().data());
                 }

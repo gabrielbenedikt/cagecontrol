@@ -8,3 +8,6 @@
 ---) change every n seconds?
 -) implement arbitrary unitaries using 3 waveplates
 ---) two controllers per cage, one shared between 2 cages -> logic needs to be altered (right now, it would attempt to open the serial comm to the shared controller twice - once per cage)
+-) cages with 3 waveplates, 1 controller
+-) button to tick all 'invert' boxes
+-)

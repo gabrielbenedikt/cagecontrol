@@ -1,4 +1,4 @@
-#include "cagecontrol.h"
+﻿#include "cagecontrol.h"
 
 /************************************************************************************************
 *                              cagecontrol::cagecontrol                                         *
@@ -10,18 +10,22 @@ cagecontrol::cagecontrol(QWidget *parent) :
 
     // UI-Setup
     pauseupdating=false;
-    motorName<<"red"<<"brown"<<"green"<<"blue"<<"white"<<"black";
+    motorName<<"red"<<"brown"<<"green"<<"blue"<<"white"<<"black"<<"orange"<<"pink";
     uiMotorGroupBoxes.reserve(motorName.length());
     QWidget *mainwidget = new QWidget();
     QGridLayout *mainlayout = new QGridLayout;
     setupUI(mainlayout);
     HWP0.reserve(motorName.length());
     QWP0.reserve(motorName.length());
+    QWP20.reserve(motorName.length());
     HWPcust.reserve(motorName.length());
     QWPcust.reserve(motorName.length());
+    QWP2cust.reserve(motorName.length());
     HWPmnum.reserve(motorName.length());
     QWPmnum.reserve(motorName.length());
+    QWP2mnum.reserve(motorName.length());
     invert.reserve(motorName.length());
+    isthreewps.reserve(motorName.length());
     useoffset=true;
     currentbasisidx=-1;
     basestime=0;
@@ -53,6 +57,7 @@ void cagecontrol::initconnections()
         connect(gb->findChild<CQPushButton*>("set"),&CQPushButton::pressed_id,this,&cagecontrol::moveANG);
     }
 
+    connect(tabs,&QTabWidget::currentChanged,this,&cagecontrol::updateUI);
     connect(motorstab->findChild<CQPushButton*>("allhvbutton"),&CQPushButton::pressed_id,this,&cagecontrol::moveHV);
     connect(motorstab->findChild<CQPushButton*>("allpmbutton"),&CQPushButton::pressed_id,this,&cagecontrol::movePM);
     connect(motorstab->findChild<CQPushButton*>("allrlbutton"),&CQPushButton::pressed_id,this,&cagecontrol::moveRL);
@@ -129,11 +134,15 @@ void cagecontrol::updatesettings(double d)
             int idx = motorName.indexOf(s);
             HWP0[idx]=tabs->findChild<QDoubleSpinBox*>(s+"HWP0sb")->value();
             QWP0[idx]=tabs->findChild<QDoubleSpinBox*>(s+"QWP0sb")->value();
+            QWP20[idx]=tabs->findChild<QDoubleSpinBox*>(s+"QWP20sb")->value();
             HWPcust[idx]=uiMotorGroupBoxes[idx]->findChild<QDoubleSpinBox*>("HWPsb")->value();
             QWPcust[idx]=uiMotorGroupBoxes[idx]->findChild<QDoubleSpinBox*>("QWPsb")->value();
+            QWP2cust[idx]=uiMotorGroupBoxes[idx]->findChild<QDoubleSpinBox*>("QWP2sb")->value();
             HWPmnum[idx]=tabs->findChild<QSpinBox*>(s+"HWPnum")->value();
             QWPmnum[idx]=tabs->findChild<QSpinBox*>(s+"QWPnum")->value();
+            QWP2mnum[idx]=tabs->findChild<QSpinBox*>(s+"QWP2num")->value();
             invert[idx]=uiMotorGroupBoxes[idx]->findChild<QCheckBox*>("invertcb")->isChecked();
+            isthreewps[idx]=tabs->findChild<QCheckBox*>(s+"threewpcb")->isChecked();
         }
 
         udpport=settingstab->findChild<QSpinBox*>("port")->value();
@@ -143,7 +152,6 @@ void cagecontrol::updatesettings(double d)
         basesfname = tabs->findChild<QLineEdit*>("filele")->text();
         basestime = tabs->findChild<QSpinBox*>("baseschangesb")->value();
     }
-
 }
 
 /************************************************************************************************
@@ -159,18 +167,26 @@ void cagecontrol::LoadConfig()
         QString id = motorName[i];
         HWP0.append(settings->value("MOTORS/HWP/"+QString::number(i)).toDouble());
         QWP0.append(settings->value("MOTORS/QWP/"+QString::number(i)).toDouble());
+        QWP20.append(settings->value("MOTORS/QWP2/"+QString::number(i)).toDouble());
         HWPcust.append(settings->value("GUI/HWP/"+QString::number(i)).toDouble());
         QWPcust.append(settings->value("GUI/QWP/"+QString::number(i)).toDouble());
+        QWP2cust.append(settings->value("GUI/QWP2/"+QString::number(i)).toDouble());
         HWPmnum.append(settings->value("MOTORS/HWPNUM/"+QString::number(i)).toInt());
         QWPmnum.append(settings->value("MOTORS/QWPNUM/"+QString::number(i)).toInt());
+        QWP2mnum.append(settings->value("MOTORS/QWP2NUM/"+QString::number(i)).toInt());
         invert.append(settings->value("GUI/INVERT/"+QString::number(i)).toBool());
+        isthreewps.append(settings->value("GUI/THREEWP/"+QString::number(i)).toBool());
         gb->findChild<QCheckBox*>("invertcb")->setChecked(invert[i]);
         gb->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[i]);
         gb->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[i]);
+        gb->findChild<QDoubleSpinBox*>("QWP2sb")->setValue(QWP2cust[i]);
+        tabs->findChild<QCheckBox*>(id+"threewpcb")->setChecked(isthreewps[i]);
         tabs->findChild<QDoubleSpinBox*>(id+"HWP0sb")->setValue(HWP0[i]);
         tabs->findChild<QDoubleSpinBox*>(id+"QWP0sb")->setValue(QWP0[i]);
+        tabs->findChild<QDoubleSpinBox*>(id+"QWP20sb")->setValue(QWP20[i]);
         tabs->findChild<QSpinBox*>(id+"HWPnum")->setValue(HWPmnum[i]);
         tabs->findChild<QSpinBox*>(id+"QWPnum")->setValue(QWPmnum[i]);
+        tabs->findChild<QSpinBox*>(id+"QWP2num")->setValue(QWP2mnum[i]);
 
         tmpstr = settings->value("MOTORS/COM"+id.toUpper(),"").toString();
         tmpint = tabs->findChild<QComboBox*>(id+"com")->findText(tmpstr);
@@ -205,14 +221,19 @@ void cagecontrol::SaveConfig()
         int i = motorName.indexOf(s);
         settings->setValue("WAVEPLATES/HWP/"+s.toUpper(),tabs->findChild<QDoubleSpinBox*>(s+"HWP0sb")->value());
         settings->setValue("WAVEPLATES/QWP/"+s.toUpper(),tabs->findChild<QDoubleSpinBox*>(s+"QWP0sb")->value());
+        settings->setValue("WAVEPLATES/QWP2/"+s.toUpper(),tabs->findChild<QDoubleSpinBox*>(s+"QWP20sb")->value());
         settings->setValue("MOTORS/COM"+s.toUpper(),tabs->findChild<QComboBox*>(s+"com")->currentText());
         settings->setValue("MOTORS/HWP/"+QString::number(i),HWP0[i]);
         settings->setValue("MOTORS/QWP/"+QString::number(i),QWP0[i]);
+        settings->setValue("MOTORS/QWP2/"+QString::number(i),QWP20[i]);
         settings->setValue("GUI/HWP/"+QString::number(i),HWPcust[i]);
         settings->setValue("GUI/QWP/"+QString::number(i),QWPcust[i]);
+        settings->setValue("GUI/QWP2/"+QString::number(i),QWP2cust[i]);
         settings->setValue("MOTORS/HWPNUM/"+QString::number(i),HWPmnum[i]);
         settings->setValue("MOTORS/QWPNUM/"+QString::number(i),QWPmnum[i]);
+        settings->setValue("MOTORS/QWP2NUM/"+QString::number(i),QWP2mnum[i]);
         settings->setValue("GUI/INVERT/"+QString::number(i),invert[i]);
+        settings->setValue("GUI/THREEWP/"+QString::number(i),isthreewps[i]);
     }
 
     settings->setValue("NETWORK/UDPPORT",tabs->findChild<QSpinBox*>("port")->value());
@@ -223,6 +244,8 @@ void cagecontrol::SaveConfig()
 
     settings->sync();
 }
+
+
 
 /************************************************************************************************
 *                          cagecontrol::slot_changeoffsetusage                                  *
@@ -242,6 +265,16 @@ void cagecontrol::slot_changeWPangles(QVector<double> angles)
         int len = motorName.length();
         HWP0=angles.mid(0,len);
         QWP0=angles.mid(len,2*len);
+        QWP20.fill(0);
+        pauseupdating=true;
+        updateUI();
+        SaveConfig();
+        pauseupdating=false;
+    } else if (angles.length()==3*motorName.length()) {
+        int len = motorName.length();
+        HWP0=angles.mid(0,len);
+        QWP0=angles.mid(len,2*len);
+        QWP20=angles.mid(2*len,3*len);
         pauseupdating=true;
         updateUI();
         SaveConfig();
@@ -267,36 +300,52 @@ cagecontrol::~cagecontrol()
 /************************************************************************************************
 *                           cagecontrol::slot_movemotors                                        *
 ************************************************************************************************/
-void cagecontrol::slot_movemotors(QString color, double HWPang, double QWPang)
+void cagecontrol::slot_movemotors(QString color, double HWPang, double QWPang, double QWP2ang)
 {
-    updatestatus("From UDP: move " + color + " to HWP " + QString::number(HWPang) + " QWP " + QString::number(QWPang));
+    updatestatus("From UDP: move " + color + " to QWP " + QString::number(QWPang) + " HWP " + QString::number(HWPang) + " QWP " + QString::number(QWP2ang));
     if (motorName.contains(color.toLower())) {
         int idx = motorName.indexOf(color.toLower());
-        movemotor(color.toLower(),HWPang,QWPang);
+        if (isthreewps[idx]) {
+            movemotor(color.toLower(),HWPang,QWPang,QWP2ang);
+        } else {
+            movemotor(color.toLower(),HWPang,QWPang);
+        }
         if (useoffset) {
             HWPcust[idx]=HWPang;
             updateUI();
             QWPcust[idx]=QWPang;
+            updateUI();
+            QWP2cust[idx]=QWP2ang;
             updateUI();
         } else {
             HWPcust[idx]=HWP0[idx]+HWPang;
             updateUI();
             QWPcust[idx]=QWP0[idx]+QWPang;
             updateUI();
+            QWP2cust[idx]=QWP20[idx]+QWP2ang;
+            updateUI();
         }
     } else if (color.toLower()=="all") {
         for (Motor* m : motors) {
             int idx = motors.indexOf(m);
-            movemotor(motorName[idx],HWPang,QWPang);
+            if (isthreewps[idx]) {
+                movemotor(motorName[idx],HWPang,QWPang,QWP2ang);
+            } else {
+                movemotor(motorName[idx],HWPang,QWPang);
+            }
             if (useoffset) {
                 HWPcust[idx]=HWPang;
                 updateUI();
                 QWPcust[idx]=QWPang;
                 updateUI();
+                QWP2cust[idx]=QWP2ang;
+                updateUI();
             } else {
                 HWPcust[idx]=HWP0[idx]+HWPang;
                 updateUI();
                 QWPcust[idx]=QWP0[idx]+QWPang;
+                updateUI();
+                QWP2cust[idx]=QWP20[idx]+QWP2ang;
                 updateUI();
             }
         }
@@ -330,6 +379,7 @@ void cagecontrol::moveHV(QString id)
     qDebug()<<"move " << id << " HV";
     double hwprot;
     double qwprot;
+    double qwp2rot;
     for (QString s : motorName) {
         int idx = motorName.indexOf(s);
         if ((id=="all") || (id==s)) {
@@ -340,16 +390,25 @@ void cagecontrol::moveHV(QString id)
                 hwprot=0;
                 qwprot=0;
             }
-            movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            qwp2rot=0;
+            if (isthreewps[idx]) {
+                movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot,QWP20[idx]);
+            } else {
+                movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            }
             if (useoffset) {
                 HWPcust[idx]=hwprot;
                 updateUI();
                 QWPcust[idx]=qwprot;
                 updateUI();
+                QWP2cust[idx]=qwp2rot;
+                updateUI();
             } else {
                 HWPcust[idx]=HWP0[idx]+hwprot;
                 updateUI();
                 QWPcust[idx]=QWP0[idx]+qwprot;
+                updateUI();
+                QWP2cust[idx]=QWP20[idx]+qwp2rot;
                 updateUI();
             }
         }
@@ -365,6 +424,7 @@ void cagecontrol::movePM(QString id)
     qDebug()<<"move " << id << " PM";
     double hwprot;
     double qwprot;
+    double qwp2rot;
     for (QString s : motorName) {
         int idx = motorName.indexOf(s);
         if ((id=="all") || (id==s)) {
@@ -375,16 +435,26 @@ void cagecontrol::movePM(QString id)
                 hwprot=22.5;
                 qwprot=45;
             }
-            movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            qwp2rot=0;
+            if (isthreewps[idx]) {
+                movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot,QWP20[idx]);
+            } else {
+                movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            }
+
             if (useoffset) {
                 HWPcust[idx]=hwprot;
                 updateUI();
                 QWPcust[idx]=qwprot;
                 updateUI();
+                QWP2cust[idx]=qwp2rot;
+                updateUI();
             } else {
                 HWPcust[idx]=HWP0[idx]+hwprot;
                 updateUI();
                 QWPcust[idx]=QWP0[idx]+qwprot;
+                updateUI();
+                QWP2cust[idx]=QWP20[idx]+qwp2rot;
                 updateUI();
             }
         }
@@ -400,6 +470,7 @@ void cagecontrol::moveRL(QString id)
     qDebug()<<"move " << id << " RL";
     double hwprot;
     double qwprot;
+    double qwp2rot;
     for (QString s : motorName) {
         int idx = motorName.indexOf(s);
         if ((id=="all") || (id==s)) {
@@ -410,16 +481,26 @@ void cagecontrol::moveRL(QString id)
                 hwprot=22.5;
                 qwprot=0;
             }
-            movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            qwp2rot=0;
+            if (isthreewps[idx]) {
+                movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot,QWP20[idx]);
+            } else {
+                movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
+            }
+
             if (useoffset) {
                 HWPcust[idx]=hwprot;
                 updateUI();
                 QWPcust[idx]=qwprot;
                 updateUI();
+                QWP2cust[idx]=qwp2rot;
+                updateUI();
             } else {
                 HWPcust[idx]=HWP0[idx]+hwprot;
                 updateUI();
                 QWPcust[idx]=QWP0[idx]+qwprot;
+                updateUI();
+                QWP2cust[idx]=QWP20[idx]+qwp2rot;
                 updateUI();
             }
         }
@@ -437,35 +518,43 @@ void cagecontrol::moveANG(QString id)
             int idx = motorName.indexOf(s);
             double HWPang = uiMotorGroupBoxes[idx]->findChild<QDoubleSpinBox*>("HWPsb")->value();
             double QWPang = uiMotorGroupBoxes[idx]->findChild<QDoubleSpinBox*>("QWPsb")->value();
-            qDebug()<<"move " << s << " HWP:" << HWPang << ", QPW:" << QWPang;
+            double QWP2ang = isthreewps[idx] ? uiMotorGroupBoxes[idx]->findChild<QDoubleSpinBox*>("QWP2sb")->value() : 0;
+            qDebug()<<"move " << s << " QWP:" << QWPang << ", HPW:" << HWPang << ", QWP: " << QWP2ang;
             if (useoffset) {
                 double hrot=HWPang+HWP0[idx];
                 double qrot=QWPang+QWP0[idx];
+                double q2rot=QWP2ang+QWP20[idx];
                 while (hrot > 340) {hrot=hrot-180;}
                 while (qrot > 340) {qrot=qrot-180;}
-                movemotor(s,hrot,qrot);
+                while (q2rot > 340) {q2rot=q2rot-180;}
+                movemotor(s,hrot,qrot,q2rot);
             } else {
-                movemotor(s,HWPang,QWPang);
+                movemotor(s,HWPang,QWPang,QWP2ang);
             }
         }
     }
 }
 
-
 /************************************************************************************************
 *                               cagecontrol::movemotor                                          *
 ************************************************************************************************/
-void cagecontrol::movemotor(QString motor, double HWPang, double QWPang)
+void cagecontrol::movemotor(QString motor, double HWPang, double QWPang, double QWP2ang)
 {
     int i = motorName.indexOf(motor);
-    if ((HWPmnum.at(i)==1) && (QWPmnum.at(i)==2)) {
-        motors.at(i)->command_moveboth(HWPang,QWPang);
-    } else if ((HWPmnum.at(i)==2) && (QWPmnum.at(i)==1)) {
-        motors.at(i)->command_moveboth(QWPang,HWPang);
+    if (!isthreewps[i]) {
+        if ((HWPmnum.at(i)==1) && (QWPmnum.at(i)==2)) {
+            motors.at(i)->command_moveboth(HWPang,QWPang);
+        } else if ((HWPmnum.at(i)==2) && (QWPmnum.at(i)==1)) {
+            motors.at(i)->command_moveboth(QWPang,HWPang);
+        } else {
+            DEBUG_ERROR("undefined motor slot: HWP %i QWP %i\n",HWPmnum.at(i),QWPmnum.at(i));
+        }
     } else {
-        DEBUG_ERROR("undefined motor slot: HWP %i QWP %i\n",HWPmnum.at(i),QWPmnum.at(i));
+        int Q1pos = QWPmnum.at(i);
+        int Hpos =  HWPmnum.at(i);
+        int Q2pos = QWP2mnum.at(i);
+        motors.at(i)->command_movethree(Q1pos, Hpos, Q2pos, QWPang, HWPang, QWP2ang);
     }
-
 }
 
 /************************************************************************************************
@@ -502,7 +591,6 @@ void cagecontrol::setupUI(QGridLayout *layout)
     CQPushButton *allpmbtn = new CQPushButton("+/- all","all");
     allpmbtn->setObjectName("allpmbutton");
     CQPushButton *allrlbtn = new CQPushButton("R/L all","all");
-    allrlbtn->setObjectName("allrlbutton");
     buttons->addWidget(allsetbtn,1,1,1,1);
     buttons->addWidget(allhvbtn,1,2,1,1);
     buttons->addWidget(allpmbtn,1,3,1,1);
@@ -539,8 +627,13 @@ void cagecontrol::setupUI(QGridLayout *layout)
         QDoubleSpinBox *Qdsb = new QDoubleSpinBox();
         Qdsb->setRange(0,340);
         Qdsb->setObjectName(s+"QWP0sb");
+        QDoubleSpinBox *Q2dsb = new QDoubleSpinBox();
+        Q2dsb->setRange(0,340);
+        Q2dsb->setObjectName(s+"QWP20sb");
         QComboBox *cb = new QComboBox();
         cb->setObjectName(s+"com");
+        QCheckBox *threecb = new QCheckBox();
+        threecb->setObjectName(s+"threewpcb");
         foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
             QStringList list;
             list << info.portName();
@@ -550,18 +643,36 @@ void cagecontrol::setupUI(QGridLayout *layout)
         Hsb->setObjectName(s+"HWPnum");
         QSpinBox *Qsb = new QSpinBox();
         Qsb->setObjectName(s+"QWPnum");
+        QSpinBox *Q2sb = new QSpinBox();
+        Q2sb->setObjectName(s+"QWP2num");
         settingslayout->addWidget(label,    idx+2,1,1,1);
         settingslayout->addWidget(Hdsb,     idx+2,2,1,1);
         settingslayout->addWidget(Qdsb,     idx+2,3,1,1);
-        settingslayout->addWidget(cb,       idx+2,4,1,1);
-        settingslayout->addWidget(Hsb,      idx+2,5,1,1);
-        settingslayout->addWidget(Qsb,      idx+2,6,1,1);
+        settingslayout->addWidget(Q2dsb,    idx+2,4,1,1);
+        settingslayout->addWidget(cb,       idx+2,5,1,1);
+        settingslayout->addWidget(Hsb,      idx+2,6,1,1);
+        settingslayout->addWidget(Qsb,      idx+2,7,1,1);
+        settingslayout->addWidget(Q2sb,     idx+2,8,1,1);
+        settingslayout->addWidget(threecb,  idx+2,9,1,1);
+
+        label->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        Hdsb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        Qdsb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        Q2dsb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        cb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        Hsb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        Qsb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        Q2sb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        threecb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     }
     QLabel *settinglabel_HWP = new QLabel("HWP");
-    QLabel *settinglabel_QWP = new QLabel("QWP");
+    QLabel *settinglabel_QWP = new QLabel("QWP1");
+    QLabel *settinglabel_QWP2 = new QLabel("QWP2");
     QLabel *settinglabel_COM = new QLabel("Port");
     QLabel *settinglabel_HWPmnum = new QLabel("HWP motor #");
-    QLabel *settinglabel_QWPmnum = new QLabel("QWP motor #");
+    QLabel *settinglabel_QWPmnum = new QLabel("QWP1 motor #");
+    QLabel *settinglabel_QWP2mnum = new QLabel("QWP2 motor #");
+    QLabel *settinglabel_threewp = new QLabel("3 WPs");
 
     QLabel *portlabel = new QLabel("UDP port: ");
     QSpinBox *portsb = new QSpinBox();
@@ -573,17 +684,30 @@ void cagecontrol::setupUI(QGridLayout *layout)
 
     settingslayout->addWidget(settinglabel_HWP,     1,2,1,1);
     settingslayout->addWidget(settinglabel_QWP,     1,3,1,1);
-    settingslayout->addWidget(settinglabel_COM,     1,4,1,1);
-    settingslayout->addWidget(settinglabel_HWPmnum, 1,5,1,1);
-    settingslayout->addWidget(settinglabel_QWPmnum, 1,6,1,1);
-    settingslayout->addWidget(portlabel,            9,1,1,1);
-    settingslayout->addWidget(portsb,               9,2,1,1);
-    settingslayout->addWidget(offsetcb,             8,1,1,3);
+    settingslayout->addWidget(settinglabel_QWP2,    1,4,1,1);
+    settingslayout->addWidget(settinglabel_COM,     1,5,1,1);
+    settingslayout->addWidget(settinglabel_HWPmnum, 1,6,1,1);
+    settingslayout->addWidget(settinglabel_QWPmnum, 1,7,1,1);
+    settingslayout->addWidget(settinglabel_QWP2mnum,1,8,1,1);
+    settingslayout->addWidget(settinglabel_threewp ,1,9,1,1);
+    settingslayout->addWidget(portlabel,            motorName.length()+3,1,1,1);
+    settingslayout->addWidget(portsb,               motorName.length()+3,2,1,1);
+    settingslayout->addWidget(offsetcb,             motorName.length()+4,1,1,3);
 
     settingslayout->setAlignment(Qt::AlignTop);
 
     motorstab->setLayout(motorlayout);
     settingstab->setLayout(settingslayout);
+
+
+    settinglabel_HWP->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    settinglabel_QWP->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    settinglabel_QWP2->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    settinglabel_COM->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    settinglabel_HWPmnum->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    settinglabel_QWPmnum->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    settinglabel_QWP2mnum->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    settinglabel_threewp->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     }
 
@@ -597,14 +721,19 @@ void cagecontrol::updateUI()
         //QString id = motorName[idx];
         gb->findChild<QDoubleSpinBox*>("HWPsb")->setValue(HWPcust[idx]);
         gb->findChild<QDoubleSpinBox*>("QWPsb")->setValue(QWPcust[idx]);
+        gb->findChild<QDoubleSpinBox*>("QWP2sb")->setValue(QWP2cust[idx]);
+        gb->findChild<QDoubleSpinBox*>("QWP2sb")->setEnabled(isthreewps[idx]);
         gb->findChild<QCheckBox*>("invertcb")->setChecked(invert[idx]);
     }
     for (QString s : motorName) {
         int idx = motorName.indexOf(s);
         tabs->findChild<QDoubleSpinBox*>(s+"HWP0sb")->setValue(HWP0[idx]);
         tabs->findChild<QDoubleSpinBox*>(s+"QWP0sb")->setValue(QWP0[idx]);
+        tabs->findChild<QDoubleSpinBox*>(s+"QWP20sb")->setValue(QWP20[idx]);
         tabs->findChild<QSpinBox*>(s+"HWPnum")->setValue(HWPmnum[idx]);
         tabs->findChild<QSpinBox*>(s+"QWPnum")->setValue(QWPmnum[idx]);
+        tabs->findChild<QSpinBox*>(s+"QWP2num")->setValue(QWP2mnum[idx]);
+        tabs->findChild<QCheckBox*>(s+"threewpcb")->setChecked(isthreewps[idx]);
     }
     tabs->findChild<QSpinBox*>("port")->setValue(udpport);
     tabs->findChild<QCheckBox*>("offsetcb")->setChecked(useoffset);
@@ -634,23 +763,34 @@ void cagecontrol::motorGB(QGroupBox *gb, QString id)
     QDoubleSpinBox *QWPsb = new QDoubleSpinBox();
     QWPsb->setObjectName("QWPsb");
     QWPsb->setRange(0,360);
-    QLabel *HWPlabel = new QLabel("HWP");
-    QLabel *QWPlabel = new QLabel("QWP");
+    QDoubleSpinBox *QWP2sb = new QDoubleSpinBox();
+    QWP2sb->setObjectName("QWP2sb");
+    QWP2sb->setRange(0,360);
+    QLabel *WPlabel = new QLabel("Q/H/Q");
     QCheckBox *invcb = new QCheckBox("invert");
     invcb->setObjectName("invertcb");
     invcb->setToolTip("Rotates predefined bases: HV->VH, PM->MP, RL->LR");
 
-
-    layout->addWidget(HWPlabel  ,1,1,1,1);
-    layout->addWidget(HWPsb     ,1,2,1,1);
-    layout->addWidget(QWPlabel  ,2,1,1,1);
-    layout->addWidget(QWPsb     ,2,2,1,1);
-    layout->addWidget(Setbtn    ,1,3,1,1);
-    layout->addWidget(HVbtn     ,1,4,1,1);
-    layout->addWidget(LRbtn     ,2,3,1,1);
-    layout->addWidget(DAbtn     ,2,4,1,1);
+    layout->addWidget(WPlabel   ,1,1,1,1);
+    layout->addWidget(QWPsb     ,1,2,1,1);
+    layout->addWidget(HWPsb     ,1,3,1,1);
+    layout->addWidget(QWP2sb    ,1,4,1,1);
     layout->addWidget(invcb     ,1,5,1,1);
 
+    layout->addWidget(Setbtn    ,2,2,1,1);
+    layout->addWidget(HVbtn     ,2,3,1,1);
+    layout->addWidget(DAbtn     ,2,4,1,1);
+    layout->addWidget(LRbtn     ,2,5,1,1);
+
+    WPlabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    QWPsb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    HWPsb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    QWP2sb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    invcb->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    Setbtn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    HVbtn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    DAbtn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    LRbtn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     gb->setTitle(id);
 
     gb->setLayout(layout);
@@ -729,11 +869,11 @@ void cagecontrol::changebases()
             for (QString s : motorName) {
                 int idx = motorName.indexOf(s);
                 if (currentbasis[idx].toLower()=="x") { //PM
-                    movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
+                    movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45,QWP20[idx]);
                 } else if (currentbasis[idx].toLower()=="y") { //RL
-                    movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]);
+                    movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx],QWP20[idx]);
                 } else if (currentbasis[idx].toLower()=="z") { //HV
-                    movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
+                    movemotor(motorName[idx],HWP0[idx],QWP0[idx],QWP20[idx]);
                 } else {
                     DEBUG_ERROR("unknown basis: %s\n",currentbasis[idx].toLower().toLocal8Bit().data());
                 }
@@ -751,11 +891,11 @@ void cagecontrol::changebases()
         for (QString s : motorName) {
             int idx = motorName.indexOf(s);
             if (currentbasis[idx].toLower()=="x") { //PM
-                movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45);
+                movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]+45,QWP20[idx]);
             } else if (currentbasis[idx].toLower()=="y") { //RL
-                movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx]);
+                movemotor(motorName[idx],HWP0[idx]+22.5,QWP0[idx],QWP20[idx]);
             } else if (currentbasis[idx].toLower()=="z") { //HV
-                movemotor(motorName[idx],HWP0[idx],QWP0[idx]);
+                movemotor(motorName[idx],HWP0[idx],QWP0[idx],QWP20[idx]);
             } else {
                 DEBUG_ERROR("unknown basis: %s\n",currentbasis[idx].toLower().toLocal8Bit().data());
             }
@@ -765,6 +905,9 @@ void cagecontrol::changebases()
     }
 }
 
+/************************************************************************************************
+*                               cagecontrol::useinvertedbases                                   *
+************************************************************************************************/
 void cagecontrol::useinvertedbases(QString id, bool inv)
 {
     pauseupdating=true;

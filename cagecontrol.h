@@ -74,8 +74,11 @@ public slots:
     /*!
      * \brief slot_movemotors
      * \param color colorcode of the cage, or 'all'
+     * \param HWPang angle of the HWP in degrees
+     * \param QWPang angle of the 1st QWP in degrees
+     * \param QWP2ang angle of the 2nd QWP in degrees. defaults to 0 because of 2/3 WP cages
      */
-    void slot_movemotors(QString color, double HWPang, double QWPang);
+    void slot_movemotors(QString color, double HWPang, double QWPang, double QWP2ang=0);
 
     /*!
      * \brief useinvertedbases
@@ -110,7 +113,7 @@ private:
     QTimer basestimer;                                  //!< Runs out every \see basestime seconds to change bases
     QDir basesdir;                                      //!< Directory of basesfile
     QFile basesf;                                       //!< Bases file
-    int currentbasisidx;                                   //!< index of current basis
+    int currentbasisidx;                                //!< index of current basis
     int basestime;                                      //!< When reading bases from file: Number of seconds after which a basischange occurs
     int udpport;                                        //!< Hold the UDP port to listen to for commandds
     bool pauseupdating;                                 //!< Keep updateUI and updatesettings from interfering with each other
@@ -127,16 +130,21 @@ private:
     /*WIP - cleaner code*/
     /*Even nicer: put everything in motor class*/
     QVector<bool> invert;                               //!< True: invert predefined bases (H/V -> V/H, P/M->M/P, L/R->R/L)
+    QVector<bool> isthreewps;                            //!< True: cage has three waveplates. False: cage has two waveplates
     QVector<Motor*> motors;                             //!< List of serial connections to the cages
     QVector<QString> motorName;                         //!< List of colorcodes of the cages
     QVector<QDoubleSpinBox> HWP0sp;                     //!< List of QSpinBoxes to set the '0' of the HWPs
     QVector<QDoubleSpinBox> QWP0sp;                     //!< List of QSpinBoxes to set the '0' of the QWPs
     QVector<int> HWPmnum;                               //!< Motornumber of controller the HWP is connected to
-    QVector<int> QWPmnum;                               //!< Motornumber of controller the QWP is connected to
+    QVector<int> QWPmnum;                               //!< Motornumber of controller the first QWP is connected to
+    QVector<int> QWP2mnum;                              //!< Motornumber of controller the second QWP is connected to
     QVector<double> HWP0;                               //!< '0' of HWPs
-    QVector<double> QWP0;                               //!< '0' of QWPs
+    QVector<double> QWP0;                               //!< '0' of first QWPs
+    QVector<double> QWP20;                              //!< '0' of second QWPs
     QVector<double> HWPcust;                            //!< custum set angle to rotate HWP to
-    QVector<double> QWPcust;                            //!< custom set angle to rotate QWP to
+    QVector<double> QWPcust;                            //!< custom set angle to rotate first QWP to
+    QVector<double> QWP2cust;                           //!< custom set angle to rotate second QWP to
+
     //UI
     QVector<QGroupBox*> uiMotorGroupBoxes;              //!< List of Groupboxes containing cage controls
 
@@ -192,12 +200,18 @@ private:
     void initconnections();
 
     /*!
+     * \brief invertall convenient way to tick all 'invert' boxes. does not rotate WPs.
+     */
+    void invertall();
+
+    /*!
      * \brief movemotor moves both motors of a cage to certain angles
      * \param motor colorcode of the cage
      * \param HWPang angle of the HWP in degrees
-     * \param QWPang angle of the QWP in degrees
+     * \param QWPang angle of the 1st QWP in degrees
+     * \param QWP2ang angle of the 2nd QWP in degrees. defaults to 0 because of 2/3 WP cages
      */
-    void movemotor(QString motor, double HWPang, double QWPang);
+    void movemotor(QString motor, double HWPang, double QWPang, double QWP2ang=0);
 
 };
 

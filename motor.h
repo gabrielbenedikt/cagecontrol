@@ -35,10 +35,16 @@ class Motor : public QObject {
 private:
     QTimer hometimer;               //!<Used to iterate through the steps of 'go to the starting position' - but in an inaccurate way. \see command_home()
     QTimer bothtimer;               //!<Used to iterate through the steps of moving two motors of one controller
+    QTimer threetimer;              //!<Used to iterate through the steps of moving two motors of one controller
     int movebothstep;               //!<Controls logic flow when two motors are to be moved consecutively
+    int movethreestep;              //!<Controls logic flow when two motors are to be moved consecutively
     bool serialconnectionok;        //!<False if opening the serial connection failed
-    uint16_t motor1steps;           //!<number of stept the 1st motor is to be moved
-    uint16_t motor2steps;           //!<number of stept the 2nd motor is to be moved
+    uint16_t motor1steps;           //!<number of steps the 1st motor is to be moved
+    uint16_t motor2steps;           //!<number of steps the 2nd motor is to be moved
+    uint16_t motor3steps;           //!<number of steps the 3rd motor is to be moved
+    uint16_t motor1idx;             //!<controller index of motor 1
+    uint16_t motor2idx;             //!<controller index of motor 2
+    uint16_t motor3idx;             //!<controller index of motor 3
 public:
     QString publicmotorstatusmessage;   //!<A string containing the current state of the serial connection
 
@@ -166,16 +172,30 @@ public slots:
     /*!
      * \brief command_moveboth moves both motors connected to the controller
      * \param ang1 angle motor 1 is to be moved to
-     * \param ang2angle motor 2 is to be moved to
+     * \param ang2 angle motor 2 is to be moved to
      */
     void command_moveboth(double ang1, double ang2);
 
-
+    /*!
+     * \brief command_movethree moves three motors connected to the controller
+     * \param idx1 index of motor 1
+     * \param idx2 index of motor 2
+     * \param idx3 index of motor 3
+     * \param ang1 angle to rotate motor 1 to
+     * \param ang2 angle to rotate motor 2 to
+     * \param ang3 angle to rotate motor 3 to
+     */
+    void command_movethree(int idx1, int idx2, int idx3, double ang1, double ang2, double ang3);
 private:
     /*!
      * \brief command_moveboth moves both motors connected to the controller
      */
     void moveboth();
+
+    /*!
+     * \brief command_movethree moves three motors connected to the controller
+     */
+    void movethree();
 
 };
 

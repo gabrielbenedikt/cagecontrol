@@ -44,7 +44,7 @@
  * usefull information to stdout.\n
  * default: true
  */
-#define DEBUG 1
+#define DEBUG True
 #define DEBUGERROR 1
 #define DEBUGWARNING 1
 #define DEBUGINFO 1

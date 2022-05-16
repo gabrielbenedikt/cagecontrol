@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++20
 
 #
 #Use git commit hash as version
@@ -54,9 +54,12 @@ macx {
 }
 
 SOURCES += \
+    elliptec.cpp \
         main.cpp \
         cagecontrol.cpp \
-    motor.cpp \
+    motorwrapper.cpp \
+    pcbmotor.cpp \
+    rotmotor.cpp \
     udplistener.cpp \
     helper.cpp \
     cqpushbutton.cpp
@@ -65,8 +68,11 @@ HEADERS += \
         cagecontrol.h \
     defines.h \
     debug.h \
+    elliptec.h \
+    motorwrapper.h \
+    pcbmotor.h \
+    rotmotor.h \
     version.h \
-    motor.h \
     udplistener.h \
     helper.h \
     cqpushbutton.h
@@ -84,7 +90,8 @@ DISTFILES += \
     doxygen_cagecontrol \
     createversion_linux.sh \
     createversion_win.bat \
-    TODO.txt
+    TODO.txt \
+    elliptec_py
 
 isEmpty(TARGET_EXT) {
     win32 {

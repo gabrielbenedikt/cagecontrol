@@ -1,9 +1,11 @@
 #ifndef CAGECONTROL_H
 #define CAGECONTROL_H
 
+#include <algorithm>
 #include "cqpushbutton.h"
 #include "debug.h"
-#include "motor.h"
+#include "rotmotor.h"
+#include "motorwrapper.h"
 #include "udplistener.h"
 #include <QCheckBox>
 #include <QComboBox>
@@ -21,13 +23,15 @@
 #include <QSettings>
 #include <QStatusBar>
 #include <QTabWidget>
+#include <QTimer>
 #include <QSerialPortInfo>
 
 namespace Ui {
 class cagecontrol;
 }
 
-class Motor;
+class rotmotor;
+class motorwrapper;
 class UDPlistener;
 
 class cagecontrol : public QMainWindow
@@ -124,20 +128,21 @@ private:
     QWidget *settingstab;                               //!< GUI tab containing settings
     QWidget *motorstab;                                 //!< GUI tab containing motor controls
     QStatusBar *status;                                 //!< Status bar
-    QVector<QString> comports;                          //!< Vector containing available serial ports names ports
+    QVector<std::string> comports;                          //!< Vector containing available serial ports names ports
     QVector<QStringList> bases;                         //!< vector holding all bases for automatic basis change
 
     /*WIP - cleaner code*/
     /*Even nicer: put everything in motor class*/
     QVector<bool> invert;                               //!< True: invert predefined bases (H/V -> V/H, P/M->M/P, L/R->R/L)
-    QVector<bool> isthreewps;                            //!< True: cage has three waveplates. False: cage has two waveplates
-    QVector<Motor*> motors;                             //!< List of serial connections to the cages
+    QVector<bool> isthreewps;                           //!< True: cage has three waveplates. False: cage has two waveplates
+    QVector<motorwrapper*> motors;                          //!< List of serial connections to the cages
+    QVector<int> motorType;                             //!< 0: PCBmotor, 1 Thorlabs Elliptec
     QVector<QString> motorName;                         //!< List of colorcodes of the cages
     QVector<QDoubleSpinBox> HWP0sp;                     //!< List of QSpinBoxes to set the '0' of the HWPs
     QVector<QDoubleSpinBox> QWP0sp;                     //!< List of QSpinBoxes to set the '0' of the QWPs
-    QVector<int> HWPmnum;                               //!< Motornumber of controller the HWP is connected to
-    QVector<int> QWPmnum;                               //!< Motornumber of controller the first QWP is connected to
-    QVector<int> QWP2mnum;                              //!< Motornumber of controller the second QWP is connected to
+    QVector<uint8_t> HWPmnum;                               //!< Motornumber of controller the HWP is connected to
+    QVector<uint8_t> QWPmnum;                               //!< Motornumber of controller the first QWP is connected to
+    QVector<uint8_t> QWP2mnum;                              //!< Motornumber of controller the second QWP is connected to
     QVector<double> HWP0;                               //!< '0' of HWPs
     QVector<double> QWP0;                               //!< '0' of first QWPs
     QVector<double> QWP20;                              //!< '0' of second QWPs

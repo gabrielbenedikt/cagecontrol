@@ -37,6 +37,8 @@ void warning(QString msg);
  * \param msg the message to be displayed
  */
 void info(QString msg);
+
+std::string str_tolower(std::string s);
 }
 
 #endif // HELPER_H

@@ -3,16 +3,17 @@
 
 /*! \file */
 
+#include "defines.h"
+#include "rotmotor.h"
+
+#include <chrono>
+#include <future>
 #include <string>
 #include <thread>
-#include <future>
-#include <chrono>
 #include <vector>
 
 #include <QtCore/QtGlobal>
 #include <QObject>
-#include "defines.h"
-#include "rotmotor.h"
 QT_USE_NAMESPACE
 
 QT_BEGIN_NAMESPACE

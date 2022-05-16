@@ -9,10 +9,13 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
-#include <thread>
-#include <sstream>
+#include <iostream>
 #include <iomanip>
 #include <optional>
+#include <sstream>
+#include <stdio.h>
+#include <string>
+#include <thread>
 QT_USE_NAMESPACE
 
 struct ell_device {

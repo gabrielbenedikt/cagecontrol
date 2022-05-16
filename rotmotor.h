@@ -20,7 +20,6 @@ class rotmotor: public QObject {
     Q_OBJECT
 public:
 
-    std::string publicmotorstatusmessage;   //!<A string containing the current state of the serial connection
     rotmotor();
     ~rotmotor();
     QSerialPort *serial;                //!<Qt serial connection interface
@@ -28,7 +27,6 @@ public:
     std::string response;
 
 private:
-    bool serialconnectionok;        //!<False if opening the serial connection failed
     uint8_t type;                   //!< 0: PCBMotor, 1: elliptec
     QByteArray data;
 
@@ -39,16 +37,6 @@ private slots:
      * \param error
      */
     void handleError(QSerialPort::SerialPortError error);
-signals:
-    /*!
-     * \brief motorstatusmessage emitted when the status of the serial connection changes, with a string indicating the actual state.
-     * \param message the message
-     */
-    void motorstatusmessage(const std::string &message);
-    /*!
-     * \brief emitted when serial connection is closed
-     */
-    void ConnectionClosed();
 
 public slots:
 
@@ -68,12 +56,6 @@ public slots:
      * \brief open establishes a connection over a serial port
      */
     void open(std::string port);
-
-    /*!
-     * \brief showStatusMessage fills the label in the GUI with text
-     * \param message the text to be shown in the label
-     */
-    void showStatusMessage(const std::string &message);
 
     /*!
      * \brief isopen returns the state of the serial connection

@@ -1,10 +1,5 @@
 #include "elliptec.h"
-#include <iostream>
-#include <sstream>
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <stdio.h>
+
 QT_USE_NAMESPACE
 
 

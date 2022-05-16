@@ -9,7 +9,6 @@ rotmotor::rotmotor()
     serial->setStopBits(QSerialPort::StopBits(1));
     serial->setDataBits(QSerialPort::DataBits(8));
     serial->setFlowControl(QSerialPort::FlowControl(0));
-    serialconnectionok = false;
 
     connect(serial, &QSerialPort::readyRead, this, &rotmotor::read);
 }
@@ -41,9 +40,6 @@ void rotmotor::close()
 {
     if (serial->isOpen())
         serial->close();
-    serialconnectionok = false;
-
-    emit(ConnectionClosed());
 }
 
 /************************************************************************************************
@@ -55,24 +51,11 @@ void rotmotor::open(std::string port)
 
     serial->setPortName(QString::fromStdString(port));
     if (serial->open(QIODevice::ReadWrite)) {
-        showStatusMessage("Connected to " + port);
-        serialconnectionok=true;
     } else {
         DEBUG_ERROR("serial connection could not be established.\n");
         qDebug()<<"Error"<<serial->errorString();
-        serialconnectionok = false;
-        showStatusMessage("Open error");
     }
     DEBUG_INFO("reached End\n");
-}
-
-/************************************************************************************************
-*                               rotmotor::showStatusMessage                                     *
-************************************************************************************************/
-void rotmotor::showStatusMessage(const std::string &message)
-{
-    publicmotorstatusmessage = message;
-    emit motorstatusmessage(publicmotorstatusmessage);
 }
 
 /************************************************************************************************
@@ -80,7 +63,7 @@ void rotmotor::showStatusMessage(const std::string &message)
 ************************************************************************************************/
 bool rotmotor::isopen()
 {
-    return serialconnectionok;
+    return serial->isOpen();
 }
 
 /************************************************************************************************

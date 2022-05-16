@@ -42,7 +42,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
 
     LoadConfig();
     initconnections();
-    openmotors();
+    //openmotors();
     updateUI();
 }
 
@@ -63,6 +63,7 @@ void cagecontrol::initconnections()
     connect(motorstab->findChild<CQPushButton*>("allpmbutton"),&CQPushButton::pressed_id,this,&cagecontrol::movePM);
     connect(motorstab->findChild<CQPushButton*>("allrlbutton"),&CQPushButton::pressed_id,this,&cagecontrol::moveRL);
     connect(motorstab->findChild<CQPushButton*>("allsetbutton"),&CQPushButton::pressed_id,this,&cagecontrol::moveANG);
+    connect(motorstab->findChild<CQPushButton*>("connectbutton"),&CQPushButton::pressed_id,this,&cagecontrol::openmotors);
 
     connect(tabs->findChild<QPushButton*>("filebtn"),&QAbstractButton::pressed,this,&cagecontrol::setbasesfile);
     connect(tabs->findChild<QPushButton*>("startbasesbtn"),&QAbstractButton::pressed,this,&cagecontrol::changebases);
@@ -597,15 +598,18 @@ void cagecontrol::setupUI(QGridLayout *layout)
     buttons->setObjectName("buttonbox");
     CQPushButton *allsetbtn = new CQPushButton("Set all","all");
     allsetbtn->setObjectName("allsetbutton");
+    CQPushButton *connectbtn = new CQPushButton("connect","all");
+    connectbtn->setObjectName("connectbutton");
     CQPushButton *allhvbtn = new CQPushButton("H/V all","all");
     allhvbtn->setObjectName("allhvbutton");
     CQPushButton *allpmbtn = new CQPushButton("+/- all","all");
     allpmbtn->setObjectName("allpmbutton");
     CQPushButton *allrlbtn = new CQPushButton("R/L all","all");
-    buttons->addWidget(allsetbtn,1,1,1,1);
-    buttons->addWidget(allhvbtn,1,2,1,1);
-    buttons->addWidget(allpmbtn,1,3,1,1);
-    buttons->addWidget(allrlbtn,1,4,1,1);
+    buttons->addWidget(connectbtn,1,1,1,1);
+    buttons->addWidget(allsetbtn,1,2,1,1);
+    buttons->addWidget(allhvbtn,1,3,1,1);
+    buttons->addWidget(allpmbtn,1,4,1,1);
+    buttons->addWidget(allrlbtn,1,5,1,1);
 
     QLabel *filelabel = new QLabel("Load bases from");
     QLabel *baseschangelabel = new QLabel("change every");

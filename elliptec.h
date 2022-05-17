@@ -5,8 +5,13 @@
 
 #include "defines.h"
 #include "rotmotor.h"
+#include "boost_serial.h"
 
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QDebug>
 #include <algorithm>
+#include <boost/asio.hpp>
 #include <chrono>
 #include <cmath>
 #include <iostream>
@@ -17,6 +22,9 @@
 #include <string>
 #include <thread>
 QT_USE_NAMESPACE
+
+
+#define SERB true
 
 struct ell_device {
     std::string address;    //address of device on controller
@@ -40,13 +48,15 @@ struct ell_response {
  * \bug There are no known bugs.
  *
  */
+
+
 class elliptec : public rotmotor{
     Q_OBJECT
 public:
     /*!
      * \brief Motor the contructor initializes variables and establishes the serial connection.
      */
-    elliptec(std::vector<uint8_t> inmids = std::vector<uint8_t>(0));
+    elliptec(std::vector<uint8_t> inmids = std::vector<uint8_t>(0), std::string devname = "");
     ~elliptec();
 
 public slots:
@@ -65,8 +75,16 @@ public slots:
 
 private:
     void read();
+    void close();
+    bool isopen();
+    void open(std::string port);
+    void handleError(QSerialPort::SerialPortError error);
     std::string query(const QByteArray &data);
+    QSerialPort *qserial;
+    Boost_serial *bserial;
+
     QByteArray data;
+    std::string response;
     // Direction constants
     const uint8_t CW = 0;
     const uint8_t CCW = 1;

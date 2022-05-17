@@ -8,7 +8,9 @@
 class motorwrapper
 {
 public:
-    motorwrapper(uint8_t intype, std::vector<uint8_t> mids);
+    motorwrapper(uint8_t intype, std::vector<uint8_t> mids, std::string devname);
+    ~motorwrapper();
+
     void open(std::string port);
     void close();
 

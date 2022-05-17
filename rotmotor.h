@@ -22,13 +22,8 @@ public:
 
     rotmotor();
     ~rotmotor();
-    QSerialPort *serial;                //!<Qt serial connection interface
-
-    std::string response;
 
 private:
-    uint8_t type;                   //!< 0: PCBMotor, 1: elliptec
-    QByteArray data;
 
 private slots:
 
@@ -36,37 +31,27 @@ private slots:
      * \brief handleError prints an error message of the serialport connection and closes the connection
      * \param error
      */
-    void handleError(QSerialPort::SerialPortError error);
+    virtual void handleError(QSerialPort::SerialPortError error) = 0;
 
 public slots:
-
-    void read();
-    /*!
-     * \brief write writes to the serialport
-     * \param data data to be written to the serial port
-     */
-    void write(const QByteArray &data);
-
 
     /*!
      * \brief close closes the serialport connection
      */
-    void close();
+    virtual void close() = 0;
     /*!
      * \brief open establishes a connection over a serial port
      */
-    void open(std::string port);
+    virtual void open(std::string port) = 0;
 
     /*!
      * \brief isopen returns the state of the serial connection
      * \return true if serial connection was established successfully, false otherwise
      */
-    bool isopen();
+    virtual bool isopen() =0;
 
-    virtual void init();
-
-    virtual void command_moveboth(int a, int b, double c, double d);
-    virtual void command_movethree(int a, int b, int c, double d, double e, double f);
+    virtual void command_moveboth(int a, int b, double c, double d) = 0;
+    virtual void command_movethree(int a, int b, int c, double d, double e, double f) = 0;
 
 };
 

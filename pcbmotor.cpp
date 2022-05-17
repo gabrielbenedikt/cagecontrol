@@ -5,18 +5,25 @@ QT_USE_NAMESPACE
 /************************************************************************************************
 *                                PCBMotor::Motor                                                *
 ************************************************************************************************/
-PCBMotor::PCBMotor(std::vector<uint8_t> mids)
+PCBMotor::PCBMotor(std::vector<uint8_t> mids, std::string devname)
 {
     DEBUG_INFO("New instance of PCBMotor created\n");
 
+    serial = new QSerialPort();
+    serial->setParity(QSerialPort::Parity(0));
+    serial->setStopBits(QSerialPort::StopBits(1));
+    serial->setDataBits(QSerialPort::DataBits(8));
+    serial->setFlowControl(QSerialPort::FlowControl(0));
     serial->setBaudRate(19200);
+    connect(serial, &QSerialPort::readyRead, this, &PCBMotor::read);
 
     movebothstep=0;
     movethreestep=0;
     motor1steps=0;
     motor1steps=0;
 
-    qDebug() << mids;
+    for (uint8_t m : mids)
+        std::cout  << (unsigned)m<< std::endl;
 }//PCBMotor::PCBMotor(void)
 
 /************************************************************************************************
@@ -26,6 +33,59 @@ PCBMotor::~PCBMotor()
 {
     DEBUG_INFO("One instance of PCBMotor destructed\n");
 }//PCBMotor::~PCBMotor()
+
+void PCBMotor::handleError(QSerialPort::SerialPortError error)
+{
+    if (error == QSerialPort::ResourceError) {
+        std::cout <<"Critical Error"<<serial->errorString().toStdString() << std::endl;
+        close();
+    }
+}
+
+void PCBMotor::read()
+{
+    data.append(serial->readAll());
+    while (serial->waitForReadyRead(500))
+        data.append(serial->readAll());
+    response = std::string(data);
+    std::cout  << "response in rotmotor" << response << std::endl;
+    data.clear();
+}
+
+void PCBMotor::write(const QByteArray &data)
+{
+    #if DEBUG
+        std::cout <<serial->portName()<<":write\t"<<QString(data);
+    #endif
+    serial->write(data);
+    serial->waitForBytesWritten(0);//you tell me wh
+    serial->waitForBytesWritten(250);
+    std::cout << "write to serial: " << std::string(data) << std::endl;
+}
+
+void PCBMotor::close()
+{
+    if (serial->isOpen())
+        serial->close();
+}
+
+bool PCBMotor::isopen()
+{
+    return serial->isOpen();
+}
+
+void PCBMotor::open(std::string port)
+{
+    DEBUG_INFO("called\n");
+
+    serial->setPortName(QString::fromStdString(port));
+    if (serial->open(QIODevice::ReadWrite)) {
+    } else {
+        DEBUG_ERROR("serial connection could not be established.\n");
+        std::cout <<"Error"<<serial->errorString().toStdString() << std::endl;
+    }
+    DEBUG_INFO("reached End\n");
+}
 
 
 /************************************************************************************************

@@ -14,6 +14,9 @@
 
 #include <QtCore/QtGlobal>
 #include <QObject>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QDebug>
 QT_USE_NAMESPACE
 
 QT_BEGIN_NAMESPACE
@@ -43,12 +46,15 @@ private:
     uint16_t motor1idx;             //!<controller index of motor 1
     uint16_t motor2idx;             //!<controller index of motor 2
     uint16_t motor3idx;             //!<controller index of motor 3
+    QByteArray data;
+    QSerialPort *serial;
+    std::string response;
 public:
 
     /*!
      * \brief Motor the contructor initializes variables and establishes the serial connection.
      */
-    PCBMotor(std::vector<uint8_t> mids = std::vector<uint8_t>(1));
+    PCBMotor(std::vector<uint8_t> mids = std::vector<uint8_t>(1), std::string devname="");
     ~PCBMotor();
 
     /*!
@@ -146,6 +152,16 @@ private:
      */
     void movethree();
 
+    void open(std::string port);
+    void read();
+    void close();
+    bool isopen();
+    void handleError(QSerialPort::SerialPortError error);
+    /*!
+     * \brief write writes to the serialport
+     * \param data data to be written to the serial port
+     */
+    void write(const QByteArray &data);
 };
 
 QT_END_NAMESPACE

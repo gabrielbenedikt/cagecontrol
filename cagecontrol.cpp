@@ -382,7 +382,7 @@ void cagecontrol::openmotors()
             ids = {HWPmnum[idx],QWPmnum[idx],QWP2mnum[idx]};
         }
 
-        motorwrapper *motor = new motorwrapper(motorType[idx], ids);
+        motorwrapper *motor = new motorwrapper(motorType[idx], ids, comports.at(idx));
         motors.append(motor);
         motor->open(comports.at(motors.indexOf(motor)));
     }
@@ -651,7 +651,7 @@ void cagecontrol::setupUI(QGridLayout *layout)
         threecb->setObjectName(s+"threewpcb");
         foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
             QStringList list;
-            list << info.portName();
+            list << info.systemLocation();
             cb->addItem(list.first(), list);
         }
         QSpinBox *Hsb = new QSpinBox();

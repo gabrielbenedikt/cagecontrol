@@ -54,6 +54,7 @@ macx {
 }
 
 SOURCES += \
+    boost_serial.cpp \
     elliptec.cpp \
         main.cpp \
         cagecontrol.cpp \
@@ -65,6 +66,7 @@ SOURCES += \
     cqpushbutton.cpp
 
 HEADERS += \
+    boost_serial.h \
         cagecontrol.h \
     defines.h \
     debug.h \

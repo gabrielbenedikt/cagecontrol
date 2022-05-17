@@ -1,20 +1,23 @@
 #include "motorwrapper.h"
 
-motorwrapper::motorwrapper(uint8_t intype, std::vector<uint8_t> mids = std::vector<uint8_t>(0)){
+motorwrapper::motorwrapper(uint8_t intype, std::vector<uint8_t> mids = std::vector<uint8_t>(0), std::string devname = ""){
     if (intype == 0) {
-        PCBMotor *pm = new PCBMotor(mids);
+        PCBMotor *pm = new PCBMotor(mids, devname);
         m = pm;
     } else if (intype == 1) {
-        elliptec *em = new elliptec(mids);
+        elliptec *em = new elliptec(mids, devname);
         m = em;
     } else {
         DEBUG_ERROR("motor type not recognized");
     }
 }
 
+motorwrapper::~motorwrapper() {
+    delete m;
+}
+
 void motorwrapper::open(std::string port){
     m->open(port);
-    m->init();
 }
 
 void motorwrapper::close(){

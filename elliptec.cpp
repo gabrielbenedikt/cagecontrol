@@ -31,7 +31,7 @@ range).
 */
 
 
-elliptec::elliptec(std::vector<uint8_t> inmids)
+elliptec::elliptec(std::vector<uint8_t> inmids, std::string devname)
 {
     devtype["rotary"] = {8, 14, 18};
     devtype["linear"] = {7, 10, 17, 20};
@@ -49,12 +49,26 @@ elliptec::elliptec(std::vector<uint8_t> inmids)
     for (std::string m : mids) {
         std::cout << m << std::endl;
     }
-    qDebug() << "";
+    std::cout  << "";
 
-    serial->setBaudRate(9600);
+    if (SERB) {
+        bserial = new Boost_serial(devname, 9600,
+                                   boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none),
+                                   boost::asio::serial_port_base::character_size(8),
+                                   boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none),
+                                   boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
+        bserial->setTimeout(boost::posix_time::seconds(5));
+    } else {
+        qserial = new QSerialPort();
+        qserial->setParity(QSerialPort::Parity(0));
+        qserial->setStopBits(QSerialPort::StopBits(1));
+        qserial->setDataBits(QSerialPort::DataBits(8));
+        qserial->setFlowControl(QSerialPort::FlowControl(0));
+        qserial->setBaudRate(9600);
 
-    disconnect(serial, &QSerialPort::readyRead, this, &rotmotor::read);
-    connect(serial, &QSerialPort::readyRead, this, &elliptec::read);
+        connect(qserial, &QSerialPort::readyRead, this, &elliptec::read);
+    }
+
 }
 
 elliptec::~elliptec()
@@ -75,25 +89,80 @@ void elliptec::init() {
  *****************************************/
 void elliptec::read()
 {
-    qDebug() << "read in elliptec";
-    data.append(serial->readAll());
-    while (serial->waitForReadyRead(500))
-        data.append(serial->readAll());
-    response = std::string(data);
-    qDebug() << "response in rotmotor" << QString::fromStdString(response);
-    data.clear();
+    std::cout << "read in elliptec"<< std::endl;
+    if (SERB) {
+        response = bserial->readStringUntil("\r\n");
+    } else {
+        data.append(qserial->readAll());
+        while (qserial->waitForReadyRead(500))
+            data.append(qserial->readAll());
+        response = std::string(data);
+        data.clear();
+    }
+    std::cout << "response in rotmotor" << response << std::endl;
 }
+
+void elliptec::handleError(QSerialPort::SerialPortError error)
+{
+    if (error == QSerialPort::ResourceError) {
+        std::cout << "Critical Error" << qserial->errorString().toStdString() << std::endl;
+        close();
+    }
+}
+
 
 void elliptec::write(const QByteArray &data)
 {
-    qDebug() << "write in elliptec";
+    std::cout  << "write in elliptec" << std::endl;
     #if DEBUG
-        qDebug()<<serial->portName()<<":write\t"<<QString(data);
+        std::cout <<serial->portName()<<":write\t"<<QString(data);
     #endif
-    serial->write(data);
-    serial->waitForBytesWritten(0);//you tell me wh
-    serial->waitForBytesWritten(250);
+    if (SERB) {
+        bserial->writeString(std::string(data));
+    } else {
+        qserial->write(data);
+        qserial->waitForBytesWritten(0);//you tell me wh
+        qserial->waitForBytesWritten(250);
+    }
     std::cout << "write to serial: " << std::string(data) << std::endl;
+}
+
+void elliptec::close()
+{
+    if (SERB) {
+        if (qserial->isOpen())
+            qserial->close();
+    } else {
+        if (bserial->isOpen())
+            bserial->close();
+    }
+}
+bool elliptec::isopen()
+{
+    return qserial->isOpen();
+}
+
+void elliptec::open(std::string port)
+{
+    DEBUG_INFO("called\n");
+
+    if (SERB) {
+        bserial->open(port, 9600,
+                      boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none),
+                      boost::asio::serial_port_base::character_size(8),
+                      boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none),
+                      boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
+    } else {
+        qserial->setPortName(QString::fromStdString(port));
+        if (qserial->open(QIODevice::ReadWrite)) {
+        } else {
+            DEBUG_ERROR("serial connection could not be established.\n");
+            std::cout <<"Error"<<qserial->errorString().toStdString() << std::endl;
+        }
+    }
+    DEBUG_INFO("reached End\n");
+
+    init();
 }
 
 /*****************************************
@@ -202,6 +271,9 @@ void elliptec::handle_devinfo(ell_device dev) {
 }
 
 ell_response elliptec::process_response() {
+    if (SERB) {
+        read();
+    }
     std::cout << response << std::endl;
     std::string addstr = response.substr(0,1);
     std::string command = response.substr(1,2);

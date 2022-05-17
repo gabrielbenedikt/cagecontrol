@@ -5,27 +5,13 @@
 
 #include "defines.h"
 #include "rotmotor.h"
+#include "boost_serial.h"
 
 #include <chrono>
 #include <future>
 #include <string>
 #include <thread>
 #include <vector>
-
-#include <QtCore/QtGlobal>
-#include <QObject>
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QDebug>
-QT_USE_NAMESPACE
-
-QT_BEGIN_NAMESPACE
-
-namespace Ui {
-class SettingsDialog;
-}
-
-QT_END_NAMESPACE
 
 /*!
  * \brief The Motor class operates the PCB-motor
@@ -48,6 +34,7 @@ private:
     uint16_t motor3idx;             //!<controller index of motor 3
     QByteArray data;
     QSerialPort *serial;
+    Boost_serial *bserial;
     std::string response;
 public:
 
@@ -154,14 +141,14 @@ private:
 
     void open(std::string port);
     void read();
+    std::string query(const std::string &data);
     void close();
     bool isopen();
-    void handleError(QSerialPort::SerialPortError error);
     /*!
      * \brief write writes to the serialport
      * \param data data to be written to the serial port
      */
-    void write(const QByteArray &data);
+    void write(const std::string &data);
 };
 
 QT_END_NAMESPACE

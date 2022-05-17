@@ -63,14 +63,23 @@
  * Accepts additional arguments to include into the message, using the fprintf-style
  * Used for Errors.
  */
-#define DEBUG_INFO(fmt, ...) \
+#define QDEBUG_INFO(fmt, ...) \
     do {if (DEBUGINFO) fprintf(stderr, "%s %s:%d:%s: " fmt, "(II)", __FILE__, __LINE__, Q_FUNC_INFO, ##__VA_ARGS__); } while (0)
 
-#define DEBUG_WARNING(fmt, ...) \
+#define QDEBUG_WARNING(fmt, ...) \
     do {if (DEBUGWARNING) fprintf(stderr, "%s %s:%d:%s: " fmt, "(WW)", __FILE__, __LINE__, Q_FUNC_INFO, ##__VA_ARGS__); } while (0)
 
-#define DEBUG_ERROR(fmt, ...) \
+#define QDEBUG_ERROR(fmt, ...) \
     do {if (DEBUGERROR) fprintf(stderr, "%s %s:%d:%s: " fmt, "(EE)", __FILE__, __LINE__, Q_FUNC_INFO, ##__VA_ARGS__); } while (0)
+
+#define DEBUG_INFO(fmt, ...) \
+    do {if (DEBUGINFO) fprintf(stderr, "%s %s:%d: " fmt, "(II)", __FILE__, __LINE__, ##__VA_ARGS__); } while (0)
+
+#define DEBUG_WARNING(fmt, ...) \
+    do {if (DEBUGWARNING) fprintf(stderr, "%s %s:%d: " fmt, "(WW)", __FILE__, __LINE__, ##__VA_ARGS__); } while (0)
+
+#define DEBUG_ERROR(fmt, ...) \
+    do {if (DEBUGERROR) fprintf(stderr, "%s %s:%d: " fmt, "(EE)", __FILE__, __LINE__, ##__VA_ARGS__); } while (0)
 #endif
 #endif // DEBUG_H
 

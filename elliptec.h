@@ -8,7 +8,6 @@
 #include "boost_serial.h"
 
 #include <algorithm>
-#include <boost/asio.hpp>
 #include <chrono>
 #include <cmath>
 #include <iostream>
@@ -44,7 +43,7 @@ struct ell_response {
 
 
 class elliptec : public rotmotor{
-Q_OBJECT
+
 public:
     /*!
      * \brief Motor the contructor initializes variables and establishes the serial connection.
@@ -52,7 +51,7 @@ public:
     elliptec(std::vector<uint8_t> inmids = std::vector<uint8_t>(0), std::string devname = "");
     ~elliptec();
 
-public slots:
+public:
     void write(const std::string &data);
     void home(std::string addr, std::string dir);
     void move_absolute(std::string addr, double pos);
@@ -71,7 +70,7 @@ private:
     void close();
     bool isopen();
     void open(std::string port);
-    std::string query(std::string &data);
+    std::string query(const std::string &data);
     Boost_serial *bserial;
 
     std::string response;

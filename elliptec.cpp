@@ -1,7 +1,5 @@
 #include "elliptec.h"
 
-QT_USE_NAMESPACE
-
 
 /*
 GS Error codes
@@ -90,7 +88,7 @@ void elliptec::write(const std::string &data)
     std::cout << "write to serial: " << data << std::endl;
 }
 
-std::string elliptec::query(std::string &data) {
+std::string elliptec::query(const std::string &data) {
     bserial->writeString(data);
     response = bserial->readStringUntil("\r\n");
     return response;
@@ -109,9 +107,7 @@ bool elliptec::isopen()
 
 void elliptec::open(std::string port)
 {
-    DEBUG_INFO("called\n");
-
-    try {
+   try {
         bserial->open(port, 9600,
                       boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none),
                       boost::asio::serial_port_base::character_size(8),

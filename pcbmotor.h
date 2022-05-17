@@ -21,7 +21,6 @@
  * and controls the movements of the motor.
  */
 class PCBMotor : public rotmotor{
-    Q_OBJECT
 private:
     int movebothstep;               //!<Controls logic flow when two motors are to be moved consecutively
     int movethreestep;              //!<Controls logic flow when two motors are to be moved consecutively
@@ -32,8 +31,6 @@ private:
     uint16_t motor1idx;             //!<controller index of motor 1
     uint16_t motor2idx;             //!<controller index of motor 2
     uint16_t motor3idx;             //!<controller index of motor 3
-    QByteArray data;
-    QSerialPort *serial;
     Boost_serial *bserial;
     std::string response;
 public:
@@ -51,7 +48,7 @@ public:
     bool sensordata();
 
 
-public slots:
+public:
     /*!
      * \brief command_park moves the motor to the mechanical stop
      */
@@ -150,7 +147,5 @@ private:
      */
     void write(const std::string &data);
 };
-
-QT_END_NAMESPACE
 
 #endif // PCBMOTOR_H

@@ -1,39 +1,21 @@
 #ifndef ROTMOTOR_H
 #define ROTMOTOR_H
 
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QDebug>
 #include <vector>
 #include <iostream>
 #include <memory>
 #include "debug.h"
 #include "defines.h"
 
-QT_USE_NAMESPACE
 
-QT_BEGIN_NAMESPACE
-
-QT_END_NAMESPACE
-
-class rotmotor: public QObject {
-    Q_OBJECT
+class rotmotor {
 public:
 
     rotmotor();
     ~rotmotor();
 
-private:
 
-private slots:
-
-    /*!
-     * \brief handleError prints an error message of the serialport connection and closes the connection
-     * \param error
-     */
-    virtual void handleError(QSerialPort::SerialPortError error) = 0;
-
-public slots:
+public:
 
     /*!
      * \brief close closes the serialport connection

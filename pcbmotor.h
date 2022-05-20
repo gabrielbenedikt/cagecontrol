@@ -7,10 +7,7 @@
 #include "rotmotor.h"
 #include "boost_serial.h"
 
-#include <chrono>
-#include <future>
 #include <string>
-#include <thread>
 #include <vector>
 
 /*!
@@ -38,7 +35,7 @@ public:
     /*!
      * \brief Motor the contructor initializes variables and establishes the serial connection.
      */
-    PCBMotor(std::vector<uint8_t> mids = std::vector<uint8_t>(1), std::string devname="");
+    PCBMotor(std::string devname="", std::vector<uint8_t> mids = std::vector<uint8_t>(1));
     ~PCBMotor();
 
     /*!
@@ -116,6 +113,15 @@ public:
     void command_moveboth(int hwp_mnum, int qwp_mnum, double hwpang, double qwpang);
 
     /*!
+     * \brief command_moveboth moves both motors connected to the controller
+     * \param hwp_mnum motor number of HWP
+     * \param hwp_mnum motor number of QWP
+     * \param hwpang angle HWP is to be moved to
+     * \param qwpang angle QWP is to be moved to
+     */
+    void command_move(int mnum, double ang);
+
+    /*!
      * \brief command_movethree moves three motors connected to the controller
      * \param hwp_mnum index of HWP
      * \param qwp_mnum index of QWP
@@ -126,6 +132,11 @@ public:
      */
     void command_movethree(int hwp_mnum, int qwp_mnum, int qwp2_mnum, double hwp_ang, double qwp_ang, double qwp2_ang);
 private:
+    /*!
+     * \brief command_moveboth moves both motors connected to the controller
+     */
+    void move();
+
     /*!
      * \brief command_moveboth moves both motors connected to the controller
      */

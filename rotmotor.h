@@ -22,11 +22,6 @@ public:
      */
     virtual void close() = 0;
     /*!
-     * \brief open establishes a connection over a serial port
-     */
-    virtual void open(std::string port) = 0;
-
-    /*!
      * \brief isopen returns the state of the serial connection
      * \return true if serial connection was established successfully, false otherwise
      */

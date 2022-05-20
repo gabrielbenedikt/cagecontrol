@@ -3,7 +3,7 @@
 /************************************************************************************************
 *                                PCBMotor::Motor                                                *
 ************************************************************************************************/
-PCBMotor::PCBMotor(std::vector<uint8_t> mids, std::string devname)
+PCBMotor::PCBMotor(std::string devname, std::vector<uint8_t> mids)
 {
     DEBUG_INFO("New instance of PCBMotor created\n");
 
@@ -21,6 +21,8 @@ PCBMotor::PCBMotor(std::vector<uint8_t> mids, std::string devname)
 
     for (uint8_t m : mids)
         std::cout  << (unsigned)m<< std::endl;
+
+    open(devname);
 }//PCBMotor::PCBMotor(void)
 
 /************************************************************************************************
@@ -171,6 +173,18 @@ void PCBMotor::stop(bool stop)
 /************************************************************************************************
 *                              PCBMotor::command_moveboth                                       *
 ************************************************************************************************/
+void PCBMotor::command_move(int mnum, double ang)
+{
+    motor1idx = mnum;
+    motor1steps=ang*2880/360;
+    movebothstep=0;
+
+    move();
+}
+
+/************************************************************************************************
+*                              PCBMotor::command_moveboth                                       *
+************************************************************************************************/
 void PCBMotor::command_moveboth(int hwp_mnum, int qwp_mnum, double hwpang, double qwpang)
 {
     motor1idx = hwp_mnum;
@@ -196,6 +210,20 @@ void PCBMotor::command_movethree(int hwp_mnum, int qwp_mnum, int qwp2_mnum, doub
     movethreestep=0;
 
     movethree();
+}
+
+/************************************************************************************************
+*                                  PCBMotor::moveboth                                           *
+************************************************************************************************/
+void PCBMotor::move()
+{
+    //DEBUG_INFO("%d %s %s%s, Going ", numsteps, "steps in direction: ", dirstring.toLocal8Bit().data(), "\n");
+    std::string commandText;
+
+    commandText = "M"+ std::to_string(motor1idx) +",s-2880,s";
+    commandText.append(std::to_string(motor1steps));
+    commandText.append("\r");
+    write(commandText.data());
 }
 
 /************************************************************************************************

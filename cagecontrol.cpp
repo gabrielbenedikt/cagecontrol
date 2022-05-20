@@ -382,9 +382,8 @@ void cagecontrol::openmotors()
             ids = {HWPmnum[idx],QWPmnum[idx],QWP2mnum[idx]};
         }
 
-        motorwrapper *motor = new motorwrapper(motorType[idx], ids, comports.at(idx));
+        motorwrapper *motor = new motorwrapper(motorType[idx], comports.at(idx), ids);
         motors.append(motor);
-        motor->open(comports.at(motors.indexOf(motor)));
     }
 }
 

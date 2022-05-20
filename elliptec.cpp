@@ -1,41 +1,16 @@
 #include "elliptec.h"
 
-
-/*
-GS Error codes
-
-Example: Shutter status value when shutter is at its default address “0”
-RX “0GS00”
-Means the shutter is OK
-Status/Error
-code value
-Meaning
-0 OK, no error
-1 Communication time out
-2 Mechanical time out
-3 Command error or not supported
-4 Value out of range
-5 Module isolated
-6 Module out of isolation
-7 Initializing error
-8 Thermal error
-9 Busy
-10 Sensor Error (May appear during self test. If code persists there is an error)
-11 Motor Error (May appear during self test. If code persists there is an error)
-12 Out of Range (e.g. stage has been instructed to move beyond its travel
-range).
-13 Over Current error
-14-255 Reserved
-*/
-
-
-elliptec::elliptec(std::vector<uint8_t> inmids, std::string devname)
+elliptec::elliptec(std::string devname, std::vector<uint8_t> inmids, bool dohome, bool freqsearch)
 {
     devtype["rotary"] = {8, 14, 18};
     devtype["linear"] = {7, 10, 17, 20};
+    devtype["linrot"] = {7, 8, 10, 14, 17, 18, 20};
     devtype["indexed"] = {6, 9, 12};
     devtype["hasclean"] = {14, 17, 18, 20};
 
+    _ser_timeout = 5;
+
+    std::sort(inmids.begin(), inmids.end());
     for (uint8_t id: inmids) {
         if (id > 15) {
             std::cout << "ERROR: elliptec motor id has to be 0 < id < 15" << std::endl;
@@ -54,19 +29,14 @@ elliptec::elliptec(std::vector<uint8_t> inmids, std::string devname)
                                boost::asio::serial_port_base::character_size(8),
                                boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none),
                                boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
-    bserial->setTimeout(boost::posix_time::seconds(5));
+    bserial->setTimeout(boost::posix_time::seconds(_ser_timeout));
 
+    open(devname, dohome, freqsearch);
 }
 
 elliptec::~elliptec()
 {
 
-}
-
-void elliptec::init() {
-    for (std::string id : mids) {
-        getinfo(id);
-    }
 }
 
 /*****************************************
@@ -105,20 +75,31 @@ bool elliptec::isopen()
     return bserial->isOpen();
 }
 
-void elliptec::open(std::string port)
-{
-   try {
-        bserial->open(port, 9600,
-                      boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none),
-                      boost::asio::serial_port_base::character_size(8),
-                      boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none),
-                      boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
-    }  catch (std::exception & ex) {
-        std::cout << ex.what() << std::endl;
+void elliptec::open(std::string port, bool dohome, bool freqsearch) {
+    if (!bserial->isOpen()) {
+        try {
+             bserial->open(port, 9600,
+                           boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none),
+                           boost::asio::serial_port_base::character_size(8),
+                           boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none),
+                           boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
+         }  catch (std::exception & ex) {
+             std::cout << ex.what() << std::endl;
+         }
+
+        for (std::string id : mids) {
+            getinfo(id);
+            if (freqsearch) {
+                search_freq(id);
+                save_userdata(id);
+            }
+            if (dohome) {
+                home(id);
+            }
+        }
     }
 
 
-    init();
 }
 
 /*****************************************
@@ -351,7 +332,21 @@ void elliptec::search_motor3_freq(std::string addr){
     //reply with info response
 }
 
-void elliptec::home(std::string addr, std::string dir = "0") {
+void elliptec::search_freq(std::string addr) {
+    auto dev = devinfo_at_addr(addr);
+    if (dev.has_value()){
+        if (devintype("indexed", dev.value().type)) {
+            search_motor1_freq(addr);
+        } else if (devintype("linrot", dev.value().type)) {
+            search_motor1_freq(addr);
+            search_motor2_freq(addr);
+        }
+    } else {
+        std::cout << "device with address " << addr << " not in connected device list" << std::endl;
+    }
+}
+
+void elliptec::home(std::string addr, std::string dir) {
     std::string msg = addr + "ho" + dir;
     write(msg.data());
     process_response();
@@ -486,14 +481,18 @@ void elliptec::save_userdata(std::string addr) {
 void elliptec::optimize_motors(std::string addr) {
     std::string msg = addr + "om";
     write(msg.data());
+    bserial->setTimeout(boost::posix_time::seconds(0));
     process_response();
+    bserial->setTimeout(boost::posix_time::seconds(_ser_timeout));
     //reply with GS (while busy) 0 when done
 }
 
 void elliptec::clean_mechanics(std::string addr) {
     std::string msg = addr + "cm";
     write(msg.data());
+    bserial->setTimeout(boost::posix_time::seconds(0));
     process_response();
+    bserial->setTimeout(boost::posix_time::seconds(_ser_timeout));
     //reply with GS (while busy) 0 when done
 }
 

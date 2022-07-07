@@ -4,5 +4,5 @@ Graphical user interface to control PCBMotor and Thorlabs Elliptec based polariz
 # how to build
 mkdir build  
 cd build  
-cmake ..  
+qmake ..  
 make  

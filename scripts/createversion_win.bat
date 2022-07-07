@@ -1,4 +1,5 @@
 @echo off
+cd ..
 for /f %%i in ('git describe') do set VAR1=%%i
 git show -s --format=%%cd --date=format:"%%Y%%m%%d%%H%%M" > tmp.txt
 set /p VAR2=<tmp.txt

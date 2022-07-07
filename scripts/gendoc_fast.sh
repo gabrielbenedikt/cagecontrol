@@ -3,14 +3,7 @@
 echo "Calling doxygen\n"
 doxygen doxygen_cagecontrol
 
-cd doc/latex
-
-for i in *.dot; do
-  echo "converting $i to ps"
-  dot -Tps2 ${i%%.*}.dot -o ${i%%.*}.ps
-  echo "converting ${i%%.*}.ps to pdf"
-  ps2pdf ${i%%.*}.ps
-done
+cd ../doc/latex
 
 echo "Generating single pdf"
 make

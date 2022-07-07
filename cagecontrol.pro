@@ -54,30 +54,30 @@ macx {
 }
 
 SOURCES += \
-    boost_serial.cpp \
-    elliptec.cpp \
-        main.cpp \
-        cagecontrol.cpp \
-    motorwrapper.cpp \
-    pcbmotor.cpp \
-    rotmotor.cpp \
-    udplistener.cpp \
-    helper.cpp \
-    cqpushbutton.cpp
+    src/boost_serial.cpp \
+    src/elliptec.cpp \
+    src/main.cpp \
+    src/cagecontrol.cpp \
+    src/motorwrapper.cpp \
+    src/pcbmotor.cpp \
+    src/rotmotor.cpp \
+    src/udplistener.cpp \
+    src/helper.cpp \
+    src/cqpushbutton.cpp
 
 HEADERS += \
-    boost_serial.h \
-        cagecontrol.h \
-    defines.h \
-    debug.h \
-    elliptec.h \
-    motorwrapper.h \
-    pcbmotor.h \
-    rotmotor.h \
-    version.h \
-    udplistener.h \
-    helper.h \
-    cqpushbutton.h
+    src/boost_serial.h \
+    src/cagecontrol.h \
+    src/defines.h \
+    src/debug.h \
+    src/elliptec.h \
+    src/motorwrapper.h \
+    src/pcbmotor.h \
+    src/rotmotor.h \
+    src/version.h \
+    src/udplistener.h \
+    src/helper.h \
+    src/cqpushbutton.h
 
 #FORMS += \
 #        cagecontrol.ui

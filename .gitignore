@@ -4,6 +4,7 @@ TODO
 
 Makefile
 # Qt
+.qmake.stash
 *.pro.user
 *.pro.user.*
 *.qbs.user

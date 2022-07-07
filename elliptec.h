@@ -103,14 +103,6 @@ public:
     void command_movethree(int hwp_mnum, int qwp_mnum, int qwp2_mnum, double hwpang, double qwpang, double qwp2ang);
 
 private:
-
-    //public:
-    //    const std::string& bar() const { return _bar; }
-    //    void bar(const std::string& bar) { _bar = bar; }
-    //private:
-    //    std::string _bar;
-
-
     // Direction constants
     const uint8_t CW = 0;
     const uint8_t CCW = 1;

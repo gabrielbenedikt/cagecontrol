@@ -15,16 +15,16 @@
  * \def VERSION_GIT
  * \brief The git commit description
  */
-#define VERSION_GIT "v0.1-21-g6ad7527"
+#define VERSION_GIT ""
 /*!
 * \def VERSION_GIT_DATE
 * \brief The date of the git commit
 */
-#define VERSION_GIT_DATE 201812201517
+#define VERSION_GIT_DATE 202207071637
 /*!
  * \def VERSION_BUILD_DATE
  * \brief The builddate
  */
-#define VERSION_BUILD_DATE 201812201519
+#define VERSION_BUILD_DATE 202207071638
 
 #endif

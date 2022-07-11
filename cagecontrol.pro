@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2018-12-12T11:30:32
-#
-#-------------------------------------------------
-
 QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -11,21 +5,34 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = bin/cagecontrol
 TEMPLATE = app
 
+elliptec.target = libelliptecpp
+elliptec.commands = echo "Building libelliptecpp.."; \
+                    cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -B elliptecpp ../elliptecpp; \
+                    make -C elliptecpp; \
+                    make -C elliptecpp install; \
+                    echo "Done building libelliptecpp.";
+
+elliptec.depends =
+pcbm.target = libpcbm
+pcbm.commands = echo "Building libpcbm.."; \
+                cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -B libpcbm ../libpcbm; \
+                make -C libpcbm; \
+                make -C libpcbm install; \
+                echo "Done building libpcbm.";
+
+pcbm.depends =
+QMAKE_EXTRA_TARGETS += elliptec
+QMAKE_EXTRA_TARGETS += pcbm
+PRE_TARGETDEPS += libelliptecpp
+PRE_TARGETDEPS += libpcbm
+
 # compiler settings
 include($$PWD/compiler.pri)
 
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
-# You can also make your code fail to compile if you use deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
 CONFIG += c++20
+LIBS += -L$$OUT_PWD/lib/ -lelliptecpp -lpcbmotor -lboost_system -lpthread
+INCLUDEPATH += -I$$OUT_PWD/include
 
 #
 #Use git commit hash as version
@@ -54,33 +61,22 @@ macx {
 }
 
 SOURCES += \
-    src/boost_serial.cpp \
-    src/elliptec.cpp \
     src/main.cpp \
     src/cagecontrol.cpp \
     src/motorwrapper.cpp \
-    src/pcbmotor.cpp \
-    src/rotmotor.cpp \
     src/udplistener.cpp \
     src/helper.cpp \
     src/cqpushbutton.cpp
 
 HEADERS += \
-    src/boost_serial.h \
     src/cagecontrol.h \
     src/defines.h \
     src/debug.h \
-    src/elliptec.h \
     src/motorwrapper.h \
-    src/pcbmotor.h \
-    src/rotmotor.h \
     src/version.h \
     src/udplistener.h \
     src/helper.h \
     src/cqpushbutton.h
-
-#FORMS += \
-#        cagecontrol.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -88,12 +84,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    README.md \
     WPangles \
-    doxygen_cagecontrol \
-    createversion_linux.sh \
-    createversion_win.bat \
+    scripts/doxygen_cagecontrol \
+    scripts/createversion_linux.sh \
+    scripts/createversion_win.bat \
     TODO.txt \
-    elliptec_py
 
 isEmpty(TARGET_EXT) {
     win32 {
@@ -113,16 +109,22 @@ win32{
     DEPLOY_COMMAND = windeployqt
 }
 win32{
-    CONFIG( debug, debug|release ) {
-        # debug
+    CONFIG( debug, debug|release ) {# debug
         DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_CUSTOM_EXT}))
-    } else {
-        # release
+    } else {# release
         DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
     }
 }
+
+
+
 #  # Uncomment the following line to help debug the deploy command when running qmake
 #  warning($${DEPLOY_COMMAND} $${DEPLOY_TARGET})
 
 # Use += instead of = if you use multiple QMAKE_POST_LINKs
-QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+QMAKE_POST_LINK += $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+EXTRA_BINFILES += $$OUT_PWD/lib/*
+EXTRA_OUT_FILES += bin/
+for(FILE,EXTRA_BINFILES){
+    QMAKE_POST_LINK += $$quote(cp $${FILE} $$EXTRA_OUT_FILES $$escape_expand(\\n\\t))
+}

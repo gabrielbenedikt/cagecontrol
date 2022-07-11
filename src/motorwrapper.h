@@ -1,9 +1,11 @@
 #ifndef MOTORWRAPPER_H
 #define MOTORWRAPPER_H
 
-#include "pcbmotor.h"
-#include "elliptec.h"
+#include "../libpcbm/include/pcbmotor.h"
+#include "../elliptecpp/include/elliptec.h"
+#include "defines.h"
 #include <string>
+#include <vector>
 
 enum devlist {
     DEV_ELLIPTEC = 0,
@@ -25,7 +27,6 @@ public:
 
 private:
     uint8_t _devtype;
-    rotmotor *m;
     elliptec *em;
     PCBMotor *pm;
 };

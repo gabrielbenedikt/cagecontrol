@@ -1,22 +1,18 @@
-#
-#compiler&linker flags
-#
 *-g++* {
             QMAKE_CXX = ccache g++
-
-            QMAKE_CFLAGS            += -pipe -fdiagnostics-color=always -std=c++2a
-            QMAKE_CXXFLAGS          += -pipe -fdiagnostics-color=always -std=c++2a
-            QMAKE_LFLAGS            += -pipe -fdiagnostics-color=always -Wl,-rpath='${ORIGIN}'  -std=c++2a
-            QMAKE_CFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer  -std=c++2a
-            QMAKE_CXXFLAGS_RELEASE  += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a
-            QMAKE_LFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a
-            QMAKE_CFLAGS_DEBUG    += -O0 -g -std=c++2a
-            QMAKE_CXXFLAGS_DEBUG  += -O0 -g -std=c++2a
-            QMAKE_LFLAGS_DEBUG    += -O0 -g -std=c++2a
+            QMAKE_CFLAGS            += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_CXXFLAGS          += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_LFLAGS            += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_CFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_CXXFLAGS_RELEASE  += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_LFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_CFLAGS_DEBUG    += -O0 -g -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_CXXFLAGS_DEBUG  += -O0 -g -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_LFLAGS_DEBUG    += -O0 -g -std=c++2a -Wl,-rpath='${ORIGIN}'
 }
 
 *-clang* {
-            QMAKE_CFLAGS            += -pipe -fcolor-diagnostics -fdiagnostics-fixit-info -
+            QMAKE_CFLAGS            += -pipe -fcolor-diagnostics -fdiagnostics-fixit-info
             QMAKE_CXXFLAGS          += -pipe -fcolor-diagnostics -fdiagnostics-fixit-info
             QMAKE_LFLAGS            += -pipe -fcolor-diagnostics -fdiagnostics-fixit-info
             QMAKE_CFLAGS_RELEASE    += -march=native -O3 -fomit-frame-pointer #-flto #LTO needs llvm gold plugin

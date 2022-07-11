@@ -4,7 +4,6 @@
 #include <algorithm>
 #include "cqpushbutton.h"
 #include "debug.h"
-#include "rotmotor.h"
 #include "motorwrapper.h"
 #include "udplistener.h"
 #include <QCheckBox>

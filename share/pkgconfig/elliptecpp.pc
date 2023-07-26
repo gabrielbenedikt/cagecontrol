@@ -1,0 +1,12 @@
+prefix=/home/peter/development/cagecontrol
+exec_prefix=/home/peter/development/cagecontrol
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: elliptecpp
+Description: C++ Thorlabs elliptec library
+Version: 0.1
+
+Requires:
+Libs: -L${libdir} -lelliptecpp
+Cflags: -I${includedir}

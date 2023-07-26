@@ -10,7 +10,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
 
     // UI-Setup
     pauseupdating=false;
-    motorName<<"tomo_a"<<"tomo_b";
+    motorName << "tomo_pcb" << "tomo_e";
     uiMotorGroupBoxes.reserve(motorName.length());
     QWidget *mainwidget = new QWidget();
     QGridLayout *mainlayout = new QGridLayout;
@@ -68,6 +68,10 @@ void cagecontrol::initconnections()
     connect(tabs->findChild<QPushButton*>("filebtn"),&QAbstractButton::pressed,this,&cagecontrol::setbasesfile);
     connect(tabs->findChild<QPushButton*>("startbasesbtn"),&QAbstractButton::pressed,this,&cagecontrol::changebases);
 
+    QList<QComboBox*> comboboxes = settingstab->findChildren<QComboBox*>();
+    for (QComboBox* box : comboboxes) {
+        connect(box, &QComboBox::currentTextChanged, this, &cagecontrol::updatesettingsqstring);
+    }
 
 #if defined (_WIN32) && (_MSC_VER<1900)
     connect(settingstab->findChild<QSpinBox*>("port"),SIGNAL(valueChanged),this,SLOT(updatesettings));
@@ -121,6 +125,17 @@ void cagecontrol::initconnections()
 ************************************************************************************************/
 void cagecontrol::updatesettingsint(int i)
 {
+    std::cout << "updateing int" << std::endl;
+    UNUSED(i);
+    updatesettings(3.1415);
+}
+
+/************************************************************************************************
+*                            cagecontrol::updatesettings                                        *
+************************************************************************************************/
+void cagecontrol::updatesettingsqstring(QString i)
+{
+    std::cout << "updateing qstring" << std::endl;
     UNUSED(i);
     updatesettings(3.1415);
 }
@@ -131,8 +146,12 @@ void cagecontrol::updatesettingsint(int i)
 void cagecontrol::updatesettings(double d)
 {
     UNUSED(d); //just there to create a SLOT with matching parameter for signal &Q(Double)SpinBox::valueChanged
+    std::cout << "updateing dbl" << std::endl;
+    std::cout << "pause: " << pauseupdating << std::endl;
     if (!pauseupdating) {
+        std::cout << "in if" << std::endl;
         for (QString s : motorName) {
+            std::cout << s.toStdString() << std::endl;
             int idx = motorName.indexOf(s);
             HWP0[idx]=tabs->findChild<QDoubleSpinBox*>(s+"HWP0sb")->value();
             QWP0[idx]=tabs->findChild<QDoubleSpinBox*>(s+"QWP0sb")->value();
@@ -145,7 +164,16 @@ void cagecontrol::updatesettings(double d)
             QWP2mnum[idx]=tabs->findChild<QSpinBox*>(s+"QWP2num")->value();
             invert[idx]=uiMotorGroupBoxes[idx]->findChild<QCheckBox*>("invertcb")->isChecked();
             isthreewps[idx]=tabs->findChild<QCheckBox*>(s+"threewpcb")->isChecked();
-            motorType[idx]=tabs->findChild<QComboBox*>(s+"type")->currentIndex();
+
+            QString mtypestr = tabs->findChild<QComboBox*>(s+"type")->currentText().toLower();
+            std::cout << mtypestr.toStdString() << std::endl;
+            if (mtypestr == QString("pcbmotor")) {
+                motorType[idx] = motorwrapper::devlist::DEV_PCBM;
+            } else if (mtypestr == QString("elliptec")) {
+                motorType[idx] = motorwrapper::devlist::DEV_ELLIPTEC;
+            } else {
+                motorType[idx] = motorwrapper::devlist::DEV_UNKNOWN;
+            }
         }
 
         udpport=settingstab->findChild<QSpinBox*>("port")->value();
@@ -199,8 +227,15 @@ void cagecontrol::LoadConfig()
         }
         tabs->findChild<QComboBox*>(id+"com")->setCurrentIndex(tmpint);
 
-        tmpstr = settings->value("MOTORS/TYPE/"+id.toUpper(),"").toString();
-        tabs->findChild<QComboBox*>(id+"type")->setCurrentIndex(tmpstr.toInt());
+        tmpint = settings->value("MOTORS/TYPE/"+id.toUpper(),"").toInt();
+        if (tmpint == motorwrapper::DEV_ELLIPTEC) {
+            tmpint = tabs->findChild<QComboBox*>(id+"type")->findText(QString("Elliptec"), Qt::MatchContains);
+        } else if (tmpint == motorwrapper::DEV_PCBM) {
+            tmpint = tabs->findChild<QComboBox*>(id+"type")->findText(QString("PCBmotor"), Qt::MatchContains);
+        } else {
+            std::cout << "motor type " << tmpint << "not recognized" << std::endl;
+        }
+        tabs->findChild<QComboBox*>(id+"type")->setCurrentIndex(tmpint);
 
     }
 
@@ -232,6 +267,12 @@ void cagecontrol::SaveConfig()
         settings->setValue("WAVEPLATES/QWP2/"+s.toUpper(),tabs->findChild<QDoubleSpinBox*>(s+"QWP20sb")->value());
         settings->setValue("MOTORS/COM"+s.toUpper(),tabs->findChild<QComboBox*>(s+"com")->currentText());
         settings->setValue("MOTORS/TYPE/"+s.toUpper(), tabs->findChild<QComboBox*>(s+"type")->currentIndex());
+        QString devtype = tabs->findChild<QComboBox*>(s+"type")->currentText().toLower();
+        if (devtype == QString("pcbmotor")) {
+            settings->setValue("MOTORS/TYPE/"+s.toUpper(), motorwrapper::devlist::DEV_PCBM);
+        } else if (devtype == QString("elliptec")) {
+            settings->setValue("MOTORS/TYPE/"+s.toUpper(), motorwrapper::devlist::DEV_ELLIPTEC);
+        }
         settings->setValue("MOTORS/HWP/"+QString::number(i),HWP0[i]);
         settings->setValue("MOTORS/QWP/"+QString::number(i),QWP0[i]);
         settings->setValue("MOTORS/QWP2/"+QString::number(i),QWP20[i]);
@@ -381,7 +422,7 @@ void cagecontrol::openmotors()
         } else {
             ids = {HWPmnum[idx],QWPmnum[idx],QWP2mnum[idx]};
         }
-
+        std::cout << "idx: " << idx << "\tmotortype: " << motorType[idx] << "\tport: " << comports.at(idx) << std::endl;
         motorwrapper *motor = new motorwrapper(motorType[idx], comports.at(idx), ids);
         motors.append(motor);
     }

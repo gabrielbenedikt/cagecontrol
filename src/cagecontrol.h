@@ -53,6 +53,11 @@ private slots:
      */
     void updatesettingsint(int i);
     /*!
+     * \brief updatesettingsqstring wrapper, just calls \see updatesettings(double d)
+     * \param i unused
+     */
+    void updatesettingsqstring(QString i);
+    /*!
      * \brief updateUI updates UI with supposedly new numbers (loaded from conf file, e.g.)
      */
     void updateUI();

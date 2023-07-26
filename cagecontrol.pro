@@ -5,33 +5,47 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = bin/cagecontrol
 TEMPLATE = app
 
+CONFIG(debug, debug|release) {
+    CMAKE_BUILDTYPE = "DEBUG"
+} else {
+    CMAKE_BUILDTYPE = "RELEASE"
+}
+
 elliptec.target = libelliptecpp
 elliptec.commands = echo "Building libelliptecpp.."; \
-                    cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -B elliptecpp ../elliptecpp; \
-                    make -C elliptecpp; \
-                    make -C elliptecpp install; \
+                    cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -DBUILD_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=$$CMAKE_BUILDTYPE -B elliptecpp $$PWD/elliptecpp; \
+#                    cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -DBUILD_EXAMPLES=OFF -B elliptecpp $$PWD/elliptecpp; \
+                    make -C $$PWD/elliptecpp; \
+                    make -C $$PWD/elliptecpp install; \
                     echo "Done building libelliptecpp.";
 
 elliptec.depends =
 pcbm.target = libpcbm
 pcbm.commands = echo "Building libpcbm.."; \
-                cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -B libpcbm ../libpcbm; \
-                make -C libpcbm; \
-                make -C libpcbm install; \
+                cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -DCMAKE_BUILD_TYPE=$$CMAKE_BUILDTYPE -B libpcbm $$PWD/libpcbm; \
+#                cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -B libpcbm $$PWD/libpcbm; \
+                make -C $$PWD/libpcbm; \
+                make -C $$PWD/libpcbm install; \
                 echo "Done building libpcbm.";
 
 pcbm.depends =
-QMAKE_EXTRA_TARGETS += elliptec
 QMAKE_EXTRA_TARGETS += pcbm
-PRE_TARGETDEPS += libelliptecpp
+QMAKE_EXTRA_TARGETS += elliptec
 PRE_TARGETDEPS += libpcbm
+PRE_TARGETDEPS += libelliptecpp
+
+
 
 # compiler settings
 include($$PWD/compiler.pri)
 
 DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++20
-LIBS += -L$$OUT_PWD/lib/ -lelliptecpp -lpcbmotor -lboost_system -lpthread
+CONFIG(debug, debug|release) {
+    LIBS += -L$$OUT_PWD/lib/ -lelliptecppd -lpcbmotord -lboost_system -lpthread
+} else {
+    LIBS += -L$$OUT_PWD/lib/ -lelliptecpp -lpcbmotor -lboost_system -lpthread
+}
 INCLUDEPATH += -I$$OUT_PWD/include
 
 #

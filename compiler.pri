@@ -1,14 +1,14 @@
 *-g++* {
             QMAKE_CXX = ccache g++
-            QMAKE_CFLAGS            += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_CXXFLAGS          += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_LFLAGS            += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_CFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_CXXFLAGS_RELEASE  += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_LFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_CFLAGS_DEBUG    += -O0 -g -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_CXXFLAGS_DEBUG  += -O0 -g -std=c++2a -Wl,-rpath='${ORIGIN}'
-            QMAKE_LFLAGS_DEBUG    += -O0 -g -std=c++2a -Wl,-rpath='${ORIGIN}'
+            QMAKE_CFLAGS            += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath,\'\$$ORIGIN\'
+            QMAKE_CXXFLAGS          += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath,\'\$$ORIGIN\'
+            QMAKE_LFLAGS            += -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath,\'\$$ORIGIN\'
+            QMAKE_CFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer
+            QMAKE_CXXFLAGS_RELEASE  += -march=native -flto -O3 -fomit-frame-pointer
+            QMAKE_LFLAGS_RELEASE    += -march=native -flto -O3 -fomit-frame-pointer
+            QMAKE_CFLAGS_DEBUG    += -O0 -g
+            QMAKE_CXXFLAGS_DEBUG  += -O0 -g
+            QMAKE_LFLAGS_DEBUG    += -O0 -g
 }
 
 *-clang* {

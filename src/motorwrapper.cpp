@@ -3,9 +3,9 @@
 motorwrapper::motorwrapper(uint8_t intype, std::string devname = "", std::vector<uint8_t> mids = std::vector<uint8_t>(0)){
     _devtype = intype;
     if (_devtype == DEV_ELLIPTEC) {
-        pm = new PCBMotor(devname);
-    } else if (_devtype == DEV_PCBM) {
         em = new elliptec(devname, mids);
+    } else if (_devtype == DEV_PCBM) {
+        pm = new PCBMotor(devname);
     } else {
         throw std::invalid_argument("motor type not recognized");
     }
@@ -17,9 +17,9 @@ motorwrapper::~motorwrapper() {
 
 void motorwrapper::close(){
     if (_devtype == DEV_ELLIPTEC) {
-        pm->close();
-    } else if (_devtype == DEV_PCBM) {
         em->close();
+    } else if (_devtype == DEV_PCBM) {
+        pm->close();
     }
 }
 
@@ -38,6 +38,7 @@ void motorwrapper::command_moveboth(int hwp_mnum, int qwp_mnum, double hwpang, d
         em->move_absolute(std::to_string(qwp_mnum), qwpang);
     } else if (_devtype == DEV_PCBM) {
         pm->moveabsolute(hwp_mnum, hwpang);
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
         pm->moveabsolute(qwp_mnum, qwpang);
     }
 }

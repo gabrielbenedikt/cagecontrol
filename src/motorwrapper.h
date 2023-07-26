@@ -7,11 +7,6 @@
 #include <string>
 #include <vector>
 
-enum devlist {
-    DEV_ELLIPTEC = 0,
-    DEV_PCBM = 1
-};
-
 class motorwrapper
 {
 public:
@@ -24,6 +19,12 @@ public:
     void move_absolute(int mnum, double ang);
     void command_moveboth(int hwp_mnum, int qwp_mnum, double hwpang, double qwpang);
     void command_movethree(int hwp_mnum, int qwp_mnum, int qwp2_mnum, double hwp_ang, double qwp_ang, double qwp2_ang);
+
+    enum devlist {
+        DEV_UNKNOWN = -1,
+        DEV_ELLIPTEC = 0,
+        DEV_PCBM = 1
+    };
 
 private:
     uint8_t _devtype;

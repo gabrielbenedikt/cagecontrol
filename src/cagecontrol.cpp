@@ -14,8 +14,11 @@ cagecontrol::cagecontrol(QWidget *parent) :
         unitaryname = settings->value("UnitaryName"+QString::number(i)).toString();
         motorName << unitaryname;
     }
-    if (motorName.empty())
+    if (motorName.empty()) {
         motorName << "unitary";
+        settings->setValue("NumUnitaries", nummotors+1);
+        settings->setValue("UnitaryName0", "unitary");
+    }
 
     // UI-Setup
     pauseupdating=false;

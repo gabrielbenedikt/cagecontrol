@@ -836,7 +836,7 @@ void cagecontrol::motorGB(QGroupBox *gb, QString id)
     QDoubleSpinBox *QWP2sb = new QDoubleSpinBox();
     QWP2sb->setObjectName("QWP2sb");
     QWP2sb->setRange(0,360);
-    QLabel *WPlabel = new QLabel("Q/H/Q");
+    QLabel *WPlabel = new QLabel(id);
     QCheckBox *invcb = new QCheckBox("invert");
     invcb->setObjectName("invertcb");
     invcb->setToolTip("Rotates predefined bases: HV->VH, PM->MP, RL->LR");

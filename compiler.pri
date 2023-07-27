@@ -1,5 +1,5 @@
 *-g++* {
-            QMAKE_CXX = ccache g++
+            QMAKE_CXX = g++
             QMAKE_CFLAGS            += -Wall -Wextra -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath,\'\$$ORIGIN\'
             QMAKE_CXXFLAGS          += -Wall -Wextra -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath,\'\$$ORIGIN\'
             QMAKE_LFLAGS            += -Wall -Wextra -pipe -fdiagnostics-color=always -std=c++2a -Wl,-rpath,\'\$$ORIGIN\'

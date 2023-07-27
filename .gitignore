@@ -1,4 +1,6 @@
-doc/
+doc/html
+doc/latex
+doc/*.pax
 bin/
 TODO
 

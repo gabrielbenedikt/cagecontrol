@@ -157,7 +157,7 @@ private:
     //UI
     QVector<QGroupBox*> uiMotorGroupBoxes;              //!< List of Groupboxes containing cage controls
 
-    void setupUI(QGridLayout *layout);                  //!< Puts together the GUI
+    void setupUI();                                     //!< Puts together the GUI
     void openmotors();                                  //!< Opens serial connections to the PCB motor controlllers
 
 

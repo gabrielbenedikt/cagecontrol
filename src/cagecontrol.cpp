@@ -14,7 +14,8 @@ cagecontrol::cagecontrol(QWidget *parent) :
     uiMotorGroupBoxes.reserve(motorName.length());
     QWidget *mainwidget = new QWidget();
     QGridLayout *mainlayout = new QGridLayout;
-    setupUI(mainlayout);
+    //setupUI(mainlayout);
+    setupUI();
     HWP0.reserve(motorName.length());
     QWP0.reserve(motorName.length());
     QWP20.reserve(motorName.length());
@@ -612,7 +613,7 @@ void cagecontrol::movemotor(QString motor, double HWPang, double QWPang, double 
 /************************************************************************************************
 *                                cagecontrol::setupUI                                           *
 ************************************************************************************************/
-void cagecontrol::setupUI(QGridLayout *layout)
+void cagecontrol::setupUI()
 {
     status = new QStatusBar();
     tabs = new QTabWidget();

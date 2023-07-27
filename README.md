@@ -3,6 +3,7 @@ Graphical user interface to control PCBMotor and Thorlabs Elliptec based polariz
 
 # what it does
 ![ui_main](doc/ui_main_readme.png)
+
 Provides a GUI to rotate polarization tomography stages to certain bases (linear, diagonal, circular).
 Or to any arbitrary angle.
 

@@ -92,8 +92,14 @@ HEADERS += \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+else: unix:!android: target.path = /opt/bin
+
+targetlibs.path = /opt/lib
+targetlibs.files = $$OUT_PWD/lib/*
+
+INSTALLS += target
+INSTALLS += targetlibs
+
 
 DISTFILES += \
     README.md \

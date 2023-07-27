@@ -14,18 +14,16 @@ CONFIG(debug, debug|release) {
 elliptec.target = libelliptecpp
 elliptec.commands = echo "Building libelliptecpp.."; \
                     cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -DBUILD_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=$$CMAKE_BUILDTYPE -B elliptecpp $$PWD/elliptecpp; \
-#                    cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -DBUILD_EXAMPLES=OFF -B elliptecpp $$PWD/elliptecpp; \
-                    $(MAKE) -C $$PWD/elliptecpp; \
-                    $(MAKE) -C $$PWD/elliptecpp install; \
+                    $(MAKE) -C $$OUT_PWD/elliptecpp; \
+                    $(MAKE) -C $$OUT_PWD/elliptecpp install; \
                     echo "Done building libelliptecpp.";
 
 elliptec.depends =
 pcbm.target = libpcbm
 pcbm.commands = echo "Building libpcbm.."; \
                 cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -DCMAKE_BUILD_TYPE=$$CMAKE_BUILDTYPE -B libpcbm $$PWD/libpcbm; \
-#                cmake -DCMAKE_INSTALL_PREFIX=$$OUT_PWD -B libpcbm $$PWD/libpcbm; \
-                $(MAKE) -C $$PWD/libpcbm; \
-                $(MAKE) -C $$PWD/libpcbm install; \
+                $(MAKE) -C $$OUT_PWD/libpcbm; \
+                $(MAKE) -C $$OUT_PWD/libpcbm install; \
                 echo "Done building libpcbm.";
 
 pcbm.depends =

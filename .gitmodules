@@ -1,6 +1,6 @@
 [submodule "libpcbm"]
 	path = libpcbm
-	url = git@gitlab.com:p.d/libpcbm.git
+	url = https://gitlab.com/p.d/libpcbm.git
 [submodule "elliptecpp"]
 	path = elliptecpp
-	url = git@gitlab.com:p.d/elliptecpp.git
+	url = https://gitlab.com/p.d/elliptecpp.git

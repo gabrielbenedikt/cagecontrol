@@ -8,13 +8,20 @@ cagecontrol::cagecontrol(QWidget *parent) :
 {
     settings = new QSettings("cagecontrol.conf", QSettings::IniFormat);
 
+    uint8_t nummotors = settings->value("NumUnitaries").toInt();
+    QString unitaryname = "";
+    for (uint8_t i = 0; i<nummotors; ++i) {
+        unitaryname = settings->value("UnitaryName"+QString::number(i)).toString();
+        motorName << unitaryname;
+    }
+    if (motorName.empty())
+        motorName << "unitary";
+
     // UI-Setup
     pauseupdating=false;
-    motorName << "tomo_pcb" << "tomo_e";
     uiMotorGroupBoxes.reserve(motorName.length());
     QWidget *mainwidget = new QWidget();
     QGridLayout *mainlayout = new QGridLayout;
-    //setupUI(mainlayout);
     setupUI();
     HWP0.reserve(motorName.length());
     QWP0.reserve(motorName.length());

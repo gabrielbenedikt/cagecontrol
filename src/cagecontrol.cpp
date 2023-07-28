@@ -233,8 +233,13 @@ void cagecontrol::LoadConfig()
 
         tmpstr = settings->value("MOTORS/COM"+id.toUpper(),"").toString();
         tmpint = tabs->findChild<QComboBox*>(id+"com")->findText(tmpstr);
-        if ((tmpstr=="") || (tmpint==-1)) {
-            tmpint=0;
+        if (tmpint==-1) {
+            if (QFile::exists(tmpstr)){
+                tabs->findChild<QComboBox*>(id+"com")->addItem(tmpstr);
+                tmpint = tabs->findChild<QComboBox*>(id+"com")->findText(tmpstr);
+            } else {
+                tmpint=0;
+            }
         }
         tabs->findChild<QComboBox*>(id+"com")->setCurrentIndex(tmpint);
 
@@ -707,6 +712,8 @@ void cagecontrol::setupUI()
             cb->addItem(list.first(), list);
             cb->setItemData(cb->count()-1, info.serialNumber(), Qt::ToolTipRole);
         }
+        cb->addItem("custom...");
+        cb->setEditable(true);
         QSpinBox *Hsb = new QSpinBox();
         Hsb->setObjectName(s+"HWPnum");
         QSpinBox *Qsb = new QSpinBox();

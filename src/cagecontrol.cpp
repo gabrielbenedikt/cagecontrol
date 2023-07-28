@@ -6,7 +6,7 @@
 cagecontrol::cagecontrol(QWidget *parent) :
     QMainWindow(parent)//,ui(new Ui::cagecontrol)
 {
-    settings = new QSettings("cagecontrol.conf", QSettings::IniFormat);
+    settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, "cagecontrol", "cagecontrol");
 
     uint8_t nummotors = settings->value("NumUnitaries").toInt();
     QString unitaryname = "";

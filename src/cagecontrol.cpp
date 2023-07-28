@@ -540,7 +540,7 @@ void cagecontrol::movePM(QString id)
 void cagecontrol::moveRL(QString id)
 {
     id=id.toLower();
-    qDebug()<<"move " << id << " PM";
+    qDebug()<<"move " << id << " RL";
     auto future = QtConcurrent::map(motorName, [=, this](const QString &s) {
         int idx = motorName.indexOf(s);
         double hwprot;

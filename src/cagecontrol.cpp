@@ -451,11 +451,11 @@ void cagecontrol::moveHV(QString id)
 {
     id=id.toLower();
     qDebug()<<"move " << id << " HV";
-    double hwprot;
-    double qwprot;
-    double qwp2rot;
-    for (QString s : motorName) {
+    auto future = QtConcurrent::map(motorName, [=, this](const QString &s) {
         int idx = motorName.indexOf(s);
+        double hwprot;
+        double qwprot;
+        double qwp2rot;
         if ((id=="all") || (id==s)) {
             if (invert[idx]) {
                 hwprot=45;
@@ -486,7 +486,7 @@ void cagecontrol::moveHV(QString id)
                 updateUI();
             }
         }
-    }
+    });
 }
 
 /************************************************************************************************
@@ -496,11 +496,11 @@ void cagecontrol::movePM(QString id)
 {
     id=id.toLower();
     qDebug()<<"move " << id << " PM";
-    double hwprot;
-    double qwprot;
-    double qwp2rot;
-    for (QString s : motorName) {
+    auto future = QtConcurrent::map(motorName, [=, this](const QString &s) {
         int idx = motorName.indexOf(s);
+        double hwprot;
+        double qwprot;
+        double qwp2rot;
         if ((id=="all") || (id==s)) {
             if (invert[idx]) {
                 hwprot=67.5;
@@ -515,7 +515,6 @@ void cagecontrol::movePM(QString id)
             } else {
                 movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
             }
-
             if (useoffset) {
                 HWPcust[idx]=hwprot;
                 updateUI();
@@ -532,7 +531,7 @@ void cagecontrol::movePM(QString id)
                 updateUI();
             }
         }
-    }
+    });
 }
 
 /************************************************************************************************
@@ -541,12 +540,12 @@ void cagecontrol::movePM(QString id)
 void cagecontrol::moveRL(QString id)
 {
     id=id.toLower();
-    qDebug()<<"move " << id << " RL";
-    double hwprot;
-    double qwprot;
-    double qwp2rot;
-    for (QString s : motorName) {
+    qDebug()<<"move " << id << " PM";
+    auto future = QtConcurrent::map(motorName, [=, this](const QString &s) {
         int idx = motorName.indexOf(s);
+        double hwprot;
+        double qwprot;
+        double qwp2rot;
         if ((id=="all") || (id==s)) {
             if (invert[idx]) {
                 hwprot=67.5;
@@ -561,7 +560,6 @@ void cagecontrol::moveRL(QString id)
             } else {
                 movemotor(s,HWP0[idx]+hwprot,QWP0[idx]+qwprot);
             }
-
             if (useoffset) {
                 HWPcust[idx]=hwprot;
                 updateUI();
@@ -578,8 +576,9 @@ void cagecontrol::moveRL(QString id)
                 updateUI();
             }
         }
-    }
+    });
 }
+
 
 /************************************************************************************************
 *                                   cagecontrol::moveANG                                        *
@@ -587,7 +586,7 @@ void cagecontrol::moveRL(QString id)
 void cagecontrol::moveANG(QString id)
 {
     id=id.toLower();
-    for (QString s : motorName) {
+    auto future = QtConcurrent::map(motorName, [=, this](const QString &s) {
         if ((id=="all") || (id==s)) {
             int idx = motorName.indexOf(s);
             double HWPang = uiMotorGroupBoxes[idx]->findChild<QDoubleSpinBox*>("HWPsb")->value() + HWP0[idx];
@@ -606,7 +605,7 @@ void cagecontrol::moveANG(QString id)
                 movemotor(s,HWPang,QWPang,QWP2ang);
             }
         }
-    }
+    });
 }
 
 /************************************************************************************************

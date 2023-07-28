@@ -23,6 +23,7 @@
 #include <QStatusBar>
 #include <QTabWidget>
 #include <QTimer>
+#include <QtConcurrent>
 #include <QSerialPortInfo>
 
 namespace Ui {

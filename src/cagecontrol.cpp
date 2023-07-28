@@ -446,21 +446,6 @@ void cagecontrol::openmotors()
     });
 }
 
-    /*for (QString s : motorName) {
-        int idx = motorName.indexOf(s);
-
-        std::vector<uint8_t> ids;
-        if (isthreewps[idx]==false) {
-            ids = {HWPmnum[idx],QWPmnum[idx]};
-        } else {
-            ids = {HWPmnum[idx],QWPmnum[idx],QWP2mnum[idx]};
-        }
-        std::cout << "idx: " << idx << "\tmotortype: " << motorType[idx] << "\tport: " << comports.at(idx) << std::endl;
-        motorwrapper *motor = new motorwrapper(motorType[idx], comports.at(idx), ids);
-        motors.append(motor);
-    }*/
-
-
 /************************************************************************************************
 *                                   cagecontrol::moveHV                                         *
 ************************************************************************************************/

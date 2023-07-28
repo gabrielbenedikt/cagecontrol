@@ -702,7 +702,7 @@ void cagecontrol::setupUI()
         threecb->setObjectName(s+"threewpcb");
         foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
             QStringList list;
-            list << info.systemLocation();
+            list << info.systemLocation()+"("+info.serialNumber()+")";
             cb->addItem(list.first(), list);
         }
         QSpinBox *Hsb = new QSpinBox();

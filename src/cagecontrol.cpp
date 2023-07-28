@@ -38,6 +38,7 @@ cagecontrol::cagecontrol(QWidget *parent) :
     motorType.reserve(motorName.length());
     invert.reserve(motorName.length());
     isthreewps.reserve(motorName.length());
+    motors.reserve(motorName.length());
     useoffset=true;
     currentbasisidx=-1;
     basestime=0;
@@ -429,7 +430,23 @@ void cagecontrol::openmotors()
     for (QString s : motorName) {
         comports.append(tabs->findChild<QComboBox*>(s+"com")->currentText().toStdString());
     }
-    for (QString s : motorName) {
+
+    auto future = QtConcurrent::map(motorName, [=, this](const QString &s) {
+            int idx = motorName.indexOf(s);
+
+            std::vector<uint8_t> ids;
+            if (isthreewps[idx]==false) {
+                ids = {HWPmnum[idx],QWPmnum[idx]};
+            } else {
+                ids = {HWPmnum[idx],QWPmnum[idx],QWP2mnum[idx]};
+            }
+            std::cout << "idx: " << idx << "\tmotortype: " << motorType[idx] << "\tport: " << comports.at(idx) << std::endl;
+            motorwrapper *motor = new motorwrapper(motorType[idx], comports.at(idx), ids);
+            motors[idx] = motor;
+    });
+}
+
+    /*for (QString s : motorName) {
         int idx = motorName.indexOf(s);
 
         std::vector<uint8_t> ids;
@@ -441,8 +458,8 @@ void cagecontrol::openmotors()
         std::cout << "idx: " << idx << "\tmotortype: " << motorType[idx] << "\tport: " << comports.at(idx) << std::endl;
         motorwrapper *motor = new motorwrapper(motorType[idx], comports.at(idx), ids);
         motors.append(motor);
-    }
-}
+    }*/
+
 
 /************************************************************************************************
 *                                   cagecontrol::moveHV                                         *

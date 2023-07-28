@@ -698,12 +698,14 @@ void cagecontrol::setupUI()
         Q2dsb->setObjectName(s+"QWP20sb");
         QComboBox *cb = new QComboBox();
         cb->setObjectName(s+"com");
+        cb->setInsertPolicy(QComboBox::InsertPolicy::InsertAtBottom);
         QCheckBox *threecb = new QCheckBox();
         threecb->setObjectName(s+"threewpcb");
         foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
             QStringList list;
-            list << info.systemLocation()+"("+info.serialNumber()+")";
+            list << info.systemLocation();
             cb->addItem(list.first(), list);
+            cb->setItemData(cb->count()-1, info.serialNumber(), Qt::ToolTipRole);
         }
         QSpinBox *Hsb = new QSpinBox();
         Hsb->setObjectName(s+"HWPnum");

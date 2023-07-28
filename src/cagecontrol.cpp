@@ -660,6 +660,7 @@ void cagecontrol::setupUI()
     CQPushButton *allpmbtn = new CQPushButton("+/- all","all");
     allpmbtn->setObjectName("allpmbutton");
     CQPushButton *allrlbtn = new CQPushButton("R/L all","all");
+    allpmbtn->setObjectName("allrlbutton");
     buttons->addWidget(connectbtn,1,1,1,1);
     buttons->addWidget(allsetbtn,1,2,1,1);
     buttons->addWidget(allhvbtn,1,3,1,1);
